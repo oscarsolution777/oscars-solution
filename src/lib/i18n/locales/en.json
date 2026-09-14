@@ -1,0 +1,44 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "logout": "Log out"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Access your salon's management panel",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "submit": "Sign in",
+      "invalidCredentials": "Incorrect email or password",
+      "noMembership": "Your account doesn't have access to any salon yet"
+    }
+  },
+  "nav": {
+    "dashboard": "Home",
+    "requests": "Requests & Appointments",
+    "appointments": "Appointments",
+    "clients": "Clients",
+    "services": "Services",
+    "staff": "Staff",
+    "inventory": "Inventory",
+    "payments": "Payments",
+    "cashClosures": "Cash Closures",
+    "finances": "Finances",
+    "reports": "Reports & Metrics",
+    "ai": "AI Assistant",
+    "settings": "Settings",
+    "comingSoon": "Coming soon"
+  },
+  "dashboard": {
+    "welcomeTitle": "Welcome!",
+    "welcomeBody": "Here's an overview of your salon.",
+    "salonInfo": "Salon details",
+    "currency": "Currency",
+    "timezone": "Timezone"
+  }
+}

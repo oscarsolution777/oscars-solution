@@ -1,0 +1,44 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "logout": "Se déconnecter"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Accédez au panneau de gestion de votre salon",
+      "emailLabel": "E-mail",
+      "passwordLabel": "Mot de passe",
+      "submit": "Se connecter",
+      "invalidCredentials": "E-mail ou mot de passe incorrect",
+      "noMembership": "Votre compte n'a encore accès à aucun salon"
+    }
+  },
+  "nav": {
+    "dashboard": "Accueil",
+    "requests": "Demandes et Rendez-vous",
+    "appointments": "Rendez-vous",
+    "clients": "Clients",
+    "services": "Services",
+    "staff": "Employés",
+    "inventory": "Inventaire",
+    "payments": "Paiements",
+    "cashClosures": "Clôture de Caisse",
+    "finances": "Finances",
+    "reports": "Rapports et Statistiques",
+    "ai": "Assistant IA",
+    "settings": "Paramètres",
+    "comingSoon": "Bientôt disponible"
+  },
+  "dashboard": {
+    "welcomeTitle": "Bienvenue !",
+    "welcomeBody": "Voici un résumé de votre salon.",
+    "salonInfo": "Informations du salon",
+    "currency": "Devise",
+    "timezone": "Fuseau horaire"
+  }
+}

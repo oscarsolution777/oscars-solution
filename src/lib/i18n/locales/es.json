@@ -1,0 +1,44 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "logout": "Cerrar sesión"
+  },
+  "auth": {
+    "login": {
+      "title": "Inicia sesión",
+      "subtitle": "Accede al panel de gestión de tu salón",
+      "emailLabel": "Correo electrónico",
+      "passwordLabel": "Contraseña",
+      "submit": "Entrar",
+      "invalidCredentials": "Correo o contraseña incorrectos",
+      "noMembership": "Tu cuenta no tiene acceso a ningún salón todavía"
+    }
+  },
+  "nav": {
+    "dashboard": "Inicio",
+    "requests": "Solicitudes y Citas",
+    "appointments": "Citas",
+    "clients": "Clientes",
+    "services": "Servicios",
+    "staff": "Trabajadores",
+    "inventory": "Inventario",
+    "payments": "Pagos",
+    "cashClosures": "Cuadre de Caja",
+    "finances": "Finanzas",
+    "reports": "Reportes y Métricas",
+    "ai": "IA - Asistente",
+    "settings": "Configuración",
+    "comingSoon": "Próximamente"
+  },
+  "dashboard": {
+    "welcomeTitle": "¡Bienvenida!",
+    "welcomeBody": "Aquí tienes un resumen de tu salón.",
+    "salonInfo": "Datos del salón",
+    "currency": "Moneda",
+    "timezone": "Zona horaria"
+  }
+}

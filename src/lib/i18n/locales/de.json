@@ -1,0 +1,44 @@
+{
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Erneut versuchen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "logout": "Abmelden"
+  },
+  "auth": {
+    "login": {
+      "title": "Anmelden",
+      "subtitle": "Greifen Sie auf das Verwaltungspanel Ihres Salons zu",
+      "emailLabel": "E-Mail",
+      "passwordLabel": "Passwort",
+      "submit": "Anmelden",
+      "invalidCredentials": "E-Mail oder Passwort ist falsch",
+      "noMembership": "Ihr Konto hat noch keinen Zugriff auf einen Salon"
+    }
+  },
+  "nav": {
+    "dashboard": "Start",
+    "requests": "Anfragen und Termine",
+    "appointments": "Termine",
+    "clients": "Kunden",
+    "services": "Dienstleistungen",
+    "staff": "Mitarbeiter",
+    "inventory": "Lagerbestand",
+    "payments": "Zahlungen",
+    "cashClosures": "Kassenabschluss",
+    "finances": "Finanzen",
+    "reports": "Berichte und Kennzahlen",
+    "ai": "KI-Assistent",
+    "settings": "Einstellungen",
+    "comingSoon": "Demnächst verfügbar"
+  },
+  "dashboard": {
+    "welcomeTitle": "Willkommen!",
+    "welcomeBody": "Hier ist eine Übersicht über Ihren Salon.",
+    "salonInfo": "Salon-Daten",
+    "currency": "Währung",
+    "timezone": "Zeitzone"
+  }
+}

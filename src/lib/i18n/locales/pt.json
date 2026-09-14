@@ -1,0 +1,44 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "retry": "Tentar novamente",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "logout": "Sair"
+  },
+  "auth": {
+    "login": {
+      "title": "Entrar",
+      "subtitle": "Acesse o painel de gestão do seu salão",
+      "emailLabel": "E-mail",
+      "passwordLabel": "Senha",
+      "submit": "Entrar",
+      "invalidCredentials": "E-mail ou senha incorretos",
+      "noMembership": "Sua conta ainda não tem acesso a nenhum salão"
+    }
+  },
+  "nav": {
+    "dashboard": "Início",
+    "requests": "Solicitações e Agendamentos",
+    "appointments": "Agendamentos",
+    "clients": "Clientes",
+    "services": "Serviços",
+    "staff": "Equipe",
+    "inventory": "Estoque",
+    "payments": "Pagamentos",
+    "cashClosures": "Fechamento de Caixa",
+    "finances": "Financeiro",
+    "reports": "Relatórios e Métricas",
+    "ai": "Assistente de IA",
+    "settings": "Configurações",
+    "comingSoon": "Em breve"
+  },
+  "dashboard": {
+    "welcomeTitle": "Bem-vinda!",
+    "welcomeBody": "Aqui está um resumo do seu salão.",
+    "salonInfo": "Dados do salão",
+    "currency": "Moeda",
+    "timezone": "Fuso horário"
+  }
+}
