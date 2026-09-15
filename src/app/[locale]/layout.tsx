@@ -1,4 +1,5 @@
-import type { Metadata, ReactNode } from "react";
+import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
