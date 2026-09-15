@@ -433,3 +433,13 @@ compila · pasa lint y typecheck · migraciones aplicadas · RLS probada con dos
 - La traducción del contenido de cada salón la hace **cada dueña, en su propio idioma**, al cargar su catálogo. El texto fijo del sistema (los 6 archivos de `locales/`) lo mantiene Oscar/Claude Code.
 
 No hay preguntas abiertas pendientes por el momento. Este documento está listo para empezar la Fase 0.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
