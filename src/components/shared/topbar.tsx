@@ -1,7 +1,8 @@
 import { CalendarDays } from "lucide-react";
+import { getLocale } from "next-intl/server";
 import { UserMenu } from "./user-menu";
 
-export function Topbar({
+export async function Topbar({
   title,
   subtitle,
   userFullName,
@@ -12,7 +13,8 @@ export function Topbar({
   userFullName: string;
   userRoleLabel: string;
 }) {
-  const today = new Intl.DateTimeFormat(undefined, {
+  const locale = await getLocale();
+  const today = new Intl.DateTimeFormat(locale, {
     day: "numeric",
     month: "long",
     year: "numeric",
