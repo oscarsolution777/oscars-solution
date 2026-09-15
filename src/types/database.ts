@@ -14,6 +14,62 @@ export type Database = {
   }
   public: {
     Tables: {
+      clients: {
+        Row: {
+          created_at: string
+          email: string | null
+          first_visit_at: string | null
+          full_name: string
+          id: string
+          is_active: boolean
+          last_visit_at: string | null
+          notes: string | null
+          phone: string
+          preferences: Json
+          salon_id: string
+          total_spent_cents: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          first_visit_at?: string | null
+          full_name: string
+          id?: string
+          is_active?: boolean
+          last_visit_at?: string | null
+          notes?: string | null
+          phone: string
+          preferences?: Json
+          salon_id: string
+          total_spent_cents?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          first_visit_at?: string | null
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          last_visit_at?: string | null
+          notes?: string | null
+          phone?: string
+          preferences?: Json
+          salon_id?: string
+          total_spent_cents?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clients_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       currencies: {
         Row: {
           code: string
@@ -224,6 +280,42 @@ export type Database = {
           },
         ]
       }
+      service_staff: {
+        Row: {
+          created_at: string
+          id: string
+          service_id: string
+          staff_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          service_id: string
+          staff_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          service_id?: string
+          staff_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_staff_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_staff_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       services: {
         Row: {
           category_id: string
@@ -280,6 +372,56 @@ export type Database = {
           },
           {
             foreignKeyName: "services_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staff: {
+        Row: {
+          base_salary_cents: number
+          created_at: string
+          full_name: string
+          hired_at: string
+          id: string
+          is_active: boolean
+          phone: string | null
+          role_title: string
+          salon_id: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          base_salary_cents?: number
+          created_at?: string
+          full_name: string
+          hired_at?: string
+          id?: string
+          is_active?: boolean
+          phone?: string | null
+          role_title: string
+          salon_id: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          base_salary_cents?: number
+          created_at?: string
+          full_name?: string
+          hired_at?: string
+          id?: string
+          is_active?: boolean
+          phone?: string | null
+          role_title?: string
+          salon_id?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staff_salon_id_fkey"
             columns: ["salon_id"]
             isOneToOne: false
             referencedRelation: "salons"

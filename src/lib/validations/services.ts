@@ -1,9 +1,5 @@
 import { z } from "zod";
-
-// El dinero nunca se guarda en float (CLAUDE.md sección 5). El formulario
-// recibe el precio en unidades del salón como texto; se valida el formato
-// aquí y se convierte a price_cents en la Server Action (nunca en el cliente).
-const PRICE_PATTERN = /^\d+(\.\d{1,2})?$/;
+import { MONEY_INPUT_PATTERN, parseMoneyToCents } from "@/lib/utils/money";
 
 // durationMin viaja como texto (igual que price) para que el tipo de
 // entrada y salida del schema coincidan — z.coerce.number() rompe la
@@ -15,7 +11,7 @@ export const serviceSchema = z.object({
   name: z.string().trim().min(1).max(120),
   description: z.string().trim().max(1000).optional().or(z.literal("")),
   features: z.string().trim().max(2000).optional().or(z.literal("")),
-  price: z.string().trim().regex(PRICE_PATTERN),
+  price: z.string().trim().regex(MONEY_INPUT_PATTERN),
   durationMin: z
     .string()
     .trim()
@@ -50,9 +46,7 @@ export function parseFeatures(raw: string | undefined): string[] {
     .filter((line) => line.length > 0);
 }
 
-export function priceToCents(price: string): number {
-  return Math.round(Number.parseFloat(price) * 100);
-}
+export const priceToCents = parseMoneyToCents;
 
 export function parseDurationMin(durationMin: string): number {
   return Number.parseInt(durationMin, 10);

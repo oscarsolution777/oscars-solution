@@ -7,7 +7,13 @@
     "cancel": "Cancelar",
     "logout": "Sair",
     "active": "Ativo",
-    "inactive": "Inativo"
+    "inactive": "Inativo",
+    "deactivateDialog": {
+      "title": "Desativar?",
+      "description": "\"{name}\" deixará de aparecer como ativo. Você pode reativá-lo quando quiser.",
+      "cancel": "Cancelar",
+      "confirm": "Desativar"
+    }
   },
   "auth": {
     "login": {
@@ -116,16 +122,137 @@
       "inactive": "Inativa",
       "editAction": "Editar"
     },
-    "deactivateDialog": {
-      "title": "Desativar?",
-      "description": "\"{name}\" deixará de aparecer como ativo. Você pode reativá-lo quando quiser.",
-      "cancel": "Cancelar",
-      "confirm": "Desativar"
-    },
     "errors": {
       "forbidden": "Você não tem permissão para fazer isso",
       "invalidInput": "Revise os campos do formulário",
       "invalidImage": "A imagem não é válida",
+      "generic": "Ocorreu um erro. Tente novamente."
+    }
+  },
+  "clients": {
+    "createButton": "Novo cliente",
+    "kpis": {
+      "total": "Total de clientes",
+      "active": "Ativos",
+      "newThisMonth": "Novos este mês",
+      "thisMonth": "Este mês",
+      "withHistory": "Com histórico de visitas",
+      "sinceFirstVisit": "Desde a primeira visita",
+      "totalSpent": "Gasto total acumulado",
+      "allClients": "De todos os clientes"
+    },
+    "table": {
+      "columnName": "Cliente",
+      "columnPhone": "Telefone",
+      "columnEmail": "E-mail",
+      "columnLastVisit": "Última visita",
+      "columnStatus": "Status",
+      "columnActions": "Ações",
+      "noVisitsYet": "Nenhuma visita registrada",
+      "searchPlaceholder": "Buscar por nome ou telefone...",
+      "emptyTitle": "Ainda não há clientes",
+      "emptyDescription": "Crie seu primeiro cliente para começar a registrar o histórico.",
+      "createFirst": "Criar o primeiro cliente",
+      "viewAction": "Ver detalhes",
+      "editAction": "Editar"
+    },
+    "detail": {
+      "title": "Detalhe do cliente",
+      "edit": "Editar",
+      "phone": "Telefone",
+      "email": "E-mail",
+      "clientSince": "Cliente desde",
+      "firstVisit": "Primeira visita",
+      "lastVisit": "Última visita",
+      "totalSpent": "Total gasto",
+      "notes": "Notas",
+      "preferences": "Preferências",
+      "statusLabel": "Cliente ativo",
+      "noDataYet": "Ainda sem dados (preenchido automaticamente com os agendamentos)"
+    },
+    "form": {
+      "createTitle": "Novo cliente",
+      "editTitle": "Editar cliente",
+      "subtitle": "Dados de contato e preferências do cliente.",
+      "nameLabel": "Nome completo",
+      "nameError": "Digite o nome do cliente",
+      "phoneLabel": "Telefone",
+      "phoneError": "Digite um telefone de contato",
+      "emailLabel": "E-mail (opcional)",
+      "emailError": "Digite um e-mail válido",
+      "notesLabel": "Notas",
+      "notesPlaceholder": "Notas internas sobre este cliente",
+      "preferencesLabel": "Preferências",
+      "preferencesPlaceholder": "Uma preferência por linha",
+      "genericError": "Não foi possível salvar o cliente. Tente novamente."
+    },
+    "errors": {
+      "invalidInput": "Revise os campos do formulário",
+      "generic": "Ocorreu um erro. Tente novamente."
+    }
+  },
+  "staff": {
+    "createButton": "Novo trabalhador",
+    "kpis": {
+      "total": "Total de trabalhadores",
+      "active": "Ativos",
+      "newThisMonth": "Novos este mês",
+      "thisMonth": "Este mês",
+      "servicesCovered": "Serviços cobertos",
+      "ofTotalServices": "Do catálogo ativo",
+      "monthlyPayroll": "Folha base mensal",
+      "baseSalariesSum": "Soma dos salários ativos"
+    },
+    "table": {
+      "columnName": "Trabalhador",
+      "columnRole": "Função",
+      "columnPhone": "Telefone",
+      "columnSalary": "Salário base",
+      "columnStatus": "Status",
+      "columnActions": "Ações",
+      "searchPlaceholder": "Buscar trabalhador...",
+      "emptyTitle": "Ainda não há trabalhadores",
+      "emptyDescription": "Adicione seu primeiro trabalhador para atribuir serviços a ele.",
+      "createFirst": "Adicionar o primeiro trabalhador",
+      "viewAction": "Ver detalhes",
+      "editAction": "Editar"
+    },
+    "detail": {
+      "title": "Detalhe do trabalhador",
+      "edit": "Editar",
+      "role": "Função",
+      "phone": "Telefone",
+      "baseSalary": "Salário base",
+      "hiredAt": "Data de admissão",
+      "statusLabel": "Trabalhador ativo",
+      "services": "Serviços que realiza",
+      "editServices": "Editar serviços",
+      "noServicesAssigned": "Nenhum serviço atribuído ainda"
+    },
+    "form": {
+      "createTitle": "Novo trabalhador",
+      "editTitle": "Editar trabalhador",
+      "subtitle": "Dados do trabalhador e seu salário base.",
+      "nameLabel": "Nome completo",
+      "nameError": "Digite o nome do trabalhador",
+      "roleLabel": "Função / cargo",
+      "roleError": "Digite a função ou cargo",
+      "phoneLabel": "Telefone (opcional)",
+      "baseSalaryLabel": "Salário base ({currency})",
+      "baseSalaryError": "Digite um salário válido (ex. 500.00)",
+      "hiredAtLabel": "Data de admissão",
+      "hiredAtError": "Selecione uma data válida",
+      "genericError": "Não foi possível salvar o trabalhador. Tente novamente."
+    },
+    "servicesForm": {
+      "title": "Serviços de {name}",
+      "subtitle": "Marque os serviços que este trabalhador pode realizar.",
+      "genericError": "Não foi possível salvar os serviços. Tente novamente.",
+      "noActiveServices": "Ainda não há serviços ativos no catálogo."
+    },
+    "errors": {
+      "forbidden": "Você não tem permissão para fazer isso",
+      "invalidInput": "Revise os campos do formulário",
       "generic": "Ocorreu um erro. Tente novamente."
     }
   }

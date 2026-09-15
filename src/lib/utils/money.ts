@@ -20,3 +20,12 @@ export function formatMoney(
     return `${currencyCode} ${amount.toFixed(2)}`;
   }
 }
+
+// Patrón de validación para inputs de dinero en unidades del salón (nunca
+// centavos): enteros o hasta 2 decimales, sin signo. Reutilizado por los
+// esquemas Zod de cada módulo (servicios, trabajadores, ...).
+export const MONEY_INPUT_PATTERN = /^\d+(\.\d{1,2})?$/;
+
+export function parseMoneyToCents(value: string): number {
+  return Math.round(Number.parseFloat(value) * 100);
+}

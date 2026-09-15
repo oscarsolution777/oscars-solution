@@ -7,7 +7,13 @@
     "cancel": "Cancel",
     "logout": "Log out",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "deactivateDialog": {
+      "title": "Deactivate?",
+      "description": "\"{name}\" will stop showing as active. You can reactivate it anytime.",
+      "cancel": "Cancel",
+      "confirm": "Deactivate"
+    }
   },
   "auth": {
     "login": {
@@ -116,16 +122,137 @@
       "inactive": "Inactive",
       "editAction": "Edit"
     },
-    "deactivateDialog": {
-      "title": "Deactivate?",
-      "description": "\"{name}\" will stop showing as active. You can reactivate it anytime.",
-      "cancel": "Cancel",
-      "confirm": "Deactivate"
-    },
     "errors": {
       "forbidden": "You don't have permission to do this",
       "invalidInput": "Check the form fields",
       "invalidImage": "The image is not valid",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "clients": {
+    "createButton": "New client",
+    "kpis": {
+      "total": "Total clients",
+      "active": "Active",
+      "newThisMonth": "New this month",
+      "thisMonth": "This month",
+      "withHistory": "With visit history",
+      "sinceFirstVisit": "Since first visit",
+      "totalSpent": "Total spent",
+      "allClients": "Across all clients"
+    },
+    "table": {
+      "columnName": "Client",
+      "columnPhone": "Phone",
+      "columnEmail": "Email",
+      "columnLastVisit": "Last visit",
+      "columnStatus": "Status",
+      "columnActions": "Actions",
+      "noVisitsYet": "No visits recorded yet",
+      "searchPlaceholder": "Search by name or phone...",
+      "emptyTitle": "No clients yet",
+      "emptyDescription": "Create your first client to start tracking their history.",
+      "createFirst": "Create the first client",
+      "viewAction": "View detail",
+      "editAction": "Edit"
+    },
+    "detail": {
+      "title": "Client detail",
+      "edit": "Edit",
+      "phone": "Phone",
+      "email": "Email",
+      "clientSince": "Client since",
+      "firstVisit": "First visit",
+      "lastVisit": "Last visit",
+      "totalSpent": "Total spent",
+      "notes": "Notes",
+      "preferences": "Preferences",
+      "statusLabel": "Client active",
+      "noDataYet": "No data yet (fills in automatically with appointments)"
+    },
+    "form": {
+      "createTitle": "New client",
+      "editTitle": "Edit client",
+      "subtitle": "Contact details and preferences for this client.",
+      "nameLabel": "Full name",
+      "nameError": "Enter the client's name",
+      "phoneLabel": "Phone",
+      "phoneError": "Enter a contact phone number",
+      "emailLabel": "Email (optional)",
+      "emailError": "Enter a valid email",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Internal notes about this client",
+      "preferencesLabel": "Preferences",
+      "preferencesPlaceholder": "One preference per line",
+      "genericError": "Couldn't save the client. Please try again."
+    },
+    "errors": {
+      "invalidInput": "Check the form fields",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "staff": {
+    "createButton": "New staff member",
+    "kpis": {
+      "total": "Total staff",
+      "active": "Active",
+      "newThisMonth": "New this month",
+      "thisMonth": "This month",
+      "servicesCovered": "Services covered",
+      "ofTotalServices": "Of the active catalog",
+      "monthlyPayroll": "Monthly base payroll",
+      "baseSalariesSum": "Sum of active base salaries"
+    },
+    "table": {
+      "columnName": "Staff member",
+      "columnRole": "Role",
+      "columnPhone": "Phone",
+      "columnSalary": "Base salary",
+      "columnStatus": "Status",
+      "columnActions": "Actions",
+      "searchPlaceholder": "Search staff...",
+      "emptyTitle": "No staff yet",
+      "emptyDescription": "Add your first staff member to assign services to them.",
+      "createFirst": "Add the first staff member",
+      "viewAction": "View detail",
+      "editAction": "Edit"
+    },
+    "detail": {
+      "title": "Staff detail",
+      "edit": "Edit",
+      "role": "Role",
+      "phone": "Phone",
+      "baseSalary": "Base salary",
+      "hiredAt": "Hire date",
+      "statusLabel": "Staff member active",
+      "services": "Services performed",
+      "editServices": "Edit services",
+      "noServicesAssigned": "No services assigned yet"
+    },
+    "form": {
+      "createTitle": "New staff member",
+      "editTitle": "Edit staff member",
+      "subtitle": "Staff details and their base salary.",
+      "nameLabel": "Full name",
+      "nameError": "Enter the staff member's name",
+      "roleLabel": "Role / position",
+      "roleError": "Enter the role or position",
+      "phoneLabel": "Phone (optional)",
+      "baseSalaryLabel": "Base salary ({currency})",
+      "baseSalaryError": "Enter a valid salary (e.g. 500.00)",
+      "hiredAtLabel": "Hire date",
+      "hiredAtError": "Select a valid date",
+      "genericError": "Couldn't save the staff member. Please try again."
+    },
+    "servicesForm": {
+      "title": "Services for {name}",
+      "subtitle": "Check the services this staff member can perform.",
+      "genericError": "Couldn't save the services. Please try again.",
+      "noActiveServices": "There are no active services in the catalog yet."
+    },
+    "errors": {
+      "forbidden": "You don't have permission to do this",
+      "invalidInput": "Check the form fields",
       "generic": "Something went wrong. Please try again."
     }
   }

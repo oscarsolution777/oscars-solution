@@ -23,7 +23,7 @@ export function DeactivateConfirmDialog({
   onConfirm: () => void;
   itemName: string;
 }) {
-  const t = useTranslations("services.deactivateDialog");
+  const t = useTranslations("common.deactivateDialog");
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>

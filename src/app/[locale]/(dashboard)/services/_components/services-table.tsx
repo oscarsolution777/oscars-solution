@@ -16,7 +16,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { formatMoney } from "@/lib/utils/money";
 import type { Tables } from "@/types/database";
 import { ServiceThumbnail } from "./service-thumbnail";
-import { StatusToggle } from "./status-toggle";
+import { StatusToggle } from "@/components/shared/status-toggle";
 import { setServiceActiveAction } from "../actions";
 
 type ServiceRow = Tables<"services">;

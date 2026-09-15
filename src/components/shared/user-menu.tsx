@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/browser";
+import { getInitials } from "@/lib/utils/text";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,12 +22,7 @@ export function UserMenu({
   const t = useTranslations("common");
   const router = useRouter();
 
-  const initials = fullName
-    .split(" ")
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+  const initials = getInitials(fullName);
 
   const handleLogout = async () => {
     const supabase = createClient();

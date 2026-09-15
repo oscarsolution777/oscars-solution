@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/shared/empty-state";
 import type { Tables } from "@/types/database";
-import { StatusToggle } from "./status-toggle";
+import { StatusToggle } from "@/components/shared/status-toggle";
 import { setCategoryActiveAction } from "../actions";
 
 type CategoryRow = Tables<"service_categories">;

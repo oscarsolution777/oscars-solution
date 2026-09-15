@@ -203,7 +203,7 @@ docs/
 
 ### Personas
 - `staff` — salon_id, user_id (**siempre nulo por ahora** — los trabajadores no tienen acceso al sistema), full_name, phone, role_title, base_salary_cents, hired_at, is_active. Sin comisiones: solo salario.
-- `clients` — salon_id, full_name, phone, email, notes, preferences (jsonb), first_visit_at, last_visit_at, total_spent_cents. **Sin `user_id` — el cliente no tiene cuenta ni login, siempre es anónimo/identificado solo por su código de solicitud.**
+- `clients` — salon_id, full_name, phone, email, notes, preferences (jsonb), first_visit_at, last_visit_at, total_spent_cents, is_active (borrado lógico, añadido en Fase 5 — la propia sección de "Reglas de datos" ya exigía nunca hacer `DELETE` de clientes). **Sin `user_id` — el cliente no tiene cuenta ni login, siempre es anónimo/identificado solo por su código de solicitud.** `first_visit_at`/`last_visit_at`/`total_spent_cents` se completan automáticamente en las Fases 4 (citas) y 6 (pagos); hasta entonces quedan vacíos/0.
 
 ### Flujo operativo — sin hora, solo fecha; cliente siempre anónimo
 - `requests` — solicitud entrante del portal QR

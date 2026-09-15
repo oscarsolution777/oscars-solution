@@ -7,7 +7,13 @@
     "cancel": "Abbrechen",
     "logout": "Abmelden",
     "active": "Aktiv",
-    "inactive": "Inaktiv"
+    "inactive": "Inaktiv",
+    "deactivateDialog": {
+      "title": "Deaktivieren?",
+      "description": "\"{name}\" wird nicht mehr als aktiv angezeigt. Sie können es jederzeit wieder aktivieren.",
+      "cancel": "Abbrechen",
+      "confirm": "Deaktivieren"
+    }
   },
   "auth": {
     "login": {
@@ -116,16 +122,137 @@
       "inactive": "Inaktiv",
       "editAction": "Bearbeiten"
     },
-    "deactivateDialog": {
-      "title": "Deaktivieren?",
-      "description": "\"{name}\" wird nicht mehr als aktiv angezeigt. Sie können es jederzeit wieder aktivieren.",
-      "cancel": "Abbrechen",
-      "confirm": "Deaktivieren"
-    },
     "errors": {
       "forbidden": "Sie haben keine Berechtigung dafür",
       "invalidInput": "Überprüfen Sie die Formularfelder",
       "invalidImage": "Das Bild ist ungültig",
+      "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    }
+  },
+  "clients": {
+    "createButton": "Neuer Kunde",
+    "kpis": {
+      "total": "Kunden gesamt",
+      "active": "Aktiv",
+      "newThisMonth": "Neu diesen Monat",
+      "thisMonth": "Diesen Monat",
+      "withHistory": "Mit Besuchshistorie",
+      "sinceFirstVisit": "Seit dem ersten Besuch",
+      "totalSpent": "Gesamtausgaben",
+      "allClients": "Über alle Kunden"
+    },
+    "table": {
+      "columnName": "Kunde",
+      "columnPhone": "Telefon",
+      "columnEmail": "E-Mail",
+      "columnLastVisit": "Letzter Besuch",
+      "columnStatus": "Status",
+      "columnActions": "Aktionen",
+      "noVisitsYet": "Noch keine Besuche erfasst",
+      "searchPlaceholder": "Nach Name oder Telefon suchen...",
+      "emptyTitle": "Noch keine Kunden",
+      "emptyDescription": "Erstellen Sie Ihren ersten Kunden, um dessen Verlauf zu verfolgen.",
+      "createFirst": "Ersten Kunden erstellen",
+      "viewAction": "Details ansehen",
+      "editAction": "Bearbeiten"
+    },
+    "detail": {
+      "title": "Kundendetails",
+      "edit": "Bearbeiten",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "clientSince": "Kunde seit",
+      "firstVisit": "Erster Besuch",
+      "lastVisit": "Letzter Besuch",
+      "totalSpent": "Gesamt ausgegeben",
+      "notes": "Notizen",
+      "preferences": "Präferenzen",
+      "statusLabel": "Kunde aktiv",
+      "noDataYet": "Noch keine Daten (wird automatisch mit Terminen ausgefüllt)"
+    },
+    "form": {
+      "createTitle": "Neuer Kunde",
+      "editTitle": "Kunde bearbeiten",
+      "subtitle": "Kontaktdaten und Präferenzen des Kunden.",
+      "nameLabel": "Vollständiger Name",
+      "nameError": "Geben Sie den Namen des Kunden ein",
+      "phoneLabel": "Telefon",
+      "phoneError": "Geben Sie eine Kontakttelefonnummer ein",
+      "emailLabel": "E-Mail (optional)",
+      "emailError": "Geben Sie eine gültige E-Mail-Adresse ein",
+      "notesLabel": "Notizen",
+      "notesPlaceholder": "Interne Notizen zu diesem Kunden",
+      "preferencesLabel": "Präferenzen",
+      "preferencesPlaceholder": "Eine Präferenz pro Zeile",
+      "genericError": "Der Kunde konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "errors": {
+      "invalidInput": "Überprüfen Sie die Formularfelder",
+      "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    }
+  },
+  "staff": {
+    "createButton": "Neuer Mitarbeiter",
+    "kpis": {
+      "total": "Mitarbeiter gesamt",
+      "active": "Aktiv",
+      "newThisMonth": "Neu diesen Monat",
+      "thisMonth": "Diesen Monat",
+      "servicesCovered": "Abgedeckte Dienstleistungen",
+      "ofTotalServices": "Vom aktiven Katalog",
+      "monthlyPayroll": "Monatliche Grundlohnsumme",
+      "baseSalariesSum": "Summe der aktiven Grundgehälter"
+    },
+    "table": {
+      "columnName": "Mitarbeiter",
+      "columnRole": "Rolle",
+      "columnPhone": "Telefon",
+      "columnSalary": "Grundgehalt",
+      "columnStatus": "Status",
+      "columnActions": "Aktionen",
+      "searchPlaceholder": "Mitarbeiter suchen...",
+      "emptyTitle": "Noch keine Mitarbeiter",
+      "emptyDescription": "Fügen Sie Ihren ersten Mitarbeiter hinzu, um ihm Dienstleistungen zuzuweisen.",
+      "createFirst": "Ersten Mitarbeiter hinzufügen",
+      "viewAction": "Details ansehen",
+      "editAction": "Bearbeiten"
+    },
+    "detail": {
+      "title": "Mitarbeiterdetails",
+      "edit": "Bearbeiten",
+      "role": "Rolle",
+      "phone": "Telefon",
+      "baseSalary": "Grundgehalt",
+      "hiredAt": "Einstellungsdatum",
+      "statusLabel": "Mitarbeiter aktiv",
+      "services": "Ausgeführte Dienstleistungen",
+      "editServices": "Dienstleistungen bearbeiten",
+      "noServicesAssigned": "Noch keine Dienstleistungen zugewiesen"
+    },
+    "form": {
+      "createTitle": "Neuer Mitarbeiter",
+      "editTitle": "Mitarbeiter bearbeiten",
+      "subtitle": "Mitarbeiterdaten und sein Grundgehalt.",
+      "nameLabel": "Vollständiger Name",
+      "nameError": "Geben Sie den Namen des Mitarbeiters ein",
+      "roleLabel": "Rolle / Position",
+      "roleError": "Geben Sie die Rolle oder Position ein",
+      "phoneLabel": "Telefon (optional)",
+      "baseSalaryLabel": "Grundgehalt ({currency})",
+      "baseSalaryError": "Geben Sie ein gültiges Gehalt ein (z. B. 500.00)",
+      "hiredAtLabel": "Einstellungsdatum",
+      "hiredAtError": "Wählen Sie ein gültiges Datum",
+      "genericError": "Der Mitarbeiter konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "servicesForm": {
+      "title": "Dienstleistungen von {name}",
+      "subtitle": "Markieren Sie die Dienstleistungen, die dieser Mitarbeiter ausführen kann.",
+      "genericError": "Die Dienstleistungen konnten nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+      "noActiveServices": "Es gibt noch keine aktiven Dienstleistungen im Katalog."
+    },
+    "errors": {
+      "forbidden": "Sie haben keine Berechtigung dafür",
+      "invalidInput": "Überprüfen Sie die Formularfelder",
       "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
     }
   }
