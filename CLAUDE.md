@@ -196,7 +196,7 @@ docs/
   - Una misma persona puede tener varias filas en `memberships` (una por salón) → así una dueña gestiona una **cadena de salones** desde una sola cuenta, con selector de salón activo en el header.
 
 ### Catálogo
-- `service_categories` — salon_id, name, sort_order
+- `service_categories` — salon_id, name, sort_order, is_active (borrado lógico, igual que el resto de tablas de catálogo — añadido en Fase 1)
 - `services` — salon_id, category_id, name, description, features (text[]), price_cents, duration_min (informativo, no bloquea agenda), image_url, is_active, sort_order
 - `service_staff` — service_id, staff_id (qué trabajador puede hacer qué servicio)
 - `service_products` — service_id, product_id, qty (consumo estándar de inventario por servicio)
@@ -259,6 +259,7 @@ El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al env
 6. El `salon_id` **nunca** viaja desde el cliente en una mutación: se deriva en el servidor desde la sesión (panel) o desde el `slug` validado (portal).
 7. Rate limiting en el endpoint público de creación de solicitudes y en la búsqueda por `public_code` (anti fuerza-bruta y anti-spam).
 8. Los datos personales de clientes nunca se envían a la API de IA. Solo métricas agregadas y anonimizadas.
+9. Los módulos con reglas owner/admin de escritura (ver tabla de permisos abajo) se refuerzan con el helper `public.has_role_in_salon(target_salon_id, allowed_roles)` (security definer, mismo patrón que `active_salon_ids()`/`is_platform_admin()`) en las políticas RLS de `insert`/`update` — nunca solo en la Server Action, porque el navegador tiene acceso directo a PostgREST con la sesión del usuario. Introducido en Fase 1 para `service_categories`/`services`; reutilizable en fases futuras.
 
 ### Permisos por rol (panel de gestión)
 

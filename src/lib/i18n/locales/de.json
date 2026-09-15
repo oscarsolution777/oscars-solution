@@ -5,7 +5,9 @@
     "retry": "Erneut versuchen",
     "save": "Speichern",
     "cancel": "Abbrechen",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "active": "Aktiv",
+    "inactive": "Inaktiv"
   },
   "auth": {
     "login": {
@@ -40,5 +42,91 @@
     "salonInfo": "Salon-Daten",
     "currency": "Währung",
     "timezone": "Zeitzone"
+  },
+  "services": {
+    "tabs": { "services": "Dienstleistungen", "categories": "Kategorien" },
+    "createServiceButton": "Neue Dienstleistung",
+    "kpis": {
+      "totalServices": "Dienstleistungen gesamt",
+      "totalCategories": "Kategorien",
+      "avgPrice": "Durchschnittspreis",
+      "avgDuration": "Durchschnittliche Dauer",
+      "active": "Aktiv",
+      "perService": "Pro Dienstleistung",
+      "minutes": "{count, plural, one {# Minute} other {# Minuten}}"
+    },
+    "table": {
+      "columnService": "Dienstleistung",
+      "columnCategory": "Kategorie",
+      "columnPrice": "Preis",
+      "columnDuration": "Dauer",
+      "columnStatus": "Status",
+      "columnActions": "Aktionen",
+      "durationValue": "{count, plural, one {# Min.} other {# Min.}}",
+      "emptyTitle": "Noch keine Dienstleistungen",
+      "emptyDescription": "Erstellen Sie Ihre erste Dienstleistung, damit sie im Katalog erscheint.",
+      "createFirst": "Erste Dienstleistung erstellen",
+      "viewAction": "Details ansehen",
+      "editAction": "Bearbeiten"
+    },
+    "detail": {
+      "title": "Details der Dienstleistung",
+      "edit": "Bearbeiten",
+      "category": "Kategorie",
+      "price": "Preis",
+      "duration": "Dauer",
+      "durationValue": "{count, plural, one {# Minute} other {# Minuten}}",
+      "features": "Merkmale",
+      "statusLabel": "Dienstleistung aktiv"
+    },
+    "form": {
+      "createTitle": "Neue Dienstleistung",
+      "editTitle": "Dienstleistung bearbeiten",
+      "subtitle": "Preise werden in der Währung des Salons angezeigt.",
+      "nameLabel": "Name",
+      "nameError": "Geben Sie einen Namen für die Dienstleistung ein",
+      "categoryLabel": "Kategorie",
+      "categoryPlaceholder": "Wählen Sie eine Kategorie",
+      "categoryError": "Wählen Sie eine Kategorie",
+      "priceLabel": "Preis ({currency})",
+      "priceError": "Geben Sie einen gültigen Preis ein (z. B. 25.00)",
+      "durationLabel": "Dauer (Min.)",
+      "durationError": "Geben Sie eine gültige Dauer ein",
+      "descriptionLabel": "Beschreibung",
+      "featuresLabel": "Merkmale",
+      "featuresPlaceholder": "Ein Merkmal pro Zeile",
+      "imageLabel": "Bild der Dienstleistung",
+      "imageInvalidType": "Format nicht erlaubt (verwenden Sie JPG, PNG oder WEBP)",
+      "imageTooLarge": "Das Bild darf nicht größer als 5MB sein",
+      "genericError": "Die Dienstleistung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "categoryForm": {
+      "createTitle": "Neue Kategorie",
+      "editTitle": "Kategorie bearbeiten",
+      "subtitle": "Gruppieren Sie Ihre Dienstleistungen, um sie leichter zu finden.",
+      "nameLabel": "Name der Kategorie",
+      "nameError": "Geben Sie einen Namen für die Kategorie ein",
+      "genericError": "Die Kategorie konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "categoriesTab": {
+      "createButton": "Neue Kategorie",
+      "emptyTitle": "Noch keine Kategorien",
+      "emptyDescription": "Erstellen Sie eine Kategorie, um Ihre Dienstleistungen zu organisieren.",
+      "serviceCount": "{count, plural, one {# Dienstleistung} other {# Dienstleistungen}}",
+      "inactive": "Inaktiv",
+      "editAction": "Bearbeiten"
+    },
+    "deactivateDialog": {
+      "title": "Deaktivieren?",
+      "description": "\"{name}\" wird nicht mehr als aktiv angezeigt. Sie können es jederzeit wieder aktivieren.",
+      "cancel": "Abbrechen",
+      "confirm": "Deaktivieren"
+    },
+    "errors": {
+      "forbidden": "Sie haben keine Berechtigung dafür",
+      "invalidInput": "Überprüfen Sie die Formularfelder",
+      "invalidImage": "Das Bild ist ungültig",
+      "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    }
   }
 }

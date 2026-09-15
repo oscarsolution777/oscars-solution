@@ -5,7 +5,9 @@
     "retry": "Tentar novamente",
     "save": "Salvar",
     "cancel": "Cancelar",
-    "logout": "Sair"
+    "logout": "Sair",
+    "active": "Ativo",
+    "inactive": "Inativo"
   },
   "auth": {
     "login": {
@@ -40,5 +42,91 @@
     "salonInfo": "Dados do salão",
     "currency": "Moeda",
     "timezone": "Fuso horário"
+  },
+  "services": {
+    "tabs": { "services": "Serviços", "categories": "Categorias" },
+    "createServiceButton": "Novo serviço",
+    "kpis": {
+      "totalServices": "Total de serviços",
+      "totalCategories": "Categorias",
+      "avgPrice": "Preço médio",
+      "avgDuration": "Duração média",
+      "active": "Ativos",
+      "perService": "Por serviço",
+      "minutes": "{count, plural, one {# minuto} other {# minutos}}"
+    },
+    "table": {
+      "columnService": "Serviço",
+      "columnCategory": "Categoria",
+      "columnPrice": "Preço",
+      "columnDuration": "Duração",
+      "columnStatus": "Status",
+      "columnActions": "Ações",
+      "durationValue": "{count, plural, one {# min} other {# min}}",
+      "emptyTitle": "Ainda não há serviços",
+      "emptyDescription": "Crie seu primeiro serviço para que apareça no catálogo.",
+      "createFirst": "Criar o primeiro serviço",
+      "viewAction": "Ver detalhes",
+      "editAction": "Editar"
+    },
+    "detail": {
+      "title": "Detalhe do serviço",
+      "edit": "Editar",
+      "category": "Categoria",
+      "price": "Preço",
+      "duration": "Duração",
+      "durationValue": "{count, plural, one {# minuto} other {# minutos}}",
+      "features": "Características",
+      "statusLabel": "Serviço ativo"
+    },
+    "form": {
+      "createTitle": "Novo serviço",
+      "editTitle": "Editar serviço",
+      "subtitle": "Os preços são exibidos na moeda do salão.",
+      "nameLabel": "Nome",
+      "nameError": "Digite um nome para o serviço",
+      "categoryLabel": "Categoria",
+      "categoryPlaceholder": "Selecione uma categoria",
+      "categoryError": "Selecione uma categoria",
+      "priceLabel": "Preço ({currency})",
+      "priceError": "Digite um preço válido (ex. 25.00)",
+      "durationLabel": "Duração (min)",
+      "durationError": "Digite uma duração válida",
+      "descriptionLabel": "Descrição",
+      "featuresLabel": "Características",
+      "featuresPlaceholder": "Uma característica por linha",
+      "imageLabel": "Imagem do serviço",
+      "imageInvalidType": "Formato não permitido (use JPG, PNG ou WEBP)",
+      "imageTooLarge": "A imagem não pode ultrapassar 5MB",
+      "genericError": "Não foi possível salvar o serviço. Tente novamente."
+    },
+    "categoryForm": {
+      "createTitle": "Nova categoria",
+      "editTitle": "Editar categoria",
+      "subtitle": "Agrupe seus serviços para encontrá-los mais facilmente.",
+      "nameLabel": "Nome da categoria",
+      "nameError": "Digite um nome para a categoria",
+      "genericError": "Não foi possível salvar a categoria. Tente novamente."
+    },
+    "categoriesTab": {
+      "createButton": "Nova categoria",
+      "emptyTitle": "Ainda não há categorias",
+      "emptyDescription": "Crie uma categoria para começar a organizar seus serviços.",
+      "serviceCount": "{count, plural, one {# serviço} other {# serviços}}",
+      "inactive": "Inativa",
+      "editAction": "Editar"
+    },
+    "deactivateDialog": {
+      "title": "Desativar?",
+      "description": "\"{name}\" deixará de aparecer como ativo. Você pode reativá-lo quando quiser.",
+      "cancel": "Cancelar",
+      "confirm": "Desativar"
+    },
+    "errors": {
+      "forbidden": "Você não tem permissão para fazer isso",
+      "invalidInput": "Revise os campos do formulário",
+      "invalidImage": "A imagem não é válida",
+      "generic": "Ocorreu um erro. Tente novamente."
+    }
   }
 }
