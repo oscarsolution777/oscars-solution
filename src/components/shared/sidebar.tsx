@@ -5,9 +5,16 @@ import { usePathname, Link } from "@/lib/i18n/navigation";
 import { navItems } from "./nav-items";
 import { cn } from "@/lib/utils";
 
-export function Sidebar({ salonName }: { salonName: string }) {
+export function Sidebar({ salonName, role }: { salonName: string; role: string }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
+
+  // "finances" (y cualquier otro módulo futuro con restrictedToRoles) no se
+  // muestra en absoluto a quien no tenga el rol requerido — CLAUDE.md
+  // sección 7: admin/reception tienen CERO acceso, no solo lectura.
+  const visibleItems = navItems.filter(
+    (item) => !item.restrictedToRoles || item.restrictedToRoles.includes(role)
+  );
 
   return (
     <aside className="flex w-[200px] shrink-0 flex-col bg-sidebar-bg text-sidebar-text">
@@ -20,7 +27,7 @@ export function Sidebar({ salonName }: { salonName: string }) {
       </div>
 
       <nav className="flex-1 space-y-1 px-2">
-        {navItems.map((item) => {
+        {visibleItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.enabled && pathname === item.href;
 

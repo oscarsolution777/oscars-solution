@@ -401,5 +401,204 @@
         "insufficientStock": "Não há estoque suficiente para essa movimentação."
       }
     }
+  },
+  "payments": {
+    "createButton": "Novo pagamento",
+    "kpis": {
+      "monthlyIncome": "Receita",
+      "thisMonth": "Este mês",
+      "pending": "Pagamentos pendentes",
+      "pendingCaption": "A receber",
+      "average": "Pagamento médio",
+      "refunded": "Reembolsado"
+    },
+    "table": {
+      "columnClient": "Cliente",
+      "columnAmount": "Valor",
+      "columnMethod": "Método",
+      "columnStatus": "Status",
+      "columnDate": "Data",
+      "columnActions": "Ações",
+      "emptyTitle": "Ainda não há pagamentos",
+      "emptyDescription": "Registre seu primeiro pagamento de um cliente.",
+      "createFirst": "Registrar o primeiro pagamento",
+      "markPaidAction": "Marcar como pago",
+      "refundAction": "Reembolsar",
+      "editAction": "Editar",
+      "refundDialog": {
+        "title": "Reembolsar este pagamento?",
+        "description": "Será marcado como reembolsado e {amount} será subtraído do total gasto pelo cliente.",
+        "cancel": "Cancelar",
+        "confirm": "Reembolsar"
+      }
+    },
+    "methods": {
+      "cash": "Dinheiro",
+      "card": "Cartão",
+      "transfer": "Transferência",
+      "other": "Outro"
+    },
+    "statuses": {
+      "pending": "Pendente",
+      "paid": "Pago",
+      "refunded": "Reembolsado"
+    },
+    "form": {
+      "createTitle": "Novo pagamento",
+      "editTitle": "Editar pagamento",
+      "subtitle": "Registre um pagamento de um cliente.",
+      "clientLabel": "Cliente",
+      "clientPlaceholder": "Selecione um cliente",
+      "clientError": "Selecione um cliente",
+      "amountLabel": "Valor ({currency})",
+      "amountError": "Digite um valor válido (ex. 10.00)",
+      "methodLabel": "Método de pagamento",
+      "statusLabel": "Status",
+      "referenceLabel": "Referência (opcional)",
+      "genericError": "Não foi possível salvar o pagamento. Tente novamente."
+    },
+    "errors": {
+      "invalidInput": "Revise os campos do formulário",
+      "generic": "Ocorreu um erro. Tente novamente."
+    }
+  },
+  "cashClosures": {
+    "createButton": "Novo fechamento",
+    "kpis": {
+      "closuresThisMonth": "Fechamentos registrados",
+      "thisMonth": "Este mês",
+      "accumulatedDifference": "Diferença acumulada"
+    },
+    "table": {
+      "columnDate": "Data",
+      "columnOpening": "Caixa inicial",
+      "columnExpected": "Esperado",
+      "columnCounted": "Contado",
+      "columnDifference": "Diferença",
+      "columnActions": "Ações",
+      "emptyTitle": "Ainda não há fechamentos de caixa",
+      "emptyDescription": "Registre o fechamento de caixa do dia para começar.",
+      "createFirst": "Registrar o primeiro fechamento",
+      "editAction": "Editar"
+    },
+    "form": {
+      "createTitle": "Novo fechamento de caixa",
+      "editTitle": "Editar fechamento de caixa",
+      "subtitle": "Conte o dinheiro do caixa e compare com o esperado.",
+      "dateLabel": "Data",
+      "dateError": "Selecione uma data válida",
+      "openingLabel": "Caixa inicial ({currency})",
+      "openingError": "Digite um valor válido (ex. 10.00)",
+      "expectedPreview": "Dinheiro esperado com base nos pagamentos em dinheiro do dia: {amount}",
+      "countedLabel": "Dinheiro contado ({currency})",
+      "countedError": "Digite um valor válido (ex. 10.00)",
+      "notesLabel": "Notas (opcional)",
+      "duplicateDateError": "Já existe um fechamento de caixa para esta data.",
+      "genericError": "Não foi possível salvar o fechamento de caixa. Tente novamente."
+    },
+    "errors": {
+      "invalidInput": "Revise os campos do formulário",
+      "generic": "Ocorreu um erro. Tente novamente.",
+      "duplicateDate": "Já existe um fechamento de caixa para esta data."
+    }
+  },
+  "finances": {
+    "errors": {
+      "forbiddenTitle": "Sem acesso",
+      "forbidden": "Somente a proprietária do salão pode ver esta seção."
+    },
+    "summary": {
+      "income": "Receita",
+      "expenses": "Despesas",
+      "payouts": "Folha de pagamento",
+      "balance": "Saldo",
+      "thisMonth": "Este mês"
+    },
+    "tabs": {
+      "expenses": "Despesas",
+      "payouts": "Folha de pagamento"
+    },
+    "expenses": {
+      "table": {
+        "createButton": "Nova despesa",
+        "columnCategory": "Categoria",
+        "columnDescription": "Descrição",
+        "columnAmount": "Valor",
+        "columnSupplier": "Fornecedor",
+        "columnDate": "Data",
+        "columnActions": "Ações",
+        "emptyTitle": "Ainda não há despesas",
+        "emptyDescription": "Registre a primeira despesa do salão.",
+        "createFirst": "Registrar a primeira despesa",
+        "editAction": "Editar",
+        "deleteAction": "Excluir",
+        "deleteDialog": {
+          "title": "Excluir esta despesa?",
+          "description": "A despesa de \"{category}\" será excluída permanentemente. Esta ação não pode ser desfeita.",
+          "cancel": "Cancelar",
+          "confirm": "Excluir"
+        }
+      },
+      "form": {
+        "createTitle": "Nova despesa",
+        "editTitle": "Editar despesa",
+        "subtitle": "Registre uma despesa do salão, independente do estoque.",
+        "categoryLabel": "Categoria",
+        "categoryError": "Digite uma categoria",
+        "descriptionLabel": "Descrição (opcional)",
+        "amountLabel": "Valor ({currency})",
+        "amountError": "Digite um valor válido (ex. 10.00)",
+        "dateLabel": "Data",
+        "dateError": "Selecione uma data válida",
+        "supplierLabel": "Fornecedor (opcional)",
+        "noSupplier": "Sem fornecedor",
+        "genericError": "Não foi possível salvar a despesa. Tente novamente."
+      },
+      "errors": {
+        "invalidInput": "Revise os campos do formulário",
+        "generic": "Ocorreu um erro. Tente novamente."
+      }
+    },
+    "payouts": {
+      "table": {
+        "createButton": "Nova folha",
+        "columnStaff": "Trabalhador",
+        "columnPeriod": "Período",
+        "columnBase": "Salário base",
+        "columnBonus": "Bônus",
+        "columnTotal": "Total",
+        "columnStatus": "Status",
+        "columnActions": "Ações",
+        "emptyTitle": "Ainda não há folhas de pagamento",
+        "emptyDescription": "Registre a primeira folha de pagamento de um trabalhador.",
+        "createFirst": "Registrar a primeira folha",
+        "editAction": "Editar",
+        "markPaidAction": "Marcar como paga"
+      },
+      "statuses": {
+        "pending": "Pendente",
+        "paid": "Paga"
+      },
+      "form": {
+        "createTitle": "Nova folha de pagamento",
+        "editTitle": "Editar folha de pagamento",
+        "subtitle": "Salário base do período mais bônus manual. Sem comissões.",
+        "staffLabel": "Trabalhador",
+        "staffPlaceholder": "Selecione um trabalhador",
+        "staffError": "Selecione um trabalhador",
+        "periodStartLabel": "De",
+        "periodEndLabel": "Até",
+        "periodError": "Selecione um período válido",
+        "baseLabel": "Salário base ({currency})",
+        "baseError": "Digite um valor válido (ex. 10.00)",
+        "bonusLabel": "Bônus ({currency})",
+        "bonusError": "Digite um valor válido (ex. 10.00)",
+        "genericError": "Não foi possível salvar a folha de pagamento. Tente novamente."
+      },
+      "errors": {
+        "invalidInput": "Revise os campos do formulário",
+        "generic": "Ocorreu um erro. Tente novamente."
+      }
+    }
   }
 }

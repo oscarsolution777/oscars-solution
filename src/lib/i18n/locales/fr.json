@@ -401,5 +401,204 @@
         "insufficientStock": "Stock insuffisant pour ce mouvement."
       }
     }
+  },
+  "payments": {
+    "createButton": "Nouveau paiement",
+    "kpis": {
+      "monthlyIncome": "Revenus",
+      "thisMonth": "Ce mois-ci",
+      "pending": "Paiements en attente",
+      "pendingCaption": "À encaisser",
+      "average": "Paiement moyen",
+      "refunded": "Remboursé"
+    },
+    "table": {
+      "columnClient": "Client",
+      "columnAmount": "Montant",
+      "columnMethod": "Méthode",
+      "columnStatus": "Statut",
+      "columnDate": "Date",
+      "columnActions": "Actions",
+      "emptyTitle": "Aucun paiement pour le moment",
+      "emptyDescription": "Enregistrez le premier paiement d'un client.",
+      "createFirst": "Enregistrer le premier paiement",
+      "markPaidAction": "Marquer comme payé",
+      "refundAction": "Rembourser",
+      "editAction": "Modifier",
+      "refundDialog": {
+        "title": "Rembourser ce paiement ?",
+        "description": "Il sera marqué comme remboursé et {amount} sera soustrait du total dépensé par le client.",
+        "cancel": "Annuler",
+        "confirm": "Rembourser"
+      }
+    },
+    "methods": {
+      "cash": "Espèces",
+      "card": "Carte",
+      "transfer": "Virement",
+      "other": "Autre"
+    },
+    "statuses": {
+      "pending": "En attente",
+      "paid": "Payé",
+      "refunded": "Remboursé"
+    },
+    "form": {
+      "createTitle": "Nouveau paiement",
+      "editTitle": "Modifier le paiement",
+      "subtitle": "Enregistrez un paiement d'un client.",
+      "clientLabel": "Client",
+      "clientPlaceholder": "Sélectionnez un client",
+      "clientError": "Sélectionnez un client",
+      "amountLabel": "Montant ({currency})",
+      "amountError": "Saisissez un montant valide (ex. 10.00)",
+      "methodLabel": "Méthode de paiement",
+      "statusLabel": "Statut",
+      "referenceLabel": "Référence (facultatif)",
+      "genericError": "Impossible d'enregistrer le paiement. Réessayez."
+    },
+    "errors": {
+      "invalidInput": "Vérifiez les champs du formulaire",
+      "generic": "Une erreur est survenue. Réessayez."
+    }
+  },
+  "cashClosures": {
+    "createButton": "Nouvelle clôture",
+    "kpis": {
+      "closuresThisMonth": "Clôtures enregistrées",
+      "thisMonth": "Ce mois-ci",
+      "accumulatedDifference": "Écart cumulé"
+    },
+    "table": {
+      "columnDate": "Date",
+      "columnOpening": "Fonds de caisse initial",
+      "columnExpected": "Attendu",
+      "columnCounted": "Compté",
+      "columnDifference": "Écart",
+      "columnActions": "Actions",
+      "emptyTitle": "Aucune clôture de caisse pour le moment",
+      "emptyDescription": "Enregistrez la clôture de caisse du jour pour commencer.",
+      "createFirst": "Enregistrer la première clôture",
+      "editAction": "Modifier"
+    },
+    "form": {
+      "createTitle": "Nouvelle clôture de caisse",
+      "editTitle": "Modifier la clôture de caisse",
+      "subtitle": "Comptez l'argent de la caisse et comparez-le au montant attendu.",
+      "dateLabel": "Date",
+      "dateError": "Sélectionnez une date valide",
+      "openingLabel": "Fonds de caisse initial ({currency})",
+      "openingError": "Saisissez un montant valide (ex. 10.00)",
+      "expectedPreview": "Espèces attendues selon les paiements en espèces du jour : {amount}",
+      "countedLabel": "Espèces comptées ({currency})",
+      "countedError": "Saisissez un montant valide (ex. 10.00)",
+      "notesLabel": "Notes (facultatif)",
+      "duplicateDateError": "Une clôture de caisse existe déjà pour cette date.",
+      "genericError": "Impossible d'enregistrer la clôture de caisse. Réessayez."
+    },
+    "errors": {
+      "invalidInput": "Vérifiez les champs du formulaire",
+      "generic": "Une erreur est survenue. Réessayez.",
+      "duplicateDate": "Une clôture de caisse existe déjà pour cette date."
+    }
+  },
+  "finances": {
+    "errors": {
+      "forbiddenTitle": "Accès refusé",
+      "forbidden": "Seule la propriétaire du salon peut voir cette section."
+    },
+    "summary": {
+      "income": "Revenus",
+      "expenses": "Dépenses",
+      "payouts": "Paie",
+      "balance": "Solde",
+      "thisMonth": "Ce mois-ci"
+    },
+    "tabs": {
+      "expenses": "Dépenses",
+      "payouts": "Paie"
+    },
+    "expenses": {
+      "table": {
+        "createButton": "Nouvelle dépense",
+        "columnCategory": "Catégorie",
+        "columnDescription": "Description",
+        "columnAmount": "Montant",
+        "columnSupplier": "Fournisseur",
+        "columnDate": "Date",
+        "columnActions": "Actions",
+        "emptyTitle": "Aucune dépense pour le moment",
+        "emptyDescription": "Enregistrez la première dépense du salon.",
+        "createFirst": "Enregistrer la première dépense",
+        "editAction": "Modifier",
+        "deleteAction": "Supprimer",
+        "deleteDialog": {
+          "title": "Supprimer cette dépense ?",
+          "description": "La dépense « {category} » sera supprimée définitivement. Cette action est irréversible.",
+          "cancel": "Annuler",
+          "confirm": "Supprimer"
+        }
+      },
+      "form": {
+        "createTitle": "Nouvelle dépense",
+        "editTitle": "Modifier la dépense",
+        "subtitle": "Enregistrez une dépense du salon, indépendante du stock.",
+        "categoryLabel": "Catégorie",
+        "categoryError": "Saisissez une catégorie",
+        "descriptionLabel": "Description (facultatif)",
+        "amountLabel": "Montant ({currency})",
+        "amountError": "Saisissez un montant valide (ex. 10.00)",
+        "dateLabel": "Date",
+        "dateError": "Sélectionnez une date valide",
+        "supplierLabel": "Fournisseur (facultatif)",
+        "noSupplier": "Aucun fournisseur",
+        "genericError": "Impossible d'enregistrer la dépense. Réessayez."
+      },
+      "errors": {
+        "invalidInput": "Vérifiez les champs du formulaire",
+        "generic": "Une erreur est survenue. Réessayez."
+      }
+    },
+    "payouts": {
+      "table": {
+        "createButton": "Nouvelle paie",
+        "columnStaff": "Employé",
+        "columnPeriod": "Période",
+        "columnBase": "Salaire de base",
+        "columnBonus": "Prime",
+        "columnTotal": "Total",
+        "columnStatus": "Statut",
+        "columnActions": "Actions",
+        "emptyTitle": "Aucune paie pour le moment",
+        "emptyDescription": "Enregistrez la première paie d'un employé.",
+        "createFirst": "Enregistrer la première paie",
+        "editAction": "Modifier",
+        "markPaidAction": "Marquer comme payée"
+      },
+      "statuses": {
+        "pending": "En attente",
+        "paid": "Payée"
+      },
+      "form": {
+        "createTitle": "Nouvelle paie",
+        "editTitle": "Modifier la paie",
+        "subtitle": "Salaire de base de la période plus une prime manuelle. Sans commissions.",
+        "staffLabel": "Employé",
+        "staffPlaceholder": "Sélectionnez un employé",
+        "staffError": "Sélectionnez un employé",
+        "periodStartLabel": "Du",
+        "periodEndLabel": "Au",
+        "periodError": "Sélectionnez une période valide",
+        "baseLabel": "Salaire de base ({currency})",
+        "baseError": "Saisissez un montant valide (ex. 10.00)",
+        "bonusLabel": "Prime ({currency})",
+        "bonusError": "Saisissez un montant valide (ex. 10.00)",
+        "genericError": "Impossible d'enregistrer la paie. Réessayez."
+      },
+      "errors": {
+        "invalidInput": "Vérifiez les champs du formulaire",
+        "generic": "Une erreur est survenue. Réessayez."
+      }
+    }
   }
 }

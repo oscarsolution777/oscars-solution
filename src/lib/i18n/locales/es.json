@@ -401,5 +401,204 @@
         "insufficientStock": "No hay stock suficiente para este movimiento."
       }
     }
+  },
+  "payments": {
+    "createButton": "Nuevo cobro",
+    "kpis": {
+      "monthlyIncome": "Ingresos",
+      "thisMonth": "Este mes",
+      "pending": "Cobros pendientes",
+      "pendingCaption": "Por cobrar",
+      "average": "Cobro promedio",
+      "refunded": "Reembolsado"
+    },
+    "table": {
+      "columnClient": "Cliente",
+      "columnAmount": "Monto",
+      "columnMethod": "Método",
+      "columnStatus": "Estado",
+      "columnDate": "Fecha",
+      "columnActions": "Acciones",
+      "emptyTitle": "Todavía no hay cobros",
+      "emptyDescription": "Registra tu primer cobro a un cliente.",
+      "createFirst": "Registrar el primer cobro",
+      "markPaidAction": "Marcar como pagado",
+      "refundAction": "Reembolsar",
+      "editAction": "Editar",
+      "refundDialog": {
+        "title": "¿Reembolsar este cobro?",
+        "description": "Se registrará como reembolsado y se restará {amount} del total gastado por el cliente.",
+        "cancel": "Cancelar",
+        "confirm": "Reembolsar"
+      }
+    },
+    "methods": {
+      "cash": "Efectivo",
+      "card": "Tarjeta",
+      "transfer": "Transferencia",
+      "other": "Otro"
+    },
+    "statuses": {
+      "pending": "Pendiente",
+      "paid": "Pagado",
+      "refunded": "Reembolsado"
+    },
+    "form": {
+      "createTitle": "Nuevo cobro",
+      "editTitle": "Editar cobro",
+      "subtitle": "Registra un cobro a un cliente.",
+      "clientLabel": "Cliente",
+      "clientPlaceholder": "Selecciona un cliente",
+      "clientError": "Selecciona un cliente",
+      "amountLabel": "Monto ({currency})",
+      "amountError": "Escribe un monto válido (ej. 10.00)",
+      "methodLabel": "Método de pago",
+      "statusLabel": "Estado",
+      "referenceLabel": "Referencia (opcional)",
+      "genericError": "No se pudo guardar el cobro. Intenta de nuevo."
+    },
+    "errors": {
+      "invalidInput": "Revisa los datos del formulario",
+      "generic": "Ha ocurrido un error. Intenta de nuevo."
+    }
+  },
+  "cashClosures": {
+    "createButton": "Nuevo cuadre",
+    "kpis": {
+      "closuresThisMonth": "Cuadres registrados",
+      "thisMonth": "Este mes",
+      "accumulatedDifference": "Diferencia acumulada"
+    },
+    "table": {
+      "columnDate": "Fecha",
+      "columnOpening": "Efectivo inicial",
+      "columnExpected": "Esperado",
+      "columnCounted": "Contado",
+      "columnDifference": "Diferencia",
+      "columnActions": "Acciones",
+      "emptyTitle": "Todavía no hay cuadres de caja",
+      "emptyDescription": "Registra el cuadre de caja del día para empezar.",
+      "createFirst": "Registrar el primer cuadre",
+      "editAction": "Editar"
+    },
+    "form": {
+      "createTitle": "Nuevo cuadre de caja",
+      "editTitle": "Editar cuadre de caja",
+      "subtitle": "Cuenta el efectivo de la caja y compáralo con lo esperado.",
+      "dateLabel": "Fecha",
+      "dateError": "Selecciona una fecha válida",
+      "openingLabel": "Efectivo inicial ({currency})",
+      "openingError": "Escribe un monto válido (ej. 10.00)",
+      "expectedPreview": "Efectivo esperado según los cobros en efectivo del día: {amount}",
+      "countedLabel": "Efectivo contado ({currency})",
+      "countedError": "Escribe un monto válido (ej. 10.00)",
+      "notesLabel": "Notas (opcional)",
+      "duplicateDateError": "Ya existe un cuadre de caja para esta fecha.",
+      "genericError": "No se pudo guardar el cuadre de caja. Intenta de nuevo."
+    },
+    "errors": {
+      "invalidInput": "Revisa los datos del formulario",
+      "generic": "Ha ocurrido un error. Intenta de nuevo.",
+      "duplicateDate": "Ya existe un cuadre de caja para esta fecha."
+    }
+  },
+  "finances": {
+    "errors": {
+      "forbiddenTitle": "Sin acceso",
+      "forbidden": "Solo la propietaria del salón puede ver esta sección."
+    },
+    "summary": {
+      "income": "Ingresos",
+      "expenses": "Gastos",
+      "payouts": "Nóminas",
+      "balance": "Balance",
+      "thisMonth": "Este mes"
+    },
+    "tabs": {
+      "expenses": "Gastos",
+      "payouts": "Nóminas"
+    },
+    "expenses": {
+      "table": {
+        "createButton": "Nuevo gasto",
+        "columnCategory": "Categoría",
+        "columnDescription": "Descripción",
+        "columnAmount": "Monto",
+        "columnSupplier": "Proveedor",
+        "columnDate": "Fecha",
+        "columnActions": "Acciones",
+        "emptyTitle": "Todavía no hay gastos",
+        "emptyDescription": "Registra el primer gasto del salón.",
+        "createFirst": "Registrar el primer gasto",
+        "editAction": "Editar",
+        "deleteAction": "Eliminar",
+        "deleteDialog": {
+          "title": "¿Eliminar este gasto?",
+          "description": "Se eliminará el gasto de \"{category}\" permanentemente. Esta acción no se puede deshacer.",
+          "cancel": "Cancelar",
+          "confirm": "Eliminar"
+        }
+      },
+      "form": {
+        "createTitle": "Nuevo gasto",
+        "editTitle": "Editar gasto",
+        "subtitle": "Registra un gasto del salón, independiente del inventario.",
+        "categoryLabel": "Categoría",
+        "categoryError": "Escribe una categoría",
+        "descriptionLabel": "Descripción (opcional)",
+        "amountLabel": "Monto ({currency})",
+        "amountError": "Escribe un monto válido (ej. 10.00)",
+        "dateLabel": "Fecha",
+        "dateError": "Selecciona una fecha válida",
+        "supplierLabel": "Proveedor (opcional)",
+        "noSupplier": "Sin proveedor",
+        "genericError": "No se pudo guardar el gasto. Intenta de nuevo."
+      },
+      "errors": {
+        "invalidInput": "Revisa los datos del formulario",
+        "generic": "Ha ocurrido un error. Intenta de nuevo."
+      }
+    },
+    "payouts": {
+      "table": {
+        "createButton": "Nueva nómina",
+        "columnStaff": "Trabajador",
+        "columnPeriod": "Periodo",
+        "columnBase": "Salario base",
+        "columnBonus": "Bono",
+        "columnTotal": "Total",
+        "columnStatus": "Estado",
+        "columnActions": "Acciones",
+        "emptyTitle": "Todavía no hay nóminas",
+        "emptyDescription": "Registra la primera nómina de un trabajador.",
+        "createFirst": "Registrar la primera nómina",
+        "editAction": "Editar",
+        "markPaidAction": "Marcar como pagada"
+      },
+      "statuses": {
+        "pending": "Pendiente",
+        "paid": "Pagada"
+      },
+      "form": {
+        "createTitle": "Nueva nómina",
+        "editTitle": "Editar nómina",
+        "subtitle": "Salario base del periodo más bono manual. Sin comisiones.",
+        "staffLabel": "Trabajador",
+        "staffPlaceholder": "Selecciona un trabajador",
+        "staffError": "Selecciona un trabajador",
+        "periodStartLabel": "Desde",
+        "periodEndLabel": "Hasta",
+        "periodError": "Selecciona un periodo válido",
+        "baseLabel": "Salario base ({currency})",
+        "baseError": "Escribe un monto válido (ej. 10.00)",
+        "bonusLabel": "Bono ({currency})",
+        "bonusError": "Escribe un monto válido (ej. 10.00)",
+        "genericError": "No se pudo guardar la nómina. Intenta de nuevo."
+      },
+      "errors": {
+        "invalidInput": "Revisa los datos del formulario",
+        "generic": "Ha ocurrido un error. Intenta de nuevo."
+      }
+    }
   }
 }

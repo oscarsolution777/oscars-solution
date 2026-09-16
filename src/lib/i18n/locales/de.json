@@ -401,5 +401,204 @@
         "insufficientStock": "Nicht genügend Bestand für diese Bewegung."
       }
     }
+  },
+  "payments": {
+    "createButton": "Neue Zahlung",
+    "kpis": {
+      "monthlyIncome": "Einnahmen",
+      "thisMonth": "Diesen Monat",
+      "pending": "Ausstehende Zahlungen",
+      "pendingCaption": "Zu kassieren",
+      "average": "Durchschnittliche Zahlung",
+      "refunded": "Erstattet"
+    },
+    "table": {
+      "columnClient": "Kunde",
+      "columnAmount": "Betrag",
+      "columnMethod": "Methode",
+      "columnStatus": "Status",
+      "columnDate": "Datum",
+      "columnActions": "Aktionen",
+      "emptyTitle": "Noch keine Zahlungen",
+      "emptyDescription": "Erfassen Sie die erste Zahlung eines Kunden.",
+      "createFirst": "Erste Zahlung erfassen",
+      "markPaidAction": "Als bezahlt markieren",
+      "refundAction": "Erstatten",
+      "editAction": "Bearbeiten",
+      "refundDialog": {
+        "title": "Diese Zahlung erstatten?",
+        "description": "Sie wird als erstattet markiert und {amount} wird vom Gesamtbetrag des Kunden abgezogen.",
+        "cancel": "Abbrechen",
+        "confirm": "Erstatten"
+      }
+    },
+    "methods": {
+      "cash": "Bar",
+      "card": "Karte",
+      "transfer": "Überweisung",
+      "other": "Sonstiges"
+    },
+    "statuses": {
+      "pending": "Ausstehend",
+      "paid": "Bezahlt",
+      "refunded": "Erstattet"
+    },
+    "form": {
+      "createTitle": "Neue Zahlung",
+      "editTitle": "Zahlung bearbeiten",
+      "subtitle": "Erfassen Sie eine Zahlung eines Kunden.",
+      "clientLabel": "Kunde",
+      "clientPlaceholder": "Kunden auswählen",
+      "clientError": "Wählen Sie einen Kunden aus",
+      "amountLabel": "Betrag ({currency})",
+      "amountError": "Geben Sie einen gültigen Betrag ein (z. B. 10.00)",
+      "methodLabel": "Zahlungsmethode",
+      "statusLabel": "Status",
+      "referenceLabel": "Referenz (optional)",
+      "genericError": "Die Zahlung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "errors": {
+      "invalidInput": "Überprüfen Sie die Formularfelder",
+      "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    }
+  },
+  "cashClosures": {
+    "createButton": "Neuer Kassenabschluss",
+    "kpis": {
+      "closuresThisMonth": "Erfasste Abschlüsse",
+      "thisMonth": "Diesen Monat",
+      "accumulatedDifference": "Kumulierte Differenz"
+    },
+    "table": {
+      "columnDate": "Datum",
+      "columnOpening": "Anfangsbestand",
+      "columnExpected": "Erwartet",
+      "columnCounted": "Gezählt",
+      "columnDifference": "Differenz",
+      "columnActions": "Aktionen",
+      "emptyTitle": "Noch keine Kassenabschlüsse",
+      "emptyDescription": "Erfassen Sie den Kassenabschluss des Tages, um zu beginnen.",
+      "createFirst": "Ersten Abschluss erfassen",
+      "editAction": "Bearbeiten"
+    },
+    "form": {
+      "createTitle": "Neuer Kassenabschluss",
+      "editTitle": "Kassenabschluss bearbeiten",
+      "subtitle": "Zählen Sie das Bargeld in der Kasse und vergleichen Sie es mit dem erwarteten Betrag.",
+      "dateLabel": "Datum",
+      "dateError": "Wählen Sie ein gültiges Datum",
+      "openingLabel": "Anfangsbestand ({currency})",
+      "openingError": "Geben Sie einen gültigen Betrag ein (z. B. 10.00)",
+      "expectedPreview": "Erwartetes Bargeld basierend auf den Barzahlungen des Tages: {amount}",
+      "countedLabel": "Gezähltes Bargeld ({currency})",
+      "countedError": "Geben Sie einen gültigen Betrag ein (z. B. 10.00)",
+      "notesLabel": "Notizen (optional)",
+      "duplicateDateError": "Für dieses Datum existiert bereits ein Kassenabschluss.",
+      "genericError": "Der Kassenabschluss konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "errors": {
+      "invalidInput": "Überprüfen Sie die Formularfelder",
+      "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "duplicateDate": "Für dieses Datum existiert bereits ein Kassenabschluss."
+    }
+  },
+  "finances": {
+    "errors": {
+      "forbiddenTitle": "Kein Zugriff",
+      "forbidden": "Nur die Salonbesitzerin kann diesen Bereich sehen."
+    },
+    "summary": {
+      "income": "Einnahmen",
+      "expenses": "Ausgaben",
+      "payouts": "Gehaltsabrechnung",
+      "balance": "Saldo",
+      "thisMonth": "Diesen Monat"
+    },
+    "tabs": {
+      "expenses": "Ausgaben",
+      "payouts": "Gehaltsabrechnung"
+    },
+    "expenses": {
+      "table": {
+        "createButton": "Neue Ausgabe",
+        "columnCategory": "Kategorie",
+        "columnDescription": "Beschreibung",
+        "columnAmount": "Betrag",
+        "columnSupplier": "Lieferant",
+        "columnDate": "Datum",
+        "columnActions": "Aktionen",
+        "emptyTitle": "Noch keine Ausgaben",
+        "emptyDescription": "Erfassen Sie die erste Ausgabe des Salons.",
+        "createFirst": "Erste Ausgabe erfassen",
+        "editAction": "Bearbeiten",
+        "deleteAction": "Löschen",
+        "deleteDialog": {
+          "title": "Diese Ausgabe löschen?",
+          "description": "Die Ausgabe „{category}“ wird endgültig gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+          "cancel": "Abbrechen",
+          "confirm": "Löschen"
+        }
+      },
+      "form": {
+        "createTitle": "Neue Ausgabe",
+        "editTitle": "Ausgabe bearbeiten",
+        "subtitle": "Erfassen Sie eine Ausgabe des Salons, unabhängig vom Lagerbestand.",
+        "categoryLabel": "Kategorie",
+        "categoryError": "Geben Sie eine Kategorie ein",
+        "descriptionLabel": "Beschreibung (optional)",
+        "amountLabel": "Betrag ({currency})",
+        "amountError": "Geben Sie einen gültigen Betrag ein (z. B. 10.00)",
+        "dateLabel": "Datum",
+        "dateError": "Wählen Sie ein gültiges Datum",
+        "supplierLabel": "Lieferant (optional)",
+        "noSupplier": "Kein Lieferant",
+        "genericError": "Die Ausgabe konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+      },
+      "errors": {
+        "invalidInput": "Überprüfen Sie die Formularfelder",
+        "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      }
+    },
+    "payouts": {
+      "table": {
+        "createButton": "Neue Gehaltsabrechnung",
+        "columnStaff": "Mitarbeiter",
+        "columnPeriod": "Zeitraum",
+        "columnBase": "Grundgehalt",
+        "columnBonus": "Bonus",
+        "columnTotal": "Gesamt",
+        "columnStatus": "Status",
+        "columnActions": "Aktionen",
+        "emptyTitle": "Noch keine Gehaltsabrechnungen",
+        "emptyDescription": "Erfassen Sie die erste Gehaltsabrechnung eines Mitarbeiters.",
+        "createFirst": "Erste Gehaltsabrechnung erfassen",
+        "editAction": "Bearbeiten",
+        "markPaidAction": "Als bezahlt markieren"
+      },
+      "statuses": {
+        "pending": "Ausstehend",
+        "paid": "Bezahlt"
+      },
+      "form": {
+        "createTitle": "Neue Gehaltsabrechnung",
+        "editTitle": "Gehaltsabrechnung bearbeiten",
+        "subtitle": "Grundgehalt des Zeitraums plus manueller Bonus. Ohne Provisionen.",
+        "staffLabel": "Mitarbeiter",
+        "staffPlaceholder": "Mitarbeiter auswählen",
+        "staffError": "Wählen Sie einen Mitarbeiter aus",
+        "periodStartLabel": "Von",
+        "periodEndLabel": "Bis",
+        "periodError": "Wählen Sie einen gültigen Zeitraum",
+        "baseLabel": "Grundgehalt ({currency})",
+        "baseError": "Geben Sie einen gültigen Betrag ein (z. B. 10.00)",
+        "bonusLabel": "Bonus ({currency})",
+        "bonusError": "Geben Sie einen gültigen Betrag ein (z. B. 10.00)",
+        "genericError": "Die Gehaltsabrechnung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+      },
+      "errors": {
+        "invalidInput": "Überprüfen Sie die Formularfelder",
+        "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      }
+    }
   }
 }

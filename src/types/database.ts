@@ -1,4 +1,4 @@
-export type Json =
+﻿export type Json =
   | string
   | number
   | boolean
@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      cash_closures: {
+        Row: {
+          closed_at: string
+          closed_by: string | null
+          closure_date: string
+          counted_cash_cents: number
+          created_at: string
+          difference_cents: number
+          expected_cash_cents: number
+          id: string
+          notes: string | null
+          opening_cash_cents: number
+          salon_id: string
+          updated_at: string
+        }
+        Insert: {
+          closed_at?: string
+          closed_by?: string | null
+          closure_date: string
+          counted_cash_cents?: number
+          created_at?: string
+          difference_cents?: number
+          expected_cash_cents?: number
+          id?: string
+          notes?: string | null
+          opening_cash_cents?: number
+          salon_id: string
+          updated_at?: string
+        }
+        Update: {
+          closed_at?: string
+          closed_by?: string | null
+          closure_date?: string
+          counted_cash_cents?: number
+          created_at?: string
+          difference_cents?: number
+          expected_cash_cents?: number
+          id?: string
+          notes?: string | null
+          opening_cash_cents?: number
+          salon_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cash_closures_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clients: {
         Row: {
           created_at: string
@@ -97,6 +150,57 @@ export type Database = {
         }
         Relationships: []
       }
+      expenses: {
+        Row: {
+          amount_cents: number
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          salon_id: string
+          spent_at: string
+          supplier_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount_cents: number
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          salon_id: string
+          spent_at?: string
+          supplier_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          salon_id?: string
+          spent_at?: string
+          supplier_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       memberships: {
         Row: {
           created_at: string
@@ -128,6 +232,60 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "memberships_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount_cents: number
+          client_id: string
+          created_at: string
+          id: string
+          method: string
+          paid_at: string
+          reference: string | null
+          salon_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_cents: number
+          client_id: string
+          created_at?: string
+          id?: string
+          method: string
+          paid_at?: string
+          reference?: string | null
+          salon_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number
+          client_id?: string
+          created_at?: string
+          id?: string
+          method?: string
+          paid_at?: string
+          reference?: string | null
+          salon_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_salon_id_fkey"
             columns: ["salon_id"]
             isOneToOne: false
             referencedRelation: "salons"
@@ -488,6 +646,66 @@ export type Database = {
             columns: ["salon_id"]
             isOneToOne: false
             referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staff_payouts: {
+        Row: {
+          base_cents: number
+          bonus_cents: number
+          created_at: string
+          id: string
+          paid_at: string | null
+          period_end: string
+          period_start: string
+          salon_id: string
+          staff_id: string
+          status: string
+          total_cents: number
+          updated_at: string
+        }
+        Insert: {
+          base_cents?: number
+          bonus_cents?: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          period_end: string
+          period_start: string
+          salon_id: string
+          staff_id: string
+          status?: string
+          total_cents?: number
+          updated_at?: string
+        }
+        Update: {
+          base_cents?: number
+          bonus_cents?: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          period_end?: string
+          period_start?: string
+          salon_id?: string
+          staff_id?: string
+          status?: string
+          total_cents?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staff_payouts_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "staff_payouts_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
             referencedColumns: ["id"]
           },
         ]

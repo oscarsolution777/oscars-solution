@@ -401,5 +401,204 @@
         "insufficientStock": "There isn't enough stock for this movement."
       }
     }
+  },
+  "payments": {
+    "createButton": "New charge",
+    "kpis": {
+      "monthlyIncome": "Income",
+      "thisMonth": "This month",
+      "pending": "Pending charges",
+      "pendingCaption": "To be collected",
+      "average": "Average charge",
+      "refunded": "Refunded"
+    },
+    "table": {
+      "columnClient": "Client",
+      "columnAmount": "Amount",
+      "columnMethod": "Method",
+      "columnStatus": "Status",
+      "columnDate": "Date",
+      "columnActions": "Actions",
+      "emptyTitle": "No charges yet",
+      "emptyDescription": "Register your first charge to a client.",
+      "createFirst": "Register the first charge",
+      "markPaidAction": "Mark as paid",
+      "refundAction": "Refund",
+      "editAction": "Edit",
+      "refundDialog": {
+        "title": "Refund this charge?",
+        "description": "It will be marked as refunded and {amount} will be subtracted from the client's total spent.",
+        "cancel": "Cancel",
+        "confirm": "Refund"
+      }
+    },
+    "methods": {
+      "cash": "Cash",
+      "card": "Card",
+      "transfer": "Transfer",
+      "other": "Other"
+    },
+    "statuses": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "refunded": "Refunded"
+    },
+    "form": {
+      "createTitle": "New charge",
+      "editTitle": "Edit charge",
+      "subtitle": "Register a charge to a client.",
+      "clientLabel": "Client",
+      "clientPlaceholder": "Select a client",
+      "clientError": "Select a client",
+      "amountLabel": "Amount ({currency})",
+      "amountError": "Enter a valid amount (e.g. 10.00)",
+      "methodLabel": "Payment method",
+      "statusLabel": "Status",
+      "referenceLabel": "Reference (optional)",
+      "genericError": "Couldn't save the charge. Please try again."
+    },
+    "errors": {
+      "invalidInput": "Check the form fields",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "cashClosures": {
+    "createButton": "New closure",
+    "kpis": {
+      "closuresThisMonth": "Closures recorded",
+      "thisMonth": "This month",
+      "accumulatedDifference": "Accumulated difference"
+    },
+    "table": {
+      "columnDate": "Date",
+      "columnOpening": "Opening cash",
+      "columnExpected": "Expected",
+      "columnCounted": "Counted",
+      "columnDifference": "Difference",
+      "columnActions": "Actions",
+      "emptyTitle": "No cash closures yet",
+      "emptyDescription": "Record the day's cash closure to get started.",
+      "createFirst": "Record the first closure",
+      "editAction": "Edit"
+    },
+    "form": {
+      "createTitle": "New cash closure",
+      "editTitle": "Edit cash closure",
+      "subtitle": "Count the cash drawer and compare it with what's expected.",
+      "dateLabel": "Date",
+      "dateError": "Select a valid date",
+      "openingLabel": "Opening cash ({currency})",
+      "openingError": "Enter a valid amount (e.g. 10.00)",
+      "expectedPreview": "Expected cash based on the day's cash charges: {amount}",
+      "countedLabel": "Counted cash ({currency})",
+      "countedError": "Enter a valid amount (e.g. 10.00)",
+      "notesLabel": "Notes (optional)",
+      "duplicateDateError": "A cash closure already exists for this date.",
+      "genericError": "Couldn't save the cash closure. Please try again."
+    },
+    "errors": {
+      "invalidInput": "Check the form fields",
+      "generic": "Something went wrong. Please try again.",
+      "duplicateDate": "A cash closure already exists for this date."
+    }
+  },
+  "finances": {
+    "errors": {
+      "forbiddenTitle": "No access",
+      "forbidden": "Only the salon owner can view this section."
+    },
+    "summary": {
+      "income": "Income",
+      "expenses": "Expenses",
+      "payouts": "Payroll",
+      "balance": "Balance",
+      "thisMonth": "This month"
+    },
+    "tabs": {
+      "expenses": "Expenses",
+      "payouts": "Payroll"
+    },
+    "expenses": {
+      "table": {
+        "createButton": "New expense",
+        "columnCategory": "Category",
+        "columnDescription": "Description",
+        "columnAmount": "Amount",
+        "columnSupplier": "Supplier",
+        "columnDate": "Date",
+        "columnActions": "Actions",
+        "emptyTitle": "No expenses yet",
+        "emptyDescription": "Record the salon's first expense.",
+        "createFirst": "Record the first expense",
+        "editAction": "Edit",
+        "deleteAction": "Delete",
+        "deleteDialog": {
+          "title": "Delete this expense?",
+          "description": "The \"{category}\" expense will be permanently deleted. This action cannot be undone.",
+          "cancel": "Cancel",
+          "confirm": "Delete"
+        }
+      },
+      "form": {
+        "createTitle": "New expense",
+        "editTitle": "Edit expense",
+        "subtitle": "Record a salon expense, independent of inventory.",
+        "categoryLabel": "Category",
+        "categoryError": "Enter a category",
+        "descriptionLabel": "Description (optional)",
+        "amountLabel": "Amount ({currency})",
+        "amountError": "Enter a valid amount (e.g. 10.00)",
+        "dateLabel": "Date",
+        "dateError": "Select a valid date",
+        "supplierLabel": "Supplier (optional)",
+        "noSupplier": "No supplier",
+        "genericError": "Couldn't save the expense. Please try again."
+      },
+      "errors": {
+        "invalidInput": "Check the form fields",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "payouts": {
+      "table": {
+        "createButton": "New payout",
+        "columnStaff": "Staff",
+        "columnPeriod": "Period",
+        "columnBase": "Base salary",
+        "columnBonus": "Bonus",
+        "columnTotal": "Total",
+        "columnStatus": "Status",
+        "columnActions": "Actions",
+        "emptyTitle": "No payouts yet",
+        "emptyDescription": "Record the first payout for a staff member.",
+        "createFirst": "Record the first payout",
+        "editAction": "Edit",
+        "markPaidAction": "Mark as paid"
+      },
+      "statuses": {
+        "pending": "Pending",
+        "paid": "Paid"
+      },
+      "form": {
+        "createTitle": "New payout",
+        "editTitle": "Edit payout",
+        "subtitle": "Base salary for the period plus a manual bonus. No commissions.",
+        "staffLabel": "Staff member",
+        "staffPlaceholder": "Select a staff member",
+        "staffError": "Select a staff member",
+        "periodStartLabel": "From",
+        "periodEndLabel": "To",
+        "periodError": "Select a valid period",
+        "baseLabel": "Base salary ({currency})",
+        "baseError": "Enter a valid amount (e.g. 10.00)",
+        "bonusLabel": "Bonus ({currency})",
+        "bonusError": "Enter a valid amount (e.g. 10.00)",
+        "genericError": "Couldn't save the payout. Please try again."
+      },
+      "errors": {
+        "invalidInput": "Check the form fields",
+        "generic": "Something went wrong. Please try again."
+      }
+    }
   }
 }

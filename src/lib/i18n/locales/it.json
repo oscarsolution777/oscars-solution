@@ -401,5 +401,204 @@
         "insufficientStock": "Scorta insufficiente per questo movimento."
       }
     }
+  },
+  "payments": {
+    "createButton": "Nuovo incasso",
+    "kpis": {
+      "monthlyIncome": "Entrate",
+      "thisMonth": "Questo mese",
+      "pending": "Incassi in sospeso",
+      "pendingCaption": "Da incassare",
+      "average": "Incasso medio",
+      "refunded": "Rimborsato"
+    },
+    "table": {
+      "columnClient": "Cliente",
+      "columnAmount": "Importo",
+      "columnMethod": "Metodo",
+      "columnStatus": "Stato",
+      "columnDate": "Data",
+      "columnActions": "Azioni",
+      "emptyTitle": "Ancora nessun incasso",
+      "emptyDescription": "Registra il primo incasso di un cliente.",
+      "createFirst": "Registra il primo incasso",
+      "markPaidAction": "Segna come pagato",
+      "refundAction": "Rimborsa",
+      "editAction": "Modifica",
+      "refundDialog": {
+        "title": "Rimborsare questo incasso?",
+        "description": "Verrà segnato come rimborsato e {amount} sarà sottratto dal totale speso dal cliente.",
+        "cancel": "Annulla",
+        "confirm": "Rimborsa"
+      }
+    },
+    "methods": {
+      "cash": "Contanti",
+      "card": "Carta",
+      "transfer": "Bonifico",
+      "other": "Altro"
+    },
+    "statuses": {
+      "pending": "In sospeso",
+      "paid": "Pagato",
+      "refunded": "Rimborsato"
+    },
+    "form": {
+      "createTitle": "Nuovo incasso",
+      "editTitle": "Modifica incasso",
+      "subtitle": "Registra un incasso da un cliente.",
+      "clientLabel": "Cliente",
+      "clientPlaceholder": "Seleziona un cliente",
+      "clientError": "Seleziona un cliente",
+      "amountLabel": "Importo ({currency})",
+      "amountError": "Inserisci un importo valido (es. 10.00)",
+      "methodLabel": "Metodo di pagamento",
+      "statusLabel": "Stato",
+      "referenceLabel": "Riferimento (opzionale)",
+      "genericError": "Impossibile salvare l'incasso. Riprova."
+    },
+    "errors": {
+      "invalidInput": "Controlla i campi del modulo",
+      "generic": "Si è verificato un errore. Riprova."
+    }
+  },
+  "cashClosures": {
+    "createButton": "Nuova chiusura",
+    "kpis": {
+      "closuresThisMonth": "Chiusure registrate",
+      "thisMonth": "Questo mese",
+      "accumulatedDifference": "Differenza accumulata"
+    },
+    "table": {
+      "columnDate": "Data",
+      "columnOpening": "Fondo cassa iniziale",
+      "columnExpected": "Atteso",
+      "columnCounted": "Contato",
+      "columnDifference": "Differenza",
+      "columnActions": "Azioni",
+      "emptyTitle": "Ancora nessuna chiusura di cassa",
+      "emptyDescription": "Registra la chiusura di cassa del giorno per iniziare.",
+      "createFirst": "Registra la prima chiusura",
+      "editAction": "Modifica"
+    },
+    "form": {
+      "createTitle": "Nuova chiusura di cassa",
+      "editTitle": "Modifica chiusura di cassa",
+      "subtitle": "Conta il contante in cassa e confrontalo con l'atteso.",
+      "dateLabel": "Data",
+      "dateError": "Seleziona una data valida",
+      "openingLabel": "Fondo cassa iniziale ({currency})",
+      "openingError": "Inserisci un importo valido (es. 10.00)",
+      "expectedPreview": "Contante atteso in base agli incassi in contanti del giorno: {amount}",
+      "countedLabel": "Contante contato ({currency})",
+      "countedError": "Inserisci un importo valido (es. 10.00)",
+      "notesLabel": "Note (opzionale)",
+      "duplicateDateError": "Esiste già una chiusura di cassa per questa data.",
+      "genericError": "Impossibile salvare la chiusura di cassa. Riprova."
+    },
+    "errors": {
+      "invalidInput": "Controlla i campi del modulo",
+      "generic": "Si è verificato un errore. Riprova.",
+      "duplicateDate": "Esiste già una chiusura di cassa per questa data."
+    }
+  },
+  "finances": {
+    "errors": {
+      "forbiddenTitle": "Nessun accesso",
+      "forbidden": "Solo la proprietaria del salone può vedere questa sezione."
+    },
+    "summary": {
+      "income": "Entrate",
+      "expenses": "Spese",
+      "payouts": "Stipendi",
+      "balance": "Saldo",
+      "thisMonth": "Questo mese"
+    },
+    "tabs": {
+      "expenses": "Spese",
+      "payouts": "Stipendi"
+    },
+    "expenses": {
+      "table": {
+        "createButton": "Nuova spesa",
+        "columnCategory": "Categoria",
+        "columnDescription": "Descrizione",
+        "columnAmount": "Importo",
+        "columnSupplier": "Fornitore",
+        "columnDate": "Data",
+        "columnActions": "Azioni",
+        "emptyTitle": "Ancora nessuna spesa",
+        "emptyDescription": "Registra la prima spesa del salone.",
+        "createFirst": "Registra la prima spesa",
+        "editAction": "Modifica",
+        "deleteAction": "Elimina",
+        "deleteDialog": {
+          "title": "Eliminare questa spesa?",
+          "description": "La spesa \"{category}\" verrà eliminata definitivamente. Questa azione non può essere annullata.",
+          "cancel": "Annulla",
+          "confirm": "Elimina"
+        }
+      },
+      "form": {
+        "createTitle": "Nuova spesa",
+        "editTitle": "Modifica spesa",
+        "subtitle": "Registra una spesa del salone, indipendente dal magazzino.",
+        "categoryLabel": "Categoria",
+        "categoryError": "Inserisci una categoria",
+        "descriptionLabel": "Descrizione (opzionale)",
+        "amountLabel": "Importo ({currency})",
+        "amountError": "Inserisci un importo valido (es. 10.00)",
+        "dateLabel": "Data",
+        "dateError": "Seleziona una data valida",
+        "supplierLabel": "Fornitore (opzionale)",
+        "noSupplier": "Nessun fornitore",
+        "genericError": "Impossibile salvare la spesa. Riprova."
+      },
+      "errors": {
+        "invalidInput": "Controlla i campi del modulo",
+        "generic": "Si è verificato un errore. Riprova."
+      }
+    },
+    "payouts": {
+      "table": {
+        "createButton": "Nuovo stipendio",
+        "columnStaff": "Dipendente",
+        "columnPeriod": "Periodo",
+        "columnBase": "Stipendio base",
+        "columnBonus": "Bonus",
+        "columnTotal": "Totale",
+        "columnStatus": "Stato",
+        "columnActions": "Azioni",
+        "emptyTitle": "Ancora nessuno stipendio",
+        "emptyDescription": "Registra il primo stipendio di un dipendente.",
+        "createFirst": "Registra il primo stipendio",
+        "editAction": "Modifica",
+        "markPaidAction": "Segna come pagato"
+      },
+      "statuses": {
+        "pending": "In sospeso",
+        "paid": "Pagato"
+      },
+      "form": {
+        "createTitle": "Nuovo stipendio",
+        "editTitle": "Modifica stipendio",
+        "subtitle": "Stipendio base del periodo più bonus manuale. Senza commissioni.",
+        "staffLabel": "Dipendente",
+        "staffPlaceholder": "Seleziona un dipendente",
+        "staffError": "Seleziona un dipendente",
+        "periodStartLabel": "Dal",
+        "periodEndLabel": "Al",
+        "periodError": "Seleziona un periodo valido",
+        "baseLabel": "Stipendio base ({currency})",
+        "baseError": "Inserisci un importo valido (es. 10.00)",
+        "bonusLabel": "Bonus ({currency})",
+        "bonusError": "Inserisci un importo valido (es. 10.00)",
+        "genericError": "Impossibile salvare lo stipendio. Riprova."
+      },
+      "errors": {
+        "invalidInput": "Controlla i campi del modulo",
+        "generic": "Si è verificato un errore. Riprova."
+      }
+    }
   }
 }
