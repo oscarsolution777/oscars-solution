@@ -47,7 +47,35 @@
     "welcomeBody": "Hier ist eine Übersicht über Ihren Salon.",
     "salonInfo": "Salon-Daten",
     "currency": "Währung",
-    "timezone": "Zeitzone"
+    "timezone": "Zeitzone",
+    "kpis": {
+      "income": "Umsatz diesen Monat",
+      "avgTicket": "Durchschnittlicher Bon",
+      "completedCount": "{count, plural, one {# abgeschlossener Termin} other {# abgeschlossene Termine}}",
+      "noShowRate": "Nichterscheinen-Quote",
+      "cashDifference": "Kumulierte Kassendifferenz",
+      "thisMonth": "Diesen Monat",
+      "pendingRequests": "Offene Anfragen",
+      "pendingCaption": "Zu bestätigen oder abzulehnen",
+      "todayAppointments": "Termine heute",
+      "todayCaption": "Für heute geplant",
+      "lowStock": "Produkte unter Mindestbestand",
+      "lowStockCaption": "Lagerbestand prüfen"
+    },
+    "topServices": {
+      "title": "Meistverkaufte Dienstleistungen",
+      "emptyTitle": "Diesen Monat noch keine Dienstleistungsverkäufe"
+    },
+    "staffWorkload": {
+      "title": "Arbeitslast pro Mitarbeiter",
+      "emptyTitle": "Diesen Monat noch keine zugewiesenen Termine",
+      "assignedCount": "{count, plural, one {# Dienstleistung} other {# Dienstleistungen}}"
+    },
+    "clientSegments": {
+      "title": "Neue vs. wiederkehrende Kunden",
+      "new": "Neu",
+      "recurring": "Wiederkehrend"
+    }
   },
   "requests": {
     "tabs": { "inbox": "Posteingang", "agenda": "Terminplan" },
@@ -712,6 +740,73 @@
         "invalidInput": "Überprüfen Sie die Formularfelder",
         "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
       }
+    }
+  },
+  "reports": {
+    "errors": {
+      "forbiddenTitle": "Kein Zugriff",
+      "forbidden": "Nur die Salonbesitzerin oder eine Administratorin können Berichte einsehen."
+    },
+    "tabs": {
+      "sales": "Umsatz",
+      "clients": "Kunden",
+      "services": "Dienstleistungen",
+      "staff": "Mitarbeiter",
+      "inventory": "Lager"
+    },
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
+    },
+    "exportCsv": "CSV exportieren",
+    "sales": {
+      "totalIncome": "Umsatz im Zeitraum",
+      "totalRefunded": "Erstattet im Zeitraum",
+      "emptyChart": "Kein Umsatz in diesem Zeitraum",
+      "emptyTable": "Keine Zahlungen in diesem Zeitraum",
+      "columnDate": "Datum",
+      "columnClient": "Kunde",
+      "columnAmount": "Betrag",
+      "columnMethod": "Methode",
+      "columnStatus": "Status"
+    },
+    "clients": {
+      "new": "Neu",
+      "recurring": "Wiederkehrend",
+      "emptyTable": "Noch keine Kunden",
+      "columnName": "Kunde",
+      "columnPhone": "Telefon",
+      "columnTotalSpent": "Gesamtausgaben",
+      "columnLastVisit": "Letzter Besuch"
+    },
+    "services": {
+      "emptyChart": "Keine abgeschlossenen Dienstleistungen in diesem Zeitraum",
+      "emptyTable": "Keine abgeschlossenen Dienstleistungen in diesem Zeitraum",
+      "columnService": "Dienstleistung",
+      "columnUnits": "Einheiten",
+      "columnRevenue": "Umsatz"
+    },
+    "staff": {
+      "emptyChart": "Keine zugewiesenen Termine in diesem Zeitraum",
+      "emptyTable": "Keine zugewiesenen Termine in diesem Zeitraum",
+      "columnStaff": "Mitarbeiter",
+      "columnAssigned": "Zugewiesene Dienstleistungen",
+      "columnRevenue": "Erzielter Umsatz"
+    },
+    "inventory": {
+      "totalValue": "Gesamtwert des Lagers",
+      "lowStockCount": "Produkte unter Mindestbestand",
+      "emptyTable": "Noch keine Produkte",
+      "columnProduct": "Produkt",
+      "columnStock": "Aktueller Bestand",
+      "columnMinStock": "Mindestbestand",
+      "columnValue": "Wert",
+      "columnStatus": "Status",
+      "lowStockBadge": "Unter Mindestbestand",
+      "okBadge": "OK"
     }
   }
 }

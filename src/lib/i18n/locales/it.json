@@ -47,7 +47,35 @@
     "welcomeBody": "Ecco un riepilogo del tuo salone.",
     "salonInfo": "Dati del salone",
     "currency": "Valuta",
-    "timezone": "Fuso orario"
+    "timezone": "Fuso orario",
+    "kpis": {
+      "income": "Incasso del mese",
+      "avgTicket": "Scontrino medio",
+      "completedCount": "{count, plural, one {# appuntamento completato} other {# appuntamenti completati}}",
+      "noShowRate": "Tasso di mancata presentazione",
+      "cashDifference": "Differenza di cassa accumulata",
+      "thisMonth": "Questo mese",
+      "pendingRequests": "Richieste in attesa",
+      "pendingCaption": "Da confermare o rifiutare",
+      "todayAppointments": "Appuntamenti di oggi",
+      "todayCaption": "Programmati per oggi",
+      "lowStock": "Prodotti sotto la scorta minima",
+      "lowStockCaption": "Controlla il magazzino"
+    },
+    "topServices": {
+      "title": "Servizi più venduti",
+      "emptyTitle": "Ancora nessuna vendita di servizi questo mese"
+    },
+    "staffWorkload": {
+      "title": "Carico di lavoro per collaboratore",
+      "emptyTitle": "Ancora nessun appuntamento assegnato questo mese",
+      "assignedCount": "{count, plural, one {# servizio} other {# servizi}}"
+    },
+    "clientSegments": {
+      "title": "Clienti nuovi vs. ricorrenti",
+      "new": "Nuovi",
+      "recurring": "Ricorrenti"
+    }
   },
   "requests": {
     "tabs": { "inbox": "In arrivo", "agenda": "Agenda" },
@@ -712,6 +740,73 @@
         "invalidInput": "Controlla i campi del modulo",
         "generic": "Si è verificato un errore. Riprova."
       }
+    }
+  },
+  "reports": {
+    "errors": {
+      "forbiddenTitle": "Accesso negato",
+      "forbidden": "Solo la proprietaria del salone o un amministratore possono vedere i report."
+    },
+    "tabs": {
+      "sales": "Vendite",
+      "clients": "Clienti",
+      "services": "Servizi",
+      "staff": "Collaboratori",
+      "inventory": "Magazzino"
+    },
+    "period": {
+      "thisMonth": "Questo mese",
+      "lastMonth": "Mese scorso",
+      "last3Months": "Ultimi 3 mesi",
+      "custom": "Personalizzato",
+      "apply": "Applica"
+    },
+    "exportCsv": "Esporta CSV",
+    "sales": {
+      "totalIncome": "Incasso del periodo",
+      "totalRefunded": "Rimborsato nel periodo",
+      "emptyChart": "Nessun incasso in questo periodo",
+      "emptyTable": "Nessun pagamento in questo periodo",
+      "columnDate": "Data",
+      "columnClient": "Cliente",
+      "columnAmount": "Importo",
+      "columnMethod": "Metodo",
+      "columnStatus": "Stato"
+    },
+    "clients": {
+      "new": "Nuovi",
+      "recurring": "Ricorrenti",
+      "emptyTable": "Ancora nessun cliente",
+      "columnName": "Cliente",
+      "columnPhone": "Telefono",
+      "columnTotalSpent": "Spesa totale",
+      "columnLastVisit": "Ultima visita"
+    },
+    "services": {
+      "emptyChart": "Nessun servizio completato in questo periodo",
+      "emptyTable": "Nessun servizio completato in questo periodo",
+      "columnService": "Servizio",
+      "columnUnits": "Unità",
+      "columnRevenue": "Ricavi"
+    },
+    "staff": {
+      "emptyChart": "Nessun appuntamento assegnato in questo periodo",
+      "emptyTable": "Nessun appuntamento assegnato in questo periodo",
+      "columnStaff": "Collaboratore",
+      "columnAssigned": "Servizi assegnati",
+      "columnRevenue": "Ricavi generati"
+    },
+    "inventory": {
+      "totalValue": "Valore totale del magazzino",
+      "lowStockCount": "Prodotti sotto la scorta minima",
+      "emptyTable": "Ancora nessun prodotto",
+      "columnProduct": "Prodotto",
+      "columnStock": "Scorta attuale",
+      "columnMinStock": "Scorta minima",
+      "columnValue": "Valore",
+      "columnStatus": "Stato",
+      "lowStockBadge": "Sotto la scorta minima",
+      "okBadge": "OK"
     }
   }
 }

@@ -47,7 +47,35 @@
     "welcomeBody": "Here's an overview of your salon.",
     "salonInfo": "Salon details",
     "currency": "Currency",
-    "timezone": "Timezone"
+    "timezone": "Timezone",
+    "kpis": {
+      "income": "Income this month",
+      "avgTicket": "Average ticket",
+      "completedCount": "{count, plural, one {# completed appointment} other {# completed appointments}}",
+      "noShowRate": "No-show rate",
+      "cashDifference": "Accumulated cash difference",
+      "thisMonth": "This month",
+      "pendingRequests": "Pending requests",
+      "pendingCaption": "Waiting to confirm or reject",
+      "todayAppointments": "Today's appointments",
+      "todayCaption": "Scheduled for today",
+      "lowStock": "Products below minimum",
+      "lowStockCaption": "Check inventory"
+    },
+    "topServices": {
+      "title": "Best-selling services",
+      "emptyTitle": "No service sales yet this month"
+    },
+    "staffWorkload": {
+      "title": "Workload by staff member",
+      "emptyTitle": "No appointments assigned yet this month",
+      "assignedCount": "{count, plural, one {# service} other {# services}}"
+    },
+    "clientSegments": {
+      "title": "New vs. recurring clients",
+      "new": "New",
+      "recurring": "Recurring"
+    }
   },
   "requests": {
     "tabs": { "inbox": "Inbox", "agenda": "Agenda" },
@@ -712,6 +740,73 @@
         "invalidInput": "Check the form fields",
         "generic": "Something went wrong. Please try again."
       }
+    }
+  },
+  "reports": {
+    "errors": {
+      "forbiddenTitle": "No access",
+      "forbidden": "Only the salon owner or an admin can view reports."
+    },
+    "tabs": {
+      "sales": "Sales",
+      "clients": "Clients",
+      "services": "Services",
+      "staff": "Staff",
+      "inventory": "Inventory"
+    },
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
+    },
+    "exportCsv": "Export CSV",
+    "sales": {
+      "totalIncome": "Income this period",
+      "totalRefunded": "Refunded this period",
+      "emptyChart": "No income in this period",
+      "emptyTable": "No payments in this period",
+      "columnDate": "Date",
+      "columnClient": "Client",
+      "columnAmount": "Amount",
+      "columnMethod": "Method",
+      "columnStatus": "Status"
+    },
+    "clients": {
+      "new": "New",
+      "recurring": "Recurring",
+      "emptyTable": "No clients yet",
+      "columnName": "Client",
+      "columnPhone": "Phone",
+      "columnTotalSpent": "Total spent",
+      "columnLastVisit": "Last visit"
+    },
+    "services": {
+      "emptyChart": "No completed services in this period",
+      "emptyTable": "No completed services in this period",
+      "columnService": "Service",
+      "columnUnits": "Units",
+      "columnRevenue": "Revenue"
+    },
+    "staff": {
+      "emptyChart": "No appointments assigned in this period",
+      "emptyTable": "No appointments assigned in this period",
+      "columnStaff": "Staff",
+      "columnAssigned": "Assigned services",
+      "columnRevenue": "Revenue generated"
+    },
+    "inventory": {
+      "totalValue": "Total inventory value",
+      "lowStockCount": "Products below minimum",
+      "emptyTable": "No products yet",
+      "columnProduct": "Product",
+      "columnStock": "Current stock",
+      "columnMinStock": "Minimum stock",
+      "columnValue": "Value",
+      "columnStatus": "Status",
+      "lowStockBadge": "Below minimum",
+      "okBadge": "OK"
     }
   }
 }

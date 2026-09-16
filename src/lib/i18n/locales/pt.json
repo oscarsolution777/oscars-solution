@@ -47,7 +47,35 @@
     "welcomeBody": "Aqui está um resumo do seu salão.",
     "salonInfo": "Dados do salão",
     "currency": "Moeda",
-    "timezone": "Fuso horário"
+    "timezone": "Fuso horário",
+    "kpis": {
+      "income": "Receita do mês",
+      "avgTicket": "Ticket médio",
+      "completedCount": "{count, plural, one {# atendimento concluído} other {# atendimentos concluídos}}",
+      "noShowRate": "Taxa de não comparecimento",
+      "cashDifference": "Diferença de caixa acumulada",
+      "thisMonth": "Este mês",
+      "pendingRequests": "Solicitações pendentes",
+      "pendingCaption": "Aguardando confirmação ou recusa",
+      "todayAppointments": "Atendimentos de hoje",
+      "todayCaption": "Agendados para hoje",
+      "lowStock": "Produtos abaixo do mínimo",
+      "lowStockCaption": "Verifique o estoque"
+    },
+    "topServices": {
+      "title": "Serviços mais vendidos",
+      "emptyTitle": "Ainda sem vendas de serviços este mês"
+    },
+    "staffWorkload": {
+      "title": "Carga de trabalho por profissional",
+      "emptyTitle": "Ainda sem atendimentos atribuídos este mês",
+      "assignedCount": "{count, plural, one {# serviço} other {# serviços}}"
+    },
+    "clientSegments": {
+      "title": "Clientes novos vs. recorrentes",
+      "new": "Novos",
+      "recurring": "Recorrentes"
+    }
   },
   "requests": {
     "tabs": { "inbox": "Caixa de entrada", "agenda": "Agenda" },
@@ -712,6 +740,73 @@
         "invalidInput": "Revise os campos do formulário",
         "generic": "Ocorreu um erro. Tente novamente."
       }
+    }
+  },
+  "reports": {
+    "errors": {
+      "forbiddenTitle": "Sem acesso",
+      "forbidden": "Somente a proprietária do salão ou um administrador podem ver os relatórios."
+    },
+    "tabs": {
+      "sales": "Vendas",
+      "clients": "Clientes",
+      "services": "Serviços",
+      "staff": "Profissionais",
+      "inventory": "Estoque"
+    },
+    "period": {
+      "thisMonth": "Este mês",
+      "lastMonth": "Mês passado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
+    },
+    "exportCsv": "Exportar CSV",
+    "sales": {
+      "totalIncome": "Receita do período",
+      "totalRefunded": "Reembolsado no período",
+      "emptyChart": "Sem receita neste período",
+      "emptyTable": "Sem pagamentos neste período",
+      "columnDate": "Data",
+      "columnClient": "Cliente",
+      "columnAmount": "Valor",
+      "columnMethod": "Método",
+      "columnStatus": "Status"
+    },
+    "clients": {
+      "new": "Novos",
+      "recurring": "Recorrentes",
+      "emptyTable": "Ainda não há clientes",
+      "columnName": "Cliente",
+      "columnPhone": "Telefone",
+      "columnTotalSpent": "Gasto total",
+      "columnLastVisit": "Última visita"
+    },
+    "services": {
+      "emptyChart": "Sem serviços concluídos neste período",
+      "emptyTable": "Sem serviços concluídos neste período",
+      "columnService": "Serviço",
+      "columnUnits": "Unidades",
+      "columnRevenue": "Receita"
+    },
+    "staff": {
+      "emptyChart": "Sem atendimentos atribuídos neste período",
+      "emptyTable": "Sem atendimentos atribuídos neste período",
+      "columnStaff": "Profissional",
+      "columnAssigned": "Serviços atribuídos",
+      "columnRevenue": "Receita gerada"
+    },
+    "inventory": {
+      "totalValue": "Valor total do estoque",
+      "lowStockCount": "Produtos abaixo do mínimo",
+      "emptyTable": "Ainda não há produtos",
+      "columnProduct": "Produto",
+      "columnStock": "Estoque atual",
+      "columnMinStock": "Estoque mínimo",
+      "columnValue": "Valor",
+      "columnStatus": "Status",
+      "lowStockBadge": "Abaixo do mínimo",
+      "okBadge": "OK"
     }
   }
 }

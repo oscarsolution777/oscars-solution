@@ -47,7 +47,35 @@
     "welcomeBody": "Voici un résumé de votre salon.",
     "salonInfo": "Informations du salon",
     "currency": "Devise",
-    "timezone": "Fuseau horaire"
+    "timezone": "Fuseau horaire",
+    "kpis": {
+      "income": "Revenus du mois",
+      "avgTicket": "Panier moyen",
+      "completedCount": "{count, plural, one {# rendez-vous terminé} other {# rendez-vous terminés}}",
+      "noShowRate": "Taux d'absence",
+      "cashDifference": "Écart de caisse cumulé",
+      "thisMonth": "Ce mois-ci",
+      "pendingRequests": "Demandes en attente",
+      "pendingCaption": "À confirmer ou refuser",
+      "todayAppointments": "Rendez-vous du jour",
+      "todayCaption": "Prévus aujourd'hui",
+      "lowStock": "Produits sous le seuil minimum",
+      "lowStockCaption": "Vérifiez l'inventaire"
+    },
+    "topServices": {
+      "title": "Services les plus vendus",
+      "emptyTitle": "Aucune vente de service ce mois-ci pour l'instant"
+    },
+    "staffWorkload": {
+      "title": "Charge de travail par employé",
+      "emptyTitle": "Aucun rendez-vous assigné ce mois-ci pour l'instant",
+      "assignedCount": "{count, plural, one {# service} other {# services}}"
+    },
+    "clientSegments": {
+      "title": "Clients nouveaux vs. récurrents",
+      "new": "Nouveaux",
+      "recurring": "Récurrents"
+    }
   },
   "requests": {
     "tabs": { "inbox": "Boîte de réception", "agenda": "Agenda" },
@@ -712,6 +740,73 @@
         "invalidInput": "Vérifiez les champs du formulaire",
         "generic": "Une erreur est survenue. Réessayez."
       }
+    }
+  },
+  "reports": {
+    "errors": {
+      "forbiddenTitle": "Accès refusé",
+      "forbidden": "Seules la propriétaire du salon ou une administratrice peuvent voir les rapports."
+    },
+    "tabs": {
+      "sales": "Ventes",
+      "clients": "Clients",
+      "services": "Services",
+      "staff": "Employés",
+      "inventory": "Inventaire"
+    },
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
+    },
+    "exportCsv": "Exporter en CSV",
+    "sales": {
+      "totalIncome": "Revenus de la période",
+      "totalRefunded": "Remboursé sur la période",
+      "emptyChart": "Aucun revenu sur cette période",
+      "emptyTable": "Aucun paiement sur cette période",
+      "columnDate": "Date",
+      "columnClient": "Client",
+      "columnAmount": "Montant",
+      "columnMethod": "Méthode",
+      "columnStatus": "Statut"
+    },
+    "clients": {
+      "new": "Nouveaux",
+      "recurring": "Récurrents",
+      "emptyTable": "Aucun client pour l'instant",
+      "columnName": "Client",
+      "columnPhone": "Téléphone",
+      "columnTotalSpent": "Total dépensé",
+      "columnLastVisit": "Dernière visite"
+    },
+    "services": {
+      "emptyChart": "Aucun service terminé sur cette période",
+      "emptyTable": "Aucun service terminé sur cette période",
+      "columnService": "Service",
+      "columnUnits": "Unités",
+      "columnRevenue": "Revenus"
+    },
+    "staff": {
+      "emptyChart": "Aucun rendez-vous assigné sur cette période",
+      "emptyTable": "Aucun rendez-vous assigné sur cette période",
+      "columnStaff": "Employé",
+      "columnAssigned": "Services assignés",
+      "columnRevenue": "Revenus générés"
+    },
+    "inventory": {
+      "totalValue": "Valeur totale de l'inventaire",
+      "lowStockCount": "Produits sous le seuil minimum",
+      "emptyTable": "Aucun produit pour l'instant",
+      "columnProduct": "Produit",
+      "columnStock": "Stock actuel",
+      "columnMinStock": "Stock minimum",
+      "columnValue": "Valeur",
+      "columnStatus": "Statut",
+      "lowStockBadge": "Sous le minimum",
+      "okBadge": "OK"
     }
   }
 }
