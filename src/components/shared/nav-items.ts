@@ -40,12 +40,13 @@ export type NavItem = {
 
 // Los 13 módulos del sidebar (CLAUDE.md sección 6/9). Solo los módulos ya
 // construidos ("dashboard" en Fase 0, "services" en Fase 1, "clients" y
-// "staff" en Fase 5, "inventory" en Fase 7, "payments"/"cashClosures"/
-// "finances" en Fase 6) tienen ruta real; el resto se muestra deshabilitado
-// ("próximamente") para no crear enlaces rotos a fases futuras.
+// "staff" en Fase 5, "requests" en Fase 4, "inventory" en Fase 7,
+// "payments"/"cashClosures"/"finances" en Fase 6) tienen ruta real; el
+// resto se muestra deshabilitado ("próximamente") para no crear enlaces
+// rotos a fases futuras.
 export const navItems: NavItem[] = [
   { key: "dashboard", href: "/dashboard", icon: LayoutDashboard, enabled: true },
-  { key: "requests", href: "/requests", icon: CalendarCheck, enabled: false },
+  { key: "requests", href: "/requests", icon: CalendarCheck, enabled: true },
   { key: "clients", href: "/clients", icon: Users, enabled: true },
   { key: "services", href: "/services", icon: Scissors, enabled: true },
   { key: "staff", href: "/staff", icon: UserRound, enabled: true },

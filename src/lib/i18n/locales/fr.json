@@ -49,6 +49,108 @@
     "currency": "Devise",
     "timezone": "Fuseau horaire"
   },
+  "requests": {
+    "tabs": { "inbox": "Boîte de réception", "agenda": "Agenda" },
+    "kpis": {
+      "pendingRequests": "Demandes en attente",
+      "pendingCaption": "À confirmer ou refuser",
+      "todayAppointments": "Rendez-vous du jour",
+      "todayCaption": "Prévus aujourd'hui",
+      "noShowRate": "Taux d'absence",
+      "thisMonth": "Ce mois-ci",
+      "completedRevenue": "Revenus des rendez-vous terminés"
+    },
+    "inbox": {
+      "createButton": "Nouvelle demande",
+      "columnClient": "Client",
+      "columnServices": "Services",
+      "columnPreferredDate": "Date préférée",
+      "columnStatus": "Statut",
+      "columnActions": "Actions",
+      "confirmAction": "Confirmer",
+      "rejectAction": "Refuser",
+      "emptyTitle": "Aucune demande pour l'instant",
+      "emptyDescription": "Créez la première demande manuelle pour commencer à planifier des rendez-vous.",
+      "createFirst": "Créer la première demande",
+      "rejectDialog": {
+        "title": "Refuser la demande ?",
+        "description": "La demande de \"{name}\" sera marquée comme refusée. Elle restera visible dans l'historique, mais aucun rendez-vous ne sera créé.",
+        "cancel": "Annuler",
+        "confirm": "Refuser"
+      }
+    },
+    "agenda": {
+      "columnDate": "Date",
+      "columnClient": "Client",
+      "columnServices": "Services",
+      "columnTotal": "Total",
+      "columnStatus": "Statut",
+      "columnActions": "Actions",
+      "serviceCount": "{count, plural, one {service} other {services}}",
+      "completeAction": "Marquer terminé",
+      "noShowAction": "Marquer absence",
+      "cancelAction": "Annuler le rendez-vous",
+      "emptyTitle": "Aucun rendez-vous pour l'instant",
+      "emptyDescription": "Les rendez-vous apparaissent ici une fois une demande confirmée.",
+      "cancelDialog": {
+        "title": "Annuler le rendez-vous ?",
+        "description": "Le rendez-vous sera marqué comme annulé. Cette action est irréversible.",
+        "cancel": "Retour",
+        "confirm": "Annuler le rendez-vous"
+      }
+    },
+    "statuses": {
+      "pending": "En attente",
+      "confirmed": "Confirmée",
+      "rejected": "Refusée",
+      "cancelled": "Annulée"
+    },
+    "appointmentStatuses": {
+      "scheduled": "Prévu",
+      "completed": "Terminé",
+      "no_show": "Absence",
+      "cancelled": "Annulé"
+    },
+    "form": {
+      "createTitle": "Nouvelle demande",
+      "subtitle": "Enregistrez une demande manuelle tant que le portail QR n'est pas disponible.",
+      "existingClientLabel": "Client existant (optionnel)",
+      "existingClientPlaceholder": "Rechercher un client...",
+      "existingClientNone": "Nouveau client",
+      "clientNameLabel": "Nom complet",
+      "clientNameError": "Saisissez le nom du client",
+      "clientPhoneLabel": "Téléphone",
+      "clientPhoneError": "Saisissez un numéro de contact",
+      "clientEmailLabel": "E-mail (optionnel)",
+      "clientEmailError": "Saisissez un e-mail valide",
+      "preferredDateLabel": "Date préférée (optionnelle)",
+      "itemsLabel": "Services demandés",
+      "addItem": "Ajouter un service",
+      "removeItem": "Retirer",
+      "servicePlaceholder": "Sélectionnez un service",
+      "staffPlaceholder": "Employé (optionnel)",
+      "staffUnassigned": "Pas encore assigné",
+      "itemsError": "Ajoutez au moins un service",
+      "genericError": "Impossible d'enregistrer la demande. Réessayez."
+    },
+    "confirm": {
+      "title": "Confirmer la demande de {name}",
+      "subtitle": "Fixez la date du rendez-vous et assignez un employé à chaque service.",
+      "dateLabel": "Date du rendez-vous",
+      "dateError": "Sélectionnez une date valide",
+      "clientLabel": "Client",
+      "clientNewOption": "Créer un nouveau client ({name})",
+      "itemsLabel": "Services et employé assigné",
+      "staffPlaceholder": "Sélectionnez un employé",
+      "staffError": "Assignez un employé à chaque service",
+      "genericError": "Impossible de confirmer la demande. Réessayez.",
+      "confirmButton": "Confirmer et créer le rendez-vous"
+    },
+    "errors": {
+      "invalidInput": "Vérifiez les champs du formulaire",
+      "generic": "Une erreur est survenue. Réessayez."
+    }
+  },
   "services": {
     "tabs": { "services": "Services", "categories": "Catégories" },
     "createServiceButton": "Nouveau service",
@@ -83,7 +185,11 @@
       "duration": "Durée",
       "durationValue": "{count, plural, one {# minute} other {# minutes}}",
       "features": "Caractéristiques",
-      "statusLabel": "Service actif"
+      "statusLabel": "Service actif",
+      "productsUsed": "Produits utilisés",
+      "editProducts": "Modifier les produits",
+      "productQty": "{qty} {unit}",
+      "noProductsAssigned": "Aucun produit assigné pour l'instant"
     },
     "form": {
       "createTitle": "Nouveau service",
@@ -121,6 +227,13 @@
       "serviceCount": "{count, plural, one {# service} other {# services}}",
       "inactive": "Inactive",
       "editAction": "Modifier"
+    },
+    "productsForm": {
+      "title": "Produits de {name}",
+      "subtitle": "Cochez les produits que ce service consomme et leur quantité.",
+      "qtyLabel": "Quantité de {name}",
+      "genericError": "Impossible d'enregistrer les produits. Réessayez.",
+      "noActiveProducts": "Aucun produit actif dans l'inventaire pour l'instant."
     },
     "errors": {
       "forbidden": "Vous n'avez pas la permission de faire cela",

@@ -49,6 +49,108 @@
     "currency": "Moeda",
     "timezone": "Fuso horário"
   },
+  "requests": {
+    "tabs": { "inbox": "Caixa de entrada", "agenda": "Agenda" },
+    "kpis": {
+      "pendingRequests": "Solicitações pendentes",
+      "pendingCaption": "Aguardando confirmação ou recusa",
+      "todayAppointments": "Atendimentos de hoje",
+      "todayCaption": "Agendados para hoje",
+      "noShowRate": "Taxa de não comparecimento",
+      "thisMonth": "Este mês",
+      "completedRevenue": "Receita de atendimentos concluídos"
+    },
+    "inbox": {
+      "createButton": "Nova solicitação",
+      "columnClient": "Cliente",
+      "columnServices": "Serviços",
+      "columnPreferredDate": "Data preferida",
+      "columnStatus": "Status",
+      "columnActions": "Ações",
+      "confirmAction": "Confirmar",
+      "rejectAction": "Recusar",
+      "emptyTitle": "Ainda não há solicitações",
+      "emptyDescription": "Crie a primeira solicitação manual para começar a agendar atendimentos.",
+      "createFirst": "Criar a primeira solicitação",
+      "rejectDialog": {
+        "title": "Recusar solicitação?",
+        "description": "A solicitação de \"{name}\" será marcada como recusada. Você ainda verá no histórico, mas nenhum atendimento será criado.",
+        "cancel": "Cancelar",
+        "confirm": "Recusar"
+      }
+    },
+    "agenda": {
+      "columnDate": "Data",
+      "columnClient": "Cliente",
+      "columnServices": "Serviços",
+      "columnTotal": "Total",
+      "columnStatus": "Status",
+      "columnActions": "Ações",
+      "serviceCount": "{count, plural, one {serviço} other {serviços}}",
+      "completeAction": "Marcar como concluído",
+      "noShowAction": "Marcar não compareceu",
+      "cancelAction": "Cancelar atendimento",
+      "emptyTitle": "Ainda não há atendimentos",
+      "emptyDescription": "Os atendimentos aparecem aqui ao confirmar uma solicitação.",
+      "cancelDialog": {
+        "title": "Cancelar atendimento?",
+        "description": "O atendimento será marcado como cancelado. Esta ação não pode ser desfeita.",
+        "cancel": "Voltar",
+        "confirm": "Cancelar atendimento"
+      }
+    },
+    "statuses": {
+      "pending": "Pendente",
+      "confirmed": "Confirmada",
+      "rejected": "Recusada",
+      "cancelled": "Cancelada"
+    },
+    "appointmentStatuses": {
+      "scheduled": "Agendado",
+      "completed": "Concluído",
+      "no_show": "Não compareceu",
+      "cancelled": "Cancelado"
+    },
+    "form": {
+      "createTitle": "Nova solicitação",
+      "subtitle": "Registre uma solicitação manual enquanto o portal QR não está disponível.",
+      "existingClientLabel": "Cliente existente (opcional)",
+      "existingClientPlaceholder": "Buscar cliente...",
+      "existingClientNone": "Cliente novo",
+      "clientNameLabel": "Nome completo",
+      "clientNameError": "Digite o nome do cliente",
+      "clientPhoneLabel": "Telefone",
+      "clientPhoneError": "Digite um telefone de contato",
+      "clientEmailLabel": "E-mail (opcional)",
+      "clientEmailError": "Digite um e-mail válido",
+      "preferredDateLabel": "Data preferida (opcional)",
+      "itemsLabel": "Serviços solicitados",
+      "addItem": "Adicionar serviço",
+      "removeItem": "Remover",
+      "servicePlaceholder": "Selecione um serviço",
+      "staffPlaceholder": "Profissional (opcional)",
+      "staffUnassigned": "Ainda não atribuído",
+      "itemsError": "Adicione pelo menos um serviço",
+      "genericError": "Não foi possível salvar a solicitação. Tente novamente."
+    },
+    "confirm": {
+      "title": "Confirmar solicitação de {name}",
+      "subtitle": "Defina a data do atendimento e atribua um profissional a cada serviço.",
+      "dateLabel": "Data do atendimento",
+      "dateError": "Selecione uma data válida",
+      "clientLabel": "Cliente",
+      "clientNewOption": "Criar cliente novo ({name})",
+      "itemsLabel": "Serviços e profissional atribuído",
+      "staffPlaceholder": "Selecione um profissional",
+      "staffError": "Atribua um profissional a cada serviço",
+      "genericError": "Não foi possível confirmar a solicitação. Tente novamente.",
+      "confirmButton": "Confirmar e criar atendimento"
+    },
+    "errors": {
+      "invalidInput": "Revise os campos do formulário",
+      "generic": "Ocorreu um erro. Tente novamente."
+    }
+  },
   "services": {
     "tabs": { "services": "Serviços", "categories": "Categorias" },
     "createServiceButton": "Novo serviço",
@@ -83,7 +185,11 @@
       "duration": "Duração",
       "durationValue": "{count, plural, one {# minuto} other {# minutos}}",
       "features": "Características",
-      "statusLabel": "Serviço ativo"
+      "statusLabel": "Serviço ativo",
+      "productsUsed": "Produtos usados",
+      "editProducts": "Editar produtos",
+      "productQty": "{qty} {unit}",
+      "noProductsAssigned": "Nenhum produto atribuído ainda"
     },
     "form": {
       "createTitle": "Novo serviço",
@@ -121,6 +227,13 @@
       "serviceCount": "{count, plural, one {# serviço} other {# serviços}}",
       "inactive": "Inativa",
       "editAction": "Editar"
+    },
+    "productsForm": {
+      "title": "Produtos de {name}",
+      "subtitle": "Marque os produtos que este serviço consome e a quantidade.",
+      "qtyLabel": "Quantidade de {name}",
+      "genericError": "Não foi possível salvar os produtos. Tente novamente.",
+      "noActiveProducts": "Ainda não há produtos ativos no estoque."
     },
     "errors": {
       "forbidden": "Você não tem permissão para fazer isso",

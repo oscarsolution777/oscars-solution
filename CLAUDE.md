@@ -199,23 +199,27 @@ docs/
 - `service_categories` — salon_id, name, sort_order, is_active (borrado lógico, igual que el resto de tablas de catálogo — añadido en Fase 1)
 - `services` — salon_id, category_id, name, description, features (text[]), price_cents, duration_min (informativo, no bloquea agenda), image_url, is_active, sort_order
 - `service_staff` — service_id, staff_id (qué trabajador puede hacer qué servicio)
-- `service_products` — service_id, product_id, qty (consumo estándar de inventario por servicio)
+- `service_products` — service_id, product_id, qty (consumo estándar de inventario por servicio, construido en la Fase 4 junto con el descuento automático de stock). Sin `salon_id` propio (se valida por trigger `check_service_product_same_salon` que ambos pertenezcan al mismo salón). Mismos permisos que "Servicios": owner/admin escritura, reception solo lectura.
 
 ### Personas
 - `staff` — salon_id, user_id (**siempre nulo por ahora** — los trabajadores no tienen acceso al sistema), full_name, phone, role_title, base_salary_cents, hired_at, is_active. Sin comisiones: solo salario.
 - `clients` — salon_id, full_name, phone, email, notes, preferences (jsonb), first_visit_at, last_visit_at, total_spent_cents, is_active (borrado lógico, añadido en Fase 5 — la propia sección de "Reglas de datos" ya exigía nunca hacer `DELETE` de clientes). **Sin `user_id` — el cliente no tiene cuenta ni login, siempre es anónimo/identificado solo por su código de solicitud.** `first_visit_at`/`last_visit_at`/`total_spent_cents` se completan automáticamente en las Fases 4 (citas) y 6 (pagos); hasta entonces quedan vacíos/0.
 
 ### Flujo operativo — sin hora, solo fecha; cliente siempre anónimo
+**Construido en la Fase 4 solo del lado del panel** (Fases 2/3 — portal QR y cancelar/reprogramar sin cuenta — siguen pausadas por decisión explícita): las solicitudes de esta fase se crean manualmente desde el panel (`source = 'manual'`); `public_code` se genera igual (trigger `set_request_public_code`, `encode(gen_random_bytes(12),'hex')`) para dejar el dato listo cuando exista el portal.
 - `requests` — solicitud entrante del portal QR
   - salon_id, **public_code (token corto y no adivinable — es la única "identidad" del cliente)**, client_id (nullable hasta vincular), client_name, client_phone, client_email, preferred_date (date, nullable)
   - status: `pending` | `confirmed` | `rejected` | `cancelled`
   - source: `qr` | `manual`
-- `request_items` — request_id, service_id, staff_id (nullable hasta que la dueña asigne), service_name_snapshot, price_cents_snapshot
-- `appointments` — cita creada al confirmar la solicitud
+  - Sin `DELETE`: una corrección se hace cambiando el `status`.
+- `request_items` — request_id, service_id, staff_id (nullable hasta que la dueña asigne), service_name_snapshot, price_cents_snapshot. El trigger `snapshot_request_item` fija siempre `service_name_snapshot`/`price_cents_snapshot` leyendo `services` en ese momento, nunca se confía en lo que envíe la aplicación. Sin `salon_id` propio (se deriva vía `request_id`, mismo patrón que `service_staff`).
+- `appointments` — cita creada al confirmar la solicitud (`createAppointmentFromRequest`: crea la cita + sus items y marca la solicitud `confirmed`, vinculando o creando el cliente)
   - salon_id, request_id (nullable), client_id, **appointment_date (date)**, total_cents, notes
   - status: `scheduled` | `completed` | `no_show` | `cancelled`
   - El orden dentro del día lo maneja la dueña de palabra; el sistema no gestiona turnos ni horario.
-- `appointment_items` — appointment_id, service_id, staff_id (el trabajador asignado), price_cents
+  - `total_cents` lo recalcula siempre el trigger `set_appointment_total` sumando `appointment_items`. Sin `DELETE`: correcciones vía `status`; cambiar la fecha es un `UPDATE` directo de `appointment_date` (la reprogramación con solicitud del cliente sigue siendo Fase 3, pausada).
+  - Al pasar a `completed`, el trigger `apply_appointment_completion` (a) inserta en `stock_movements` un movimiento `out` por cada `service_products` de cada servicio de la cita (descuento automático de inventario) y (b) actualiza `clients.first_visit_at`/`last_visit_at`.
+- `appointment_items` — appointment_id, service_id, staff_id (el trabajador asignado, obligatorio), price_cents. El trigger `snapshot_appointment_item` fija siempre `price_cents` desde `services`. Sin `salon_id` propio. Sin `DELETE`.
 
 ### Cancelar / reprogramar sin cuenta
 El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al enviar la solicitud) y desde ahí puede, mientras el estado lo permita:
@@ -223,7 +227,7 @@ El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al env
 - Pedir cambio de fecha (esto crea una solicitud de reprogramación que la dueña confirma, igual que una solicitud nueva — no se reprograma solo automáticamente para evitar choques que la dueña no vea).
 
 ### Dinero
-- `payments` — salon_id, client_id, amount_cents, method (`cash` | `card` | `transfer` | `other`), status (`pending` | `paid` | `refunded`), paid_at, reference. **`appointment_id` queda pendiente para la Fase 4** (no existe `appointments` todavía; no se puede crear la FK). Al insertar o cambiar el `status`, el trigger `apply_payment_to_client` mantiene `clients.total_spent_cents` sincronizado (suma en `paid`, resta si pasa a `refunded`) — es la pieza de Fase 6 que CLAUDE.md ya anticipaba para ese campo. Ledger de solo `SELECT`/`INSERT`/`UPDATE` (nunca `DELETE`): una corrección se hace cambiando el `status`, no borrando la fila.
+- `payments` — salon_id, client_id, amount_cents, method (`cash` | `card` | `transfer` | `other`), status (`pending` | `paid` | `refunded`), paid_at, reference, **appointment_id (nullable, añadido en la Fase 4 junto con `appointments`; sin UI de vinculación todavía — queda para un pase posterior)**. Al insertar o cambiar el `status`, el trigger `apply_payment_to_client` mantiene `clients.total_spent_cents` sincronizado (suma en `paid`, resta si pasa a `refunded`) — es la pieza de Fase 6 que CLAUDE.md ya anticipaba para ese campo. Ledger de solo `SELECT`/`INSERT`/`UPDATE` (nunca `DELETE`): una corrección se hace cambiando el `status`, no borrando la fila.
 - `cash_closures` — cuadre de caja diario, **uno por salón y por día** (`unique(salon_id, closure_date)`): salon_id, closure_date, opening_cash_cents, expected_cash_cents, counted_cash_cents, difference_cents, notes, closed_by, closed_at. `expected_cash_cents` (solo al crear) y `difference_cents` (al crear y editar) los calcula siempre el trigger `apply_cash_closure_computed` — nunca se aceptan desde la aplicación. `expected_cash_cents = opening_cash_cents + Σ pagos en efectivo/pagados de ese día`, comparando la fecha en la **zona horaria del salón**, no en UTC. Sin `DELETE`.
 - `expenses` — salon_id, category (texto libre), description, amount_cents, spent_at, supplier_id (nullable, FK a `suppliers` de la Fase 7) — independiente del inventario. Único módulo de esta sección con `DELETE` real (owner): es una captura simple sin efectos derivados aguas abajo, a diferencia de `payments`/`cash_closures`/`staff_payouts`.
 - `staff_payouts` — salon_id, staff_id, period_start, period_end, base_cents, bonus_cents (manual), total_cents, status (`pending` | `paid`), paid_at. `total_cents` lo recalcula siempre el trigger `set_payout_total` (`base_cents + bonus_cents`), nunca se confía en el valor enviado por la app. Sin comisiones (sección 13). Sin `DELETE`.
@@ -233,7 +237,7 @@ El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al env
 ### Inventario
 - `suppliers` — salon_id, name, phone, email, notes, **is_active** (añadido en Fase 7 sobre lo listado aquí originalmente: un proveedor con productos históricos no debe borrarse, se desactiva en su lugar, igual que el resto del catálogo — borrado lógico, nunca `DELETE`)
 - `products` — salon_id, name, sku, unit (`ml`|`g`|`unit`), stock_qty, min_stock, cost_cents, price_cents, supplier_id, is_active. `stock_qty` se modifica únicamente a través de `stock_movements` (trigger), nunca por `UPDATE` directo.
-- `stock_movements` — salon_id, product_id, type (`in` | `out` | `adjustment` | `loss`), qty, reason, created_by. Ledger inmutable (solo `SELECT`/`INSERT`). **`appointment_id` (nullable) y el descuento automático de stock al completar una cita (vía `service_products`) quedan pendientes para la Fase 4**, ya que ambos dependen de la tabla `appointments`, que no existe todavía — no se puede crear una FK a una tabla inexistente ni simular el flujo sin datos reales.
+- `stock_movements` — salon_id, product_id, type (`in` | `out` | `adjustment` | `loss`), qty, reason, created_by, **appointment_id (nullable, añadido en la Fase 4)**: identifica el movimiento `out` generado automáticamente por el trigger `apply_appointment_completion` al completar una cita; `null` para movimientos manuales. Ledger inmutable (solo `SELECT`/`INSERT`).
 
 ### Sistema
 - `settings` — salon_id, key, value (jsonb)

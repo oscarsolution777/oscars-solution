@@ -49,6 +49,108 @@
     "currency": "Moneda",
     "timezone": "Zona horaria"
   },
+  "requests": {
+    "tabs": { "inbox": "Bandeja", "agenda": "Agenda" },
+    "kpis": {
+      "pendingRequests": "Solicitudes pendientes",
+      "pendingCaption": "Por confirmar o rechazar",
+      "todayAppointments": "Citas de hoy",
+      "todayCaption": "Programadas para hoy",
+      "noShowRate": "Tasa de no-show",
+      "thisMonth": "Este mes",
+      "completedRevenue": "Ingresos de citas completadas"
+    },
+    "inbox": {
+      "createButton": "Nueva solicitud",
+      "columnClient": "Cliente",
+      "columnServices": "Servicios",
+      "columnPreferredDate": "Fecha preferida",
+      "columnStatus": "Estado",
+      "columnActions": "Acciones",
+      "confirmAction": "Confirmar",
+      "rejectAction": "Rechazar",
+      "emptyTitle": "Todavía no hay solicitudes",
+      "emptyDescription": "Crea la primera solicitud manual para empezar a agendar citas.",
+      "createFirst": "Crear la primera solicitud",
+      "rejectDialog": {
+        "title": "¿Rechazar solicitud?",
+        "description": "La solicitud de \"{name}\" pasará a rechazada. Podrás ver el historial, pero no se creará ninguna cita.",
+        "cancel": "Cancelar",
+        "confirm": "Rechazar"
+      }
+    },
+    "agenda": {
+      "columnDate": "Fecha",
+      "columnClient": "Cliente",
+      "columnServices": "Servicios",
+      "columnTotal": "Total",
+      "columnStatus": "Estado",
+      "columnActions": "Acciones",
+      "serviceCount": "{count, plural, one {servicio} other {servicios}}",
+      "completeAction": "Marcar completada",
+      "noShowAction": "Marcar no asistió",
+      "cancelAction": "Cancelar cita",
+      "emptyTitle": "Todavía no hay citas",
+      "emptyDescription": "Las citas aparecen aquí al confirmar una solicitud.",
+      "cancelDialog": {
+        "title": "¿Cancelar cita?",
+        "description": "La cita pasará a cancelada. Esta acción no se puede deshacer.",
+        "cancel": "Volver",
+        "confirm": "Cancelar cita"
+      }
+    },
+    "statuses": {
+      "pending": "Pendiente",
+      "confirmed": "Confirmada",
+      "rejected": "Rechazada",
+      "cancelled": "Cancelada"
+    },
+    "appointmentStatuses": {
+      "scheduled": "Programada",
+      "completed": "Completada",
+      "no_show": "No asistió",
+      "cancelled": "Cancelada"
+    },
+    "form": {
+      "createTitle": "Nueva solicitud",
+      "subtitle": "Registra una solicitud manual mientras el portal QR no está disponible.",
+      "existingClientLabel": "Cliente existente (opcional)",
+      "existingClientPlaceholder": "Buscar cliente...",
+      "existingClientNone": "Cliente nuevo",
+      "clientNameLabel": "Nombre completo",
+      "clientNameError": "Escribe el nombre del cliente",
+      "clientPhoneLabel": "Teléfono",
+      "clientPhoneError": "Escribe un teléfono de contacto",
+      "clientEmailLabel": "Correo electrónico (opcional)",
+      "clientEmailError": "Escribe un correo válido",
+      "preferredDateLabel": "Fecha preferida (opcional)",
+      "itemsLabel": "Servicios pedidos",
+      "addItem": "Agregar servicio",
+      "removeItem": "Quitar",
+      "servicePlaceholder": "Selecciona un servicio",
+      "staffPlaceholder": "Trabajador (opcional)",
+      "staffUnassigned": "Sin asignar todavía",
+      "itemsError": "Agrega al menos un servicio",
+      "genericError": "No se pudo guardar la solicitud. Intenta de nuevo."
+    },
+    "confirm": {
+      "title": "Confirmar solicitud de {name}",
+      "subtitle": "Fija la fecha de la cita y asigna un trabajador a cada servicio.",
+      "dateLabel": "Fecha de la cita",
+      "dateError": "Selecciona una fecha válida",
+      "clientLabel": "Cliente",
+      "clientNewOption": "Crear cliente nuevo ({name})",
+      "itemsLabel": "Servicios y trabajador asignado",
+      "staffPlaceholder": "Selecciona un trabajador",
+      "staffError": "Asigna un trabajador a cada servicio",
+      "genericError": "No se pudo confirmar la solicitud. Intenta de nuevo.",
+      "confirmButton": "Confirmar y crear cita"
+    },
+    "errors": {
+      "invalidInput": "Revisa los datos del formulario",
+      "generic": "Ha ocurrido un error. Intenta de nuevo."
+    }
+  },
   "services": {
     "tabs": { "services": "Servicios", "categories": "Categorías" },
     "createServiceButton": "Nuevo servicio",
@@ -83,7 +185,11 @@
       "duration": "Duración",
       "durationValue": "{count, plural, one {# minuto} other {# minutos}}",
       "features": "Características",
-      "statusLabel": "Servicio activo"
+      "statusLabel": "Servicio activo",
+      "productsUsed": "Productos que usa",
+      "editProducts": "Editar productos",
+      "productQty": "{qty} {unit}",
+      "noProductsAssigned": "Sin productos asignados todavía"
     },
     "form": {
       "createTitle": "Nuevo servicio",
@@ -121,6 +227,13 @@
       "serviceCount": "{count, plural, one {# servicio} other {# servicios}}",
       "inactive": "Inactiva",
       "editAction": "Editar"
+    },
+    "productsForm": {
+      "title": "Productos de {name}",
+      "subtitle": "Marca los productos que consume este servicio y su cantidad.",
+      "qtyLabel": "Cantidad de {name}",
+      "genericError": "No se pudieron guardar los productos. Intenta de nuevo.",
+      "noActiveProducts": "No hay productos activos en el inventario todavía."
     },
     "errors": {
       "forbidden": "No tienes permiso para hacer esto",

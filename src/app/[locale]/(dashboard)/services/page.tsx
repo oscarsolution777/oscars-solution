@@ -3,6 +3,8 @@ import { requireAuth } from "@/lib/auth/guards";
 import { createClient } from "@/lib/supabase/server";
 import { listServiceCategories } from "@/lib/db/service-categories";
 import { listServices } from "@/lib/db/services";
+import { listProducts } from "@/lib/db/products";
+import { listServiceProductsForServices } from "@/lib/db/service-products";
 import { EmptyState } from "@/components/shared/empty-state";
 import { ServicesView } from "./_components/services-view";
 
@@ -18,10 +20,16 @@ export default async function ServicesPage() {
   }
 
   const supabase = await createClient();
-  const [categories, services] = await Promise.all([
+  const [categories, services, products] = await Promise.all([
     listServiceCategories(supabase, salon.id),
     listServices(supabase, salon.id),
+    listProducts(supabase, salon.id),
   ]);
+
+  const serviceProducts = await listServiceProductsForServices(
+    supabase,
+    services.map((service) => service.id)
+  );
 
   const activeServices = services.filter((service) => service.is_active);
   const activeCategories = categories.filter((category) => category.is_active);
@@ -46,6 +54,8 @@ export default async function ServicesPage() {
     <ServicesView
       categories={categories}
       services={services}
+      products={products.filter((product) => product.is_active)}
+      serviceProducts={serviceProducts}
       kpis={{
         totalServices: activeServices.length,
         totalCategories: activeCategories.length,

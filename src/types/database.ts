@@ -14,6 +14,116 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointment_items: {
+        Row: {
+          appointment_id: string
+          created_at: string
+          id: string
+          price_cents: number
+          service_id: string
+          staff_id: string
+        }
+        Insert: {
+          appointment_id: string
+          created_at?: string
+          id?: string
+          price_cents?: number
+          service_id: string
+          staff_id: string
+        }
+        Update: {
+          appointment_id?: string
+          created_at?: string
+          id?: string
+          price_cents?: number
+          service_id?: string
+          staff_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointment_items_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointment_items_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointment_items_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      appointments: {
+        Row: {
+          appointment_date: string
+          client_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          request_id: string | null
+          salon_id: string
+          status: string
+          total_cents: number
+          updated_at: string
+        }
+        Insert: {
+          appointment_date: string
+          client_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          request_id?: string | null
+          salon_id: string
+          status?: string
+          total_cents?: number
+          updated_at?: string
+        }
+        Update: {
+          appointment_date?: string
+          client_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          request_id?: string | null
+          salon_id?: string
+          status?: string
+          total_cents?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cash_closures: {
         Row: {
           closed_at: string
@@ -242,6 +352,7 @@ export type Database = {
       payments: {
         Row: {
           amount_cents: number
+          appointment_id: string | null
           client_id: string
           created_at: string
           id: string
@@ -254,6 +365,7 @@ export type Database = {
         }
         Insert: {
           amount_cents: number
+          appointment_id?: string | null
           client_id: string
           created_at?: string
           id?: string
@@ -266,6 +378,7 @@ export type Database = {
         }
         Update: {
           amount_cents?: number
+          appointment_id?: string | null
           client_id?: string
           created_at?: string
           id?: string
@@ -277,6 +390,13 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "payments_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "payments_client_id_fkey"
             columns: ["client_id"]
@@ -401,6 +521,118 @@ export type Database = {
         }
         Relationships: []
       }
+      request_items: {
+        Row: {
+          created_at: string
+          id: string
+          price_cents_snapshot: number
+          request_id: string
+          service_id: string
+          service_name_snapshot: string
+          staff_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          price_cents_snapshot?: number
+          request_id: string
+          service_id: string
+          service_name_snapshot?: string
+          staff_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          price_cents_snapshot?: number
+          request_id?: string
+          service_id?: string
+          service_name_snapshot?: string
+          staff_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_items_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "request_items_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "request_items_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      requests: {
+        Row: {
+          client_email: string | null
+          client_id: string | null
+          client_name: string
+          client_phone: string | null
+          created_at: string
+          id: string
+          preferred_date: string | null
+          public_code: string
+          salon_id: string
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          client_email?: string | null
+          client_id?: string | null
+          client_name: string
+          client_phone?: string | null
+          created_at?: string
+          id?: string
+          preferred_date?: string | null
+          public_code?: string
+          salon_id: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          client_email?: string | null
+          client_id?: string | null
+          client_name?: string
+          client_phone?: string | null
+          created_at?: string
+          id?: string
+          preferred_date?: string | null
+          public_code?: string
+          salon_id?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "requests_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "requests_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       salons: {
         Row: {
           address: string | null
@@ -497,6 +729,45 @@ export type Database = {
             columns: ["salon_id"]
             isOneToOne: false
             referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_products: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string
+          qty: number
+          service_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id: string
+          qty: number
+          service_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string
+          qty?: number
+          service_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_products_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_products_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
             referencedColumns: ["id"]
           },
         ]
@@ -712,6 +983,7 @@ export type Database = {
       }
       stock_movements: {
         Row: {
+          appointment_id: string | null
           created_at: string
           created_by: string | null
           id: string
@@ -722,6 +994,7 @@ export type Database = {
           type: string
         }
         Insert: {
+          appointment_id?: string | null
           created_at?: string
           created_by?: string | null
           id?: string
@@ -732,6 +1005,7 @@ export type Database = {
           type: string
         }
         Update: {
+          appointment_id?: string | null
           created_at?: string
           created_by?: string | null
           id?: string
@@ -742,6 +1016,13 @@ export type Database = {
           type?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "stock_movements_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "stock_movements_product_id_fkey"
             columns: ["product_id"]

@@ -12,15 +12,20 @@ import { CategoriesTab } from "./categories-tab";
 import { ServiceDetailPanel } from "./service-detail-panel";
 import { ServiceFormPanel } from "./service-form-panel";
 import { CategoryFormPanel } from "./category-form-panel";
+import { ServiceProductsPanel } from "./service-products-panel";
 
 type ServiceRow = Tables<"services">;
 type CategoryRow = Tables<"service_categories">;
+type ProductRow = Tables<"products">;
+type ServiceProductRow = { service_id: string; product_id: string; qty: number };
 
 const WRITE_ROLES = new Set(["owner", "admin"]);
 
 export function ServicesView({
   categories,
   services,
+  products,
+  serviceProducts,
   kpis,
   currency,
   locale,
@@ -28,6 +33,8 @@ export function ServicesView({
 }: {
   categories: CategoryRow[];
   services: ServiceRow[];
+  products: ProductRow[];
+  serviceProducts: ServiceProductRow[];
   kpis: {
     totalServices: number;
     totalCategories: number;
@@ -50,6 +57,12 @@ export function ServicesView({
   const [categoryFormState, setCategoryFormState] = useState<
     { mode: "create" } | { mode: "edit"; categoryId: string } | null
   >(null);
+  const [productsFormServiceId, setProductsFormServiceId] = useState<string | null>(null);
+
+  const productsById = useMemo(
+    () => new Map(products.map((product) => [product.id, product])),
+    [products]
+  );
 
   const categoriesById = useMemo(
     () => new Map(categories.map((category) => [category.id, category])),
@@ -69,6 +82,26 @@ export function ServicesView({
     categoryFormState?.mode === "edit"
       ? (categories.find((category) => category.id === categoryFormState.categoryId) ?? null)
       : null;
+
+  const productsFormService = productsFormServiceId
+    ? (services.find((service) => service.id === productsFormServiceId) ?? null)
+    : null;
+
+  const assignedQtyByProductId = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const row of serviceProducts) {
+      if (row.service_id === productsFormServiceId) map.set(row.product_id, row.qty);
+    }
+    return map;
+  }, [serviceProducts, productsFormServiceId]);
+
+  const viewingServiceProducts = useMemo(() => {
+    if (!viewingService) return [];
+    return serviceProducts
+      .filter((row) => row.service_id === viewingService.id)
+      .map((row) => ({ product: productsById.get(row.product_id), qty: row.qty }))
+      .filter((entry): entry is { product: ProductRow; qty: number } => Boolean(entry.product));
+  }, [serviceProducts, viewingService, productsById]);
 
   return (
     <div className="space-y-6">
@@ -129,12 +162,18 @@ export function ServicesView({
         categoryName={
           viewingService ? (categoriesById.get(viewingService.category_id)?.name ?? "—") : ""
         }
+        assignedProducts={viewingServiceProducts}
         currency={currency}
         locale={locale}
         canWrite={canWrite}
         onEdit={() => {
           if (!viewingService) return;
           setServiceFormState({ mode: "edit", serviceId: viewingService.id });
+          setViewingServiceId(null);
+        }}
+        onEditProducts={() => {
+          if (!viewingService) return;
+          setProductsFormServiceId(viewingService.id);
           setViewingServiceId(null);
         }}
       />
@@ -154,6 +193,16 @@ export function ServicesView({
           open={categoryFormState !== null}
           onOpenChange={(open) => !open && setCategoryFormState(null)}
           category={editingCategory}
+        />
+      )}
+
+      {canWrite && (
+        <ServiceProductsPanel
+          open={productsFormServiceId !== null}
+          onOpenChange={(open) => !open && setProductsFormServiceId(null)}
+          service={productsFormService}
+          products={products}
+          assignedQtyByProductId={assignedQtyByProductId}
         />
       )}
     </div>

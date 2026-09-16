@@ -25,6 +25,8 @@ import {
   updateService,
 } from "@/lib/db/services";
 import { deleteServiceImage, uploadServiceImage } from "@/lib/storage/service-images";
+import { serviceProductSchema } from "@/lib/validations/service-products";
+import { setServiceProducts } from "@/lib/db/service-products";
 
 type ActionResult<T = undefined> =
   | { ok: true; data: T }
@@ -237,6 +239,34 @@ export async function updateServiceAction(
       }
     }
 
+    return { ok: true, data: undefined };
+  } catch {
+    return { ok: false, error: "services.errors.generic" };
+  }
+}
+
+export async function setServiceProductsAction(
+  serviceId: string,
+  items: { productId: string; qty: string }[]
+): Promise<ActionResult> {
+  const access = await requireCatalogWriteAccess();
+  if (!access.ok) return access;
+
+  const parsed = items.map((item) => serviceProductSchema.safeParse(item));
+  if (parsed.some((result) => !result.success)) {
+    return { ok: false, error: "services.errors.invalidInput" };
+  }
+
+  try {
+    const supabase = await createClient();
+    await setServiceProducts(
+      supabase,
+      serviceId,
+      parsed.map((result) => ({
+        productId: result.data!.productId,
+        qty: Number.parseInt(result.data!.qty, 10),
+      }))
+    );
     return { ok: true, data: undefined };
   } catch {
     return { ok: false, error: "services.errors.generic" };

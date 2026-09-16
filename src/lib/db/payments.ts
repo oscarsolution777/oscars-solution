@@ -4,7 +4,7 @@ import type { TablesUpdate } from "@/types/database";
 type SupabaseServerClient = Awaited<ReturnType<typeof createClient>>;
 
 const SELECT_COLUMNS =
-  "id, salon_id, client_id, amount_cents, method, status, reference, paid_at, created_at, updated_at";
+  "id, salon_id, client_id, amount_cents, method, status, reference, appointment_id, paid_at, created_at, updated_at";
 
 export async function listPayments(supabase: SupabaseServerClient, salonId: string) {
   const { data, error } = await supabase

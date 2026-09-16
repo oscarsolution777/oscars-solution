@@ -20,24 +20,30 @@ import { setServiceActiveAction } from "../actions";
 
 type ServiceRow = Tables<"services">;
 
+type ProductRow = Tables<"products">;
+
 export function ServiceDetailPanel({
   open,
   onOpenChange,
   service,
   categoryName,
+  assignedProducts,
   currency,
   locale,
   canWrite,
   onEdit,
+  onEditProducts,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   service: ServiceRow | null;
   categoryName: string;
+  assignedProducts: { product: ProductRow; qty: number }[];
   currency: string;
   locale: string;
   canWrite: boolean;
   onEdit: () => void;
+  onEditProducts: () => void;
 }) {
   const t = useTranslations("services.detail");
   const tCommon = useTranslations("common");
@@ -113,6 +119,30 @@ export function ServiceDetailPanel({
               </ul>
             </div>
           )}
+          <div>
+            <div className="mb-1.5 flex items-center justify-between">
+              <p className="text-sm font-medium text-text-primary">{t("productsUsed")}</p>
+              {canWrite && (
+                <Button variant="ghost" size="sm" onClick={onEditProducts}>
+                  {t("editProducts")}
+                </Button>
+              )}
+            </div>
+            {assignedProducts.length > 0 ? (
+              <ul className="space-y-1 text-sm text-text-secondary">
+                {assignedProducts.map(({ product, qty }) => (
+                  <li key={product.id} className="flex items-center justify-between">
+                    <span>{product.name}</span>
+                    <span className="font-medium text-text-primary">
+                      {t("productQty", { qty, unit: product.unit })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-text-secondary">{t("noProductsAssigned")}</p>
+            )}
+          </div>
         </div>
 
         {canWrite && (

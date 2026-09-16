@@ -49,6 +49,108 @@
     "currency": "Währung",
     "timezone": "Zeitzone"
   },
+  "requests": {
+    "tabs": { "inbox": "Posteingang", "agenda": "Terminplan" },
+    "kpis": {
+      "pendingRequests": "Offene Anfragen",
+      "pendingCaption": "Zu bestätigen oder abzulehnen",
+      "todayAppointments": "Termine heute",
+      "todayCaption": "Für heute geplant",
+      "noShowRate": "Nichterscheinen-Quote",
+      "thisMonth": "Diesen Monat",
+      "completedRevenue": "Umsatz aus abgeschlossenen Terminen"
+    },
+    "inbox": {
+      "createButton": "Neue Anfrage",
+      "columnClient": "Kunde",
+      "columnServices": "Dienstleistungen",
+      "columnPreferredDate": "Wunschdatum",
+      "columnStatus": "Status",
+      "columnActions": "Aktionen",
+      "confirmAction": "Bestätigen",
+      "rejectAction": "Ablehnen",
+      "emptyTitle": "Noch keine Anfragen",
+      "emptyDescription": "Erstellen Sie die erste manuelle Anfrage, um Termine zu planen.",
+      "createFirst": "Erste Anfrage erstellen",
+      "rejectDialog": {
+        "title": "Anfrage ablehnen?",
+        "description": "Die Anfrage von \"{name}\" wird als abgelehnt markiert. Sie bleibt im Verlauf sichtbar, es wird jedoch kein Termin erstellt.",
+        "cancel": "Abbrechen",
+        "confirm": "Ablehnen"
+      }
+    },
+    "agenda": {
+      "columnDate": "Datum",
+      "columnClient": "Kunde",
+      "columnServices": "Dienstleistungen",
+      "columnTotal": "Gesamt",
+      "columnStatus": "Status",
+      "columnActions": "Aktionen",
+      "serviceCount": "{count, plural, one {Dienstleistung} other {Dienstleistungen}}",
+      "completeAction": "Als abgeschlossen markieren",
+      "noShowAction": "Als nicht erschienen markieren",
+      "cancelAction": "Termin stornieren",
+      "emptyTitle": "Noch keine Termine",
+      "emptyDescription": "Termine erscheinen hier, sobald eine Anfrage bestätigt wird.",
+      "cancelDialog": {
+        "title": "Termin stornieren?",
+        "description": "Der Termin wird als storniert markiert. Dies kann nicht rückgängig gemacht werden.",
+        "cancel": "Zurück",
+        "confirm": "Termin stornieren"
+      }
+    },
+    "statuses": {
+      "pending": "Offen",
+      "confirmed": "Bestätigt",
+      "rejected": "Abgelehnt",
+      "cancelled": "Storniert"
+    },
+    "appointmentStatuses": {
+      "scheduled": "Geplant",
+      "completed": "Abgeschlossen",
+      "no_show": "Nicht erschienen",
+      "cancelled": "Storniert"
+    },
+    "form": {
+      "createTitle": "Neue Anfrage",
+      "subtitle": "Erfassen Sie eine manuelle Anfrage, solange das QR-Portal noch nicht verfügbar ist.",
+      "existingClientLabel": "Bestehender Kunde (optional)",
+      "existingClientPlaceholder": "Kunde suchen...",
+      "existingClientNone": "Neuer Kunde",
+      "clientNameLabel": "Vollständiger Name",
+      "clientNameError": "Geben Sie den Namen des Kunden ein",
+      "clientPhoneLabel": "Telefon",
+      "clientPhoneError": "Geben Sie eine Kontakttelefonnummer ein",
+      "clientEmailLabel": "E-Mail (optional)",
+      "clientEmailError": "Geben Sie eine gültige E-Mail-Adresse ein",
+      "preferredDateLabel": "Wunschdatum (optional)",
+      "itemsLabel": "Angefragte Dienstleistungen",
+      "addItem": "Dienstleistung hinzufügen",
+      "removeItem": "Entfernen",
+      "servicePlaceholder": "Dienstleistung auswählen",
+      "staffPlaceholder": "Mitarbeiter (optional)",
+      "staffUnassigned": "Noch nicht zugewiesen",
+      "itemsError": "Fügen Sie mindestens eine Dienstleistung hinzu",
+      "genericError": "Die Anfrage konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "confirm": {
+      "title": "Anfrage von {name} bestätigen",
+      "subtitle": "Legen Sie das Termindatum fest und weisen Sie jeder Dienstleistung einen Mitarbeiter zu.",
+      "dateLabel": "Termindatum",
+      "dateError": "Wählen Sie ein gültiges Datum",
+      "clientLabel": "Kunde",
+      "clientNewOption": "Neuen Kunden erstellen ({name})",
+      "itemsLabel": "Dienstleistungen und zugewiesener Mitarbeiter",
+      "staffPlaceholder": "Mitarbeiter auswählen",
+      "staffError": "Weisen Sie jeder Dienstleistung einen Mitarbeiter zu",
+      "genericError": "Die Anfrage konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.",
+      "confirmButton": "Bestätigen und Termin erstellen"
+    },
+    "errors": {
+      "invalidInput": "Überprüfen Sie die Formularfelder",
+      "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    }
+  },
   "services": {
     "tabs": { "services": "Dienstleistungen", "categories": "Kategorien" },
     "createServiceButton": "Neue Dienstleistung",
@@ -83,7 +185,11 @@
       "duration": "Dauer",
       "durationValue": "{count, plural, one {# Minute} other {# Minuten}}",
       "features": "Merkmale",
-      "statusLabel": "Dienstleistung aktiv"
+      "statusLabel": "Dienstleistung aktiv",
+      "productsUsed": "Verwendete Produkte",
+      "editProducts": "Produkte bearbeiten",
+      "productQty": "{qty} {unit}",
+      "noProductsAssigned": "Noch keine Produkte zugewiesen"
     },
     "form": {
       "createTitle": "Neue Dienstleistung",
@@ -121,6 +227,13 @@
       "serviceCount": "{count, plural, one {# Dienstleistung} other {# Dienstleistungen}}",
       "inactive": "Inaktiv",
       "editAction": "Bearbeiten"
+    },
+    "productsForm": {
+      "title": "Produkte von {name}",
+      "subtitle": "Markieren Sie die Produkte, die diese Dienstleistung verbraucht, und deren Menge.",
+      "qtyLabel": "Menge von {name}",
+      "genericError": "Die Produkte konnten nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+      "noActiveProducts": "Es gibt noch keine aktiven Produkte im Lager."
     },
     "errors": {
       "forbidden": "Sie haben keine Berechtigung dafür",

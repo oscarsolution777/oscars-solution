@@ -49,6 +49,108 @@
     "currency": "Currency",
     "timezone": "Timezone"
   },
+  "requests": {
+    "tabs": { "inbox": "Inbox", "agenda": "Agenda" },
+    "kpis": {
+      "pendingRequests": "Pending requests",
+      "pendingCaption": "Waiting to confirm or reject",
+      "todayAppointments": "Today's appointments",
+      "todayCaption": "Scheduled for today",
+      "noShowRate": "No-show rate",
+      "thisMonth": "This month",
+      "completedRevenue": "Revenue from completed appointments"
+    },
+    "inbox": {
+      "createButton": "New request",
+      "columnClient": "Client",
+      "columnServices": "Services",
+      "columnPreferredDate": "Preferred date",
+      "columnStatus": "Status",
+      "columnActions": "Actions",
+      "confirmAction": "Confirm",
+      "rejectAction": "Reject",
+      "emptyTitle": "No requests yet",
+      "emptyDescription": "Create the first manual request to start scheduling appointments.",
+      "createFirst": "Create the first request",
+      "rejectDialog": {
+        "title": "Reject request?",
+        "description": "\"{name}\"'s request will be marked as rejected. You'll still see it in the history, but no appointment will be created.",
+        "cancel": "Cancel",
+        "confirm": "Reject"
+      }
+    },
+    "agenda": {
+      "columnDate": "Date",
+      "columnClient": "Client",
+      "columnServices": "Services",
+      "columnTotal": "Total",
+      "columnStatus": "Status",
+      "columnActions": "Actions",
+      "serviceCount": "{count, plural, one {service} other {services}}",
+      "completeAction": "Mark completed",
+      "noShowAction": "Mark no-show",
+      "cancelAction": "Cancel appointment",
+      "emptyTitle": "No appointments yet",
+      "emptyDescription": "Appointments appear here once a request is confirmed.",
+      "cancelDialog": {
+        "title": "Cancel appointment?",
+        "description": "The appointment will be marked as cancelled. This can't be undone.",
+        "cancel": "Go back",
+        "confirm": "Cancel appointment"
+      }
+    },
+    "statuses": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "appointmentStatuses": {
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "no_show": "No-show",
+      "cancelled": "Cancelled"
+    },
+    "form": {
+      "createTitle": "New request",
+      "subtitle": "Register a manual request while the QR portal isn't available yet.",
+      "existingClientLabel": "Existing client (optional)",
+      "existingClientPlaceholder": "Search client...",
+      "existingClientNone": "New client",
+      "clientNameLabel": "Full name",
+      "clientNameError": "Enter the client's name",
+      "clientPhoneLabel": "Phone",
+      "clientPhoneError": "Enter a contact phone number",
+      "clientEmailLabel": "Email (optional)",
+      "clientEmailError": "Enter a valid email",
+      "preferredDateLabel": "Preferred date (optional)",
+      "itemsLabel": "Requested services",
+      "addItem": "Add service",
+      "removeItem": "Remove",
+      "servicePlaceholder": "Select a service",
+      "staffPlaceholder": "Staff (optional)",
+      "staffUnassigned": "Not assigned yet",
+      "itemsError": "Add at least one service",
+      "genericError": "Couldn't save the request. Please try again."
+    },
+    "confirm": {
+      "title": "Confirm {name}'s request",
+      "subtitle": "Set the appointment date and assign a staff member to each service.",
+      "dateLabel": "Appointment date",
+      "dateError": "Select a valid date",
+      "clientLabel": "Client",
+      "clientNewOption": "Create new client ({name})",
+      "itemsLabel": "Services and assigned staff",
+      "staffPlaceholder": "Select a staff member",
+      "staffError": "Assign a staff member to each service",
+      "genericError": "Couldn't confirm the request. Please try again.",
+      "confirmButton": "Confirm and create appointment"
+    },
+    "errors": {
+      "invalidInput": "Check the form fields",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
   "services": {
     "tabs": { "services": "Services", "categories": "Categories" },
     "createServiceButton": "New service",
@@ -83,7 +185,11 @@
       "duration": "Duration",
       "durationValue": "{count, plural, one {# minute} other {# minutes}}",
       "features": "Features",
-      "statusLabel": "Service active"
+      "statusLabel": "Service active",
+      "productsUsed": "Products used",
+      "editProducts": "Edit products",
+      "productQty": "{qty} {unit}",
+      "noProductsAssigned": "No products assigned yet"
     },
     "form": {
       "createTitle": "New service",
@@ -121,6 +227,13 @@
       "serviceCount": "{count, plural, one {# service} other {# services}}",
       "inactive": "Inactive",
       "editAction": "Edit"
+    },
+    "productsForm": {
+      "title": "Products for {name}",
+      "subtitle": "Mark the products this service consumes and their quantity.",
+      "qtyLabel": "Quantity of {name}",
+      "genericError": "Couldn't save the products. Please try again.",
+      "noActiveProducts": "There are no active products in inventory yet."
     },
     "errors": {
       "forbidden": "You don't have permission to do this",

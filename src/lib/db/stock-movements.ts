@@ -2,7 +2,8 @@ import type { createClient } from "@/lib/supabase/server";
 
 type SupabaseServerClient = Awaited<ReturnType<typeof createClient>>;
 
-const SELECT_COLUMNS = "id, salon_id, product_id, type, qty, reason, created_by, created_at";
+const SELECT_COLUMNS =
+  "id, salon_id, product_id, type, qty, reason, created_by, appointment_id, created_at";
 
 export async function listStockMovements(supabase: SupabaseServerClient, salonId: string) {
   const { data, error } = await supabase
