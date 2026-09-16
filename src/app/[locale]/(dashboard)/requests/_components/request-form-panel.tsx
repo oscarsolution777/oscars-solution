@@ -133,6 +133,10 @@ export function RequestFormPanel({
                 <Select
                   value={field.value || NO_CLIENT}
                   onValueChange={(value) => field.onChange(value === NO_CLIENT ? "" : value)}
+                  items={{
+                    [NO_CLIENT]: t("existingClientNone"),
+                    ...Object.fromEntries(clients.map((client) => [client.id, client.full_name])),
+                  }}
                 >
                   <SelectTrigger id="clientId" className="w-full">
                     <SelectValue placeholder={t("existingClientPlaceholder")} />
@@ -200,7 +204,11 @@ export function RequestFormPanel({
                     control={control}
                     name={`items.${index}.serviceId`}
                     render={({ field: serviceField }) => (
-                      <Select value={serviceField.value} onValueChange={serviceField.onChange}>
+                      <Select
+                        value={serviceField.value}
+                        onValueChange={serviceField.onChange}
+                        items={Object.fromEntries(services.map((service) => [service.id, service.name]))}
+                      >
                         <SelectTrigger className="w-full">
                           <SelectValue placeholder={t("servicePlaceholder")} />
                         </SelectTrigger>
@@ -223,6 +231,10 @@ export function RequestFormPanel({
                         onValueChange={(value) =>
                           staffField.onChange(value === NO_STAFF ? "" : value)
                         }
+                        items={{
+                          [NO_STAFF]: t("staffUnassigned"),
+                          ...Object.fromEntries(staff.map((member) => [member.id, member.full_name])),
+                        }}
                       >
                         <SelectTrigger className="w-full">
                           <SelectValue placeholder={t("staffPlaceholder")} />

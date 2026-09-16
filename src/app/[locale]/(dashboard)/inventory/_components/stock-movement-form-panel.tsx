@@ -132,7 +132,11 @@ export function StockMovementFormPanel({
                 control={control}
                 name="productId"
                 render={({ field }) => (
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    items={Object.fromEntries(products.map((product) => [product.id, product.name]))}
+                  >
                     <SelectTrigger id="productId" className="w-full">
                       <SelectValue placeholder={t("productPlaceholder")} />
                     </SelectTrigger>
@@ -158,7 +162,11 @@ export function StockMovementFormPanel({
               control={control}
               name="type"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
+                <Select
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  items={Object.fromEntries(stockMovementTypes.map((type) => [type, tTypes(type)]))}
+                >
                   <SelectTrigger id="type" className="w-full">
                     <SelectValue />
                   </SelectTrigger>
@@ -181,7 +189,13 @@ export function StockMovementFormPanel({
                 control={control}
                 name="direction"
                 render={({ field }) => (
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    items={Object.fromEntries(
+                      stockMovementDirections.map((direction) => [direction, t(`directions.${direction}`)])
+                    )}
+                  >
                     <SelectTrigger id="direction" className="w-full">
                       <SelectValue />
                     </SelectTrigger>

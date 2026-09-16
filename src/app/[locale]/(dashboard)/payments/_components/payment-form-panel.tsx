@@ -130,7 +130,11 @@ export function PaymentFormPanel({
               control={control}
               name="clientId"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
+                <Select
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  items={Object.fromEntries(clients.map((client) => [client.id, client.full_name]))}
+                >
                   <SelectTrigger id="clientId" className="w-full">
                     <SelectValue placeholder={t("clientPlaceholder")} />
                   </SelectTrigger>
@@ -159,7 +163,11 @@ export function PaymentFormPanel({
                 control={control}
                 name="method"
                 render={({ field }) => (
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    items={Object.fromEntries(paymentMethods.map((method) => [method, tMethods(method)]))}
+                  >
                     <SelectTrigger id="method" className="w-full">
                       <SelectValue />
                     </SelectTrigger>
@@ -182,7 +190,11 @@ export function PaymentFormPanel({
               control={control}
               name="status"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
+                <Select
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  items={Object.fromEntries(paymentStatuses.map((status) => [status, tStatuses(status)]))}
+                >
                   <SelectTrigger id="status" className="w-full">
                     <SelectValue />
                   </SelectTrigger>

@@ -131,6 +131,10 @@ export function ConfirmRequestPanel({
                   <Select
                     value={field.value || NEW_CLIENT}
                     onValueChange={(value) => field.onChange(value === NEW_CLIENT ? "" : value)}
+                    items={{
+                      [NEW_CLIENT]: t("clientNewOption", { name: request.client_name }),
+                      ...Object.fromEntries(clients.map((client) => [client.id, client.full_name])),
+                    }}
                   >
                     <SelectTrigger id="clientId" className="w-full">
                       <SelectValue />
@@ -163,7 +167,11 @@ export function ConfirmRequestPanel({
                   control={control}
                   name={`items.${index}.staffId`}
                   render={({ field }) => (
-                    <Select value={field.value} onValueChange={field.onChange}>
+                    <Select
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      items={Object.fromEntries(staff.map((member) => [member.id, member.full_name]))}
+                    >
                       <SelectTrigger className="w-44">
                         <SelectValue placeholder={t("staffPlaceholder")} />
                       </SelectTrigger>

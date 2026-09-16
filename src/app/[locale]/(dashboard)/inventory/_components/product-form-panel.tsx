@@ -143,7 +143,11 @@ export function ProductFormPanel({
                 control={control}
                 name="unit"
                 render={({ field }) => (
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    items={Object.fromEntries(productUnits.map((unit) => [unit, tUnits(unit)]))}
+                  >
                     <SelectTrigger id="unit" className="w-full">
                       <SelectValue />
                     </SelectTrigger>
@@ -171,6 +175,15 @@ export function ProductFormPanel({
                   onValueChange={(value) =>
                     field.onChange(value === NO_SUPPLIER_VALUE ? "" : value)
                   }
+                  items={{
+                    [NO_SUPPLIER_VALUE]: t("noSupplier"),
+                    ...Object.fromEntries(
+                      suppliers.map((supplier) => [
+                        supplier.id,
+                        `${supplier.name}${!supplier.is_active ? ` (${tCommon("inactive")})` : ""}`,
+                      ])
+                    ),
+                  }}
                 >
                   <SelectTrigger id="supplierId" className="w-full">
                     <SelectValue />

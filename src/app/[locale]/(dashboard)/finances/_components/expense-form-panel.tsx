@@ -162,6 +162,10 @@ export function ExpenseFormPanel({
                   onValueChange={(value) =>
                     field.onChange(value === NO_SUPPLIER_VALUE ? "" : value)
                   }
+                  items={{
+                    [NO_SUPPLIER_VALUE]: t("noSupplier"),
+                    ...Object.fromEntries(suppliers.map((supplier) => [supplier.id, supplier.name])),
+                  }}
                 >
                   <SelectTrigger id="supplierId" className="w-full">
                     <SelectValue />

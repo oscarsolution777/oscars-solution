@@ -146,7 +146,16 @@ export function ServiceFormPanel({
               control={control}
               name="categoryId"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
+                <Select
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  items={Object.fromEntries(
+                    categories.map((category) => [
+                      category.id,
+                      `${category.name}${!category.is_active ? ` (${tCommon("inactive")})` : ""}`,
+                    ])
+                  )}
+                >
                   <SelectTrigger id="categoryId" className="w-full">
                     <SelectValue placeholder={t("categoryPlaceholder")} />
                   </SelectTrigger>

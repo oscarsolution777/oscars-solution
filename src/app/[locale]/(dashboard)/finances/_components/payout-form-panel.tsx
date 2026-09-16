@@ -143,7 +143,12 @@ export function PayoutFormPanel({
               control={control}
               name="staffId"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange} disabled={isEditing}>
+                <Select
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  disabled={isEditing}
+                  items={Object.fromEntries(staff.map((member) => [member.id, member.full_name]))}
+                >
                   <SelectTrigger id="staffId" className="w-full">
                     <SelectValue placeholder={t("staffPlaceholder")} />
                   </SelectTrigger>
