@@ -229,9 +229,9 @@ El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al env
 - `staff_payouts` — salon_id, staff_id, period_start, period_end, base_cents, bonus_cents (manual), total_cents, status, paid_at
 
 ### Inventario
-- `suppliers` — salon_id, name, phone, email, notes
-- `products` — salon_id, name, sku, unit (`ml`|`g`|`unit`), stock_qty, min_stock, cost_cents, price_cents, supplier_id, is_active
-- `stock_movements` — salon_id, product_id, type (`in` | `out` | `adjustment` | `loss`), qty, reason, appointment_id (nullable), created_by
+- `suppliers` — salon_id, name, phone, email, notes, **is_active** (añadido en Fase 7 sobre lo listado aquí originalmente: un proveedor con productos históricos no debe borrarse, se desactiva en su lugar, igual que el resto del catálogo — borrado lógico, nunca `DELETE`)
+- `products` — salon_id, name, sku, unit (`ml`|`g`|`unit`), stock_qty, min_stock, cost_cents, price_cents, supplier_id, is_active. `stock_qty` se modifica únicamente a través de `stock_movements` (trigger), nunca por `UPDATE` directo.
+- `stock_movements` — salon_id, product_id, type (`in` | `out` | `adjustment` | `loss`), qty, reason, created_by. Ledger inmutable (solo `SELECT`/`INSERT`). **`appointment_id` (nullable) y el descuento automático de stock al completar una cita (vía `service_products`) quedan pendientes para la Fase 4**, ya que ambos dependen de la tabla `appointments`, que no existe todavía — no se puede crear una FK a una tabla inexistente ni simular el flujo sin datos reales.
 
 ### Sistema
 - `settings` — salon_id, key, value (jsonb)

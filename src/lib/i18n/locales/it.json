@@ -255,5 +255,151 @@
       "invalidInput": "Controlla i campi del modulo",
       "generic": "Si è verificato un errore. Riprova."
     }
+  },
+  "inventory": {
+    "kpis": {
+      "totalProducts": "Totale prodotti",
+      "active": "Attivi",
+      "lowStock": "Prodotti sotto scorta minima",
+      "lowStockCaption": "Da rifornire",
+      "inventoryValue": "Valore di magazzino",
+      "inventoryValueCaption": "A prezzo di costo",
+      "movementsThisMonth": "Movimenti",
+      "thisMonth": "Questo mese"
+    },
+    "tabs": {
+      "products": "Prodotti",
+      "suppliers": "Fornitori",
+      "movements": "Movimenti"
+    },
+    "products": {
+      "createButton": "Nuovo prodotto",
+      "units": {
+        "ml": "ml",
+        "g": "g",
+        "unit": "unità"
+      },
+      "table": {
+        "columnName": "Prodotto",
+        "columnStock": "Scorta",
+        "columnCost": "Costo",
+        "columnPrice": "Prezzo",
+        "columnStatus": "Stato",
+        "columnActions": "Azioni",
+        "emptyTitle": "Non ci sono ancora prodotti",
+        "emptyDescription": "Crea il tuo primo prodotto per iniziare a gestire il magazzino.",
+        "createFirst": "Crea il primo prodotto",
+        "viewAction": "Vedi dettagli",
+        "editAction": "Modifica",
+        "lowStockBadge": "Scorta sotto il minimo"
+      },
+      "detail": {
+        "title": "Dettagli del prodotto",
+        "edit": "Modifica",
+        "stock": "Scorta attuale",
+        "min": "min.",
+        "sku": "SKU",
+        "cost": "Costo",
+        "price": "Prezzo di vendita",
+        "supplier": "Fornitore",
+        "registerMovement": "Registra movimento",
+        "statusLabel": "Prodotto attivo",
+        "lowStockBadge": "Sotto il minimo"
+      },
+      "form": {
+        "createTitle": "Nuovo prodotto",
+        "editTitle": "Modifica prodotto",
+        "subtitle": "Dati del prodotto, scorta minima e prezzi.",
+        "nameLabel": "Nome",
+        "nameError": "Inserisci il nome del prodotto",
+        "skuLabel": "SKU (opzionale)",
+        "unitLabel": "Unità",
+        "supplierLabel": "Fornitore",
+        "noSupplier": "Nessun fornitore",
+        "minStockLabel": "Scorta minima",
+        "minStockError": "Inserisci una quantità valida",
+        "costLabel": "Costo ({currency})",
+        "costError": "Inserisci un costo valido (es. 10.00)",
+        "priceLabel": "Prezzo di vendita ({currency})",
+        "priceError": "Inserisci un prezzo valido (es. 15.00)",
+        "genericError": "Impossibile salvare il prodotto. Riprova."
+      },
+      "errors": {
+        "invalidInput": "Controlla i campi del modulo",
+        "generic": "Si è verificato un errore. Riprova."
+      }
+    },
+    "suppliers": {
+      "table": {
+        "createButton": "Nuovo fornitore",
+        "emptyTitle": "Non ci sono ancora fornitori",
+        "emptyDescription": "Aggiungi il tuo primo fornitore per collegarlo ai tuoi prodotti.",
+        "createFirst": "Aggiungi il primo fornitore",
+        "columnName": "Fornitore",
+        "columnPhone": "Telefono",
+        "columnEmail": "Email",
+        "columnStatus": "Stato",
+        "columnActions": "Azioni",
+        "editAction": "Modifica"
+      },
+      "form": {
+        "createTitle": "Nuovo fornitore",
+        "editTitle": "Modifica fornitore",
+        "subtitle": "Dati di contatto del fornitore.",
+        "nameLabel": "Nome",
+        "nameError": "Inserisci il nome del fornitore",
+        "phoneLabel": "Telefono (opzionale)",
+        "emailLabel": "Email (opzionale)",
+        "emailError": "Inserisci un'email valida",
+        "notesLabel": "Note",
+        "genericError": "Impossibile salvare il fornitore. Riprova."
+      },
+      "errors": {
+        "invalidInput": "Controlla i campi del modulo",
+        "generic": "Si è verificato un errore. Riprova."
+      }
+    },
+    "movements": {
+      "createButton": "Nuovo movimento",
+      "emptyTitle": "Non ci sono ancora movimenti",
+      "emptyDescription": "Registra entrate, uscite, rettifiche o perdite dei tuoi prodotti.",
+      "createFirst": "Registra il primo movimento",
+      "table": {
+        "columnProduct": "Prodotto",
+        "columnType": "Tipo",
+        "columnQty": "Quantità",
+        "columnReason": "Motivo",
+        "columnDate": "Data"
+      },
+      "types": {
+        "in": "Entrata",
+        "out": "Uscita",
+        "adjustment": "Rettifica",
+        "loss": "Perdita"
+      },
+      "form": {
+        "title": "Nuovo movimento",
+        "subtitle": "Registra una variazione di scorta di un prodotto.",
+        "productLabel": "Prodotto",
+        "productPlaceholder": "Seleziona un prodotto",
+        "productError": "Seleziona un prodotto",
+        "typeLabel": "Tipo di movimento",
+        "directionLabel": "Direzione della rettifica",
+        "directions": {
+          "increase": "Aumenta scorta",
+          "decrease": "Diminuisci scorta"
+        },
+        "qtyLabel": "Quantità",
+        "qtyError": "Inserisci una quantità valida",
+        "reasonLabel": "Motivo (opzionale)",
+        "genericError": "Impossibile registrare il movimento. Riprova.",
+        "insufficientStockError": "Scorta insufficiente per questo movimento."
+      },
+      "errors": {
+        "invalidInput": "Controlla i campi del modulo",
+        "generic": "Si è verificato un errore. Riprova.",
+        "insufficientStock": "Scorta insufficiente per questo movimento."
+      }
+    }
   }
 }

@@ -255,5 +255,151 @@
       "invalidInput": "Check the form fields",
       "generic": "Something went wrong. Please try again."
     }
+  },
+  "inventory": {
+    "kpis": {
+      "totalProducts": "Total products",
+      "active": "Active",
+      "lowStock": "Products below minimum",
+      "lowStockCaption": "Need restocking",
+      "inventoryValue": "Inventory value",
+      "inventoryValueCaption": "At cost price",
+      "movementsThisMonth": "Movements",
+      "thisMonth": "This month"
+    },
+    "tabs": {
+      "products": "Products",
+      "suppliers": "Suppliers",
+      "movements": "Movements"
+    },
+    "products": {
+      "createButton": "New product",
+      "units": {
+        "ml": "ml",
+        "g": "g",
+        "unit": "unit"
+      },
+      "table": {
+        "columnName": "Product",
+        "columnStock": "Stock",
+        "columnCost": "Cost",
+        "columnPrice": "Price",
+        "columnStatus": "Status",
+        "columnActions": "Actions",
+        "emptyTitle": "No products yet",
+        "emptyDescription": "Create your first product to start tracking inventory.",
+        "createFirst": "Create first product",
+        "viewAction": "View details",
+        "editAction": "Edit",
+        "lowStockBadge": "Stock below minimum"
+      },
+      "detail": {
+        "title": "Product details",
+        "edit": "Edit",
+        "stock": "Current stock",
+        "min": "min.",
+        "sku": "SKU",
+        "cost": "Cost",
+        "price": "Selling price",
+        "supplier": "Supplier",
+        "registerMovement": "Register movement",
+        "statusLabel": "Active product",
+        "lowStockBadge": "Below minimum"
+      },
+      "form": {
+        "createTitle": "New product",
+        "editTitle": "Edit product",
+        "subtitle": "Product details, minimum stock and prices.",
+        "nameLabel": "Name",
+        "nameError": "Enter the product name",
+        "skuLabel": "SKU (optional)",
+        "unitLabel": "Unit",
+        "supplierLabel": "Supplier",
+        "noSupplier": "No supplier",
+        "minStockLabel": "Minimum stock",
+        "minStockError": "Enter a valid quantity",
+        "costLabel": "Cost ({currency})",
+        "costError": "Enter a valid cost (e.g. 10.00)",
+        "priceLabel": "Selling price ({currency})",
+        "priceError": "Enter a valid price (e.g. 15.00)",
+        "genericError": "Couldn't save the product. Please try again."
+      },
+      "errors": {
+        "invalidInput": "Check the form fields",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "suppliers": {
+      "table": {
+        "createButton": "New supplier",
+        "emptyTitle": "No suppliers yet",
+        "emptyDescription": "Add your first supplier to link it to your products.",
+        "createFirst": "Add first supplier",
+        "columnName": "Supplier",
+        "columnPhone": "Phone",
+        "columnEmail": "Email",
+        "columnStatus": "Status",
+        "columnActions": "Actions",
+        "editAction": "Edit"
+      },
+      "form": {
+        "createTitle": "New supplier",
+        "editTitle": "Edit supplier",
+        "subtitle": "Supplier contact details.",
+        "nameLabel": "Name",
+        "nameError": "Enter the supplier name",
+        "phoneLabel": "Phone (optional)",
+        "emailLabel": "Email (optional)",
+        "emailError": "Enter a valid email",
+        "notesLabel": "Notes",
+        "genericError": "Couldn't save the supplier. Please try again."
+      },
+      "errors": {
+        "invalidInput": "Check the form fields",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "movements": {
+      "createButton": "New movement",
+      "emptyTitle": "No movements yet",
+      "emptyDescription": "Record entries, exits, adjustments or losses for your products.",
+      "createFirst": "Record first movement",
+      "table": {
+        "columnProduct": "Product",
+        "columnType": "Type",
+        "columnQty": "Quantity",
+        "columnReason": "Reason",
+        "columnDate": "Date"
+      },
+      "types": {
+        "in": "In",
+        "out": "Out",
+        "adjustment": "Adjustment",
+        "loss": "Loss"
+      },
+      "form": {
+        "title": "New movement",
+        "subtitle": "Record a stock change for a product.",
+        "productLabel": "Product",
+        "productPlaceholder": "Select a product",
+        "productError": "Select a product",
+        "typeLabel": "Movement type",
+        "directionLabel": "Adjustment direction",
+        "directions": {
+          "increase": "Increase stock",
+          "decrease": "Decrease stock"
+        },
+        "qtyLabel": "Quantity",
+        "qtyError": "Enter a valid quantity",
+        "reasonLabel": "Reason (optional)",
+        "genericError": "Couldn't record the movement. Please try again.",
+        "insufficientStockError": "There isn't enough stock for this movement."
+      },
+      "errors": {
+        "invalidInput": "Check the form fields",
+        "generic": "Something went wrong. Please try again.",
+        "insufficientStock": "There isn't enough stock for this movement."
+      }
+    }
   }
 }

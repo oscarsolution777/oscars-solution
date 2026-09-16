@@ -255,5 +255,151 @@
       "invalidInput": "Überprüfen Sie die Formularfelder",
       "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
     }
+  },
+  "inventory": {
+    "kpis": {
+      "totalProducts": "Produkte gesamt",
+      "active": "Aktiv",
+      "lowStock": "Produkte unter Mindestbestand",
+      "lowStockCaption": "Müssen nachbestellt werden",
+      "inventoryValue": "Lagerwert",
+      "inventoryValueCaption": "Zum Einkaufspreis",
+      "movementsThisMonth": "Bewegungen",
+      "thisMonth": "Diesen Monat"
+    },
+    "tabs": {
+      "products": "Produkte",
+      "suppliers": "Lieferanten",
+      "movements": "Bewegungen"
+    },
+    "products": {
+      "createButton": "Neues Produkt",
+      "units": {
+        "ml": "ml",
+        "g": "g",
+        "unit": "Stück"
+      },
+      "table": {
+        "columnName": "Produkt",
+        "columnStock": "Bestand",
+        "columnCost": "Kosten",
+        "columnPrice": "Preis",
+        "columnStatus": "Status",
+        "columnActions": "Aktionen",
+        "emptyTitle": "Noch keine Produkte",
+        "emptyDescription": "Erstellen Sie Ihr erstes Produkt, um den Lagerbestand zu verwalten.",
+        "createFirst": "Erstes Produkt erstellen",
+        "viewAction": "Details ansehen",
+        "editAction": "Bearbeiten",
+        "lowStockBadge": "Bestand unter Minimum"
+      },
+      "detail": {
+        "title": "Produktdetails",
+        "edit": "Bearbeiten",
+        "stock": "Aktueller Bestand",
+        "min": "Min.",
+        "sku": "SKU",
+        "cost": "Kosten",
+        "price": "Verkaufspreis",
+        "supplier": "Lieferant",
+        "registerMovement": "Bewegung erfassen",
+        "statusLabel": "Produkt aktiv",
+        "lowStockBadge": "Unter Minimum"
+      },
+      "form": {
+        "createTitle": "Neues Produkt",
+        "editTitle": "Produkt bearbeiten",
+        "subtitle": "Produktdaten, Mindestbestand und Preise.",
+        "nameLabel": "Name",
+        "nameError": "Geben Sie den Produktnamen ein",
+        "skuLabel": "SKU (optional)",
+        "unitLabel": "Einheit",
+        "supplierLabel": "Lieferant",
+        "noSupplier": "Kein Lieferant",
+        "minStockLabel": "Mindestbestand",
+        "minStockError": "Geben Sie eine gültige Menge ein",
+        "costLabel": "Kosten ({currency})",
+        "costError": "Geben Sie gültige Kosten ein (z. B. 10.00)",
+        "priceLabel": "Verkaufspreis ({currency})",
+        "priceError": "Geben Sie einen gültigen Preis ein (z. B. 15.00)",
+        "genericError": "Das Produkt konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+      },
+      "errors": {
+        "invalidInput": "Überprüfen Sie die Formularfelder",
+        "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      }
+    },
+    "suppliers": {
+      "table": {
+        "createButton": "Neuer Lieferant",
+        "emptyTitle": "Noch keine Lieferanten",
+        "emptyDescription": "Fügen Sie Ihren ersten Lieferanten hinzu, um ihn mit Ihren Produkten zu verknüpfen.",
+        "createFirst": "Ersten Lieferanten hinzufügen",
+        "columnName": "Lieferant",
+        "columnPhone": "Telefon",
+        "columnEmail": "E-Mail",
+        "columnStatus": "Status",
+        "columnActions": "Aktionen",
+        "editAction": "Bearbeiten"
+      },
+      "form": {
+        "createTitle": "Neuer Lieferant",
+        "editTitle": "Lieferant bearbeiten",
+        "subtitle": "Kontaktdaten des Lieferanten.",
+        "nameLabel": "Name",
+        "nameError": "Geben Sie den Namen des Lieferanten ein",
+        "phoneLabel": "Telefon (optional)",
+        "emailLabel": "E-Mail (optional)",
+        "emailError": "Geben Sie eine gültige E-Mail-Adresse ein",
+        "notesLabel": "Notizen",
+        "genericError": "Der Lieferant konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+      },
+      "errors": {
+        "invalidInput": "Überprüfen Sie die Formularfelder",
+        "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      }
+    },
+    "movements": {
+      "createButton": "Neue Bewegung",
+      "emptyTitle": "Noch keine Bewegungen",
+      "emptyDescription": "Erfassen Sie Zugänge, Abgänge, Korrekturen oder Verluste Ihrer Produkte.",
+      "createFirst": "Erste Bewegung erfassen",
+      "table": {
+        "columnProduct": "Produkt",
+        "columnType": "Typ",
+        "columnQty": "Menge",
+        "columnReason": "Grund",
+        "columnDate": "Datum"
+      },
+      "types": {
+        "in": "Zugang",
+        "out": "Abgang",
+        "adjustment": "Korrektur",
+        "loss": "Verlust"
+      },
+      "form": {
+        "title": "Neue Bewegung",
+        "subtitle": "Erfassen Sie eine Bestandsänderung für ein Produkt.",
+        "productLabel": "Produkt",
+        "productPlaceholder": "Wählen Sie ein Produkt",
+        "productError": "Wählen Sie ein Produkt",
+        "typeLabel": "Bewegungstyp",
+        "directionLabel": "Richtung der Korrektur",
+        "directions": {
+          "increase": "Bestand erhöhen",
+          "decrease": "Bestand verringern"
+        },
+        "qtyLabel": "Menge",
+        "qtyError": "Geben Sie eine gültige Menge ein",
+        "reasonLabel": "Grund (optional)",
+        "genericError": "Die Bewegung konnte nicht erfasst werden. Bitte versuchen Sie es erneut.",
+        "insufficientStockError": "Nicht genügend Bestand für diese Bewegung."
+      },
+      "errors": {
+        "invalidInput": "Überprüfen Sie die Formularfelder",
+        "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+        "insufficientStock": "Nicht genügend Bestand für diese Bewegung."
+      }
+    }
   }
 }
