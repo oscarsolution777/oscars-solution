@@ -7,7 +7,10 @@ import { LoginForm } from "./login-form";
 export default async function LoginPage() {
   const session = await getCurrentSession();
   if (session) {
-    redirect({ href: "/dashboard", locale: await getLocale() });
+    // Oscar (único platform admin) no opera un salón propio: si ya inició
+    // sesión, va directo al Panel SuperAdmin en vez del panel de gestión.
+    const href = session.isPlatformAdmin ? "/admin/salons" : "/dashboard";
+    redirect({ href, locale: await getLocale() });
   }
 
   const t = await getTranslations("auth.login");

@@ -75,6 +75,11 @@
       "title": "Clients nouveaux vs. récurrents",
       "new": "Nouveaux",
       "recurring": "Récurrents"
+    },
+    "suspended": {
+      "title": "Ce salon est suspendu",
+      "body": "Votre abonnement n'est pas actif actuellement. Contactez Oscar's Solution pour réactiver l'accès.",
+      "demoExpiredBody": "Votre démo a expiré. Contactez Oscar's Solution si vous souhaitez continuer à utiliser le système."
     }
   },
   "requests": {
@@ -807,6 +812,131 @@
       "columnStatus": "Statut",
       "lowStockBadge": "Sous le minimum",
       "okBadge": "OK"
+    }
+  },
+  "superadmin": {
+    "nav": {
+      "salons": "Salons",
+      "currencies": "Devises",
+      "usage": "Utilisation"
+    },
+    "salons": {
+      "pageTitle": "Salons",
+      "pageSubtitle": "Tous les salons de la plateforme, réels et de démonstration.",
+      "createRealButton": "Nouveau salon",
+      "createDemoButton": "Nouvelle démo",
+      "table": {
+        "columnName": "Salon",
+        "columnCurrency": "Devise",
+        "columnLocale": "Langue",
+        "columnStatus": "Statut",
+        "columnDemo": "Démo",
+        "columnCreatedAt": "Créé",
+        "columnActions": "Actions",
+        "emptyTitle": "Aucun salon pour l'instant",
+        "emptyDescription": "Créez le premier salon réel ou une démo pour un prospect.",
+        "activateAction": "Activer",
+        "suspendAction": "Suspendre",
+        "demoExpiresOn": "Expire le {date}",
+        "notDemo": "—"
+      },
+      "status": {
+        "trial": "Essai",
+        "active": "Actif",
+        "suspended": "Suspendu",
+        "cancelled": "Annulé"
+      },
+      "createRealForm": {
+        "title": "Nouveau salon",
+        "subtitle": "Enregistrez un salon réel qui a déjà souscrit au service.",
+        "nameLabel": "Nom du salon",
+        "slugLabel": "Slug (URL du portail)",
+        "phoneLabel": "Téléphone",
+        "addressLabel": "Adresse",
+        "timezoneLabel": "Fuseau horaire",
+        "currencyLabel": "Devise",
+        "defaultLocaleLabel": "Langue par défaut",
+        "ownerFullNameLabel": "Nom de la propriétaire",
+        "ownerEmailLabel": "Email de la propriétaire",
+        "nameError": "Entrez un nom valide",
+        "slugError": "Uniquement des minuscules, chiffres et tirets",
+        "timezoneError": "Entrez un fuseau horaire valide (ex. America/Guyana)",
+        "currencyError": "Sélectionnez une devise",
+        "ownerEmailError": "Entrez un email valide",
+        "ownerFullNameError": "Entrez un nom valide",
+        "genericError": "Impossible de créer le salon. Vérifiez les données et réessayez."
+      },
+      "createDemoForm": {
+        "title": "Nouvelle démo",
+        "subtitle": "Créez un salon de démonstration avec le catalogue du salon pilote déjà chargé.",
+        "demoDurationLabel": "Durée (jours)",
+        "genericError": "Impossible de créer la démo. Vérifiez les données et réessayez."
+      },
+      "credentialsDialog": {
+        "title": "Compte créé",
+        "body": "Partagez ces identifiants avec la propriétaire. Le mot de passe ne sera plus affiché.",
+        "emailLabel": "Email",
+        "passwordLabel": "Mot de passe temporaire",
+        "close": "Fermer"
+      },
+      "errors": {
+        "invalidInput": "Vérifiez les champs du formulaire.",
+        "generic": "Une erreur inattendue s'est produite. Réessayez.",
+        "slugTaken": "Ce slug est déjà utilisé par un autre salon."
+      }
+    },
+    "currencies": {
+      "pageTitle": "Devises et tarifs",
+      "pageSubtitle": "Devises prises en charge par la plateforme et prix de l'abonnement par devise.",
+      "currenciesTitle": "Devises prises en charge",
+      "addCurrencyButton": "Ajouter une devise",
+      "table": {
+        "columnCode": "Code",
+        "columnName": "Nom",
+        "columnSymbol": "Symbole",
+        "columnStatus": "Statut",
+        "activateAction": "Activer",
+        "deactivateAction": "Désactiver",
+        "emptyTitle": "Aucune devise pour l'instant"
+      },
+      "pricesTitle": "Prix de l'abonnement",
+      "pricesTable": {
+        "columnCurrency": "Devise",
+        "columnPrice": "Prix actif",
+        "columnUpdatedAt": "Mis à jour",
+        "emptyTitle": "Aucun prix défini pour l'instant",
+        "setPriceAction": "Définir le prix"
+      },
+      "currencyForm": {
+        "title": "Ajouter une devise",
+        "codeLabel": "Code ISO 4217",
+        "nameLabel": "Nom",
+        "symbolLabel": "Symbole",
+        "codeError": "Doit être un code de 3 lettres (ex. USD)",
+        "nameError": "Entrez un nom valide",
+        "symbolError": "Entrez un symbole valide",
+        "genericError": "Impossible d'ajouter la devise."
+      },
+      "priceForm": {
+        "title": "Définir le prix de l'abonnement",
+        "currencyLabel": "Devise",
+        "priceLabel": "Prix",
+        "priceError": "Entrez un montant valide",
+        "genericError": "Impossible d'enregistrer le prix."
+      }
+    },
+    "usage": {
+      "pageTitle": "Utilisation agrégée",
+      "pageSubtitle": "Métriques agrégées par salon. N'inclut pas les données individuelles des clients.",
+      "table": {
+        "columnSalon": "Salon",
+        "columnAppointments": "Rendez-vous",
+        "columnRevenue": "Revenus encaissés",
+        "columnClients": "Clients actifs",
+        "columnLastActivity": "Dernière activité",
+        "never": "Aucune activité pour l'instant",
+        "emptyTitle": "Aucun salon avec activité pour l'instant"
+      }
     }
   }
 }

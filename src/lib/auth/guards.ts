@@ -17,3 +17,22 @@ export async function requireAuth(): Promise<CurrentSession> {
 
   return session as CurrentSession;
 }
+
+// Protección del Panel SuperAdmin (Fase 9A, CLAUDE.md sección 10): fuera de
+// cualquier salon_id, solo para usuarios en platform_admins. Un usuario sin
+// sesión va a /login; uno con sesión pero sin ese rol va a /dashboard (no
+// tiene nada que hacer en /admin, no es un error de autenticación).
+export async function requirePlatformAdmin(): Promise<CurrentSession> {
+  const session = await getCurrentSession();
+  const locale = await getLocale();
+
+  if (!session) {
+    redirect({ href: "/login", locale });
+  }
+
+  if (!(session as CurrentSession).isPlatformAdmin) {
+    redirect({ href: "/dashboard", locale });
+  }
+
+  return session as CurrentSession;
+}

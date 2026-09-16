@@ -75,6 +75,11 @@
       "title": "Neue vs. wiederkehrende Kunden",
       "new": "Neu",
       "recurring": "Wiederkehrend"
+    },
+    "suspended": {
+      "title": "Dieser Salon ist gesperrt",
+      "body": "Dein Abonnement ist derzeit nicht aktiv. Kontaktiere Oscar's Solution, um den Zugang zu reaktivieren.",
+      "demoExpiredBody": "Deine Demo ist abgelaufen. Kontaktiere Oscar's Solution, wenn du das System weiter nutzen möchtest."
     }
   },
   "requests": {
@@ -807,6 +812,131 @@
       "columnStatus": "Status",
       "lowStockBadge": "Unter Mindestbestand",
       "okBadge": "OK"
+    }
+  },
+  "superadmin": {
+    "nav": {
+      "salons": "Salons",
+      "currencies": "Währungen",
+      "usage": "Nutzung"
+    },
+    "salons": {
+      "pageTitle": "Salons",
+      "pageSubtitle": "Alle Salons der Plattform, echte und Demo-Salons.",
+      "createRealButton": "Neuer Salon",
+      "createDemoButton": "Neue Demo",
+      "table": {
+        "columnName": "Salon",
+        "columnCurrency": "Währung",
+        "columnLocale": "Sprache",
+        "columnStatus": "Status",
+        "columnDemo": "Demo",
+        "columnCreatedAt": "Erstellt",
+        "columnActions": "Aktionen",
+        "emptyTitle": "Noch keine Salons",
+        "emptyDescription": "Erstelle den ersten echten Salon oder eine Demo für einen Interessenten.",
+        "activateAction": "Aktivieren",
+        "suspendAction": "Sperren",
+        "demoExpiresOn": "Läuft ab am {date}",
+        "notDemo": "—"
+      },
+      "status": {
+        "trial": "Testphase",
+        "active": "Aktiv",
+        "suspended": "Gesperrt",
+        "cancelled": "Storniert"
+      },
+      "createRealForm": {
+        "title": "Neuer Salon",
+        "subtitle": "Erfasse einen echten Salon, der den Service bereits gebucht hat.",
+        "nameLabel": "Name des Salons",
+        "slugLabel": "Slug (Portal-URL)",
+        "phoneLabel": "Telefon",
+        "addressLabel": "Adresse",
+        "timezoneLabel": "Zeitzone",
+        "currencyLabel": "Währung",
+        "defaultLocaleLabel": "Standardsprache",
+        "ownerFullNameLabel": "Name der Inhaberin",
+        "ownerEmailLabel": "E-Mail der Inhaberin",
+        "nameError": "Gib einen gültigen Namen ein",
+        "slugError": "Nur Kleinbuchstaben, Zahlen und Bindestriche",
+        "timezoneError": "Gib eine gültige Zeitzone ein (z. B. America/Guyana)",
+        "currencyError": "Wähle eine Währung",
+        "ownerEmailError": "Gib eine gültige E-Mail-Adresse ein",
+        "ownerFullNameError": "Gib einen gültigen Namen ein",
+        "genericError": "Der Salon konnte nicht erstellt werden. Überprüfe die Angaben und versuche es erneut."
+      },
+      "createDemoForm": {
+        "title": "Neue Demo",
+        "subtitle": "Erstelle einen Demo-Salon mit dem bereits geladenen Katalog des Pilotsalons.",
+        "demoDurationLabel": "Dauer (Tage)",
+        "genericError": "Die Demo konnte nicht erstellt werden. Überprüfe die Angaben und versuche es erneut."
+      },
+      "credentialsDialog": {
+        "title": "Konto erstellt",
+        "body": "Teile diese Zugangsdaten mit der Inhaberin. Das Passwort wird nicht erneut angezeigt.",
+        "emailLabel": "E-Mail",
+        "passwordLabel": "Temporäres Passwort",
+        "close": "Schließen"
+      },
+      "errors": {
+        "invalidInput": "Überprüfe die Formularfelder.",
+        "generic": "Ein unerwarteter Fehler ist aufgetreten. Versuche es erneut.",
+        "slugTaken": "Dieser Slug wird bereits von einem anderen Salon verwendet."
+      }
+    },
+    "currencies": {
+      "pageTitle": "Währungen & Preise",
+      "pageSubtitle": "Von der Plattform unterstützte Währungen und der Abo-Preis pro Währung.",
+      "currenciesTitle": "Unterstützte Währungen",
+      "addCurrencyButton": "Währung hinzufügen",
+      "table": {
+        "columnCode": "Code",
+        "columnName": "Name",
+        "columnSymbol": "Symbol",
+        "columnStatus": "Status",
+        "activateAction": "Aktivieren",
+        "deactivateAction": "Deaktivieren",
+        "emptyTitle": "Noch keine Währungen"
+      },
+      "pricesTitle": "Abo-Preis",
+      "pricesTable": {
+        "columnCurrency": "Währung",
+        "columnPrice": "Aktiver Preis",
+        "columnUpdatedAt": "Aktualisiert",
+        "emptyTitle": "Noch keine Preise festgelegt",
+        "setPriceAction": "Preis festlegen"
+      },
+      "currencyForm": {
+        "title": "Währung hinzufügen",
+        "codeLabel": "ISO-4217-Code",
+        "nameLabel": "Name",
+        "symbolLabel": "Symbol",
+        "codeError": "Muss ein 3-Buchstaben-Code sein (z. B. USD)",
+        "nameError": "Gib einen gültigen Namen ein",
+        "symbolError": "Gib ein gültiges Symbol ein",
+        "genericError": "Die Währung konnte nicht hinzugefügt werden."
+      },
+      "priceForm": {
+        "title": "Abo-Preis festlegen",
+        "currencyLabel": "Währung",
+        "priceLabel": "Preis",
+        "priceError": "Gib einen gültigen Betrag ein",
+        "genericError": "Der Preis konnte nicht gespeichert werden."
+      }
+    },
+    "usage": {
+      "pageTitle": "Aggregierte Nutzung",
+      "pageSubtitle": "Aggregierte Kennzahlen pro Salon. Enthält keine individuellen Kundendaten.",
+      "table": {
+        "columnSalon": "Salon",
+        "columnAppointments": "Termine",
+        "columnRevenue": "Eingenommener Umsatz",
+        "columnClients": "Aktive Kunden",
+        "columnLastActivity": "Letzte Aktivität",
+        "never": "Noch keine Aktivität",
+        "emptyTitle": "Noch keine Salons mit Aktivität"
+      }
     }
   }
 }

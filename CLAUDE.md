@@ -188,6 +188,7 @@ docs/
 - `platform_admins` — user_id (= auth.users.id). Cualquier fila aquí da acceso total al Panel SuperAdmin.
 - `currencies` — code (PK, ISO 4217, ej. `USD`,`GYD`,`BRL`,`EUR`), name, symbol, is_active. Precargada con USD, GYD, BRL, EUR; el SuperAdmin puede agregar más sin desplegar código.
 - `subscription_prices` — currency_code (FK a currencies), price_cents, is_active. El precio de la suscripción de Oscar's Solution, uno por moneda soportada.
+- Funciones de apoyo del Panel SuperAdmin (Fase 9A, `security definer`, sin tabla propia): `expire_due_demo_salons()` (corrige oportunistamente cualquier demo vencida a `subscription_status='suspended'`, invocada desde el login del panel y desde `/admin/salons`) y `platform_usage_summary()` (métricas agregadas por salón — citas, ingresos cobrados, clientes activos, última actividad — nunca filas individuales de clientes/pagos, sección 7.3).
 
 ### Tenant y accesos
 - `salons` — id, name, slug (único, para la URL del QR), logo_url, phone, address, timezone, **currency (FK a currencies — moneda en la que el salón cobra a sus clientes)**, **default_locale**, is_active, subscription_status (`trial`|`active`|`suspended`|`cancelled`), **is_demo**, **demo_expires_at (timestamptz, nullable)**, created_at
@@ -399,6 +400,8 @@ Funciones mínimas:
 
 Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fase 0.
 
+**Estado: construido en la Fase 9A** (las 6 funciones mínimas de arriba están implementadas y en producción). `requirePlatformAdmin()` (`src/lib/auth/guards.ts`) protege la ruta; el login redirige a `/admin/salons` cuando el usuario está en `platform_admins`. Como consecuencia directa de que ahora existe quien controla `subscription_status`, el panel de gestión (`(dashboard)/layout.tsx`) bloquea el acceso con un estado dedicado cuando el salón activo está `suspended`/`cancelled` — antes de esta fase ese campo no tenía ningún efecto en la aplicación. Pendiente: el módulo de **IA** de esta misma fase (sección 9) todavía no está construido.
+
 ---
 
 ## 11. Hoja de ruta (construir en este orden)
@@ -412,7 +415,7 @@ Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fa
 - **Fase 6 — Pagos y Finanzas:** cobros, cuadre de caja diario (por salón), gastos, nóminas, resumen.
 - **Fase 7 — Inventario:** productos, proveedores, movimientos, descuento automático, alertas.
 - **Fase 8 — Dashboard y Reportes:** KPIs, gráficos, exportación a CSV.
-- **Fase 9 — IA + SuperAdmin:** análisis y recomendaciones (proveedor intercambiable); panel SuperAdmin completo (salones, demos, monedas, precios de suscripción).
+- **Fase 9 — IA + SuperAdmin:** análisis y recomendaciones (proveedor intercambiable); panel SuperAdmin completo (salones, demos, monedas, precios de suscripción). **Panel SuperAdmin (9A) construido; módulo de IA (9B) pendiente** — ver sección 10.
 - **Fase 10 — Multi-salón y pulido:** selector de salón para dueñas con cadena, configuración, auditoría, revisión de traducciones en los 6 idiomas.
 
 **Definición de "terminado" para cada fase:**

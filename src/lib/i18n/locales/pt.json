@@ -75,6 +75,11 @@
       "title": "Clientes novos vs. recorrentes",
       "new": "Novos",
       "recurring": "Recorrentes"
+    },
+    "suspended": {
+      "title": "Este salão está suspenso",
+      "body": "Sua assinatura não está ativa no momento. Entre em contato com a Oscar's Solution para reativar o acesso.",
+      "demoExpiredBody": "Sua demo expirou. Entre em contato com a Oscar's Solution se quiser continuar usando o sistema."
     }
   },
   "requests": {
@@ -807,6 +812,131 @@
       "columnStatus": "Status",
       "lowStockBadge": "Abaixo do mínimo",
       "okBadge": "OK"
+    }
+  },
+  "superadmin": {
+    "nav": {
+      "salons": "Salões",
+      "currencies": "Moedas",
+      "usage": "Uso"
+    },
+    "salons": {
+      "pageTitle": "Salões",
+      "pageSubtitle": "Todos os salões da plataforma, reais e de demonstração.",
+      "createRealButton": "Novo salão",
+      "createDemoButton": "Nova demo",
+      "table": {
+        "columnName": "Salão",
+        "columnCurrency": "Moeda",
+        "columnLocale": "Idioma",
+        "columnStatus": "Status",
+        "columnDemo": "Demo",
+        "columnCreatedAt": "Criado",
+        "columnActions": "Ações",
+        "emptyTitle": "Ainda não há salões",
+        "emptyDescription": "Crie o primeiro salão real ou uma demo para um cliente em potencial.",
+        "activateAction": "Ativar",
+        "suspendAction": "Suspender",
+        "demoExpiresOn": "Expira em {date}",
+        "notDemo": "—"
+      },
+      "status": {
+        "trial": "Teste",
+        "active": "Ativo",
+        "suspended": "Suspenso",
+        "cancelled": "Cancelado"
+      },
+      "createRealForm": {
+        "title": "Novo salão",
+        "subtitle": "Cadastre um salão real que já contratou o serviço.",
+        "nameLabel": "Nome do salão",
+        "slugLabel": "Slug (URL do portal)",
+        "phoneLabel": "Telefone",
+        "addressLabel": "Endereço",
+        "timezoneLabel": "Fuso horário",
+        "currencyLabel": "Moeda",
+        "defaultLocaleLabel": "Idioma padrão",
+        "ownerFullNameLabel": "Nome da proprietária",
+        "ownerEmailLabel": "Email da proprietária",
+        "nameError": "Digite um nome válido",
+        "slugError": "Apenas letras minúsculas, números e hífens",
+        "timezoneError": "Digite um fuso horário válido (ex. America/Guyana)",
+        "currencyError": "Selecione uma moeda",
+        "ownerEmailError": "Digite um email válido",
+        "ownerFullNameError": "Digite um nome válido",
+        "genericError": "Não foi possível criar o salão. Verifique os dados e tente novamente."
+      },
+      "createDemoForm": {
+        "title": "Nova demo",
+        "subtitle": "Crie um salão de demonstração com o catálogo do salão piloto já carregado.",
+        "demoDurationLabel": "Duração (dias)",
+        "genericError": "Não foi possível criar a demo. Verifique os dados e tente novamente."
+      },
+      "credentialsDialog": {
+        "title": "Conta criada",
+        "body": "Compartilhe estas credenciais com a proprietária. A senha não será mostrada novamente.",
+        "emailLabel": "Email",
+        "passwordLabel": "Senha temporária",
+        "close": "Fechar"
+      },
+      "errors": {
+        "invalidInput": "Revise os campos do formulário.",
+        "generic": "Ocorreu um erro inesperado. Tente novamente.",
+        "slugTaken": "Esse slug já está em uso por outro salão."
+      }
+    },
+    "currencies": {
+      "pageTitle": "Moedas e preços",
+      "pageSubtitle": "Moedas suportadas pela plataforma e o preço da assinatura por moeda.",
+      "currenciesTitle": "Moedas suportadas",
+      "addCurrencyButton": "Adicionar moeda",
+      "table": {
+        "columnCode": "Código",
+        "columnName": "Nome",
+        "columnSymbol": "Símbolo",
+        "columnStatus": "Status",
+        "activateAction": "Ativar",
+        "deactivateAction": "Desativar",
+        "emptyTitle": "Ainda não há moedas"
+      },
+      "pricesTitle": "Preço da assinatura",
+      "pricesTable": {
+        "columnCurrency": "Moeda",
+        "columnPrice": "Preço ativo",
+        "columnUpdatedAt": "Atualizado",
+        "emptyTitle": "Ainda não há preços definidos",
+        "setPriceAction": "Definir preço"
+      },
+      "currencyForm": {
+        "title": "Adicionar moeda",
+        "codeLabel": "Código ISO 4217",
+        "nameLabel": "Nome",
+        "symbolLabel": "Símbolo",
+        "codeError": "Deve ser um código de 3 letras (ex. USD)",
+        "nameError": "Digite um nome válido",
+        "symbolError": "Digite um símbolo válido",
+        "genericError": "Não foi possível adicionar a moeda."
+      },
+      "priceForm": {
+        "title": "Definir preço da assinatura",
+        "currencyLabel": "Moeda",
+        "priceLabel": "Preço",
+        "priceError": "Digite um valor válido",
+        "genericError": "Não foi possível salvar o preço."
+      }
+    },
+    "usage": {
+      "pageTitle": "Uso agregado",
+      "pageSubtitle": "Métricas agregadas por salão. Não inclui dados individuais de clientes.",
+      "table": {
+        "columnSalon": "Salão",
+        "columnAppointments": "Atendimentos",
+        "columnRevenue": "Receita recebida",
+        "columnClients": "Clientes ativos",
+        "columnLastActivity": "Última atividade",
+        "never": "Ainda sem atividade",
+        "emptyTitle": "Ainda não há salões com atividade"
+      }
     }
   }
 }

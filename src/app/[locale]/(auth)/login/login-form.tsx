@@ -36,7 +36,7 @@ export function LoginForm() {
         setServerError(result.error);
         return;
       }
-      router.push("/dashboard");
+      router.push(result.redirectTo);
       router.refresh();
     });
   };

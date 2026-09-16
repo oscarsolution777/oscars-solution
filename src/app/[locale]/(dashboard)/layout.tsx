@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { requireAuth } from "@/lib/auth/guards";
 import { Sidebar } from "@/components/shared/sidebar";
 import { Topbar } from "@/components/shared/topbar";
+import { SalonSuspendedState } from "@/components/shared/salon-suspended-state";
 
 export default async function DashboardLayout({
   children,
@@ -15,6 +16,8 @@ export default async function DashboardLayout({
   const salonName = session.activeMembership?.salon?.name ?? "—";
   const fullName = session.profile?.full_name ?? session.user.email ?? "";
   const roleLabel = session.activeMembership?.role ?? "";
+  const subscriptionStatus = session.activeMembership?.salon?.subscription_status;
+  const isSuspended = subscriptionStatus === "suspended" || subscriptionStatus === "cancelled";
 
   return (
     <div className="flex min-h-screen bg-content-bg">
@@ -26,7 +29,20 @@ export default async function DashboardLayout({
           userFullName={fullName}
           userRoleLabel={roleLabel}
         />
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-6">
+          {isSuspended ? (
+            <SalonSuspendedState
+              title={t("suspended.title")}
+              body={
+                session.activeMembership?.salon?.is_demo
+                  ? t("suspended.demoExpiredBody")
+                  : t("suspended.body")
+              }
+            />
+          ) : (
+            children
+          )}
+        </main>
       </div>
     </div>
   );

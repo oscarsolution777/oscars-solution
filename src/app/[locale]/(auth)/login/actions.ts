@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { loginSchema } from "@/lib/validations/auth";
 
 type ActionResult =
-  | { ok: true }
+  | { ok: true; redirectTo: string }
   | { ok: false; error: string };
 
 export async function login(formData: FormData): Promise<ActionResult> {
@@ -24,5 +24,8 @@ export async function login(formData: FormData): Promise<ActionResult> {
     return { ok: false, error: "auth.login.invalidCredentials" };
   }
 
-  return { ok: true };
+  // Oscar (único platform admin) no opera un salón propio: va directo al
+  // Panel SuperAdmin en vez del panel de gestión.
+  const { data: isPlatformAdmin } = await supabase.rpc("is_platform_admin");
+  return { ok: true, redirectTo: isPlatformAdmin ? "/admin/salons" : "/dashboard" };
 }

@@ -75,6 +75,11 @@
       "title": "New vs. recurring clients",
       "new": "New",
       "recurring": "Recurring"
+    },
+    "suspended": {
+      "title": "This salon is suspended",
+      "body": "Your subscription is not currently active. Contact Oscar's Solution to reactivate access.",
+      "demoExpiredBody": "Your demo has expired. Contact Oscar's Solution if you'd like to keep using the system."
     }
   },
   "requests": {
@@ -807,6 +812,131 @@
       "columnStatus": "Status",
       "lowStockBadge": "Below minimum",
       "okBadge": "OK"
+    }
+  },
+  "superadmin": {
+    "nav": {
+      "salons": "Salons",
+      "currencies": "Currencies",
+      "usage": "Usage"
+    },
+    "salons": {
+      "pageTitle": "Salons",
+      "pageSubtitle": "All salons on the platform, real and demo.",
+      "createRealButton": "New salon",
+      "createDemoButton": "New demo",
+      "table": {
+        "columnName": "Salon",
+        "columnCurrency": "Currency",
+        "columnLocale": "Language",
+        "columnStatus": "Status",
+        "columnDemo": "Demo",
+        "columnCreatedAt": "Created",
+        "columnActions": "Actions",
+        "emptyTitle": "No salons yet",
+        "emptyDescription": "Create the first real salon or a demo for a prospect.",
+        "activateAction": "Activate",
+        "suspendAction": "Suspend",
+        "demoExpiresOn": "Expires {date}",
+        "notDemo": "—"
+      },
+      "status": {
+        "trial": "Trial",
+        "active": "Active",
+        "suspended": "Suspended",
+        "cancelled": "Cancelled"
+      },
+      "createRealForm": {
+        "title": "New salon",
+        "subtitle": "Register a real salon that already signed up.",
+        "nameLabel": "Salon name",
+        "slugLabel": "Slug (portal URL)",
+        "phoneLabel": "Phone",
+        "addressLabel": "Address",
+        "timezoneLabel": "Timezone",
+        "currencyLabel": "Currency",
+        "defaultLocaleLabel": "Default language",
+        "ownerFullNameLabel": "Owner's name",
+        "ownerEmailLabel": "Owner's email",
+        "nameError": "Enter a valid name",
+        "slugError": "Lowercase letters, numbers and hyphens only",
+        "timezoneError": "Enter a valid timezone (e.g. America/Guyana)",
+        "currencyError": "Select a currency",
+        "ownerEmailError": "Enter a valid email",
+        "ownerFullNameError": "Enter a valid name",
+        "genericError": "Could not create the salon. Check the data and try again."
+      },
+      "createDemoForm": {
+        "title": "New demo",
+        "subtitle": "Create a demo salon with the pilot salon's catalog already loaded.",
+        "demoDurationLabel": "Duration (days)",
+        "genericError": "Could not create the demo. Check the data and try again."
+      },
+      "credentialsDialog": {
+        "title": "Account created",
+        "body": "Share these credentials with the owner. The password won't be shown again.",
+        "emailLabel": "Email",
+        "passwordLabel": "Temporary password",
+        "close": "Close"
+      },
+      "errors": {
+        "invalidInput": "Check the form fields.",
+        "generic": "Something went wrong. Please try again.",
+        "slugTaken": "That slug is already used by another salon."
+      }
+    },
+    "currencies": {
+      "pageTitle": "Currencies & prices",
+      "pageSubtitle": "Currencies supported by the platform and the subscription price per currency.",
+      "currenciesTitle": "Supported currencies",
+      "addCurrencyButton": "Add currency",
+      "table": {
+        "columnCode": "Code",
+        "columnName": "Name",
+        "columnSymbol": "Symbol",
+        "columnStatus": "Status",
+        "activateAction": "Activate",
+        "deactivateAction": "Deactivate",
+        "emptyTitle": "No currencies yet"
+      },
+      "pricesTitle": "Subscription price",
+      "pricesTable": {
+        "columnCurrency": "Currency",
+        "columnPrice": "Active price",
+        "columnUpdatedAt": "Updated",
+        "emptyTitle": "No prices set yet",
+        "setPriceAction": "Set price"
+      },
+      "currencyForm": {
+        "title": "Add currency",
+        "codeLabel": "ISO 4217 code",
+        "nameLabel": "Name",
+        "symbolLabel": "Symbol",
+        "codeError": "Must be a 3-letter code (e.g. USD)",
+        "nameError": "Enter a valid name",
+        "symbolError": "Enter a valid symbol",
+        "genericError": "Could not add the currency."
+      },
+      "priceForm": {
+        "title": "Set subscription price",
+        "currencyLabel": "Currency",
+        "priceLabel": "Price",
+        "priceError": "Enter a valid amount",
+        "genericError": "Could not save the price."
+      }
+    },
+    "usage": {
+      "pageTitle": "Aggregate usage",
+      "pageSubtitle": "Aggregated metrics per salon. Does not include individual client data.",
+      "table": {
+        "columnSalon": "Salon",
+        "columnAppointments": "Appointments",
+        "columnRevenue": "Revenue collected",
+        "columnClients": "Active clients",
+        "columnLastActivity": "Last activity",
+        "never": "No activity yet",
+        "emptyTitle": "No salons with activity yet"
+      }
     }
   }
 }
