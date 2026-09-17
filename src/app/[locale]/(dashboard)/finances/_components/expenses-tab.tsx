@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { EmptyState } from "@/components/shared/empty-state";
 import { formatMoney } from "@/lib/utils/money";
-import { formatSalonDate } from "@/lib/utils/dates";
+import { formatCalendarDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import { deleteExpenseAction } from "../actions";
 
@@ -36,7 +36,6 @@ export function ExpensesTab({
   expenses,
   suppliersById,
   currency,
-  timezone,
   locale,
   onEdit,
   onCreate,
@@ -44,7 +43,6 @@ export function ExpensesTab({
   expenses: ExpenseRow[];
   suppliersById: Map<string, SupplierRow>;
   currency: string;
-  timezone: string;
   locale: string;
   onEdit: (expense: ExpenseRow) => void;
   onCreate: () => void;
@@ -110,7 +108,7 @@ export function ExpensesTab({
                       : "—"}
                   </TableCell>
                   <TableCell className="text-text-secondary">
-                    {formatSalonDate(`${expense.spent_at}T00:00:00`, timezone, locale, "PP")}
+                    {formatCalendarDate(expense.spent_at, locale, "PP")}
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-1">

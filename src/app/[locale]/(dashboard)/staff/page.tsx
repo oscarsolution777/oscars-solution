@@ -59,7 +59,6 @@ export default async function StaffPage() {
         monthlyPayrollCents,
       }}
       currency={salon.currency}
-      timezone={salon.timezone}
       locale={locale}
       canWrite={WRITE_ROLES.includes(
         session.activeMembership.role as (typeof WRITE_ROLES)[number]

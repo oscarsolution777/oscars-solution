@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/shared/empty-state";
 import { formatMoney } from "@/lib/utils/money";
-import { formatSalonDate } from "@/lib/utils/dates";
+import { formatCalendarDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import { markPayoutPaidAction } from "../actions";
 
@@ -27,7 +27,6 @@ export function PayoutsTab({
   payouts,
   staffById,
   currency,
-  timezone,
   locale,
   onEdit,
   onCreate,
@@ -35,7 +34,6 @@ export function PayoutsTab({
   payouts: StaffPayoutRow[];
   staffById: Map<string, StaffRow>;
   currency: string;
-  timezone: string;
   locale: string;
   onEdit: (payout: StaffPayoutRow) => void;
   onCreate: () => void;
@@ -85,9 +83,9 @@ export function PayoutsTab({
                     {staffById.get(payout.staff_id)?.full_name ?? "—"}
                   </TableCell>
                   <TableCell className="text-text-secondary">
-                    {formatSalonDate(`${payout.period_start}T00:00:00`, timezone, locale, "PP")}
+                    {formatCalendarDate(payout.period_start, locale, "PP")}
                     {" – "}
-                    {formatSalonDate(`${payout.period_end}T00:00:00`, timezone, locale, "PP")}
+                    {formatCalendarDate(payout.period_end, locale, "PP")}
                   </TableCell>
                   <TableCell className="text-text-secondary">
                     {formatMoney(payout.base_cents, currency, locale)}

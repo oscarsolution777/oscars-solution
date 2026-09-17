@@ -83,7 +83,6 @@ export default async function RequestsPage() {
         completedRevenueCents,
       }}
       currency={salon.currency}
-      timezone={salon.timezone}
       locale={locale}
     />
   );

@@ -65,7 +65,6 @@ export default async function FinancesPage() {
       suppliers={suppliers.filter((supplier) => supplier.is_active)}
       summary={{ incomeCents, expensesCents, payoutsCents, balanceCents }}
       currency={salon.currency}
-      timezone={salon.timezone}
       locale={locale}
     />
   );

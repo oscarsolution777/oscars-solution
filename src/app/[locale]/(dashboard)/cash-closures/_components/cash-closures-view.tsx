@@ -15,7 +15,6 @@ export function CashClosuresView({
   closures,
   kpis,
   currency,
-  timezone,
   locale,
 }: {
   closures: CashClosureRow[];
@@ -24,7 +23,6 @@ export function CashClosuresView({
     accumulatedDifferenceCents: number;
   };
   currency: string;
-  timezone: string;
   locale: string;
 }) {
   const t = useTranslations("cashClosures");
@@ -57,7 +55,6 @@ export function CashClosuresView({
       <ClosuresTable
         closures={closures}
         currency={currency}
-        timezone={timezone}
         locale={locale}
         onEdit={(closure) => setFormState({ mode: "edit", closureId: closure.id })}
         onCreate={() => setFormState({ mode: "create" })}

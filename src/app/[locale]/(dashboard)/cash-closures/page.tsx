@@ -38,7 +38,6 @@ export default async function CashClosuresPage() {
         accumulatedDifferenceCents,
       }}
       currency={salon.currency}
-      timezone={salon.timezone}
       locale={locale}
     />
   );

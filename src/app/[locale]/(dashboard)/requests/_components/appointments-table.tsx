@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { EmptyState } from "@/components/shared/empty-state";
 import { formatMoney } from "@/lib/utils/money";
-import { formatSalonDate } from "@/lib/utils/dates";
+import { formatCalendarDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import { setAppointmentStatusAction, rescheduleAppointmentAction } from "../actions";
 
@@ -47,14 +47,12 @@ export function AppointmentsTable({
   itemsByAppointmentId,
   clientsById,
   currency,
-  timezone,
   locale,
 }: {
   appointments: AppointmentRow[];
   itemsByAppointmentId: Map<string, AppointmentItemRow[]>;
   clientsById: Map<string, ClientRow>;
   currency: string;
-  timezone: string;
   locale: string;
 }) {
   const t = useTranslations("requests.agenda");
@@ -110,7 +108,7 @@ export function AppointmentsTable({
                       onChange={(event) => applyReschedule(appointment.id, event.target.value)}
                     />
                   ) : (
-                    formatSalonDate(appointment.appointment_date, timezone, locale, "PP")
+                    formatCalendarDate(appointment.appointment_date, locale, "PP")
                   )}
                 </TableCell>
                 <TableCell className="font-medium text-text-primary">

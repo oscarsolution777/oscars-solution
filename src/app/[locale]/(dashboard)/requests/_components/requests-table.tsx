@@ -25,7 +25,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { EmptyState } from "@/components/shared/empty-state";
-import { formatSalonDate } from "@/lib/utils/dates";
+import { formatCalendarDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import { setRequestStatusAction } from "../actions";
 
@@ -42,14 +42,12 @@ const STATUS_BADGE_VARIANT: Record<string, "default" | "secondary" | "destructiv
 export function RequestsTable({
   requests,
   itemsByRequestId,
-  timezone,
   locale,
   onConfirm,
   onCreate,
 }: {
   requests: RequestRow[];
   itemsByRequestId: Map<string, RequestItemRow[]>;
-  timezone: string;
   locale: string;
   onConfirm: (request: RequestRow) => void;
   onCreate: () => void;
@@ -105,7 +103,7 @@ export function RequestsTable({
                 </TableCell>
                 <TableCell className="text-text-secondary">
                   {request.preferred_date
-                    ? formatSalonDate(request.preferred_date, timezone, locale, "PP")
+                    ? formatCalendarDate(request.preferred_date, locale, "PP")
                     : "—"}
                 </TableCell>
                 <TableCell>

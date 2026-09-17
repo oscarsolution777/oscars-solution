@@ -30,7 +30,6 @@ export function RequestsView({
   staff,
   kpis,
   currency,
-  timezone,
   locale,
 }: {
   requests: RequestRow[];
@@ -47,7 +46,6 @@ export function RequestsView({
     completedRevenueCents: number;
   };
   currency: string;
-  timezone: string;
   locale: string;
 }) {
   const t = useTranslations("requests");
@@ -117,7 +115,6 @@ export function RequestsView({
           <RequestsTable
             requests={requests}
             itemsByRequestId={itemsByRequestId}
-            timezone={timezone}
             locale={locale}
             onConfirm={(request) => setConfirmingRequestId(request.id)}
             onCreate={() => setRequestFormOpen(true)}
@@ -130,7 +127,6 @@ export function RequestsView({
             itemsByAppointmentId={itemsByAppointmentId}
             clientsById={clientsById}
             currency={currency}
-            timezone={timezone}
             locale={locale}
           />
         </TabsContent>

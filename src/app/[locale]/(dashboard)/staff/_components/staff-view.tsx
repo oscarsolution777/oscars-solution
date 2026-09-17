@@ -21,7 +21,6 @@ export function StaffView({
   serviceStaffRows,
   kpis,
   currency,
-  timezone,
   locale,
   canWrite,
 }: {
@@ -36,7 +35,6 @@ export function StaffView({
     monthlyPayrollCents: number;
   };
   currency: string;
-  timezone: string;
   locale: string;
   canWrite: boolean;
 }) {
@@ -120,7 +118,6 @@ export function StaffView({
         staffMember={viewingStaff}
         assignedServices={assignedServicesForViewing}
         currency={currency}
-        timezone={timezone}
         locale={locale}
         canWrite={canWrite}
         onEdit={() => {

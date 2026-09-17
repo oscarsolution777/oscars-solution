@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/shared/empty-state";
 import { formatMoney } from "@/lib/utils/money";
-import { formatSalonDate } from "@/lib/utils/dates";
+import { formatCalendarDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 
 type CashClosureRow = Tables<"cash_closures">;
@@ -21,14 +21,12 @@ type CashClosureRow = Tables<"cash_closures">;
 export function ClosuresTable({
   closures,
   currency,
-  timezone,
   locale,
   onEdit,
   onCreate,
 }: {
   closures: CashClosureRow[];
   currency: string;
-  timezone: string;
   locale: string;
   onEdit: (closure: CashClosureRow) => void;
   onCreate: () => void;
@@ -64,7 +62,7 @@ export function ClosuresTable({
             return (
               <TableRow key={closure.id}>
                 <TableCell className="font-medium text-text-primary">
-                  {formatSalonDate(`${closure.closure_date}T00:00:00`, timezone, locale, "PP")}
+                  {formatCalendarDate(closure.closure_date, locale, "PP")}
                 </TableCell>
                 <TableCell className="text-text-secondary">
                   {formatMoney(closure.opening_cash_cents, currency, locale)}

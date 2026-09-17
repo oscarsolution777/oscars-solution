@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { StatusToggle } from "@/components/shared/status-toggle";
 import { formatMoney } from "@/lib/utils/money";
-import { formatSalonDate } from "@/lib/utils/dates";
+import { formatCalendarDate } from "@/lib/utils/dates";
 import { getInitials } from "@/lib/utils/text";
 import type { Tables } from "@/types/database";
 import { setStaffActiveAction } from "../actions";
@@ -29,7 +29,6 @@ export function StaffDetailPanel({
   staffMember,
   assignedServices,
   currency,
-  timezone,
   locale,
   canWrite,
   onEdit,
@@ -40,7 +39,6 @@ export function StaffDetailPanel({
   staffMember: StaffRow | null;
   assignedServices: ServiceRow[];
   currency: string;
-  timezone: string;
   locale: string;
   canWrite: boolean;
   onEdit: () => void;
@@ -112,7 +110,7 @@ export function StaffDetailPanel({
               <CalendarDays size={16} className="text-text-muted" />
               <dt className="text-text-muted">{t("hiredAt")}</dt>
               <dd className="ml-auto font-medium text-text-primary">
-                {formatSalonDate(staffMember.hired_at, timezone, locale)}
+                {formatCalendarDate(staffMember.hired_at, locale)}
               </dd>
             </div>
           </dl>

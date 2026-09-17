@@ -22,7 +22,6 @@ export function FinancesView({
   suppliers,
   summary,
   currency,
-  timezone,
   locale,
 }: {
   expenses: ExpenseRow[];
@@ -36,7 +35,6 @@ export function FinancesView({
     balanceCents: number;
   };
   currency: string;
-  timezone: string;
   locale: string;
 }) {
   const t = useTranslations("finances");
@@ -87,7 +85,6 @@ export function FinancesView({
             expenses={expenses}
             suppliersById={suppliersById}
             currency={currency}
-            timezone={timezone}
             locale={locale}
             onEdit={(expense) => setExpenseFormState({ mode: "edit", expenseId: expense.id })}
             onCreate={() => setExpenseFormState({ mode: "create" })}
@@ -99,7 +96,6 @@ export function FinancesView({
             payouts={payouts}
             staffById={staffById}
             currency={currency}
-            timezone={timezone}
             locale={locale}
             onEdit={(payout) => setPayoutFormState({ mode: "edit", payoutId: payout.id })}
             onCreate={() => setPayoutFormState({ mode: "create" })}

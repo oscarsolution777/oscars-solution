@@ -123,7 +123,7 @@ NEXT_PUBLIC_DEFAULT_LOCALE=es
 - **Mutaciones:** Server Actions en `actions.ts` junto a la feature. Validar con Zod al entrar.
 - **Acceso a datos:** todas las consultas viven en `src/lib/db/<entity>.ts`. Ningún componente llama a Supabase directamente.
 - **Dinero:** siempre enteros en céntimos (`price_cents: integer`). Nunca `float`. Formateo solo en la capa de presentación con `formatMoney(amount, currencyCode, locale)`.
-- **Fechas:** se guardan en UTC (`timestamptz` para timestamps, `date` para fechas sin hora). Se muestran en la zona horaria del salón (`salons.timezone`) y formateadas según el idioma activo.
+- **Fechas:** se guardan en UTC (`timestamptz` para timestamps, `date` para fechas sin hora). Los `timestamptz` (`created_at`, `paid_at`, `last_visit_at`...) se muestran en la zona horaria del salón (`salons.timezone`) vía `formatSalonDate` (`src/lib/utils/dates.ts`). Las columnas `date` puras (`appointment_date`, `preferred_date`, `closure_date`, `hired_at`, `spent_at`, `period_start`/`period_end`...) **no representan un instante** — nunca se les aplica la zona horaria del salón (les restaría un día en salones detrás de UTC, ej. America/Guyana); se muestran con `formatCalendarDate` (mismo archivo), que siempre formatea en UTC. Bug real detectado y corregido en la Fase 2.
 - **Nombres:** tablas y columnas en `snake_case` plural; componentes en `PascalCase`; funciones en `camelCase`.
 - **Errores:** las Server Actions devuelven `{ ok: true, data }` o `{ ok: false, error: string }` (el `error` es una clave de traducción, no un mensaje final).
 - **Commits:** Conventional Commits (`feat:`, `fix:`, `chore:`, `refactor:`, `db:`).
