@@ -141,3 +141,35 @@ export async function getRequestStatusByPublicCode(
   if (error) throw error;
   return (data as PublicRequestStatus | null) ?? null;
 }
+
+// Fase 3: cancelar / pedir reprogramación desde /estado/[code], siempre
+// localizado por public_code vía funciones security definer (migración
+// 0015) — nunca un UPDATE directo de la tabla, que solo permite RLS para
+// `authenticated` (CLAUDE.md sección 7.4).
+type PublicActionResult = { ok: true; newPublicCode?: string } | { ok: false; error: string };
+
+export async function cancelRequestByCode(
+  supabase: SupabaseServerClient,
+  publicCode: string
+): Promise<PublicActionResult> {
+  const { data, error } = await supabase.rpc("cancel_request_by_code", {
+    p_public_code: publicCode,
+  });
+
+  if (error) throw error;
+  return data as PublicActionResult;
+}
+
+export async function requestRescheduleByCode(
+  supabase: SupabaseServerClient,
+  publicCode: string,
+  preferredDate: string
+): Promise<PublicActionResult> {
+  const { data, error } = await supabase.rpc("request_reschedule_by_code", {
+    p_public_code: publicCode,
+    p_preferred_date: preferredDate,
+  });
+
+  if (error) throw error;
+  return data as PublicActionResult;
+}

@@ -6,6 +6,7 @@ import { formatCalendarDate } from "@/lib/utils/dates";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { StatusActions } from "./_components/status-actions";
 
 const STATUS_VARIANT: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
   pending: "secondary",
@@ -21,11 +22,11 @@ export default async function PublicStatusPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ code: string }>;
-  searchParams: Promise<{ new?: string }>;
+  params: Promise<{ slug: string; code: string }>;
+  searchParams: Promise<{ new?: string; rescheduled?: string }>;
 }) {
-  const { code } = await params;
-  const { new: isNew } = await searchParams;
+  const { slug, code } = await params;
+  const { new: isNew, rescheduled } = await searchParams;
   const locale = await getLocale();
   const t = await getTranslations("portal.status");
 
@@ -40,11 +41,27 @@ export default async function PublicStatusPage({
     );
   }
 
+  // Mismo criterio que las funciones security definer de la migración 0015
+  // (cancel_request_by_code / request_reschedule_by_code): duplicado aquí
+  // solo para decidir qué botones mostrar — la función SQL rechaza igual
+  // cualquier acción fuera de estos estados, como defensa real.
+  const isInactive = status.status === "rejected" || status.status === "cancelled";
+  const appointmentHappened =
+    status.appointment?.status === "completed" || status.appointment?.status === "no_show";
+  const canCancel = !isInactive && !appointmentHappened;
+  const canReschedule = status.status === "pending" || status.status === "confirmed";
+
   return (
     <div className="flex flex-col gap-4 p-4">
       {isNew === "1" && (
         <div className="rounded-lg border border-primary/30 bg-primary/10 p-3 text-sm text-text-primary">
           {t("savedCodeBanner", { code })}
+        </div>
+      )}
+
+      {rescheduled === "1" && (
+        <div className="rounded-lg border border-primary/30 bg-primary/10 p-3 text-sm text-text-primary">
+          {t("reschedule.banner", { code })}
         </div>
       )}
 
@@ -84,6 +101,13 @@ export default async function PublicStatusPage({
               </div>
             ))}
           </div>
+
+          <StatusActions
+            slug={slug}
+            code={code}
+            canCancel={canCancel}
+            canReschedule={canReschedule}
+          />
         </CardContent>
       </Card>
     </div>

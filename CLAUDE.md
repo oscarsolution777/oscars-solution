@@ -222,7 +222,7 @@ Construido en dos etapas: el flujo del panel (confirmar/rechazar, crear la cita)
   - Al pasar a `completed`, el trigger `apply_appointment_completion` (a) inserta en `stock_movements` un movimiento `out` por cada `service_products` de cada servicio de la cita (descuento automático de inventario) y (b) actualiza `clients.first_visit_at`/`last_visit_at`.
 - `appointment_items` — appointment_id, service_id, staff_id (el trabajador asignado, obligatorio), price_cents. El trigger `snapshot_appointment_item` fija siempre `price_cents` desde `services`. Sin `salon_id` propio. Sin `DELETE`.
 
-### Portal QR (Fase 2) y cancelar/reprogramar (Fase 3, pausada)
+### Portal QR (Fase 2) y cancelar/reprogramar (Fase 3)
 Construido en la Fase 2: `/s/[slug]` (catálogo), `/s/[slug]/solicitud` (selección +
 formulario) y `/s/[slug]/estado/[code]` (consulta de estado), todo sin cuenta.
 Acceso público implementado con un patrón mixto (migración `0013`):
@@ -249,8 +249,41 @@ Acceso público implementado con un patrón mixto (migración `0013`):
 
 El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al enviar la solicitud) y desde ahí puede, mientras el estado lo permita:
 - Consultar el estado (**construido, Fase 2**).
-- Cancelar su solicitud o cita (**Fase 3, pausada**).
-- Pedir cambio de fecha (esto crea una solicitud de reprogramación que la dueña confirma, igual que una solicitud nueva — no se reprograma solo automáticamente para evitar choques que la dueña no vea) (**Fase 3, pausada**).
+- Cancelar su solicitud o cita (**construido, Fase 3**).
+- Pedir cambio de fecha (esto crea una solicitud de reprogramación que la dueña confirma, igual que una solicitud nueva — no se reprograma solo automáticamente para evitar choques que la dueña no vea) (**construido, Fase 3**).
+
+**Fase 3 — implementación:** dos funciones `security definer` más (migración
+`0015`, corregidas en `0016`), mismo patrón de localización exclusiva por
+`public_code` que `get_request_status`:
+- `cancel_request_by_code(public_code)`: cancela la solicitud y, si existe
+  una cita vinculada con `status='scheduled'`, también la cancela. Rechaza
+  con `already_inactive` si ya estaba `rejected`/`cancelled`, o
+  `already_happened` si la cita ya es `completed`/`no_show`. Nunca `DELETE`
+  (regla de datos, sección 6): siempre `UPDATE` de `status`.
+- `request_reschedule_by_code(public_code, preferred_date)`: solo si el
+  estado actual es `pending` o `confirmed`. Crea una fila **nueva** en
+  `requests` (`source='qr'`, mismos datos de contacto, la fecha pedida) y
+  clona sus `request_items` — la solicitud/cita original **no se toca**. El
+  cliente recibe un `public_code` nuevo para la solicitud de reprogramación,
+  igual que al enviar cualquier solicitud por primera vez. Sujeta al mismo
+  trigger `check_request_rate_limit` que cualquier insert de `requests`
+  (verificado: la 5ª reprogramación seguida para el mismo teléfono en una
+  hora es rechazada).
+- Bug real detectado y corregido en `0016`: un `security definer` con
+  `set search_path = public` reemplaza el search_path de la sesión durante
+  toda su ejecución — incluyendo triggers disparados dentro de ella. El
+  insert de `request_reschedule_by_code` dispara `set_request_public_code`
+  (migración `0008`), que llama a `gen_random_bytes()` sin calificar esquema
+  (`pgcrypto` vive en `extensions`); con `search_path = public` a secas,
+  `extensions` queda fuera y la función fallaba. Corregido a
+  `set search_path = public, extensions` en ambas funciones nuevas. Cualquier
+  función `security definer` futura que haga `INSERT`/`UPDATE` sobre tablas
+  con triggers debe incluir `extensions` en su `search_path` por la misma
+  razón.
+- UI: botones "Cancelar solicitud" (con `AlertDialog` de confirmación,
+  sección 12) y "Pedir cambio de fecha" en `estado/[code]/page.tsx`, visibles
+  solo cuando el estado lo permite (mismo criterio duplicado en TypeScript
+  que en la función SQL, que lo rechaza igual como defensa real).
 
 ### Dinero
 - `payments` — salon_id, client_id, amount_cents, method (`cash` | `card` | `transfer` | `other`), status (`pending` | `paid` | `refunded`), paid_at, reference, **appointment_id (nullable, añadido en la Fase 4 junto con `appointments`; sin UI de vinculación todavía — queda para un pase posterior)**. Al insertar o cambiar el `status`, el trigger `apply_payment_to_client` mantiene `clients.total_spent_cents` sincronizado (suma en `paid`, resta si pasa a `refunded`) — es la pieza de Fase 6 que CLAUDE.md ya anticipaba para ese campo. Ledger de solo `SELECT`/`INSERT`/`UPDATE` (nunca `DELETE`): una corrección se hace cambiando el `status`, no borrando la fila.
@@ -439,7 +472,7 @@ Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fa
 - **Fase 0 — Base:** Next.js + Supabase + Tailwind/shadcn + **next-intl con los 6 idiomas** (aunque el contenido inicial esté completo solo en español y el resto en fallback), layout, login, tablas `salons`/`profiles`/`memberships`/`platform_admins`/`currencies`/`subscription_prices`, RLS base, seed con un salón de demo presentable (moneda GYD, zona horaria America/Guyana, como el primer salón real).
 - **Fase 1 — Catálogo:** categorías y servicios (CRUD + imágenes), precios en la moneda del salón.
 - **Fase 2 — Portal QR (anónimo):** `/s/[slug]`, selección de servicios (varios servicios, varios trabajadores), envío de solicitud, `public_code`, consulta de estado, generación del QR. **Construida y en producción** — ver sección 6, "Portal QR (Fase 2)".
-- **Fase 3 — Cancelar / reprogramar sin cuenta:** acciones desde `/estado/[code]`.
+- **Fase 3 — Cancelar / reprogramar sin cuenta:** acciones desde `/estado/[code]`. **Construida y en producción** — ver sección 6, "Portal QR (Fase 2) y cancelar/reprogramar (Fase 3)".
 - **Fase 4 — Solicitudes y Citas (panel):** bandeja, confirmar/rechazar, asignar trabajador y fecha (sin hora), agenda por día, estados.
 - **Fase 5 — Clientes y Trabajadores (panel):** fichas, historial, habilidades, rendimiento, salario.
 - **Fase 6 — Pagos y Finanzas:** cobros, cuadre de caja diario (por salón), gastos, nóminas, resumen.

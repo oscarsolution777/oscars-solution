@@ -902,6 +902,28 @@
         "scheduled": "Agendada",
         "completed": "Concluída",
         "no_show": "Não compareceu"
+      },
+      "cancel": {
+        "button": "Cancelar solicitação",
+        "confirmTitle": "Cancelar sua solicitação?",
+        "confirmDescription": "Esta ação não pode ser desfeita. Se quiser uma nova data mais tarde, será preciso enviar uma nova solicitação.",
+        "cancelAction": "Voltar",
+        "confirmAction": "Sim, cancelar"
+      },
+      "reschedule": {
+        "dateLabel": "Pedir outra data",
+        "submit": "Enviar solicitação de mudança",
+        "banner": "Enviamos sua solicitação de mudança de data. Guarde este novo código para consultá-la: {code}. Sua solicitação/horário anterior continua como estava até o salão revisá-la."
+      },
+      "errors": {
+        "notFound": "Não encontramos essa solicitação.",
+        "alreadyInactive": "Esta solicitação já estava cancelada ou rejeitada.",
+        "alreadyHappened": "Este horário já aconteceu, não é possível cancelar.",
+        "notReschedulable": "Esta solicitação não admite mais mudança de data.",
+        "salonUnavailable": "O salão não está disponível no momento.",
+        "serviceUnavailable": "Um dos serviços da sua solicitação não está mais disponível.",
+        "invalidInput": "Insira uma data válida.",
+        "generic": "Não foi possível concluir a ação. Tente novamente."
       }
     }
   },

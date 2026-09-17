@@ -1193,6 +1193,7 @@ export type Database = {
     }
     Functions: {
       active_salon_ids: { Args: never; Returns: string[] }
+      cancel_request_by_code: { Args: { p_public_code: string }; Returns: Json }
       expire_due_demo_salons: { Args: never; Returns: undefined }
       get_request_status: { Args: { p_public_code: string }; Returns: Json }
       has_role_in_salon: {
@@ -1218,6 +1219,10 @@ export type Database = {
           salon_id: string
           salon_name: string
         }[]
+      }
+      request_reschedule_by_code: {
+        Args: { p_preferred_date: string; p_public_code: string }
+        Returns: Json
       }
     }
     Enums: {

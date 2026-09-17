@@ -902,6 +902,28 @@
         "scheduled": "Geplant",
         "completed": "Abgeschlossen",
         "no_show": "Nicht erschienen"
+      },
+      "cancel": {
+        "button": "Anfrage stornieren",
+        "confirmTitle": "Anfrage wirklich stornieren?",
+        "confirmDescription": "Das kann nicht rückgängig gemacht werden. Wenn du später einen neuen Termin möchtest, musst du eine neue Anfrage senden.",
+        "cancelAction": "Zurück",
+        "confirmAction": "Ja, stornieren"
+      },
+      "reschedule": {
+        "dateLabel": "Anderes Datum anfragen",
+        "submit": "Änderungsanfrage senden",
+        "banner": "Wir haben deine Terminänderungsanfrage gesendet. Speichere diesen neuen Code, um sie abzurufen: {code}. Deine vorherige Anfrage/dein Termin bleibt unverändert, bis der Salon sie überprüft."
+      },
+      "errors": {
+        "notFound": "Wir konnten diese Anfrage nicht finden.",
+        "alreadyInactive": "Diese Anfrage wurde bereits storniert oder abgelehnt.",
+        "alreadyHappened": "Dieser Termin hat bereits stattgefunden und kann nicht storniert werden.",
+        "notReschedulable": "Diese Anfrage kann nicht mehr verschoben werden.",
+        "salonUnavailable": "Der Salon ist derzeit nicht verfügbar.",
+        "serviceUnavailable": "Einer der Dienste in deiner Anfrage ist nicht mehr verfügbar.",
+        "invalidInput": "Gib ein gültiges Datum ein.",
+        "generic": "Die Aktion konnte nicht abgeschlossen werden. Bitte versuche es erneut."
       }
     }
   },

@@ -902,6 +902,28 @@
         "scheduled": "Scheduled",
         "completed": "Completed",
         "no_show": "No-show"
+      },
+      "cancel": {
+        "button": "Cancel request",
+        "confirmTitle": "Cancel your request?",
+        "confirmDescription": "This can't be undone. If you want a new date later, you'll need to submit a new request.",
+        "cancelAction": "Go back",
+        "confirmAction": "Yes, cancel"
+      },
+      "reschedule": {
+        "dateLabel": "Ask for a different date",
+        "submit": "Send change request",
+        "banner": "We sent your date-change request. Save this new code to check it: {code}. Your previous request/appointment stays as it was until the salon reviews it."
+      },
+      "errors": {
+        "notFound": "We couldn't find that request.",
+        "alreadyInactive": "This request was already cancelled or rejected.",
+        "alreadyHappened": "This appointment already happened, it can't be cancelled.",
+        "notReschedulable": "This request can no longer be rescheduled.",
+        "salonUnavailable": "The salon isn't available right now.",
+        "serviceUnavailable": "One of the services in your request is no longer available.",
+        "invalidInput": "Enter a valid date.",
+        "generic": "We couldn't complete the action. Please try again."
       }
     }
   },

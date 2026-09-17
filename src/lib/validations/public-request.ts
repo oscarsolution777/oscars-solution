@@ -17,3 +17,9 @@ export const publicRequestSchema = z.object({
 
 export type PublicRequestInput = z.infer<typeof publicRequestSchema>;
 export type PublicRequestItemInput = z.infer<typeof publicRequestItemSchema>;
+
+export const rescheduleRequestSchema = z.object({
+  preferredDate: z.string().trim().regex(DATE_PATTERN),
+});
+
+export type RescheduleRequestInput = z.infer<typeof rescheduleRequestSchema>;

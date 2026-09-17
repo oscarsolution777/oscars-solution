@@ -902,6 +902,28 @@
         "scheduled": "Programmata",
         "completed": "Completata",
         "no_show": "Assente"
+      },
+      "cancel": {
+        "button": "Annulla richiesta",
+        "confirmTitle": "Annullare la tua richiesta?",
+        "confirmDescription": "Questa azione non può essere annullata. Se vuoi una nuova data più avanti, dovrai inviare una nuova richiesta.",
+        "cancelAction": "Torna indietro",
+        "confirmAction": "Sì, annulla"
+      },
+      "reschedule": {
+        "dateLabel": "Chiedi un'altra data",
+        "submit": "Invia richiesta di cambio",
+        "banner": "Abbiamo inviato la tua richiesta di cambio data. Salva questo nuovo codice per consultarla: {code}. La tua richiesta/appuntamento precedente resta com'era finché il salone non la revisiona."
+      },
+      "errors": {
+        "notFound": "Non abbiamo trovato questa richiesta.",
+        "alreadyInactive": "Questa richiesta era già stata annullata o rifiutata.",
+        "alreadyHappened": "Questo appuntamento è già avvenuto, non può essere annullato.",
+        "notReschedulable": "Questa richiesta non ammette più un cambio di data.",
+        "salonUnavailable": "Il salone non è disponibile in questo momento.",
+        "serviceUnavailable": "Uno dei servizi della tua richiesta non è più disponibile.",
+        "invalidInput": "Inserisci una data valida.",
+        "generic": "Non è stato possibile completare l'azione. Riprova."
       }
     }
   },

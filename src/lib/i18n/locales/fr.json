@@ -902,6 +902,28 @@
         "scheduled": "Planifiée",
         "completed": "Terminée",
         "no_show": "Absence"
+      },
+      "cancel": {
+        "button": "Annuler la demande",
+        "confirmTitle": "Annuler votre demande ?",
+        "confirmDescription": "Cette action est définitive. Si vous voulez une nouvelle date plus tard, il faudra envoyer une nouvelle demande.",
+        "cancelAction": "Retour",
+        "confirmAction": "Oui, annuler"
+      },
+      "reschedule": {
+        "dateLabel": "Demander une autre date",
+        "submit": "Envoyer la demande de changement",
+        "banner": "Nous avons envoyé votre demande de changement de date. Enregistrez ce nouveau code pour la consulter : {code}. Votre demande/rendez-vous précédent reste inchangé jusqu'à ce que le salon l'examine."
+      },
+      "errors": {
+        "notFound": "Nous n'avons pas trouvé cette demande.",
+        "alreadyInactive": "Cette demande était déjà annulée ou refusée.",
+        "alreadyHappened": "Ce rendez-vous a déjà eu lieu, il ne peut pas être annulé.",
+        "notReschedulable": "Cette demande n'admet plus de changement de date.",
+        "salonUnavailable": "Le salon n'est pas disponible pour le moment.",
+        "serviceUnavailable": "L'un des services de votre demande n'est plus disponible.",
+        "invalidInput": "Saisissez une date valide.",
+        "generic": "Impossible de terminer l'action. Réessayez."
       }
     }
   },
