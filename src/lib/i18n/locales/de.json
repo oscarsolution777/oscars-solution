@@ -4,6 +4,7 @@
     "error": "Ein Fehler ist aufgetreten",
     "retry": "Erneut versuchen",
     "save": "Speichern",
+    "saved": "Gespeichert",
     "cancel": "Abbrechen",
     "logout": "Abmelden",
     "active": "Aktiv",
@@ -40,7 +41,10 @@
     "reports": "Berichte und Kennzahlen",
     "ai": "KI-Assistent",
     "settings": "Einstellungen",
-    "comingSoon": "Demnächst verfügbar"
+    "comingSoon": "Demnächst verfügbar",
+    "salonSwitcher": {
+      "label": "Salon wechseln"
+    }
   },
   "dashboard": {
     "welcomeTitle": "Willkommen!",
@@ -80,12 +84,6 @@
       "title": "Dieser Salon ist gesperrt",
       "body": "Dein Abonnement ist derzeit nicht aktiv. Kontaktiere Oscar's Solution, um den Zugang zu reaktivieren.",
       "demoExpiredBody": "Deine Demo ist abgelaufen. Kontaktiere Oscar's Solution, wenn du das System weiter nutzen möchtest."
-    },
-    "qrPortal": {
-      "title": "QR-Portal",
-      "subtitle": "Teile diesen Code, damit deine Kundinnen ohne Konto Termine buchen können.",
-      "copyLink": "Link kopieren",
-      "copied": "Kopiert!"
     }
   },
   "requests": {
@@ -850,6 +848,82 @@
       "forbidden": "Nur die Inhaberin oder eine Administratorin können diesen Bereich sehen.",
       "notConfigured": "Die KI ist noch nicht konfiguriert.",
       "providerFailed": "Das Ergebnis konnte nicht erstellt werden. Bitte erneut versuchen."
+    }
+  },
+  "settings": {
+    "tabs": {
+      "profile": "Salondaten",
+      "members": "Benutzer",
+      "audit": "Aktivitätsprotokoll"
+    },
+    "errors": {
+      "forbiddenTitle": "Kein Zugriff",
+      "forbidden": "Du hast keine Berechtigung, diesen Bereich zu sehen.",
+      "invalidInput": "Überprüfe die Angaben im Formular",
+      "invalidLogo": "Das Logo muss JPG, PNG oder WEBP sein, maximal 5MB",
+      "notFound": "Eintrag nicht gefunden",
+      "cannotEditSelf": "Du kannst deine eigene Mitgliedschaft nicht bearbeiten",
+      "invalidRole": "Wähle eine gültige Rolle",
+      "generic": "Ein Fehler ist aufgetreten. Bitte erneut versuchen."
+    },
+    "profile": {
+      "title": "Salondaten",
+      "subtitle": "Diese Angaben erscheinen in deinem öffentlichen Portal und im Panel.",
+      "readOnlySubtitle": "Nur die Inhaberin kann diese Daten bearbeiten.",
+      "nameLabel": "Salonname",
+      "nameError": "Gib einen Namen ein",
+      "phoneLabel": "Telefon (optional)",
+      "addressLabel": "Adresse (optional)",
+      "timezoneLabel": "Zeitzone",
+      "defaultLocaleLabel": "Standardsprache des Portals",
+      "currencyLabel": "Währung",
+      "currencyHint": "Die Währung des Salons wird von Oscar's Solution bei der Kontoerstellung festgelegt.",
+      "logoLabel": "Logo",
+      "logoEmpty": "Kein Logo",
+      "logoInvalidType": "Das Logo muss JPG, PNG oder WEBP sein",
+      "logoTooLarge": "Das Logo darf nicht größer als 5MB sein"
+    },
+    "qrPortal": {
+      "title": "QR-Portal",
+      "subtitle": "Teile diesen Code, damit deine Kundinnen ohne Konto Termine buchen können.",
+      "copyLink": "Link kopieren",
+      "copied": "Kopiert!"
+    },
+    "members": {
+      "emptyTitle": "Noch keine weiteren Mitglieder",
+      "emptyDescription": "Neue Benutzer werden vom Oscar's-Solution-Team angelegt.",
+      "columnName": "Name",
+      "columnEmail": "E-Mail",
+      "columnRole": "Rolle",
+      "columnStatus": "Status",
+      "youBadge": "Du",
+      "roles": {
+        "owner": "Inhaberin",
+        "admin": "Administrator",
+        "reception": "Empfang"
+      }
+    },
+    "audit": {
+      "emptyTitle": "Noch keine Aktivität erfasst",
+      "emptyDescription": "Sensible Änderungen am Salon erscheinen hier.",
+      "columnDate": "Datum",
+      "columnUser": "Benutzer",
+      "columnEntity": "Element",
+      "columnAction": "Aktion",
+      "unknownUser": "Unbekannter Benutzer",
+      "entities": {
+        "salon": "Salon",
+        "membership": "Benutzer",
+        "request": "Anfrage",
+        "appointment": "Termin"
+      },
+      "actions": {
+        "salon_profile_updated": "Salondaten aktualisiert",
+        "membership_updated": "Benutzer aktualisiert",
+        "request_confirmed": "Anfrage bestätigt",
+        "request_rejected": "Anfrage abgelehnt",
+        "appointment_cancelled": "Termin storniert"
+      }
     }
   },
   "portal": {

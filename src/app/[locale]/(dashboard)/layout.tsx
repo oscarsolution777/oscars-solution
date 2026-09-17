@@ -18,10 +18,18 @@ export default async function DashboardLayout({
   const roleLabel = session.activeMembership?.role ?? "";
   const subscriptionStatus = session.activeMembership?.salon?.subscription_status;
   const isSuspended = subscriptionStatus === "suspended" || subscriptionStatus === "cancelled";
+  const salons = session.memberships
+    .filter((m) => m.salon)
+    .map((m) => ({ id: m.salon!.id, name: m.salon!.name }));
 
   return (
     <div className="flex min-h-screen bg-content-bg">
-      <Sidebar salonName={salonName} role={roleLabel} />
+      <Sidebar
+        salonName={salonName}
+        role={roleLabel}
+        salons={salons}
+        activeSalonId={session.activeMembership?.salon?.id}
+      />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar
           title={t("welcomeTitle")}

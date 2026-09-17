@@ -38,12 +38,11 @@ export type NavItem = {
   restrictedToRoles?: readonly string[];
 };
 
-// Los 13 módulos del sidebar (CLAUDE.md sección 6/9). Solo los módulos ya
-// construidos ("dashboard" y "reports" en Fase 8, "services" en Fase 1,
-// "clients" y "staff" en Fase 5, "requests" en Fase 4, "inventory" en
-// Fase 7, "payments"/"cashClosures"/"finances" en Fase 6, "ai" en Fase 9B)
-// tienen ruta real; el resto se muestra deshabilitado ("próximamente")
-// para no crear enlaces rotos a fases futuras.
+// Los 13 módulos del sidebar (CLAUDE.md sección 6/9). Todos tienen ya ruta
+// real ("dashboard"/"reports" en Fase 8, "services" en Fase 1, "clients"/
+// "staff" en Fase 5, "requests" en Fase 4, "inventory" en Fase 7,
+// "payments"/"cashClosures"/"finances" en Fase 6, "ai" en Fase 9B,
+// "settings" en Fase 10).
 export const navItems: NavItem[] = [
   { key: "dashboard", href: "/dashboard", icon: LayoutDashboard, enabled: true },
   { key: "requests", href: "/requests", icon: CalendarCheck, enabled: true },
@@ -74,5 +73,11 @@ export const navItems: NavItem[] = [
     enabled: true,
     restrictedToRoles: ["owner", "admin"],
   },
-  { key: "settings", href: "/settings", icon: Settings, enabled: false },
+  {
+    key: "settings",
+    href: "/settings",
+    icon: Settings,
+    enabled: true,
+    restrictedToRoles: ["owner", "admin"],
+  },
 ];

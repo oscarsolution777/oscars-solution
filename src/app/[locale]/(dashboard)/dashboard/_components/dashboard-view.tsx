@@ -9,7 +9,6 @@ import { FinancialCards } from "./financial-cards";
 import { TopServicesChart } from "./top-services-chart";
 import { StaffWorkloadList } from "./staff-workload-list";
 import { ClientSegmentsCard } from "./client-segments-card";
-import { QrPortalCard } from "./qr-portal-card";
 
 type ProductRow = Tables<"products">;
 
@@ -44,17 +43,12 @@ export function DashboardView(
         topServices: ServiceSalesRow[];
         staffWorkload: StaffWorkloadRow[];
         clientSegments: ClientSegments;
-        qrPortal: { url: string; dataUrl: string };
       }
 ) {
   return (
     <div className="space-y-6">
       {props.variant === "full" && (
         <FinancialCards financial={props.financial} currency={props.currency} locale={props.locale} />
-      )}
-
-      {props.variant === "full" && (
-        <QrPortalCard qrDataUrl={props.qrPortal.dataUrl} portalUrl={props.qrPortal.url} />
       )}
 
       <OperationalCards operational={props.operational} />

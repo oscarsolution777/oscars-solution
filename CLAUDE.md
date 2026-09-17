@@ -244,8 +244,9 @@ Acceso público implementado con un patrón mixto (migración `0013`):
   activos para cualquier servicio (sin filtrar por `service_staff`), igual que
   ya hace el formulario manual del panel.
 - Generación del QR: `src/lib/qr/generate-portal-qr.ts` (`qrcode`, 100%
-  servidor), mostrado en una tarjeta del Dashboard (owner/admin) — Configuración
-  todavía no existe (Fase 10).
+  servidor), mostrado en una tarjeta de Configuración (`/settings`, pestaña
+  "Datos del salón" — se construyó en la Fase 10; antes de esa fase vivía
+  temporalmente en el Dashboard, que todavía no existía Configuración).
 
 El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al enviar la solicitud) y desde ahí puede, mientras el estado lo permita:
 - Consultar el estado (**construido, Fase 2**).
@@ -284,6 +285,58 @@ El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al env
   sección 12) y "Pedir cambio de fecha" en `estado/[code]/page.tsx`, visibles
   solo cuando el estado lo permite (mismo criterio duplicado en TypeScript
   que en la función SQL, que lo rechaza igual como defensa real).
+
+### Configuración y multi-salón (Fase 10)
+
+Construida en la Fase 10, ruta `(dashboard)/settings`. Cierra los tres
+pendientes que las fases anteriores dejaban explícitamente para después:
+autoservicio de datos del salón (migración 0003 decía "escritura solo
+SuperAdmin, autoservicio de configuración por la dueña es Fase 10"), selector
+de salón activo para dueñas con cadena (`memberships` ya soportaba varias
+filas por usuario, pero `getCurrentSession()` siempre usaba la primera), y
+auditoría (`audit_log` estaba documentada en la sección "Sistema" de este
+mismo archivo pero la tabla nunca se había creado).
+
+- **Selector de salón**: cookie `active_salon_id` (`src/lib/auth/session.ts`,
+  `ACTIVE_SALON_COOKIE`) que recuerda cuál de las `memberships` activas de la
+  persona es el salón "actual"; `setActiveSalonAction` (`src/lib/auth/actions.ts`)
+  la escribe tras validar que el salón pedido está entre sus propias
+  memberships. El dropdown (`SalonSwitcher`, en el Sidebar) solo se muestra
+  si la persona tiene más de un salón activo.
+- **Autoservicio de datos del salón**: función `security definer`
+  `update_salon_profile(salon_id, name, logo_url, phone, address, timezone,
+  default_locale)` (migración `0017`) — exige rol owner
+  (`has_role_in_salon`). Nunca toca `currency`, `subscription_status`,
+  `is_demo`, `demo_expires_at`, `slug` ni `is_active`: esas columnas siguen
+  siendo exclusivas del Panel SuperAdmin (sección 10). El logo se sube al
+  bucket público `salon-logos` (mismo patrón que `service-images` de la Fase
+  1, políticas RLS de `storage.objects` solo para owner).
+- **Usuarios y roles** (alcance acotado — sin invitar gente nueva, esa
+  decisión queda fuera de esta fase): `list_salon_members(salon_id)` y
+  `update_salon_membership(membership_id, role, is_active)`, ambas
+  `security definer` y owner-only. La segunda rechaza con `cannot_edit_self`
+  si la dueña intenta tocar su propia fila, para que no pueda bloquearse a sí
+  misma. Los usuarios nuevos los sigue dando de alta el equipo de Oscar's
+  Solution, como antes de esta fase.
+- **Auditoría** (`audit_log`, migración `0017`): alcance acotado a acciones
+  sensibles, no a cada Server Action del panel — cambios de datos del salón y
+  de membresías (registrados dentro de las propias funciones SQL de arriba,
+  vía el helper `log_audit_event`), y confirmar/rechazar una solicitud o
+  cancelar una cita (`requests/actions.ts`, en la aplicación). Activar/
+  suspender un salón (Fase 9A, SuperAdmin) queda fuera: es cross-tenant y ya
+  tiene su propio panel. Lectura solo para owner (`has_role_in_salon`); sin
+  política de `insert` sobre la tabla, la única vía de escritura es
+  `log_audit_event`.
+- **La tabla genérica `settings` (key/value) de la sección "Sistema" de este
+  archivo no se construyó en esta fase**: no había ningún dato concreto que
+  la necesitara (moneda, idioma por defecto y timezone ya son columnas
+  dedicadas de `salons`). Queda documentada aquí como pendiente real, no como
+  omisión accidental.
+- **Permisos**: "Configuración" es owner ✅ / admin parcial / reception ❌
+  (tabla de la sección 7). "Parcial" para admin significa solo lectura de
+  "Datos del salón" (incluye el QR) — las pestañas "Usuarios" y "Auditoría"
+  ni siquiera se muestran. `reception` no entra a `/settings` en absoluto
+  (bloqueo de página completa, mismo patrón que "Finanzas").
 
 ### Dinero
 - `payments` — salon_id, client_id, amount_cents, method (`cash` | `card` | `transfer` | `other`), status (`pending` | `paid` | `refunded`), paid_at, reference, **appointment_id (nullable, añadido en la Fase 4 junto con `appointments`; sin UI de vinculación todavía — queda para un pase posterior)**. Al insertar o cambiar el `status`, el trigger `apply_payment_to_client` mantiene `clients.total_spent_cents` sincronizado (suma en `paid`, resta si pasa a `refunded`) — es la pieza de Fase 6 que CLAUDE.md ya anticipaba para ese campo. Ledger de solo `SELECT`/`INSERT`/`UPDATE` (nunca `DELETE`): una corrección se hace cambiando el `status`, no borrando la fila.
@@ -479,7 +532,7 @@ Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fa
 - **Fase 7 — Inventario:** productos, proveedores, movimientos, descuento automático, alertas.
 - **Fase 8 — Dashboard y Reportes:** KPIs, gráficos, exportación a CSV.
 - **Fase 9 — IA + SuperAdmin:** análisis y recomendaciones (proveedor intercambiable); panel SuperAdmin completo (salones, demos, monedas, precios de suscripción). **Panel SuperAdmin (9A) y módulo de IA (9B) construidos** — ver secciones 9 y 10. Pendiente real: cargar `ANTHROPIC_API_KEY`/`OPENAI_API_KEY` en producción (hoy vacías, el módulo de IA degrada a "no configurada").
-- **Fase 10 — Multi-salón y pulido:** selector de salón para dueñas con cadena, configuración, auditoría, revisión de traducciones en los 6 idiomas.
+- **Fase 10 — Multi-salón y pulido:** selector de salón para dueñas con cadena, configuración, auditoría, revisión de traducciones en los 6 idiomas. **Construida y en producción** — ver sección 6, "Configuración y multi-salón (Fase 10)".
 
 **Definición de "terminado" para cada fase:**
 compila · pasa lint y typecheck · migraciones aplicadas · RLS probada con dos salones distintos · funciona en móvil · estados de carga, vacío y error implementados · seed actualizado · textos nuevos presentes en los 6 idiomas (o marcados como pendientes).
@@ -504,6 +557,7 @@ compila · pasa lint y typecheck · migraciones aplicadas · RLS probada con dos
 - El primer salón real opera en **GYD**, zona horaria **America/Guyana**.
 - La reprogramación pedida desde `/estado/[code]` **no notifica** a la dueña por ningún canal externo — simplemente aparece como una solicitud pendiente más en su bandeja.
 - La traducción del contenido de cada salón la hace **cada dueña, en su propio idioma**, al cargar su catálogo. El texto fijo del sistema (los 6 archivos de `locales/`) lo mantiene Oscar/Claude Code.
+- Configuración (Fase 10) no incluye invitar usuarios nuevos por email: la dueña solo administra membresías que ya existen (ver, cambiar rol, activar/desactivar). Los usuarios nuevos los sigue dando de alta el equipo de Oscar's Solution.
 
 No hay preguntas abiertas pendientes por el momento. Este documento está listo para empezar la Fase 0.
 

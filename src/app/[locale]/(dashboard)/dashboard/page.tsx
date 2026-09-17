@@ -20,7 +20,6 @@ import {
   computeCashDifferenceTotal,
 } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
-import { buildPortalUrl, generatePortalQrDataUrl } from "@/lib/qr/generate-portal-qr";
 import { DashboardView } from "./_components/dashboard-view";
 
 export default async function DashboardPage() {
@@ -74,9 +73,6 @@ export default async function DashboardPage() {
     );
   }
 
-  const portalUrl = buildPortalUrl(salon.slug, salon.default_locale);
-  const qrDataUrl = await generatePortalQrDataUrl(portalUrl);
-
   const appointmentsById = new Map(appointments.map((a) => [a.id, a]));
   const servicesById = new Map(services.map((s) => [s.id, s]));
   const staffById = new Map(staff.map((s) => [s.id, s]));
@@ -108,7 +104,6 @@ export default async function DashboardPage() {
       topServices={topServices}
       staffWorkload={staffWorkload}
       clientSegments={clientSegments}
-      qrPortal={{ url: portalUrl, dataUrl: qrDataUrl }}
     />
   );
 }

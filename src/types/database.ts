@@ -193,6 +193,47 @@ export type Database = {
           },
         ]
       }
+      audit_log: {
+        Row: {
+          action: string
+          created_at: string
+          diff: Json | null
+          entity: string
+          entity_id: string | null
+          id: string
+          salon_id: string
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          diff?: Json | null
+          entity: string
+          entity_id?: string | null
+          id?: string
+          salon_id: string
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          diff?: Json | null
+          entity?: string
+          entity_id?: string | null
+          id?: string
+          salon_id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_log_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cash_closures: {
         Row: {
           closed_at: string
@@ -1208,6 +1249,27 @@ export type Database = {
           id: string
         }[]
       }
+      list_salon_members: {
+        Args: { p_salon_id: string }
+        Returns: {
+          email: string
+          full_name: string
+          is_active: boolean
+          membership_id: string
+          role: string
+          user_id: string
+        }[]
+      }
+      log_audit_event: {
+        Args: {
+          p_action: string
+          p_diff?: Json
+          p_entity: string
+          p_entity_id: string
+          p_salon_id: string
+        }
+        Returns: undefined
+      }
       platform_usage_summary: {
         Args: never
         Returns: {
@@ -1222,6 +1284,22 @@ export type Database = {
       }
       request_reschedule_by_code: {
         Args: { p_preferred_date: string; p_public_code: string }
+        Returns: Json
+      }
+      update_salon_membership: {
+        Args: { p_is_active: boolean; p_membership_id: string; p_role: string }
+        Returns: Json
+      }
+      update_salon_profile: {
+        Args: {
+          p_address: string
+          p_default_locale: string
+          p_logo_url: string
+          p_name: string
+          p_phone: string
+          p_salon_id: string
+          p_timezone: string
+        }
         Returns: Json
       }
     }

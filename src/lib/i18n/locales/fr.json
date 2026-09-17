@@ -4,6 +4,7 @@
     "error": "Une erreur s'est produite",
     "retry": "Réessayer",
     "save": "Enregistrer",
+    "saved": "Enregistré",
     "cancel": "Annuler",
     "logout": "Se déconnecter",
     "active": "Actif",
@@ -40,7 +41,10 @@
     "reports": "Rapports et Statistiques",
     "ai": "Assistant IA",
     "settings": "Paramètres",
-    "comingSoon": "Bientôt disponible"
+    "comingSoon": "Bientôt disponible",
+    "salonSwitcher": {
+      "label": "Changer de salon"
+    }
   },
   "dashboard": {
     "welcomeTitle": "Bienvenue !",
@@ -80,12 +84,6 @@
       "title": "Ce salon est suspendu",
       "body": "Votre abonnement n'est pas actif actuellement. Contactez Oscar's Solution pour réactiver l'accès.",
       "demoExpiredBody": "Votre démo a expiré. Contactez Oscar's Solution si vous souhaitez continuer à utiliser le système."
-    },
-    "qrPortal": {
-      "title": "Portail QR",
-      "subtitle": "Partagez ce code pour que vos clients réservent sans compte.",
-      "copyLink": "Copier le lien",
-      "copied": "Copié !"
     }
   },
   "requests": {
@@ -850,6 +848,82 @@
       "forbidden": "Seule la propriétaire ou une administratrice peuvent voir cette section.",
       "notConfigured": "L'IA n'est pas encore configurée.",
       "providerFailed": "Impossible de générer le résultat. Réessaie."
+    }
+  },
+  "settings": {
+    "tabs": {
+      "profile": "Informations du salon",
+      "members": "Utilisateurs",
+      "audit": "Journal d'activité"
+    },
+    "errors": {
+      "forbiddenTitle": "Accès refusé",
+      "forbidden": "Vous n'avez pas la permission de voir cette section.",
+      "invalidInput": "Vérifiez les champs du formulaire",
+      "invalidLogo": "Le logo doit être en JPG, PNG ou WEBP, 5 Mo maximum",
+      "notFound": "Élément introuvable",
+      "cannotEditSelf": "Vous ne pouvez pas modifier votre propre appartenance",
+      "invalidRole": "Sélectionnez un rôle valide",
+      "generic": "Une erreur s'est produite. Réessayez."
+    },
+    "profile": {
+      "title": "Informations du salon",
+      "subtitle": "Ces informations apparaissent sur votre portail public et dans le panneau.",
+      "readOnlySubtitle": "Seule la propriétaire peut modifier ces informations.",
+      "nameLabel": "Nom du salon",
+      "nameError": "Saisissez un nom",
+      "phoneLabel": "Téléphone (optionnel)",
+      "addressLabel": "Adresse (optionnelle)",
+      "timezoneLabel": "Fuseau horaire",
+      "defaultLocaleLabel": "Langue par défaut du portail",
+      "currencyLabel": "Devise",
+      "currencyHint": "La devise du salon est définie par Oscar's Solution à la création du compte.",
+      "logoLabel": "Logo",
+      "logoEmpty": "Aucun logo",
+      "logoInvalidType": "Le logo doit être en JPG, PNG ou WEBP",
+      "logoTooLarge": "Le logo ne peut pas dépasser 5 Mo"
+    },
+    "qrPortal": {
+      "title": "Portail QR",
+      "subtitle": "Partagez ce code pour que vos clients réservent sans compte.",
+      "copyLink": "Copier le lien",
+      "copied": "Copié !"
+    },
+    "members": {
+      "emptyTitle": "Pas encore d'autres membres",
+      "emptyDescription": "Les nouveaux utilisateurs sont créés par l'équipe Oscar's Solution.",
+      "columnName": "Nom",
+      "columnEmail": "Email",
+      "columnRole": "Rôle",
+      "columnStatus": "Statut",
+      "youBadge": "Vous",
+      "roles": {
+        "owner": "Propriétaire",
+        "admin": "Administrateur",
+        "reception": "Réception"
+      }
+    },
+    "audit": {
+      "emptyTitle": "Aucune activité enregistrée pour l'instant",
+      "emptyDescription": "Les modifications sensibles du salon apparaîtront ici.",
+      "columnDate": "Date",
+      "columnUser": "Utilisateur",
+      "columnEntity": "Élément",
+      "columnAction": "Action",
+      "unknownUser": "Utilisateur inconnu",
+      "entities": {
+        "salon": "Salon",
+        "membership": "Utilisateur",
+        "request": "Demande",
+        "appointment": "Rendez-vous"
+      },
+      "actions": {
+        "salon_profile_updated": "Informations du salon mises à jour",
+        "membership_updated": "Utilisateur mis à jour",
+        "request_confirmed": "Demande confirmée",
+        "request_rejected": "Demande refusée",
+        "appointment_cancelled": "Rendez-vous annulé"
+      }
     }
   },
   "portal": {

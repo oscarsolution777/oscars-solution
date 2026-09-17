@@ -7,6 +7,7 @@ import { confirmRequestSchema, appointmentStatuses } from "@/lib/validations/app
 import { createRequestWithItems, getRequestById, updateRequestRow } from "@/lib/db/requests";
 import { createAppointmentFromRequest, updateAppointmentRow } from "@/lib/db/appointments";
 import { createClientRow } from "@/lib/db/clients";
+import { logAuditEvent } from "@/lib/db/audit-log";
 import type { RequestInput } from "@/lib/validations/requests";
 import type { ConfirmRequestInput } from "@/lib/validations/appointments";
 
@@ -77,6 +78,23 @@ export async function setRequestStatusAction(
   try {
     const supabase = await createClient();
     await updateRequestRow(supabase, requestId, { status });
+
+    // Auditoría (Fase 10, alcance acotado): solo rechazar, no cualquier
+    // transición de estado de una solicitud.
+    if (status === "rejected") {
+      try {
+        await logAuditEvent(supabase, {
+          salonId: access.salonId,
+          entity: "request",
+          entityId: requestId,
+          action: "request_rejected",
+        });
+      } catch {
+        // Best-effort: la solicitud ya quedó rechazada, no se revierte por
+        // un fallo al registrar la auditoría.
+      }
+    }
+
     return { ok: true, data: undefined };
   } catch {
     return { ok: false, error: "requests.errors.generic" };
@@ -126,6 +144,18 @@ export async function confirmRequestAction(
       })),
     });
 
+    try {
+      await logAuditEvent(supabase, {
+        salonId: access.salonId,
+        entity: "request",
+        entityId: requestId,
+        action: "request_confirmed",
+      });
+    } catch {
+      // Best-effort: la cita ya quedó creada, no se revierte por un fallo
+      // al registrar la auditoría.
+    }
+
     return { ok: true, data: undefined };
   } catch {
     return { ok: false, error: "requests.errors.generic" };
@@ -146,6 +176,23 @@ export async function setAppointmentStatusAction(
   try {
     const supabase = await createClient();
     await updateAppointmentRow(supabase, appointmentId, { status });
+
+    // Auditoría (Fase 10, alcance acotado): solo cancelar, no cualquier
+    // transición de estado de una cita (completed/no_show quedan fuera).
+    if (status === "cancelled") {
+      try {
+        await logAuditEvent(supabase, {
+          salonId: access.salonId,
+          entity: "appointment",
+          entityId: appointmentId,
+          action: "appointment_cancelled",
+        });
+      } catch {
+        // Best-effort: la cita ya quedó cancelada, no se revierte por un
+        // fallo al registrar la auditoría.
+      }
+    }
+
     return { ok: true, data: undefined };
   } catch {
     return { ok: false, error: "requests.errors.generic" };

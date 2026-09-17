@@ -4,6 +4,7 @@
     "error": "Something went wrong",
     "retry": "Retry",
     "save": "Save",
+    "saved": "Saved",
     "cancel": "Cancel",
     "logout": "Log out",
     "active": "Active",
@@ -40,7 +41,10 @@
     "reports": "Reports & Metrics",
     "ai": "AI Assistant",
     "settings": "Settings",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "salonSwitcher": {
+      "label": "Switch salon"
+    }
   },
   "dashboard": {
     "welcomeTitle": "Welcome!",
@@ -80,12 +84,6 @@
       "title": "This salon is suspended",
       "body": "Your subscription is not currently active. Contact Oscar's Solution to reactivate access.",
       "demoExpiredBody": "Your demo has expired. Contact Oscar's Solution if you'd like to keep using the system."
-    },
-    "qrPortal": {
-      "title": "QR Portal",
-      "subtitle": "Share this code so your clients can book appointments without an account.",
-      "copyLink": "Copy link",
-      "copied": "Copied!"
     }
   },
   "requests": {
@@ -850,6 +848,82 @@
       "forbidden": "Only the owner or an admin can view this section.",
       "notConfigured": "AI is not configured yet.",
       "providerFailed": "Could not generate the result. Please try again."
+    }
+  },
+  "settings": {
+    "tabs": {
+      "profile": "Salon details",
+      "members": "Users",
+      "audit": "Audit log"
+    },
+    "errors": {
+      "forbiddenTitle": "No access",
+      "forbidden": "You don't have permission to view this section.",
+      "invalidInput": "Check the form fields",
+      "invalidLogo": "The logo must be JPG, PNG or WEBP, up to 5MB",
+      "notFound": "Record not found",
+      "cannotEditSelf": "You can't edit your own membership",
+      "invalidRole": "Select a valid role",
+      "generic": "Something went wrong. Please try again."
+    },
+    "profile": {
+      "title": "Salon details",
+      "subtitle": "This information shows up on your public portal and in the panel.",
+      "readOnlySubtitle": "Only the owner can edit these details.",
+      "nameLabel": "Salon name",
+      "nameError": "Enter a name",
+      "phoneLabel": "Phone (optional)",
+      "addressLabel": "Address (optional)",
+      "timezoneLabel": "Timezone",
+      "defaultLocaleLabel": "Portal's default language",
+      "currencyLabel": "Currency",
+      "currencyHint": "Your salon's currency is set by Oscar's Solution when your account is created.",
+      "logoLabel": "Logo",
+      "logoEmpty": "No logo",
+      "logoInvalidType": "The logo must be JPG, PNG or WEBP",
+      "logoTooLarge": "The logo can't be larger than 5MB"
+    },
+    "qrPortal": {
+      "title": "QR Portal",
+      "subtitle": "Share this code so your clients can book appointments without an account.",
+      "copyLink": "Copy link",
+      "copied": "Copied!"
+    },
+    "members": {
+      "emptyTitle": "No other members yet",
+      "emptyDescription": "New users are set up by the Oscar's Solution team.",
+      "columnName": "Name",
+      "columnEmail": "Email",
+      "columnRole": "Role",
+      "columnStatus": "Status",
+      "youBadge": "You",
+      "roles": {
+        "owner": "Owner",
+        "admin": "Admin",
+        "reception": "Reception"
+      }
+    },
+    "audit": {
+      "emptyTitle": "No activity recorded yet",
+      "emptyDescription": "Sensitive changes to the salon will show up here.",
+      "columnDate": "Date",
+      "columnUser": "User",
+      "columnEntity": "Item",
+      "columnAction": "Action",
+      "unknownUser": "Unknown user",
+      "entities": {
+        "salon": "Salon",
+        "membership": "User",
+        "request": "Request",
+        "appointment": "Appointment"
+      },
+      "actions": {
+        "salon_profile_updated": "Salon details updated",
+        "membership_updated": "User updated",
+        "request_confirmed": "Request confirmed",
+        "request_rejected": "Request rejected",
+        "appointment_cancelled": "Appointment cancelled"
+      }
     }
   },
   "portal": {

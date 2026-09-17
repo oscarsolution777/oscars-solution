@@ -4,6 +4,7 @@
     "error": "Ocorreu um erro",
     "retry": "Tentar novamente",
     "save": "Salvar",
+    "saved": "Salvo",
     "cancel": "Cancelar",
     "logout": "Sair",
     "active": "Ativo",
@@ -40,7 +41,10 @@
     "reports": "Relatórios e Métricas",
     "ai": "Assistente de IA",
     "settings": "Configurações",
-    "comingSoon": "Em breve"
+    "comingSoon": "Em breve",
+    "salonSwitcher": {
+      "label": "Trocar de salão"
+    }
   },
   "dashboard": {
     "welcomeTitle": "Bem-vinda!",
@@ -80,12 +84,6 @@
       "title": "Este salão está suspenso",
       "body": "Sua assinatura não está ativa no momento. Entre em contato com a Oscar's Solution para reativar o acesso.",
       "demoExpiredBody": "Sua demo expirou. Entre em contato com a Oscar's Solution se quiser continuar usando o sistema."
-    },
-    "qrPortal": {
-      "title": "Portal QR",
-      "subtitle": "Compartilhe este código para que seus clientes agendem horários sem precisar de conta.",
-      "copyLink": "Copiar link",
-      "copied": "Copiado!"
     }
   },
   "requests": {
@@ -850,6 +848,82 @@
       "forbidden": "Somente a proprietária ou uma administradora podem ver esta seção.",
       "notConfigured": "A IA ainda não está configurada.",
       "providerFailed": "Não foi possível gerar o resultado. Tente novamente."
+    }
+  },
+  "settings": {
+    "tabs": {
+      "profile": "Dados do salão",
+      "members": "Usuários",
+      "audit": "Auditoria"
+    },
+    "errors": {
+      "forbiddenTitle": "Sem acesso",
+      "forbidden": "Você não tem permissão para ver esta seção.",
+      "invalidInput": "Revise os dados do formulário",
+      "invalidLogo": "O logo deve ser JPG, PNG ou WEBP de até 5MB",
+      "notFound": "Registro não encontrado",
+      "cannotEditSelf": "Você não pode editar sua própria associação",
+      "invalidRole": "Selecione uma função válida",
+      "generic": "Ocorreu um erro. Tente novamente."
+    },
+    "profile": {
+      "title": "Dados do salão",
+      "subtitle": "Estas informações aparecem no seu portal público e no painel.",
+      "readOnlySubtitle": "Somente a proprietária pode editar estes dados.",
+      "nameLabel": "Nome do salão",
+      "nameError": "Digite um nome",
+      "phoneLabel": "Telefone (opcional)",
+      "addressLabel": "Endereço (opcional)",
+      "timezoneLabel": "Fuso horário",
+      "defaultLocaleLabel": "Idioma padrão do portal",
+      "currencyLabel": "Moeda",
+      "currencyHint": "A moeda do salão é definida pela Oscar's Solution ao criar sua conta.",
+      "logoLabel": "Logo",
+      "logoEmpty": "Sem logo",
+      "logoInvalidType": "O logo deve ser JPG, PNG ou WEBP",
+      "logoTooLarge": "O logo não pode ter mais de 5MB"
+    },
+    "qrPortal": {
+      "title": "Portal QR",
+      "subtitle": "Compartilhe este código para que seus clientes agendem horários sem precisar de conta.",
+      "copyLink": "Copiar link",
+      "copied": "Copiado!"
+    },
+    "members": {
+      "emptyTitle": "Ainda não há outros membros",
+      "emptyDescription": "Novos usuários são cadastrados pela equipe da Oscar's Solution.",
+      "columnName": "Nome",
+      "columnEmail": "Email",
+      "columnRole": "Função",
+      "columnStatus": "Status",
+      "youBadge": "Você",
+      "roles": {
+        "owner": "Proprietária",
+        "admin": "Administrador",
+        "reception": "Recepção"
+      }
+    },
+    "audit": {
+      "emptyTitle": "Ainda não há atividade registrada",
+      "emptyDescription": "As alterações sensíveis do salão vão aparecer aqui.",
+      "columnDate": "Data",
+      "columnUser": "Usuário",
+      "columnEntity": "Item",
+      "columnAction": "Ação",
+      "unknownUser": "Usuário desconhecido",
+      "entities": {
+        "salon": "Salão",
+        "membership": "Usuário",
+        "request": "Solicitação",
+        "appointment": "Agendamento"
+      },
+      "actions": {
+        "salon_profile_updated": "Dados do salão atualizados",
+        "membership_updated": "Usuário atualizado",
+        "request_confirmed": "Solicitação confirmada",
+        "request_rejected": "Solicitação rejeitada",
+        "appointment_cancelled": "Agendamento cancelado"
+      }
     }
   },
   "portal": {

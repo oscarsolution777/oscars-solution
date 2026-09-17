@@ -4,8 +4,19 @@ import { useTranslations } from "next-intl";
 import { usePathname, Link } from "@/lib/i18n/navigation";
 import { navItems } from "./nav-items";
 import { cn } from "@/lib/utils";
+import { SalonSwitcher } from "./salon-switcher";
 
-export function Sidebar({ salonName, role }: { salonName: string; role: string }) {
+export function Sidebar({
+  salonName,
+  role,
+  salons,
+  activeSalonId,
+}: {
+  salonName: string;
+  role: string;
+  salons?: { id: string; name: string }[];
+  activeSalonId?: string;
+}) {
   const t = useTranslations("nav");
   const pathname = usePathname();
 
@@ -20,8 +31,12 @@ export function Sidebar({ salonName, role }: { salonName: string; role: string }
     <aside className="flex w-[200px] shrink-0 flex-col bg-sidebar-bg text-sidebar-text">
       <div className="flex items-center gap-2 px-4 py-5">
         <div className="h-8 w-8 shrink-0 rounded-full bg-primary" aria-hidden />
-        <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-white">{salonName}</p>
+        <div className="min-w-0 flex-1">
+          {salons && salons.length > 1 && activeSalonId ? (
+            <SalonSwitcher salons={salons} activeSalonId={activeSalonId} activeSalonName={salonName} />
+          ) : (
+            <p className="truncate text-sm font-semibold text-white">{salonName}</p>
+          )}
           <p className="truncate text-xs text-sidebar-text">Salón de Belleza</p>
         </div>
       </div>
