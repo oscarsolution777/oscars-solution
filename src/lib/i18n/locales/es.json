@@ -80,6 +80,12 @@
       "title": "Este salón está suspendido",
       "body": "Tu suscripción no está activa en este momento. Contacta a Oscar's Solution para reactivar el acceso.",
       "demoExpiredBody": "Tu demo ha expirado. Contacta a Oscar's Solution si quieres continuar usando el sistema."
+    },
+    "qrPortal": {
+      "title": "Portal QR",
+      "subtitle": "Comparte este código para que tus clientes agenden citas sin necesidad de cuenta.",
+      "copyLink": "Copiar enlace",
+      "copied": "¡Copiado!"
     }
   },
   "requests": {
@@ -844,6 +850,59 @@
       "forbidden": "Solo la propietaria o un administrador pueden ver esta sección.",
       "notConfigured": "La IA todavía no está configurada.",
       "providerFailed": "No se pudo generar el resultado. Intenta de nuevo."
+    }
+  },
+  "portal": {
+    "catalog": {
+      "title": "Reserva tu cita",
+      "subtitle": "Elige los servicios que quieres agendar",
+      "emptyTitle": "Todavía no hay servicios disponibles",
+      "emptyDescription": "Este salón no ha publicado su catálogo todavía.",
+      "addButton": "Agregar",
+      "addedLabel": "Agregado",
+      "continueButton": "Continuar ({count})"
+    },
+    "form": {
+      "title": "Completa tu solicitud",
+      "subtitle": "Revisa los servicios elegidos y déjanos tus datos de contacto",
+      "reviewTitle": "Servicios seleccionados",
+      "removeItem": "Quitar",
+      "totalLabel": "Total",
+      "itemsError": "Selecciona al menos un servicio",
+      "staffLabel": "Trabajador preferido",
+      "staffPlaceholder": "Elige un trabajador (opcional)",
+      "staffUnassigned": "Sin preferencia",
+      "nameLabel": "Nombre completo",
+      "nameError": "Ingresa tu nombre",
+      "phoneLabel": "Teléfono",
+      "phoneError": "Ingresa un teléfono de contacto",
+      "emailLabel": "Correo electrónico (opcional)",
+      "emailError": "Ingresa un correo válido",
+      "preferredDateLabel": "Fecha preferida (opcional)",
+      "submit": "Enviar solicitud",
+      "emptySelectionTitle": "No has seleccionado ningún servicio",
+      "emptySelectionDescription": "Vuelve al catálogo para elegir los servicios que quieres agendar.",
+      "backToCatalog": "Ver catálogo",
+      "errors": {
+        "generic": "No se pudo enviar tu solicitud. Intenta de nuevo.",
+        "rateLimited": "Ya enviaste varias solicitudes recientemente. Intenta más tarde."
+      }
+    },
+    "status": {
+      "notFoundTitle": "No encontramos esa solicitud",
+      "notFoundDescription": "Revisa que el código sea correcto o contacta al salón directamente.",
+      "savedCodeBanner": "¡Listo! Guarda este código para consultar tu solicitud: {code}",
+      "yourCodeLabel": "Tu código",
+      "appointmentDateLabel": "Fecha de tu cita",
+      "statusLabels": {
+        "pending": "Pendiente",
+        "confirmed": "Confirmada",
+        "rejected": "Rechazada",
+        "cancelled": "Cancelada",
+        "scheduled": "Agendada",
+        "completed": "Completada",
+        "no_show": "No se presentó"
+      }
     }
   },
   "superadmin": {

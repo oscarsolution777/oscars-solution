@@ -49,6 +49,7 @@ export async function createRequestWithItems(
     clientEmail: string | null;
     preferredDate: string | null;
     items: { serviceId: string; staffId: string | null }[];
+    source: "manual" | "qr";
   }
 ) {
   const { data: request, error: requestError } = await supabase
@@ -60,7 +61,7 @@ export async function createRequestWithItems(
       client_phone: input.clientPhone,
       client_email: input.clientEmail,
       preferred_date: input.preferredDate,
-      source: "manual",
+      source: input.source,
     })
     .select(SELECT_COLUMNS)
     .single();
@@ -112,4 +113,31 @@ export async function updateRequestRow(
 
   if (error) throw error;
   return data;
+}
+
+// Único punto de lectura del portal público: localiza la solicitud
+// exclusivamente por public_code vía la función security definer
+// get_request_status (migración 0013) — nunca un SELECT directo de la tabla.
+export type PublicRequestStatus = {
+  salonName: string;
+  currency: string;
+  timezone: string;
+  status: string;
+  clientName: string;
+  preferredDate: string | null;
+  createdAt: string;
+  items: { serviceName: string; priceCents: number; staffFullName: string | null }[];
+  appointment: { appointmentDate: string; status: string } | null;
+};
+
+export async function getRequestStatusByPublicCode(
+  supabase: SupabaseServerClient,
+  publicCode: string
+): Promise<PublicRequestStatus | null> {
+  const { data, error } = await supabase.rpc("get_request_status", {
+    p_public_code: publicCode,
+  });
+
+  if (error) throw error;
+  return (data as PublicRequestStatus | null) ?? null;
 }

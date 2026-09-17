@@ -80,6 +80,12 @@
       "title": "Dieser Salon ist gesperrt",
       "body": "Dein Abonnement ist derzeit nicht aktiv. Kontaktiere Oscar's Solution, um den Zugang zu reaktivieren.",
       "demoExpiredBody": "Deine Demo ist abgelaufen. Kontaktiere Oscar's Solution, wenn du das System weiter nutzen möchtest."
+    },
+    "qrPortal": {
+      "title": "QR-Portal",
+      "subtitle": "Teile diesen Code, damit deine Kundinnen ohne Konto Termine buchen können.",
+      "copyLink": "Link kopieren",
+      "copied": "Kopiert!"
     }
   },
   "requests": {
@@ -844,6 +850,59 @@
       "forbidden": "Nur die Inhaberin oder eine Administratorin können diesen Bereich sehen.",
       "notConfigured": "Die KI ist noch nicht konfiguriert.",
       "providerFailed": "Das Ergebnis konnte nicht erstellt werden. Bitte erneut versuchen."
+    }
+  },
+  "portal": {
+    "catalog": {
+      "title": "Termin buchen",
+      "subtitle": "Wähle die Dienstleistungen, die du buchen möchtest",
+      "emptyTitle": "Noch keine Dienstleistungen verfügbar",
+      "emptyDescription": "Dieser Salon hat seinen Katalog noch nicht veröffentlicht.",
+      "addButton": "Hinzufügen",
+      "addedLabel": "Hinzugefügt",
+      "continueButton": "Weiter ({count})"
+    },
+    "form": {
+      "title": "Anfrage vervollständigen",
+      "subtitle": "Überprüfe die gewählten Dienstleistungen und hinterlasse deine Kontaktdaten",
+      "reviewTitle": "Ausgewählte Dienstleistungen",
+      "removeItem": "Entfernen",
+      "totalLabel": "Gesamt",
+      "itemsError": "Wähle mindestens eine Dienstleistung",
+      "staffLabel": "Bevorzugte Mitarbeiterin",
+      "staffPlaceholder": "Mitarbeiterin wählen (optional)",
+      "staffUnassigned": "Keine Präferenz",
+      "nameLabel": "Vollständiger Name",
+      "nameError": "Gib deinen Namen ein",
+      "phoneLabel": "Telefon",
+      "phoneError": "Gib eine Kontakttelefonnummer ein",
+      "emailLabel": "E-Mail (optional)",
+      "emailError": "Gib eine gültige E-Mail ein",
+      "preferredDateLabel": "Bevorzugtes Datum (optional)",
+      "submit": "Anfrage senden",
+      "emptySelectionTitle": "Du hast keine Dienstleistung ausgewählt",
+      "emptySelectionDescription": "Gehe zurück zum Katalog, um die gewünschten Dienstleistungen auszuwählen.",
+      "backToCatalog": "Katalog ansehen",
+      "errors": {
+        "generic": "Deine Anfrage konnte nicht gesendet werden. Versuche es erneut.",
+        "rateLimited": "Du hast kürzlich schon mehrere Anfragen gesendet. Versuche es später erneut."
+      }
+    },
+    "status": {
+      "notFoundTitle": "Wir konnten diese Anfrage nicht finden",
+      "notFoundDescription": "Überprüfe, ob der Code korrekt ist, oder wende dich direkt an den Salon.",
+      "savedCodeBanner": "Fertig! Speichere diesen Code, um deine Anfrage abzurufen: {code}",
+      "yourCodeLabel": "Dein Code",
+      "appointmentDateLabel": "Datum deines Termins",
+      "statusLabels": {
+        "pending": "Ausstehend",
+        "confirmed": "Bestätigt",
+        "rejected": "Abgelehnt",
+        "cancelled": "Storniert",
+        "scheduled": "Geplant",
+        "completed": "Abgeschlossen",
+        "no_show": "Nicht erschienen"
+      }
     }
   },
   "superadmin": {

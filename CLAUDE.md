@@ -207,7 +207,7 @@ docs/
 - `clients` — salon_id, full_name, phone, email, notes, preferences (jsonb), first_visit_at, last_visit_at, total_spent_cents, is_active (borrado lógico, añadido en Fase 5 — la propia sección de "Reglas de datos" ya exigía nunca hacer `DELETE` de clientes). **Sin `user_id` — el cliente no tiene cuenta ni login, siempre es anónimo/identificado solo por su código de solicitud.** `first_visit_at`/`last_visit_at`/`total_spent_cents` se completan automáticamente en las Fases 4 (citas) y 6 (pagos); hasta entonces quedan vacíos/0.
 
 ### Flujo operativo — sin hora, solo fecha; cliente siempre anónimo
-**Construido en la Fase 4 solo del lado del panel** (Fases 2/3 — portal QR y cancelar/reprogramar sin cuenta — siguen pausadas por decisión explícita): las solicitudes de esta fase se crean manualmente desde el panel (`source = 'manual'`); `public_code` se genera igual (trigger `set_request_public_code`, `encode(gen_random_bytes(12),'hex')`) para dejar el dato listo cuando exista el portal.
+Construido en dos etapas: el flujo del panel (confirmar/rechazar, crear la cita) en la **Fase 4** (`source = 'manual'`), y el **Portal QR anónimo** (`/s/[slug]`, `source = 'qr'`) en la **Fase 2** — ver "Portal QR (Fase 2)" más abajo. `public_code` se genera igual en ambos casos (trigger `set_request_public_code`, `encode(gen_random_bytes(12),'hex')`, 96 bits de entropía). Cancelar/reprogramar desde `/estado/[code]` sigue siendo la **Fase 3**, todavía pausada.
 - `requests` — solicitud entrante del portal QR
   - salon_id, **public_code (token corto y no adivinable — es la única "identidad" del cliente)**, client_id (nullable hasta vincular), client_name, client_phone, client_email, preferred_date (date, nullable)
   - status: `pending` | `confirmed` | `rejected` | `cancelled`
@@ -222,10 +222,35 @@ docs/
   - Al pasar a `completed`, el trigger `apply_appointment_completion` (a) inserta en `stock_movements` un movimiento `out` por cada `service_products` de cada servicio de la cita (descuento automático de inventario) y (b) actualiza `clients.first_visit_at`/`last_visit_at`.
 - `appointment_items` — appointment_id, service_id, staff_id (el trabajador asignado, obligatorio), price_cents. El trigger `snapshot_appointment_item` fija siempre `price_cents` desde `services`. Sin `salon_id` propio. Sin `DELETE`.
 
-### Cancelar / reprogramar sin cuenta
+### Portal QR (Fase 2) y cancelar/reprogramar (Fase 3, pausada)
+Construido en la Fase 2: `/s/[slug]` (catálogo), `/s/[slug]/solicitud` (selección +
+formulario) y `/s/[slug]/estado/[code]` (consulta de estado), todo sin cuenta.
+Acceso público implementado con un patrón mixto (migración `0013`):
+- `salons`/`service_categories`/`services`: `SELECT` directo a `anon` vía RLS
+  filtrada (categorías/servicios ya lo tenían desde la Fase 1).
+- `staff`: nunca se abre la tabla completa a `anon` (columnas sensibles como
+  `phone`/`base_salary_cents`). Solo se expone `id`+`full_name` de activos vía
+  la función `security definer` `list_public_staff_for_salon(salon_id)`.
+- `requests`/`request_items`: solo `INSERT` a `anon` (`source='qr'`, salón
+  activo/trial, servicio activo) — nunca `SELECT` de la tabla completa.
+- Consulta de estado: función `security definer` `get_request_status(public_code)`,
+  el único `SELECT` posible sobre `requests`, localizado exclusivamente por el
+  código (96 bits de entropía — la "contraseña de un solo uso" de la sección
+  6). Devuelve `null` si no hay coincidencia, nunca un error.
+- Anti-spam (sección 7.7): trigger `check_request_rate_limit` en `requests`
+  rechaza más de 5 solicitudes por `(salon_id, client_phone)` por hora, **solo
+  para `source='qr'`** (nunca limita las solicitudes manuales del panel).
+- Selección de trabajador preferido: se muestran todos los trabajadores
+  activos para cualquier servicio (sin filtrar por `service_staff`), igual que
+  ya hace el formulario manual del panel.
+- Generación del QR: `src/lib/qr/generate-portal-qr.ts` (`qrcode`, 100%
+  servidor), mostrado en una tarjeta del Dashboard (owner/admin) — Configuración
+  todavía no existe (Fase 10).
+
 El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al enviar la solicitud) y desde ahí puede, mientras el estado lo permita:
-- Cancelar su solicitud o cita.
-- Pedir cambio de fecha (esto crea una solicitud de reprogramación que la dueña confirma, igual que una solicitud nueva — no se reprograma solo automáticamente para evitar choques que la dueña no vea).
+- Consultar el estado (**construido, Fase 2**).
+- Cancelar su solicitud o cita (**Fase 3, pausada**).
+- Pedir cambio de fecha (esto crea una solicitud de reprogramación que la dueña confirma, igual que una solicitud nueva — no se reprograma solo automáticamente para evitar choques que la dueña no vea) (**Fase 3, pausada**).
 
 ### Dinero
 - `payments` — salon_id, client_id, amount_cents, method (`cash` | `card` | `transfer` | `other`), status (`pending` | `paid` | `refunded`), paid_at, reference, **appointment_id (nullable, añadido en la Fase 4 junto con `appointments`; sin UI de vinculación todavía — queda para un pase posterior)**. Al insertar o cambiar el `status`, el trigger `apply_payment_to_client` mantiene `clients.total_spent_cents` sincronizado (suma en `paid`, resta si pasa a `refunded`) — es la pieza de Fase 6 que CLAUDE.md ya anticipaba para ese campo. Ledger de solo `SELECT`/`INSERT`/`UPDATE` (nunca `DELETE`): una corrección se hace cambiando el `status`, no borrando la fila.
@@ -267,7 +292,7 @@ El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al env
 4. El **portal público** (siempre sin cuenta) solo puede: leer `salons` (activo, por slug), `service_categories`, `services` (activos); insertar en `requests`/`request_items`; y leer/actualizar (cancelar, pedir reprogramación) **su propia** solicitud/cita **solo si presenta el `public_code` correcto** — la política de RLS para esto se basa en el código, no en un usuario autenticado.
 5. `SUPABASE_SERVICE_ROLE_KEY` solo en código de servidor. Si aparece en un archivo con `"use client"`, es un bug crítico.
 6. El `salon_id` **nunca** viaja desde el cliente en una mutación: se deriva en el servidor desde la sesión (panel) o desde el `slug` validado (portal).
-7. Rate limiting en el endpoint público de creación de solicitudes y en la búsqueda por `public_code` (anti fuerza-bruta y anti-spam).
+7. Rate limiting en el endpoint público de creación de solicitudes y en la búsqueda por `public_code` (anti fuerza-bruta y anti-spam). **Implementado en la Fase 2**: creación de solicitudes limitada por trigger DB (`check_request_rate_limit`, máx. 5/hora por teléfono, solo `source='qr'`); la búsqueda por `public_code` no añade throttling adicional porque el código tiene 96 bits de entropía (fuerza bruta computacionalmente inviable).
 8. Los datos personales de clientes nunca se envían a la API de IA. Solo métricas agregadas y anonimizadas.
 9. Los módulos con reglas owner/admin de escritura (ver tabla de permisos abajo) se refuerzan con el helper `public.has_role_in_salon(target_salon_id, allowed_roles)` (security definer, mismo patrón que `active_salon_ids()`/`is_platform_admin()`) en las políticas RLS de `insert`/`update` — nunca solo en la Server Action, porque el navegador tiene acceso directo a PostgREST con la sesión del usuario. Introducido en Fase 1 para `service_categories`/`services`; reutilizable en fases futuras.
 
@@ -413,7 +438,7 @@ Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fa
 
 - **Fase 0 — Base:** Next.js + Supabase + Tailwind/shadcn + **next-intl con los 6 idiomas** (aunque el contenido inicial esté completo solo en español y el resto en fallback), layout, login, tablas `salons`/`profiles`/`memberships`/`platform_admins`/`currencies`/`subscription_prices`, RLS base, seed con un salón de demo presentable (moneda GYD, zona horaria America/Guyana, como el primer salón real).
 - **Fase 1 — Catálogo:** categorías y servicios (CRUD + imágenes), precios en la moneda del salón.
-- **Fase 2 — Portal QR (anónimo):** `/s/[slug]`, selección de servicios (varios servicios, varios trabajadores), envío de solicitud, `public_code`, consulta de estado, generación del QR.
+- **Fase 2 — Portal QR (anónimo):** `/s/[slug]`, selección de servicios (varios servicios, varios trabajadores), envío de solicitud, `public_code`, consulta de estado, generación del QR. **Construida y en producción** — ver sección 6, "Portal QR (Fase 2)".
 - **Fase 3 — Cancelar / reprogramar sin cuenta:** acciones desde `/estado/[code]`.
 - **Fase 4 — Solicitudes y Citas (panel):** bandeja, confirmar/rechazar, asignar trabajador y fecha (sin hora), agenda por día, estados.
 - **Fase 5 — Clientes y Trabajadores (panel):** fichas, historial, habilidades, rendimiento, salario.

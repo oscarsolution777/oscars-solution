@@ -80,6 +80,12 @@
       "title": "Ce salon est suspendu",
       "body": "Votre abonnement n'est pas actif actuellement. Contactez Oscar's Solution pour réactiver l'accès.",
       "demoExpiredBody": "Votre démo a expiré. Contactez Oscar's Solution si vous souhaitez continuer à utiliser le système."
+    },
+    "qrPortal": {
+      "title": "Portail QR",
+      "subtitle": "Partagez ce code pour que vos clients réservent sans compte.",
+      "copyLink": "Copier le lien",
+      "copied": "Copié !"
     }
   },
   "requests": {
@@ -844,6 +850,59 @@
       "forbidden": "Seule la propriétaire ou une administratrice peuvent voir cette section.",
       "notConfigured": "L'IA n'est pas encore configurée.",
       "providerFailed": "Impossible de générer le résultat. Réessaie."
+    }
+  },
+  "portal": {
+    "catalog": {
+      "title": "Réservez votre rendez-vous",
+      "subtitle": "Choisissez les services que vous souhaitez réserver",
+      "emptyTitle": "Aucun service disponible pour le moment",
+      "emptyDescription": "Ce salon n'a pas encore publié son catalogue.",
+      "addButton": "Ajouter",
+      "addedLabel": "Ajouté",
+      "continueButton": "Continuer ({count})"
+    },
+    "form": {
+      "title": "Complétez votre demande",
+      "subtitle": "Vérifiez les services choisis et laissez-nous vos coordonnées",
+      "reviewTitle": "Services sélectionnés",
+      "removeItem": "Retirer",
+      "totalLabel": "Total",
+      "itemsError": "Sélectionnez au moins un service",
+      "staffLabel": "Employé préféré",
+      "staffPlaceholder": "Choisissez un employé (facultatif)",
+      "staffUnassigned": "Aucune préférence",
+      "nameLabel": "Nom complet",
+      "nameError": "Indiquez votre nom",
+      "phoneLabel": "Téléphone",
+      "phoneError": "Indiquez un numéro de contact",
+      "emailLabel": "E-mail (facultatif)",
+      "emailError": "Indiquez un e-mail valide",
+      "preferredDateLabel": "Date préférée (facultatif)",
+      "submit": "Envoyer la demande",
+      "emptySelectionTitle": "Vous n'avez sélectionné aucun service",
+      "emptySelectionDescription": "Retournez au catalogue pour choisir les services à réserver.",
+      "backToCatalog": "Voir le catalogue",
+      "errors": {
+        "generic": "Impossible d'envoyer votre demande. Réessayez.",
+        "rateLimited": "Vous avez déjà envoyé plusieurs demandes récemment. Réessayez plus tard."
+      }
+    },
+    "status": {
+      "notFoundTitle": "Nous n'avons pas trouvé cette demande",
+      "notFoundDescription": "Vérifiez que le code est correct ou contactez directement le salon.",
+      "savedCodeBanner": "C'est fait ! Enregistrez ce code pour consulter votre demande : {code}",
+      "yourCodeLabel": "Votre code",
+      "appointmentDateLabel": "Date de votre rendez-vous",
+      "statusLabels": {
+        "pending": "En attente",
+        "confirmed": "Confirmée",
+        "rejected": "Refusée",
+        "cancelled": "Annulée",
+        "scheduled": "Planifiée",
+        "completed": "Terminée",
+        "no_show": "Absence"
+      }
     }
   },
   "superadmin": {

@@ -80,6 +80,12 @@
       "title": "Este salão está suspenso",
       "body": "Sua assinatura não está ativa no momento. Entre em contato com a Oscar's Solution para reativar o acesso.",
       "demoExpiredBody": "Sua demo expirou. Entre em contato com a Oscar's Solution se quiser continuar usando o sistema."
+    },
+    "qrPortal": {
+      "title": "Portal QR",
+      "subtitle": "Compartilhe este código para que seus clientes agendem horários sem precisar de conta.",
+      "copyLink": "Copiar link",
+      "copied": "Copiado!"
     }
   },
   "requests": {
@@ -844,6 +850,59 @@
       "forbidden": "Somente a proprietária ou uma administradora podem ver esta seção.",
       "notConfigured": "A IA ainda não está configurada.",
       "providerFailed": "Não foi possível gerar o resultado. Tente novamente."
+    }
+  },
+  "portal": {
+    "catalog": {
+      "title": "Agende seu horário",
+      "subtitle": "Escolha os serviços que deseja agendar",
+      "emptyTitle": "Ainda não há serviços disponíveis",
+      "emptyDescription": "Este salão ainda não publicou seu catálogo.",
+      "addButton": "Adicionar",
+      "addedLabel": "Adicionado",
+      "continueButton": "Continuar ({count})"
+    },
+    "form": {
+      "title": "Complete sua solicitação",
+      "subtitle": "Revise os serviços escolhidos e deixe seus dados de contato",
+      "reviewTitle": "Serviços selecionados",
+      "removeItem": "Remover",
+      "totalLabel": "Total",
+      "itemsError": "Selecione pelo menos um serviço",
+      "staffLabel": "Profissional preferido",
+      "staffPlaceholder": "Escolha um profissional (opcional)",
+      "staffUnassigned": "Sem preferência",
+      "nameLabel": "Nome completo",
+      "nameError": "Informe seu nome",
+      "phoneLabel": "Telefone",
+      "phoneError": "Informe um telefone de contato",
+      "emailLabel": "E-mail (opcional)",
+      "emailError": "Informe um e-mail válido",
+      "preferredDateLabel": "Data preferida (opcional)",
+      "submit": "Enviar solicitação",
+      "emptySelectionTitle": "Você não selecionou nenhum serviço",
+      "emptySelectionDescription": "Volte ao catálogo para escolher os serviços que deseja agendar.",
+      "backToCatalog": "Ver catálogo",
+      "errors": {
+        "generic": "Não foi possível enviar sua solicitação. Tente novamente.",
+        "rateLimited": "Você já enviou várias solicitações recentemente. Tente novamente mais tarde."
+      }
+    },
+    "status": {
+      "notFoundTitle": "Não encontramos essa solicitação",
+      "notFoundDescription": "Verifique se o código está correto ou entre em contato diretamente com o salão.",
+      "savedCodeBanner": "Pronto! Guarde este código para consultar sua solicitação: {code}",
+      "yourCodeLabel": "Seu código",
+      "appointmentDateLabel": "Data do seu horário",
+      "statusLabels": {
+        "pending": "Pendente",
+        "confirmed": "Confirmada",
+        "rejected": "Rejeitada",
+        "cancelled": "Cancelada",
+        "scheduled": "Agendada",
+        "completed": "Concluída",
+        "no_show": "Não compareceu"
+      }
     }
   },
   "superadmin": {

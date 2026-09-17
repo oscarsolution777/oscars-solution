@@ -39,3 +39,39 @@ insert into public.salons (
   'active',
   false
 ) on conflict (id) do nothing;
+
+-- Catálogo de ejemplo presentable del salón piloto (Fase 2: sin esto no hay
+-- nada que mostrar en el portal público /s/[slug]). IDs generados con
+-- crypto.randomUUID() (UUID v4 real, no un patrón de dígitos repetidos):
+-- z.string().uuid() (validaciones de servicios/categorías/solicitudes) exige
+-- el nibble de variante RFC4122 (8-b), que un id como '222...221' no cumple.
+insert into public.service_categories (id, salon_id, name, sort_order) values
+  ('1b05b9a8-f134-4800-aad6-d3650a1e8ffa', '11111111-1111-1111-1111-111111111111', 'Cabello', 10),
+  ('62df3e8b-caa7-4fcd-9de4-689c9dd7c6af', '11111111-1111-1111-1111-111111111111', 'Uñas', 20),
+  ('848eb1a7-a22b-4a85-9081-04e96002a00a', '11111111-1111-1111-1111-111111111111', 'Piel', 30)
+on conflict (id) do nothing;
+
+insert into public.services (
+  id, salon_id, category_id, name, description, features, price_cents, duration_min, sort_order
+) values
+  ('67865bc2-bd7b-4315-9b7c-6b39309425bf', '11111111-1111-1111-1111-111111111111',
+   '1b05b9a8-f134-4800-aad6-d3650a1e8ffa', 'Corte de cabello',
+   'Corte personalizado según el tipo de cabello y el estilo que buscas.',
+   array['Lavado incluido', 'Asesoría de estilo'], 3000, 45, 10),
+  ('1d470b5a-9a1e-453d-9654-1bda6aab6144', '11111111-1111-1111-1111-111111111111',
+   '1b05b9a8-f134-4800-aad6-d3650a1e8ffa', 'Coloración completa',
+   'Tinte de raíz a puntas con productos profesionales.',
+   array['Incluye tratamiento hidratante'], 8000, 120, 20),
+  ('3d805eb7-dd07-4595-9132-75d2c9847344', '11111111-1111-1111-1111-111111111111',
+   '1b05b9a8-f134-4800-aad6-d3650a1e8ffa', 'Peinado para evento',
+   'Peinado elegante para bodas, fiestas u ocasiones especiales.',
+   array['Incluye prueba previa opcional'], 5000, 60, 30),
+  ('1fba29c4-529d-401d-bb11-87a8b11764b7', '11111111-1111-1111-1111-111111111111',
+   '62df3e8b-caa7-4fcd-9de4-689c9dd7c6af', 'Manicure clásica',
+   'Limado, cutícula y esmaltado tradicional.',
+   array['Esmaltado a elección'], 2000, 40, 10),
+  ('73bff0fe-c375-4de5-b16a-e78c2278db6b', '11111111-1111-1111-1111-111111111111',
+   '848eb1a7-a22b-4a85-9081-04e96002a00a', 'Facial hidratante',
+   'Limpieza profunda e hidratación para todo tipo de piel.',
+   array['Incluye mascarilla final'], 4500, 50, 10)
+on conflict (id) do nothing;

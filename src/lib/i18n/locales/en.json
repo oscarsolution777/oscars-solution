@@ -80,6 +80,12 @@
       "title": "This salon is suspended",
       "body": "Your subscription is not currently active. Contact Oscar's Solution to reactivate access.",
       "demoExpiredBody": "Your demo has expired. Contact Oscar's Solution if you'd like to keep using the system."
+    },
+    "qrPortal": {
+      "title": "QR Portal",
+      "subtitle": "Share this code so your clients can book appointments without an account.",
+      "copyLink": "Copy link",
+      "copied": "Copied!"
     }
   },
   "requests": {
@@ -844,6 +850,59 @@
       "forbidden": "Only the owner or an admin can view this section.",
       "notConfigured": "AI is not configured yet.",
       "providerFailed": "Could not generate the result. Please try again."
+    }
+  },
+  "portal": {
+    "catalog": {
+      "title": "Book your appointment",
+      "subtitle": "Choose the services you'd like to schedule",
+      "emptyTitle": "No services available yet",
+      "emptyDescription": "This salon hasn't published its catalog yet.",
+      "addButton": "Add",
+      "addedLabel": "Added",
+      "continueButton": "Continue ({count})"
+    },
+    "form": {
+      "title": "Complete your request",
+      "subtitle": "Review the services you chose and leave us your contact details",
+      "reviewTitle": "Selected services",
+      "removeItem": "Remove",
+      "totalLabel": "Total",
+      "itemsError": "Select at least one service",
+      "staffLabel": "Preferred staff member",
+      "staffPlaceholder": "Choose a staff member (optional)",
+      "staffUnassigned": "No preference",
+      "nameLabel": "Full name",
+      "nameError": "Enter your name",
+      "phoneLabel": "Phone",
+      "phoneError": "Enter a contact phone number",
+      "emailLabel": "Email (optional)",
+      "emailError": "Enter a valid email",
+      "preferredDateLabel": "Preferred date (optional)",
+      "submit": "Send request",
+      "emptySelectionTitle": "You haven't selected any service",
+      "emptySelectionDescription": "Go back to the catalog to choose the services you'd like to book.",
+      "backToCatalog": "View catalog",
+      "errors": {
+        "generic": "We couldn't send your request. Please try again.",
+        "rateLimited": "You've already sent several requests recently. Please try again later."
+      }
+    },
+    "status": {
+      "notFoundTitle": "We couldn't find that request",
+      "notFoundDescription": "Check that the code is correct or contact the salon directly.",
+      "savedCodeBanner": "Done! Save this code to check your request: {code}",
+      "yourCodeLabel": "Your code",
+      "appointmentDateLabel": "Your appointment date",
+      "statusLabels": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "rejected": "Rejected",
+        "cancelled": "Cancelled",
+        "scheduled": "Scheduled",
+        "completed": "Completed",
+        "no_show": "No-show"
+      }
     }
   },
   "superadmin": {

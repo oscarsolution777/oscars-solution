@@ -1194,11 +1194,19 @@ export type Database = {
     Functions: {
       active_salon_ids: { Args: never; Returns: string[] }
       expire_due_demo_salons: { Args: never; Returns: undefined }
+      get_request_status: { Args: { p_public_code: string }; Returns: Json }
       has_role_in_salon: {
         Args: { allowed_roles: string[]; target_salon_id: string }
         Returns: boolean
       }
       is_platform_admin: { Args: never; Returns: boolean }
+      list_public_staff_for_salon: {
+        Args: { p_salon_id: string }
+        Returns: {
+          full_name: string
+          id: string
+        }[]
+      }
       platform_usage_summary: {
         Args: never
         Returns: {

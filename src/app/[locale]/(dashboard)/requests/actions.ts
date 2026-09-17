@@ -51,6 +51,7 @@ export async function createRequestAction(input: RequestInput): Promise<ActionRe
         serviceId: item.serviceId,
         staffId: item.staffId || null,
       })),
+      source: "manual",
     });
     return { ok: true, data: undefined };
   } catch {
