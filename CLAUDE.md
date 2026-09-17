@@ -207,7 +207,7 @@ docs/
 - `clients` — salon_id, full_name, phone, email, notes, preferences (jsonb), first_visit_at, last_visit_at, total_spent_cents, is_active (borrado lógico, añadido en Fase 5 — la propia sección de "Reglas de datos" ya exigía nunca hacer `DELETE` de clientes). **Sin `user_id` — el cliente no tiene cuenta ni login, siempre es anónimo/identificado solo por su código de solicitud.** `first_visit_at`/`last_visit_at`/`total_spent_cents` se completan automáticamente en las Fases 4 (citas) y 6 (pagos); hasta entonces quedan vacíos/0.
 
 ### Flujo operativo — sin hora, solo fecha; cliente siempre anónimo
-Construido en dos etapas: el flujo del panel (confirmar/rechazar, crear la cita) en la **Fase 4** (`source = 'manual'`), y el **Portal QR anónimo** (`/s/[slug]`, `source = 'qr'`) en la **Fase 2** — ver "Portal QR (Fase 2)" más abajo. `public_code` se genera igual en ambos casos (trigger `set_request_public_code`, `encode(gen_random_bytes(12),'hex')`, 96 bits de entropía). Cancelar/reprogramar desde `/estado/[code]` sigue siendo la **Fase 3**, todavía pausada.
+Construido en dos etapas: el flujo del panel (confirmar/rechazar, crear la cita) en la **Fase 4** (`source = 'manual'`), y el **Portal QR anónimo** (`/s/[slug]`, `source = 'qr'`) en la **Fase 2** — ver "Portal QR (Fase 2)" más abajo. `public_code` se genera igual en ambos casos (trigger `set_request_public_code`, `encode(gen_random_bytes(12),'hex')`, 96 bits de entropía). Cancelar/reprogramar desde `/estado/[code]` es la **Fase 3**, construida y en producción (ver "Portal QR (Fase 2) y cancelar/reprogramar (Fase 3)" más abajo).
 - `requests` — solicitud entrante del portal QR
   - salon_id, **public_code (token corto y no adivinable — es la única "identidad" del cliente)**, client_id (nullable hasta vincular), client_name, client_phone, client_email, preferred_date (date, nullable)
   - status: `pending` | `confirmed` | `rejected` | `cancelled`
@@ -218,7 +218,7 @@ Construido en dos etapas: el flujo del panel (confirmar/rechazar, crear la cita)
   - salon_id, request_id (nullable), client_id, **appointment_date (date)**, total_cents, notes
   - status: `scheduled` | `completed` | `no_show` | `cancelled`
   - El orden dentro del día lo maneja la dueña de palabra; el sistema no gestiona turnos ni horario.
-  - `total_cents` lo recalcula siempre el trigger `set_appointment_total` sumando `appointment_items`. Sin `DELETE`: correcciones vía `status`; cambiar la fecha es un `UPDATE` directo de `appointment_date` (la reprogramación con solicitud del cliente sigue siendo Fase 3, pausada).
+  - `total_cents` lo recalcula siempre el trigger `set_appointment_total` sumando `appointment_items`. Sin `DELETE`: correcciones vía `status`; cambiar la fecha es un `UPDATE` directo de `appointment_date` desde el panel; la reprogramación pedida por el cliente (Fase 3) nunca actualiza esta fila directamente — crea una solicitud nueva, ver sección 6 "Portal QR (Fase 2) y cancelar/reprogramar (Fase 3)".
   - Al pasar a `completed`, el trigger `apply_appointment_completion` (a) inserta en `stock_movements` un movimiento `out` por cada `service_products` de cada servicio de la cita (descuento automático de inventario) y (b) actualiza `clients.first_visit_at`/`last_visit_at`.
 - `appointment_items` — appointment_id, service_id, staff_id (el trabajador asignado, obligatorio), price_cents. El trigger `snapshot_appointment_item` fija siempre `price_cents` desde `services`. Sin `salon_id` propio. Sin `DELETE`.
 
