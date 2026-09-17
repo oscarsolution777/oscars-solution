@@ -814,6 +814,38 @@
       "okBadge": "OK"
     }
   },
+  "ai": {
+    "title": "KI-Assistent",
+    "subtitle": "Analyse und Empfehlungen basierend auf der Aktivität der letzten 30 Tage.",
+    "regenerateButton": "Neu generieren",
+    "regenerating": "Wird generiert...",
+    "analysisTitle": "Geschäftsanalyse",
+    "recommendationsTitle": "Empfehlungen",
+    "emptyAnalysis": "Noch keine Analyse verfügbar.",
+    "emptyRecommendations": "Noch keine Empfehlungen verfügbar.",
+    "notConfiguredTitle": "KI noch nicht konfiguriert",
+    "notConfiguredBody": "Der Schlüssel des KI-Anbieters muss noch eingerichtet werden. Wende dich an das Oscar's-Solution-Team, um sie zu aktivieren.",
+    "recommendationLabels": {
+      "area": {
+        "ventas": "Verkauf",
+        "clientes": "Kunden",
+        "inventario": "Lager",
+        "personal": "Personal",
+        "precios": "Preise"
+      },
+      "impact": {
+        "alto": "Hohe Auswirkung",
+        "medio": "Mittlere Auswirkung",
+        "bajo": "Geringe Auswirkung"
+      }
+    },
+    "errors": {
+      "forbiddenTitle": "Kein Zugriff",
+      "forbidden": "Nur die Inhaberin oder eine Administratorin können diesen Bereich sehen.",
+      "notConfigured": "Die KI ist noch nicht konfiguriert.",
+      "providerFailed": "Das Ergebnis konnte nicht erstellt werden. Bitte erneut versuchen."
+    }
+  },
   "superadmin": {
     "nav": {
       "salons": "Salons",

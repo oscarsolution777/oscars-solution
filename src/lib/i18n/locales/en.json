@@ -814,6 +814,38 @@
       "okBadge": "OK"
     }
   },
+  "ai": {
+    "title": "AI Assistant",
+    "subtitle": "Analysis and recommendations based on the last 30 days of activity.",
+    "regenerateButton": "Regenerate",
+    "regenerating": "Generating...",
+    "analysisTitle": "Business analysis",
+    "recommendationsTitle": "Recommendations",
+    "emptyAnalysis": "No analysis available yet.",
+    "emptyRecommendations": "No recommendations available yet.",
+    "notConfiguredTitle": "AI not configured yet",
+    "notConfiguredBody": "The AI provider key still needs to be set up. Contact the Oscar's Solution team to activate it.",
+    "recommendationLabels": {
+      "area": {
+        "ventas": "Sales",
+        "clientes": "Clients",
+        "inventario": "Inventory",
+        "personal": "Staff",
+        "precios": "Pricing"
+      },
+      "impact": {
+        "alto": "High impact",
+        "medio": "Medium impact",
+        "bajo": "Low impact"
+      }
+    },
+    "errors": {
+      "forbiddenTitle": "No access",
+      "forbidden": "Only the owner or an admin can view this section.",
+      "notConfigured": "AI is not configured yet.",
+      "providerFailed": "Could not generate the result. Please try again."
+    }
+  },
   "superadmin": {
     "nav": {
       "salons": "Salons",

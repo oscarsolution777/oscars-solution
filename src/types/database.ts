@@ -39,6 +39,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_analyses: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          locale: string
+          period_from: string
+          period_to: string
+          result: Json
+          salon_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          locale: string
+          period_from: string
+          period_to: string
+          result: Json
+          salon_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          locale?: string
+          period_from?: string
+          period_to?: string
+          result?: Json
+          salon_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_analyses_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       appointment_items: {
         Row: {
           appointment_id: string

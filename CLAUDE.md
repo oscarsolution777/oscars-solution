@@ -240,6 +240,9 @@ El cliente accede a `/s/[slug]/estado/[code]` (mismo código que recibió al env
 - `products` — salon_id, name, sku, unit (`ml`|`g`|`unit`), stock_qty, min_stock, cost_cents, price_cents, supplier_id, is_active. `stock_qty` se modifica únicamente a través de `stock_movements` (trigger), nunca por `UPDATE` directo.
 - `stock_movements` — salon_id, product_id, type (`in` | `out` | `adjustment` | `loss`), qty, reason, created_by, **appointment_id (nullable, añadido en la Fase 4)**: identifica el movimiento `out` generado automáticamente por el trigger `apply_appointment_completion` al completar una cita; `null` para movimientos manuales. Ledger inmutable (solo `SELECT`/`INSERT`).
 
+### IA
+- `ai_analyses` — caché del último resultado de IA por salón (Fase 9B): salon_id, kind (`analysis`|`recommendations`), locale, period_from, period_to (date, ventana fija de 30 días), result (jsonb: string para `analysis`, array de `Recommendation` para `recommendations`), created_at. Único registro por `(salon_id, kind, locale)` — se sobreescribe con `upsert` en cada regeneración, no acumula historial. Permisos: solo owner/admin (`has_role_in_salon(salon_id, array['owner','admin'])` en las 4 políticas RLS), igual que "IA" en la tabla de permisos de la sección 7.
+
 ### Sistema
 - `settings` — salon_id, key, value (jsonb)
 - `audit_log` — salon_id, user_id, entity, entity_id, action, diff (jsonb), created_at
@@ -366,23 +369,25 @@ Login superadmin → ve lista de todos los salones (nombre, suscripción, si es 
 - **Diferencia de caja acumulada** (suma de `cash_closures.difference_cents` del periodo)
 
 ### Módulo de IA
-**Único punto del producto donde se usa IA.**
+**Único punto del producto donde se usa IA.** Construido en la **Fase 9B**, ruta `(dashboard)/ai`, visible solo para owner/admin (sección 7).
 
 Dos funciones, ambas server-side, detrás de una interfaz de proveedor intercambiable (`src/lib/ai/provider.ts`):
 ```ts
 interface AiProvider {
-  analyzeBusiness(metrics: BusinessMetrics): Promise<string>;
-  getRecommendations(metrics: BusinessMetrics): Promise<Recommendation[]>;
+  analyzeBusiness(metrics: BusinessMetrics, locale: string): Promise<string>;
+  getRecommendations(metrics: BusinessMetrics, locale: string): Promise<Recommendation[]>;
 }
 ```
-- Implementaciones concretas: `anthropicProvider` (Claude Haiku) y `openaiProvider`, seleccionables por `AI_PROVIDER`.
+(`locale` se añadió a la firma para que la respuesta salga en el idioma activo del usuario, tal como pide esta misma sección).
+- Implementaciones concretas: `anthropicProvider` (`src/lib/ai/providers/anthropic.ts`, Claude Haiku) y `openaiProvider` (`src/lib/ai/providers/openai.ts`), seleccionables por `AI_PROVIDER` vía `getAiProvider()` (`src/lib/ai/get-provider.ts`). Si falta la API key del proveedor elegido, `getAiProvider()` lanza `AiNotConfiguredError` en vez de un error críptico del SDK.
+- `BusinessMetrics` (`src/lib/ai/types.ts`) se construye con `buildBusinessMetrics`/`loadBusinessMetrics` reutilizando literalmente las funciones de `src/lib/reports/aggregations.ts` (Fase 8) sobre una ventana fija de los **últimos 30 días** — nunca se recalcula un KPI aparte para la IA.
 - **Analizar negocio** — diagnóstico en lenguaje natural, en el idioma activo del usuario.
 - **Recomendaciones** — JSON estructurado y tipado:
   ```ts
   { title: string, area: 'ventas'|'clientes'|'inventario'|'personal'|'precios',
     impact: 'alto'|'medio'|'bajo', reasoning: string, action: string }[]
   ```
-Reglas: prompts en `src/lib/ai/prompts/`, salida validada con Zod, resultados cacheados, degradación elegante si la API falla, **cero datos personales en el prompt**.
+Reglas: prompts en `src/lib/ai/prompts/`, salida validada con Zod (`src/lib/validations/ai.ts`), resultados cacheados en `ai_analyses` (sección 6, fresco 24 h, botón "Regenerar" fuerza una llamada nueva), degradación elegante si la API falla o falta la clave (estado dedicado "IA no configurada", nunca un error 500), **cero datos personales en el prompt** (por construcción: `BusinessMetrics` solo trae agregados, nunca filas de `clients`/`payments`).
 
 ---
 
@@ -400,7 +405,7 @@ Funciones mínimas:
 
 Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fase 0.
 
-**Estado: construido en la Fase 9A** (las 6 funciones mínimas de arriba están implementadas y en producción). `requirePlatformAdmin()` (`src/lib/auth/guards.ts`) protege la ruta; el login redirige a `/admin/salons` cuando el usuario está en `platform_admins`. Como consecuencia directa de que ahora existe quien controla `subscription_status`, el panel de gestión (`(dashboard)/layout.tsx`) bloquea el acceso con un estado dedicado cuando el salón activo está `suspended`/`cancelled` — antes de esta fase ese campo no tenía ningún efecto en la aplicación. Pendiente: el módulo de **IA** de esta misma fase (sección 9) todavía no está construido.
+**Estado: construido en la Fase 9A** (las 6 funciones mínimas de arriba están implementadas y en producción). `requirePlatformAdmin()` (`src/lib/auth/guards.ts`) protege la ruta; el login redirige a `/admin/salons` cuando el usuario está en `platform_admins`. Como consecuencia directa de que ahora existe quien controla `subscription_status`, el panel de gestión (`(dashboard)/layout.tsx`) bloquea el acceso con un estado dedicado cuando el salón activo está `suspended`/`cancelled` — antes de esta fase ese campo no tenía ningún efecto en la aplicación. El módulo de **IA** de esta misma fase (sección 9) se construyó después, en la Fase 9B, y ya está en producción.
 
 ---
 
@@ -415,7 +420,7 @@ Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fa
 - **Fase 6 — Pagos y Finanzas:** cobros, cuadre de caja diario (por salón), gastos, nóminas, resumen.
 - **Fase 7 — Inventario:** productos, proveedores, movimientos, descuento automático, alertas.
 - **Fase 8 — Dashboard y Reportes:** KPIs, gráficos, exportación a CSV.
-- **Fase 9 — IA + SuperAdmin:** análisis y recomendaciones (proveedor intercambiable); panel SuperAdmin completo (salones, demos, monedas, precios de suscripción). **Panel SuperAdmin (9A) construido; módulo de IA (9B) pendiente** — ver sección 10.
+- **Fase 9 — IA + SuperAdmin:** análisis y recomendaciones (proveedor intercambiable); panel SuperAdmin completo (salones, demos, monedas, precios de suscripción). **Panel SuperAdmin (9A) y módulo de IA (9B) construidos** — ver secciones 9 y 10. Pendiente real: cargar `ANTHROPIC_API_KEY`/`OPENAI_API_KEY` en producción (hoy vacías, el módulo de IA degrada a "no configurada").
 - **Fase 10 — Multi-salón y pulido:** selector de salón para dueñas con cadena, configuración, auditoría, revisión de traducciones en los 6 idiomas.
 
 **Definición de "terminado" para cada fase:**

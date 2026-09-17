@@ -814,6 +814,38 @@
       "okBadge": "OK"
     }
   },
+  "ai": {
+    "title": "IA - Asistente",
+    "subtitle": "Análisis y recomendaciones basados en la actividad de los últimos 30 días.",
+    "regenerateButton": "Regenerar",
+    "regenerating": "Generando...",
+    "analysisTitle": "Análisis del negocio",
+    "recommendationsTitle": "Recomendaciones",
+    "emptyAnalysis": "Todavía no hay un análisis disponible.",
+    "emptyRecommendations": "Todavía no hay recomendaciones disponibles.",
+    "notConfiguredTitle": "IA no configurada todavía",
+    "notConfiguredBody": "Falta configurar la clave del proveedor de IA. Contacta al equipo de Oscar's Solution para activarla.",
+    "recommendationLabels": {
+      "area": {
+        "ventas": "Ventas",
+        "clientes": "Clientes",
+        "inventario": "Inventario",
+        "personal": "Personal",
+        "precios": "Precios"
+      },
+      "impact": {
+        "alto": "Impacto alto",
+        "medio": "Impacto medio",
+        "bajo": "Impacto bajo"
+      }
+    },
+    "errors": {
+      "forbiddenTitle": "Sin acceso",
+      "forbidden": "Solo la propietaria o un administrador pueden ver esta sección.",
+      "notConfigured": "La IA todavía no está configurada.",
+      "providerFailed": "No se pudo generar el resultado. Intenta de nuevo."
+    }
+  },
   "superadmin": {
     "nav": {
       "salons": "Salones",
