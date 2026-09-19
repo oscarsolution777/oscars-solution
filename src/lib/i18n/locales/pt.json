@@ -80,6 +80,10 @@
       "new": "Novos",
       "recurring": "Recorrentes"
     },
+    "revenueTrend": {
+      "title": "Tendência de receita",
+      "emptyTitle": "Ainda sem receita registrada este mês"
+    },
     "suspended": {
       "title": "Este salão está suspenso",
       "body": "Sua assinatura não está ativa no momento. Entre em contato com a Oscar's Solution para reativar o acesso.",
@@ -422,6 +426,18 @@
       "suppliers": "Fornecedores",
       "movements": "Movimentações"
     },
+    "charts": {
+      "productsValue": {
+        "title": "Valor de estoque por produto",
+        "emptyTitle": "Ainda não há produtos com estoque"
+      },
+      "stockMovements": {
+        "title": "Movimentações de estoque",
+        "emptyTitle": "Sem movimentações nos últimos 3 meses",
+        "in": "Entradas",
+        "out": "Saídas"
+      }
+    },
     "products": {
       "createButton": "Novo produto",
       "units": {
@@ -554,6 +570,16 @@
   },
   "payments": {
     "createButton": "Novo pagamento",
+    "charts": {
+      "incomeTrend": {
+        "title": "Tendência de receita",
+        "emptyTitle": "Sem pagamentos recebidos nos últimos 3 meses"
+      },
+      "methodBreakdown": {
+        "title": "Pagamentos por método",
+        "emptyTitle": "Sem pagamentos recebidos este mês"
+      }
+    },
     "kpis": {
       "monthlyIncome": "Receita",
       "thisMonth": "Este mês",
@@ -614,6 +640,12 @@
   },
   "cashClosures": {
     "createButton": "Novo fechamento",
+    "charts": {
+      "differenceTrend": {
+        "title": "Diferença de caixa ao longo do tempo",
+        "emptyTitle": "Sem fechamentos registrados nos últimos 3 meses"
+      }
+    },
     "kpis": {
       "closuresThisMonth": "Fechamentos registrados",
       "thisMonth": "Este mês",
@@ -656,6 +688,16 @@
     "errors": {
       "forbiddenTitle": "Sem acesso",
       "forbidden": "Somente a proprietária do salão pode ver esta seção."
+    },
+    "charts": {
+      "monthlyTrend": {
+        "title": "Receitas, despesas e folhas por mês",
+        "emptyTitle": "Ainda não há dados financeiros"
+      },
+      "expenseCategory": {
+        "title": "Despesas por categoria",
+        "emptyTitle": "Sem despesas registradas este mês"
+      }
     },
     "summary": {
       "income": "Receita",
@@ -808,6 +850,8 @@
     "inventory": {
       "totalValue": "Valor total do estoque",
       "lowStockCount": "Produtos abaixo do mínimo",
+      "chartTitle": "Valor de estoque por produto",
+      "emptyChart": "Ainda não há produtos com estoque",
       "emptyTable": "Ainda não há produtos",
       "columnProduct": "Produto",
       "columnStock": "Estoque atual",

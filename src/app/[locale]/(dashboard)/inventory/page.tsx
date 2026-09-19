@@ -1,9 +1,12 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { formatInTimeZone } from "date-fns-tz";
 import { requireAuth } from "@/lib/auth/guards";
 import { createClient } from "@/lib/supabase/server";
 import { listProducts } from "@/lib/db/products";
 import { listSuppliers } from "@/lib/db/suppliers";
 import { listStockMovements } from "@/lib/db/stock-movements";
+import { getPresetRange } from "@/lib/utils/period";
+import { computeStockMovementTrend } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { InventoryView } from "./_components/inventory-view";
 
@@ -41,11 +44,16 @@ export default async function InventoryPage() {
     (movement) => new Date(movement.created_at) >= startOfMonth
   ).length;
 
+  const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
+  const { from, to } = getPresetRange("last3Months", todayStr);
+  const stockMovementTrend = computeStockMovementTrend(movements, from, to, salon.timezone);
+
   return (
     <InventoryView
       products={products}
       suppliers={suppliers}
       movements={movements}
+      stockMovementTrend={stockMovementTrend}
       kpis={{
         totalProducts: activeProducts.length,
         lowStockCount,

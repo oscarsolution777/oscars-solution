@@ -1,4 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { formatInTimeZone } from "date-fns-tz";
 import { requireAuth } from "@/lib/auth/guards";
 import { createClient } from "@/lib/supabase/server";
 import { listExpenses } from "@/lib/db/expenses";
@@ -6,8 +7,12 @@ import { listStaffPayouts } from "@/lib/db/staff-payouts";
 import { listPayments } from "@/lib/db/payments";
 import { listStaff } from "@/lib/db/staff";
 import { listSuppliers } from "@/lib/db/suppliers";
+import { getPresetRange } from "@/lib/utils/period";
+import { computeExpensesByCategory, computeMonthlyFinanceTrend } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { FinancesView } from "./_components/finances-view";
+
+const MONTHLY_TREND_MONTHS = 6;
 
 export default async function FinancesPage() {
   const session = await requireAuth();
@@ -57,6 +62,17 @@ export default async function FinancesPage() {
 
   const balanceCents = incomeCents - expensesCents - payoutsCents;
 
+  const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
+  const thisMonth = getPresetRange("thisMonth", todayStr);
+  const expenseCategories = computeExpensesByCategory(expenses, thisMonth.from, thisMonth.to);
+  const monthlyTrend = computeMonthlyFinanceTrend(
+    payments,
+    expenses,
+    payouts,
+    MONTHLY_TREND_MONTHS,
+    salon.timezone
+  );
+
   return (
     <FinancesView
       expenses={expenses}
@@ -64,6 +80,8 @@ export default async function FinancesPage() {
       staff={staff.filter((member) => member.is_active)}
       suppliers={suppliers.filter((supplier) => supplier.is_active)}
       summary={{ incomeCents, expensesCents, payoutsCents, balanceCents }}
+      expenseCategories={expenseCategories}
+      monthlyTrend={monthlyTrend}
       currency={salon.currency}
       locale={locale}
     />

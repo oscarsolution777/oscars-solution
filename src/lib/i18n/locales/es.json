@@ -80,6 +80,10 @@
       "new": "Nuevos",
       "recurring": "Recurrentes"
     },
+    "revenueTrend": {
+      "title": "Tendencia de ingresos",
+      "emptyTitle": "Sin ingresos registrados este mes todavía"
+    },
     "suspended": {
       "title": "Este salón está suspendido",
       "body": "Tu suscripción no está activa en este momento. Contacta a Oscar's Solution para reactivar el acceso.",
@@ -422,6 +426,18 @@
       "suppliers": "Proveedores",
       "movements": "Movimientos"
     },
+    "charts": {
+      "productsValue": {
+        "title": "Valor de inventario por producto",
+        "emptyTitle": "Todavía no hay productos con stock"
+      },
+      "stockMovements": {
+        "title": "Movimientos de stock",
+        "emptyTitle": "Sin movimientos en los últimos 3 meses",
+        "in": "Entradas",
+        "out": "Salidas"
+      }
+    },
     "products": {
       "createButton": "Nuevo producto",
       "units": {
@@ -554,6 +570,16 @@
   },
   "payments": {
     "createButton": "Nuevo cobro",
+    "charts": {
+      "incomeTrend": {
+        "title": "Tendencia de ingresos",
+        "emptyTitle": "Sin cobros pagados en los últimos 3 meses"
+      },
+      "methodBreakdown": {
+        "title": "Cobros por método de pago",
+        "emptyTitle": "Sin cobros pagados este mes"
+      }
+    },
     "kpis": {
       "monthlyIncome": "Ingresos",
       "thisMonth": "Este mes",
@@ -614,6 +640,12 @@
   },
   "cashClosures": {
     "createButton": "Nuevo cuadre",
+    "charts": {
+      "differenceTrend": {
+        "title": "Diferencia de caja en el tiempo",
+        "emptyTitle": "Sin cuadres registrados en los últimos 3 meses"
+      }
+    },
     "kpis": {
       "closuresThisMonth": "Cuadres registrados",
       "thisMonth": "Este mes",
@@ -656,6 +688,16 @@
     "errors": {
       "forbiddenTitle": "Sin acceso",
       "forbidden": "Solo la propietaria del salón puede ver esta sección."
+    },
+    "charts": {
+      "monthlyTrend": {
+        "title": "Ingresos, gastos y nóminas por mes",
+        "emptyTitle": "Todavía no hay datos financieros"
+      },
+      "expenseCategory": {
+        "title": "Gastos por categoría",
+        "emptyTitle": "Sin gastos registrados este mes"
+      }
     },
     "summary": {
       "income": "Ingresos",
@@ -808,6 +850,8 @@
     "inventory": {
       "totalValue": "Valor total de inventario",
       "lowStockCount": "Productos bajo mínimo",
+      "chartTitle": "Valor de inventario por producto",
+      "emptyChart": "Todavía no hay productos con stock",
       "emptyTable": "Todavía no hay productos",
       "columnProduct": "Producto",
       "columnStock": "Stock actual",

@@ -14,6 +14,9 @@ type ClientRow = Tables<"clients">;
 type ServiceRow = Tables<"services">;
 type StaffRow = Tables<"staff">;
 type CashClosureRow = Tables<"cash_closures">;
+type StockMovementRow = Tables<"stock_movements">;
+type ExpenseRow = Tables<"expenses">;
+type StaffPayoutRow = Tables<"staff_payouts">;
 
 export function inRange(dateStr: string, from: string, to: string): boolean {
   const d = dateStr.slice(0, 10);
@@ -201,4 +204,163 @@ export function computeCashDifferenceTotal(
   return cashClosures
     .filter((c) => inRange(c.closure_date, from, to))
     .reduce((sum, c) => sum + c.difference_cents, 0);
+}
+
+export interface CashDifferencePoint {
+  label: string; // closure_date (yyyy-MM-dd), sin conversión de zona horaria (es una columna "date" pura)
+  differenceCents: number;
+}
+
+// Serie de la diferencia de caja por día para el gráfico de tendencia de
+// Cuadre de caja. A diferencia de computeCashDifferenceTotal (un solo número
+// acumulado), aquí se conserva un punto por cierre para poder graficarlo.
+export function computeCashDifferenceTrend(
+  cashClosures: CashClosureRow[],
+  from: string,
+  to: string
+): CashDifferencePoint[] {
+  return cashClosures
+    .filter((c) => inRange(c.closure_date, from, to))
+    .sort((a, b) => (a.closure_date < b.closure_date ? -1 : a.closure_date > b.closure_date ? 1 : 0))
+    .map((c) => ({ label: c.closure_date, differenceCents: c.difference_cents }));
+}
+
+export interface PaymentMethodSlice {
+  method: string;
+  amountCents: number;
+}
+
+// Distribución de cobros pagados por método (efectivo/tarjeta/transferencia/
+// otro) en el periodo, para el donut de Pagos.
+export function computePaymentMethodBreakdown(
+  payments: PaymentRow[],
+  from: string,
+  to: string
+): PaymentMethodSlice[] {
+  const byMethod = new Map<string, number>();
+  for (const payment of payments) {
+    if (payment.status !== "paid") continue;
+    if (!inRange(payment.paid_at, from, to)) continue;
+    byMethod.set(payment.method, (byMethod.get(payment.method) ?? 0) + payment.amount_cents);
+  }
+  return Array.from(byMethod.entries())
+    .sort(([, a], [, b]) => b - a)
+    .map(([method, amountCents]) => ({ method, amountCents }));
+}
+
+export interface ExpenseCategorySlice {
+  category: string;
+  amountCents: number;
+}
+
+// Distribución de gastos por categoría (texto libre, sección 6 de CLAUDE.md)
+// en el periodo, para el donut de Finanzas.
+export function computeExpensesByCategory(
+  expenses: ExpenseRow[],
+  from: string,
+  to: string
+): ExpenseCategorySlice[] {
+  const byCategory = new Map<string, number>();
+  for (const expense of expenses) {
+    if (!inRange(expense.spent_at, from, to)) continue;
+    byCategory.set(expense.category, (byCategory.get(expense.category) ?? 0) + expense.amount_cents);
+  }
+  return Array.from(byCategory.entries())
+    .sort(([, a], [, b]) => b - a)
+    .map(([category, amountCents]) => ({ category, amountCents }));
+}
+
+export interface FinanceMonthPoint {
+  label: string; // yyyy-MM
+  incomeCents: number;
+  expensesCents: number;
+  payoutsCents: number;
+}
+
+// Tendencia mensual de ingresos/gastos/nóminas para el gráfico de barras
+// agrupadas de Finanzas. A diferencia del resto de funciones de este archivo
+// (que reciben from/to de un único periodo), esta arma sus propios N meses
+// consecutivos porque el gráfico necesita varios puntos discretos, no un
+// rango continuo.
+export function computeMonthlyFinanceTrend(
+  payments: PaymentRow[],
+  expenses: ExpenseRow[],
+  payouts: StaffPayoutRow[],
+  monthsBack: number,
+  timezone: string
+): FinanceMonthPoint[] {
+  const now = new Date();
+  const months: string[] = [];
+  for (let i = monthsBack - 1; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+  }
+
+  const points = new Map<string, FinanceMonthPoint>(
+    months.map((label) => [label, { label, incomeCents: 0, expensesCents: 0, payoutsCents: 0 }])
+  );
+
+  for (const payment of payments) {
+    if (payment.status !== "paid") continue;
+    const key = formatInTimeZone(new Date(payment.paid_at), timezone, "yyyy-MM");
+    const point = points.get(key);
+    if (point) point.incomeCents += payment.amount_cents;
+  }
+
+  for (const expense of expenses) {
+    const key = expense.spent_at.slice(0, 7);
+    const point = points.get(key);
+    if (point) point.expensesCents += expense.amount_cents;
+  }
+
+  for (const payout of payouts) {
+    if (payout.status !== "paid" || !payout.paid_at) continue;
+    const key = formatInTimeZone(new Date(payout.paid_at), timezone, "yyyy-MM");
+    const point = points.get(key);
+    if (point) point.payoutsCents += payout.total_cents;
+  }
+
+  return Array.from(points.values());
+}
+
+export interface StockMovementPoint {
+  label: string;
+  inQty: number;
+  outQty: number;
+}
+
+// Entradas vs salidas de stock por día/semana/mes (mismo criterio de
+// granularidad automática que computeSalesBuckets), para el gráfico de
+// movimientos de Inventario. "Salida" agrupa out/loss/adjustment: la tabla
+// stock_movements no distingue si un ajuste sumó o restó stock, así que se
+// trata como una simplificación visual (el detalle exacto sigue disponible
+// en la tabla de movimientos).
+export function computeStockMovementTrend(
+  movements: StockMovementRow[],
+  from: string,
+  to: string,
+  timezone: string
+): StockMovementPoint[] {
+  const span = daysBetween(from, to);
+  const granularity: "day" | "week" | "month" = span <= 31 ? "day" : span <= 120 ? "week" : "month";
+
+  const buckets = new Map<string, StockMovementPoint>();
+  for (const movement of movements) {
+    const dateStr = formatInTimeZone(new Date(movement.created_at), timezone, "yyyy-MM-dd");
+    if (!inRange(dateStr, from, to)) continue;
+
+    const key =
+      granularity === "day" ? dateStr : granularity === "month" ? dateStr.slice(0, 7) : mondayOf(dateStr);
+    const point = buckets.get(key) ?? { label: key, inQty: 0, outQty: 0 };
+    if (movement.type === "in") {
+      point.inQty += movement.qty;
+    } else {
+      point.outQty += movement.qty;
+    }
+    buckets.set(key, point);
+  }
+
+  return Array.from(buckets.entries())
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([, point]) => point);
 }

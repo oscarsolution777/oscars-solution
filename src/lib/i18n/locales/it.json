@@ -80,6 +80,10 @@
       "new": "Nuovi",
       "recurring": "Ricorrenti"
     },
+    "revenueTrend": {
+      "title": "Andamento dei ricavi",
+      "emptyTitle": "Ancora nessun ricavo registrato questo mese"
+    },
     "suspended": {
       "title": "Questo salone è sospeso",
       "body": "Il tuo abbonamento non è attivo al momento. Contatta Oscar's Solution per riattivare l'accesso.",
@@ -422,6 +426,18 @@
       "suppliers": "Fornitori",
       "movements": "Movimenti"
     },
+    "charts": {
+      "productsValue": {
+        "title": "Valore di magazzino per prodotto",
+        "emptyTitle": "Ancora nessun prodotto con scorte"
+      },
+      "stockMovements": {
+        "title": "Movimenti di magazzino",
+        "emptyTitle": "Nessun movimento negli ultimi 3 mesi",
+        "in": "Entrate",
+        "out": "Uscite"
+      }
+    },
     "products": {
       "createButton": "Nuovo prodotto",
       "units": {
@@ -554,6 +570,16 @@
   },
   "payments": {
     "createButton": "Nuovo incasso",
+    "charts": {
+      "incomeTrend": {
+        "title": "Andamento dei ricavi",
+        "emptyTitle": "Nessun incasso pagato negli ultimi 3 mesi"
+      },
+      "methodBreakdown": {
+        "title": "Incassi per metodo di pagamento",
+        "emptyTitle": "Nessun incasso pagato questo mese"
+      }
+    },
     "kpis": {
       "monthlyIncome": "Entrate",
       "thisMonth": "Questo mese",
@@ -614,6 +640,12 @@
   },
   "cashClosures": {
     "createButton": "Nuova chiusura",
+    "charts": {
+      "differenceTrend": {
+        "title": "Differenza di cassa nel tempo",
+        "emptyTitle": "Nessuna chiusura registrata negli ultimi 3 mesi"
+      }
+    },
     "kpis": {
       "closuresThisMonth": "Chiusure registrate",
       "thisMonth": "Questo mese",
@@ -656,6 +688,16 @@
     "errors": {
       "forbiddenTitle": "Nessun accesso",
       "forbidden": "Solo la proprietaria del salone può vedere questa sezione."
+    },
+    "charts": {
+      "monthlyTrend": {
+        "title": "Entrate, spese e stipendi per mese",
+        "emptyTitle": "Ancora nessun dato finanziario"
+      },
+      "expenseCategory": {
+        "title": "Spese per categoria",
+        "emptyTitle": "Nessuna spesa registrata questo mese"
+      }
     },
     "summary": {
       "income": "Entrate",
@@ -808,6 +850,8 @@
     "inventory": {
       "totalValue": "Valore totale del magazzino",
       "lowStockCount": "Prodotti sotto la scorta minima",
+      "chartTitle": "Valore di magazzino per prodotto",
+      "emptyChart": "Ancora nessun prodotto con scorte",
       "emptyTable": "Ancora nessun prodotto",
       "columnProduct": "Prodotto",
       "columnStock": "Scorta attuale",

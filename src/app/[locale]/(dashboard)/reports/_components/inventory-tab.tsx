@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { ProductsValueChart } from "@/components/shared/charts/products-value-chart";
 import { formatMoney } from "@/lib/utils/money";
 import type { Tables } from "@/types/database";
 import { ExportCsvButton } from "./export-csv-button";
@@ -61,6 +62,14 @@ export function InventoryTab({
           </CardContent>
         </Card>
       </div>
+
+      <ProductsValueChart
+        products={products}
+        currency={currency}
+        locale={locale}
+        title={t("chartTitle")}
+        emptyTitle={t("emptyChart")}
+      />
 
       <div className="flex justify-end">
         <ExportCsvButton rows={csvRows} filename="inventario.csv" />

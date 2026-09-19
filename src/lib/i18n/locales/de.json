@@ -80,6 +80,10 @@
       "new": "Neu",
       "recurring": "Wiederkehrend"
     },
+    "revenueTrend": {
+      "title": "Umsatzentwicklung",
+      "emptyTitle": "Diesen Monat noch keine Einnahmen erfasst"
+    },
     "suspended": {
       "title": "Dieser Salon ist gesperrt",
       "body": "Dein Abonnement ist derzeit nicht aktiv. Kontaktiere Oscar's Solution, um den Zugang zu reaktivieren.",
@@ -422,6 +426,18 @@
       "suppliers": "Lieferanten",
       "movements": "Bewegungen"
     },
+    "charts": {
+      "productsValue": {
+        "title": "Lagerwert nach Produkt",
+        "emptyTitle": "Noch keine Produkte mit Bestand"
+      },
+      "stockMovements": {
+        "title": "Lagerbewegungen",
+        "emptyTitle": "Keine Bewegungen in den letzten 3 Monaten",
+        "in": "Eingänge",
+        "out": "Ausgänge"
+      }
+    },
     "products": {
       "createButton": "Neues Produkt",
       "units": {
@@ -554,6 +570,16 @@
   },
   "payments": {
     "createButton": "Neue Zahlung",
+    "charts": {
+      "incomeTrend": {
+        "title": "Umsatzentwicklung",
+        "emptyTitle": "Keine bezahlten Zahlungen in den letzten 3 Monaten"
+      },
+      "methodBreakdown": {
+        "title": "Zahlungen nach Zahlungsmethode",
+        "emptyTitle": "Diesen Monat keine bezahlten Zahlungen"
+      }
+    },
     "kpis": {
       "monthlyIncome": "Einnahmen",
       "thisMonth": "Diesen Monat",
@@ -614,6 +640,12 @@
   },
   "cashClosures": {
     "createButton": "Neuer Kassenabschluss",
+    "charts": {
+      "differenceTrend": {
+        "title": "Kassendifferenz im Zeitverlauf",
+        "emptyTitle": "Keine Abschlüsse in den letzten 3 Monaten"
+      }
+    },
     "kpis": {
       "closuresThisMonth": "Erfasste Abschlüsse",
       "thisMonth": "Diesen Monat",
@@ -656,6 +688,16 @@
     "errors": {
       "forbiddenTitle": "Kein Zugriff",
       "forbidden": "Nur die Salonbesitzerin kann diesen Bereich sehen."
+    },
+    "charts": {
+      "monthlyTrend": {
+        "title": "Einnahmen, Ausgaben und Gehälter pro Monat",
+        "emptyTitle": "Noch keine Finanzdaten"
+      },
+      "expenseCategory": {
+        "title": "Ausgaben nach Kategorie",
+        "emptyTitle": "Diesen Monat keine Ausgaben erfasst"
+      }
     },
     "summary": {
       "income": "Einnahmen",
@@ -808,6 +850,8 @@
     "inventory": {
       "totalValue": "Gesamtwert des Lagers",
       "lowStockCount": "Produkte unter Mindestbestand",
+      "chartTitle": "Lagerwert nach Produkt",
+      "emptyChart": "Noch keine Produkte mit Bestand",
       "emptyTable": "Noch keine Produkte",
       "columnProduct": "Produkt",
       "columnStock": "Aktueller Bestand",

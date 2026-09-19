@@ -18,6 +18,7 @@ import {
   computeStaffWorkload,
   computeClientSegments,
   computeCashDifferenceTotal,
+  computeSalesBuckets,
 } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { DashboardView } from "./_components/dashboard-view";
@@ -87,6 +88,7 @@ export default async function DashboardPage() {
   const staffWorkload = computeStaffWorkload(appointmentItems, appointmentsById, staffById, from, to);
   const clientSegments = computeClientSegments(clients, appointments, from, to);
   const cashDifferenceCents = computeCashDifferenceTotal(cashClosures, from, to);
+  const revenueTrend = computeSalesBuckets(payments, from, to, salon.timezone);
 
   return (
     <DashboardView
@@ -101,6 +103,7 @@ export default async function DashboardPage() {
         avgTicketCents,
         cashDifferenceCents,
       }}
+      revenueTrend={revenueTrend}
       topServices={topServices}
       staffWorkload={staffWorkload}
       clientSegments={clientSegments}

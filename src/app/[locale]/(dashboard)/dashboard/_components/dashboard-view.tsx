@@ -1,14 +1,16 @@
 import type { Tables } from "@/types/database";
 import type {
+  SalesBucket,
   ServiceSalesRow,
   StaffWorkloadRow,
   ClientSegments,
 } from "@/lib/reports/aggregations";
 import { OperationalCards } from "./operational-cards";
 import { FinancialCards } from "./financial-cards";
+import { RevenueTrendChart } from "./revenue-trend-chart";
 import { TopServicesChart } from "./top-services-chart";
-import { StaffWorkloadList } from "./staff-workload-list";
-import { ClientSegmentsCard } from "./client-segments-card";
+import { StaffWorkloadChart } from "./staff-workload-chart";
+import { ClientSegmentsChart } from "./client-segments-chart";
 
 type ProductRow = Tables<"products">;
 
@@ -40,6 +42,7 @@ export function DashboardView(
           avgTicketCents: number;
           cashDifferenceCents: number;
         };
+        revenueTrend: SalesBucket[];
         topServices: ServiceSalesRow[];
         staffWorkload: StaffWorkloadRow[];
         clientSegments: ClientSegments;
@@ -54,17 +57,25 @@ export function DashboardView(
       <OperationalCards operational={props.operational} />
 
       {props.variant === "full" && (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <TopServicesChart
-            services={props.topServices}
+        <>
+          <RevenueTrendChart
+            buckets={props.revenueTrend}
             currency={props.currency}
             locale={props.locale}
           />
-          <div className="space-y-4">
-            <StaffWorkloadList staffWorkload={props.staffWorkload} />
-            <ClientSegmentsCard segments={props.clientSegments} />
+
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <TopServicesChart
+              services={props.topServices}
+              currency={props.currency}
+              locale={props.locale}
+            />
+            <div className="space-y-4">
+              <StaffWorkloadChart staffWorkload={props.staffWorkload} />
+              <ClientSegmentsChart segments={props.clientSegments} />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

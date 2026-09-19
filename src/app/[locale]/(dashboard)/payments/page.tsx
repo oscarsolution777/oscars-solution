@@ -1,8 +1,11 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { formatInTimeZone } from "date-fns-tz";
 import { requireAuth } from "@/lib/auth/guards";
 import { createClient } from "@/lib/supabase/server";
 import { listPayments } from "@/lib/db/payments";
 import { listClients } from "@/lib/db/clients";
+import { getPresetRange } from "@/lib/utils/period";
+import { computeSalesBuckets, computePaymentMethodBreakdown } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PaymentsView } from "./_components/payments-view";
 
@@ -40,10 +43,18 @@ export default async function PaymentsPage() {
     0
   );
 
+  const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
+  const last3Months = getPresetRange("last3Months", todayStr);
+  const thisMonth = getPresetRange("thisMonth", todayStr);
+  const incomeTrend = computeSalesBuckets(payments, last3Months.from, last3Months.to, salon.timezone);
+  const methodBreakdown = computePaymentMethodBreakdown(payments, thisMonth.from, thisMonth.to);
+
   return (
     <PaymentsView
       payments={payments}
       clients={clients.filter((client) => client.is_active)}
+      incomeTrend={incomeTrend}
+      methodBreakdown={methodBreakdown}
       kpis={{
         monthlyIncomeCents,
         pendingCount,

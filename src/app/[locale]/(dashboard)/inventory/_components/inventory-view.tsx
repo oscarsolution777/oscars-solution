@@ -5,8 +5,11 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { ProductsValueChart } from "@/components/shared/charts/products-value-chart";
 import type { Tables } from "@/types/database";
+import type { StockMovementPoint } from "@/lib/reports/aggregations";
 import { KpiCards } from "./kpi-cards";
+import { StockMovementsChart } from "./stock-movements-chart";
 import { ProductsTable } from "./products-table";
 import { ProductDetailPanel } from "./product-detail-panel";
 import { ProductFormPanel } from "./product-form-panel";
@@ -23,6 +26,7 @@ export function InventoryView({
   products,
   suppliers,
   movements,
+  stockMovementTrend,
   kpis,
   currency,
   timezone,
@@ -31,6 +35,7 @@ export function InventoryView({
   products: ProductRow[];
   suppliers: SupplierRow[];
   movements: StockMovementRow[];
+  stockMovementTrend: StockMovementPoint[];
   kpis: {
     totalProducts: number;
     lowStockCount: number;
@@ -89,6 +94,17 @@ export function InventoryView({
         currency={currency}
         locale={locale}
       />
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <ProductsValueChart
+          products={products.filter((product) => product.is_active)}
+          currency={currency}
+          locale={locale}
+          title={t("charts.productsValue.title")}
+          emptyTitle={t("charts.productsValue.emptyTitle")}
+        />
+        <StockMovementsChart points={stockMovementTrend} />
+      </div>
 
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
         <div className="flex flex-wrap items-center justify-between gap-3">

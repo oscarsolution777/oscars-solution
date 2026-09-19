@@ -80,6 +80,10 @@
       "new": "New",
       "recurring": "Recurring"
     },
+    "revenueTrend": {
+      "title": "Revenue trend",
+      "emptyTitle": "No revenue recorded this month yet"
+    },
     "suspended": {
       "title": "This salon is suspended",
       "body": "Your subscription is not currently active. Contact Oscar's Solution to reactivate access.",
@@ -422,6 +426,18 @@
       "suppliers": "Suppliers",
       "movements": "Movements"
     },
+    "charts": {
+      "productsValue": {
+        "title": "Inventory value by product",
+        "emptyTitle": "No products with stock yet"
+      },
+      "stockMovements": {
+        "title": "Stock movements",
+        "emptyTitle": "No movements in the last 3 months",
+        "in": "In",
+        "out": "Out"
+      }
+    },
     "products": {
       "createButton": "New product",
       "units": {
@@ -554,6 +570,16 @@
   },
   "payments": {
     "createButton": "New charge",
+    "charts": {
+      "incomeTrend": {
+        "title": "Revenue trend",
+        "emptyTitle": "No paid charges in the last 3 months"
+      },
+      "methodBreakdown": {
+        "title": "Charges by payment method",
+        "emptyTitle": "No paid charges this month"
+      }
+    },
     "kpis": {
       "monthlyIncome": "Income",
       "thisMonth": "This month",
@@ -614,6 +640,12 @@
   },
   "cashClosures": {
     "createButton": "New closure",
+    "charts": {
+      "differenceTrend": {
+        "title": "Cash difference over time",
+        "emptyTitle": "No closures recorded in the last 3 months"
+      }
+    },
     "kpis": {
       "closuresThisMonth": "Closures recorded",
       "thisMonth": "This month",
@@ -656,6 +688,16 @@
     "errors": {
       "forbiddenTitle": "No access",
       "forbidden": "Only the salon owner can view this section."
+    },
+    "charts": {
+      "monthlyTrend": {
+        "title": "Income, expenses and payouts by month",
+        "emptyTitle": "No financial data yet"
+      },
+      "expenseCategory": {
+        "title": "Expenses by category",
+        "emptyTitle": "No expenses recorded this month"
+      }
     },
     "summary": {
       "income": "Income",
@@ -808,6 +850,8 @@
     "inventory": {
       "totalValue": "Total inventory value",
       "lowStockCount": "Products below minimum",
+      "chartTitle": "Inventory value by product",
+      "emptyChart": "No products with stock yet",
       "emptyTable": "No products yet",
       "columnProduct": "Product",
       "columnStock": "Current stock",

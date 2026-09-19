@@ -4,7 +4,10 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Tables } from "@/types/database";
+import type { ExpenseCategorySlice, FinanceMonthPoint } from "@/lib/reports/aggregations";
 import { SummaryCards } from "./summary-cards";
+import { MonthlyTrendChart } from "./monthly-trend-chart";
+import { ExpenseCategoryChart } from "./expense-category-chart";
 import { ExpensesTab } from "./expenses-tab";
 import { ExpenseFormPanel } from "./expense-form-panel";
 import { PayoutsTab } from "./payouts-tab";
@@ -21,6 +24,8 @@ export function FinancesView({
   staff,
   suppliers,
   summary,
+  expenseCategories,
+  monthlyTrend,
   currency,
   locale,
 }: {
@@ -34,6 +39,8 @@ export function FinancesView({
     payoutsCents: number;
     balanceCents: number;
   };
+  expenseCategories: ExpenseCategorySlice[];
+  monthlyTrend: FinanceMonthPoint[];
   currency: string;
   locale: string;
 }) {
@@ -73,6 +80,11 @@ export function FinancesView({
         currency={currency}
         locale={locale}
       />
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <MonthlyTrendChart points={monthlyTrend} currency={currency} locale={locale} />
+        <ExpenseCategoryChart slices={expenseCategories} currency={currency} locale={locale} />
+      </div>
 
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
         <TabsList>
