@@ -84,6 +84,12 @@
       "title": "Tendencia de ingresos",
       "emptyTitle": "Sin ingresos registrados este mes todavía"
     },
+    "completionBreakdown": {
+      "title": "Citas completadas vs. no-show",
+      "emptyTitle": "Sin citas completadas ni no-show este mes todavía",
+      "completed": "Completadas",
+      "noShow": "No-show"
+    },
     "suspended": {
       "title": "Este salón está suspendido",
       "body": "Tu suscripción no está activa en este momento. Contacta a Oscar's Solution para reactivar el acceso.",

@@ -14,10 +14,10 @@ export function ClientsChart({ segments }: { segments: ClientSegments }) {
   return (
     <div className="h-56 w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ left: 8, right: 8 }}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="label" tick={{ fontSize: 12 }} />
-          <YAxis allowDecimals={false} width={40} />
+        <BarChart data={data} layout="vertical" margin={{ left: 8, right: 16 }}>
+          <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+          <XAxis type="number" allowDecimals={false} />
+          <YAxis type="category" dataKey="label" width={90} tick={{ fontSize: 12 }} />
           <Tooltip />
           <Bar dataKey="count" fill="var(--color-primary)" radius={4} />
         </BarChart>

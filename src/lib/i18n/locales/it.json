@@ -84,6 +84,12 @@
       "title": "Andamento dei ricavi",
       "emptyTitle": "Ancora nessun ricavo registrato questo mese"
     },
+    "completionBreakdown": {
+      "title": "Completati vs. no-show",
+      "emptyTitle": "Ancora nessun completato o no-show questo mese",
+      "completed": "Completati",
+      "noShow": "No-show"
+    },
     "suspended": {
       "title": "Questo salone è sospeso",
       "body": "Il tuo abbonamento non è attivo al momento. Contatta Oscar's Solution per riattivare l'accesso.",

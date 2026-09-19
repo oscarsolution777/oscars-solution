@@ -25,11 +25,12 @@ export function MonthlyTrendChart({
       title={t("charts.monthlyTrend.title")}
       isEmpty={isEmpty}
       emptyTitle={t("charts.monthlyTrend.emptyTitle")}
+      height={300}
     >
-      <BarChart data={points} margin={{ left: 8, right: 8 }}>
-        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-        <XAxis dataKey="label" tick={{ fontSize: 12 }} />
-        <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={90} />
+      <BarChart data={points} layout="vertical" margin={{ left: 8, right: 16 }}>
+        <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+        <XAxis type="number" tickFormatter={(value) => formatMoney(value, currency, locale)} />
+        <YAxis type="category" dataKey="label" width={70} tick={{ fontSize: 12 }} />
         <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
         <Legend />
         <Bar dataKey="incomeCents" name={t("summary.income")} fill="var(--color-success)" radius={4} />

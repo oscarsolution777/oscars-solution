@@ -84,6 +84,12 @@
       "title": "Tendência de receita",
       "emptyTitle": "Ainda sem receita registrada este mês"
     },
+    "completionBreakdown": {
+      "title": "Concluídos vs. no-show",
+      "emptyTitle": "Ainda sem concluídos ou no-show este mês",
+      "completed": "Concluídos",
+      "noShow": "No-show"
+    },
     "suspended": {
       "title": "Este salão está suspenso",
       "body": "Sua assinatura não está ativa no momento. Entre em contato com a Oscar's Solution para reativar o acesso.",

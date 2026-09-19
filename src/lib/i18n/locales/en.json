@@ -84,6 +84,12 @@
       "title": "Revenue trend",
       "emptyTitle": "No revenue recorded this month yet"
     },
+    "completionBreakdown": {
+      "title": "Completed vs. no-show",
+      "emptyTitle": "No completed or no-show appointments yet this month",
+      "completed": "Completed",
+      "noShow": "No-show"
+    },
     "suspended": {
       "title": "This salon is suspended",
       "body": "Your subscription is not currently active. Contact Oscar's Solution to reactivate access.",

@@ -11,6 +11,7 @@ import { RevenueTrendChart } from "./revenue-trend-chart";
 import { TopServicesChart } from "./top-services-chart";
 import { StaffWorkloadChart } from "./staff-workload-chart";
 import { ClientSegmentsChart } from "./client-segments-chart";
+import { CompletionBreakdownChart } from "./completion-breakdown-chart";
 
 type ProductRow = Tables<"products">;
 
@@ -46,6 +47,7 @@ export function DashboardView(
         topServices: ServiceSalesRow[];
         staffWorkload: StaffWorkloadRow[];
         clientSegments: ClientSegments;
+        completionBreakdown: { completed: number; noShow: number };
       }
 ) {
   return (
@@ -70,10 +72,12 @@ export function DashboardView(
               currency={props.currency}
               locale={props.locale}
             />
-            <div className="space-y-4">
-              <StaffWorkloadChart staffWorkload={props.staffWorkload} />
-              <ClientSegmentsChart segments={props.clientSegments} />
-            </div>
+            <StaffWorkloadChart staffWorkload={props.staffWorkload} />
+            <ClientSegmentsChart segments={props.clientSegments} />
+            <CompletionBreakdownChart
+              completed={props.completionBreakdown.completed}
+              noShow={props.completionBreakdown.noShow}
+            />
           </div>
         </>
       )}

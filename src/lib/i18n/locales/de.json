@@ -84,6 +84,12 @@
       "title": "Umsatzentwicklung",
       "emptyTitle": "Diesen Monat noch keine Einnahmen erfasst"
     },
+    "completionBreakdown": {
+      "title": "Abgeschlossen vs. Nichterscheinen",
+      "emptyTitle": "Diesen Monat noch keine abgeschlossenen Termine oder Nichterscheinen",
+      "completed": "Abgeschlossen",
+      "noShow": "Nichterscheinen"
+    },
     "suspended": {
       "title": "Dieser Salon ist gesperrt",
       "body": "Dein Abonnement ist derzeit nicht aktiv. Kontaktiere Oscar's Solution, um den Zugang zu reaktivieren.",

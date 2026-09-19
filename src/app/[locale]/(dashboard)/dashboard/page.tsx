@@ -79,7 +79,7 @@ export default async function DashboardPage() {
   const staffById = new Map(staff.map((s) => [s.id, s]));
 
   const incomeCents = sumPaidIncomeCents(payments, from, to);
-  const { completed, rate: noShowRate } = computeNoShowRate(appointments, from, to);
+  const { completed, noShow, rate: noShowRate } = computeNoShowRate(appointments, from, to);
   const avgTicketCents = completed > 0 ? Math.round(incomeCents / completed) : 0;
   const topServices = computeTopServices(appointmentItems, appointmentsById, servicesById, from, to).slice(
     0,
@@ -107,6 +107,7 @@ export default async function DashboardPage() {
       topServices={topServices}
       staffWorkload={staffWorkload}
       clientSegments={clientSegments}
+      completionBreakdown={{ completed, noShow }}
     />
   );
 }

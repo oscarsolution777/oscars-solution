@@ -84,6 +84,12 @@
       "title": "Évolution des revenus",
       "emptyTitle": "Pas encore de revenus ce mois-ci"
     },
+    "completionBreakdown": {
+      "title": "Rendez-vous honorés vs. absences",
+      "emptyTitle": "Pas encore de rendez-vous honorés ou d'absences ce mois-ci",
+      "completed": "Honorés",
+      "noShow": "Absences"
+    },
     "suspended": {
       "title": "Ce salon est suspendu",
       "body": "Votre abonnement n'est pas actif actuellement. Contactez Oscar's Solution pour réactiver l'accès.",
