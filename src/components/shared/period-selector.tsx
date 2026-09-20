@@ -15,9 +15,17 @@ import {
 import type { Period, PeriodPreset } from "@/lib/utils/period";
 
 // El periodo vive en la URL (?preset=&from=&to=), no en estado global
-// (CLAUDE.md sección 2: preferir Server Components + URL state).
-export function PeriodSelector({ period }: { period: Period }) {
-  const t = useTranslations("reports.period");
+// (CLAUDE.md sección 2: preferir Server Components + URL state). Compartido
+// entre Reportes y Dashboard (Fase de rediseño de gráficos) — cada módulo
+// tiene su propio namespace de traducción con las mismas claves.
+export function PeriodSelector({
+  period,
+  namespace = "reports.period",
+}: {
+  period: Period;
+  namespace?: string;
+}) {
+  const t = useTranslations(namespace);
   const router = useRouter();
   const pathname = usePathname();
 

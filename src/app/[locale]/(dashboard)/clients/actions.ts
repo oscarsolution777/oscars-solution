@@ -44,7 +44,7 @@ export async function createClientAction(formData: FormData): Promise<ActionResu
     await createClientRow(supabase, {
       salonId: access.salonId,
       fullName: parsed.data.fullName,
-      phone: parsed.data.phone,
+      phone: parsed.data.phone || null,
       email: parsed.data.email || null,
       notes: parsed.data.notes || null,
       preferences: parsePreferences(parsed.data.preferences),
@@ -80,7 +80,7 @@ export async function updateClientAction(formData: FormData): Promise<ActionResu
     const supabase = await createClient();
     await updateClientRow(supabase, clientId, {
       fullName: parsed.data.fullName,
-      phone: parsed.data.phone,
+      phone: parsed.data.phone || null,
       email: parsed.data.email || null,
       notes: parsed.data.notes || null,
       preferences: parsePreferences(parsed.data.preferences),

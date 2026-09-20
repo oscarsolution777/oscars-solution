@@ -2,11 +2,14 @@ import { TrendingUp, Receipt, UserX, Scale } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatMoney } from "@/lib/utils/money";
+import { formatCalendarDate } from "@/lib/utils/dates";
+import type { Period } from "@/lib/utils/period";
 
 export async function FinancialCards({
   financial,
   currency,
   locale,
+  period,
 }: {
   financial: {
     incomeCents: number;
@@ -17,8 +20,15 @@ export async function FinancialCards({
   };
   currency: string;
   locale: string;
+  period: Period;
 }) {
   const t = await getTranslations("dashboard.kpis");
+  const tPeriod = await getTranslations("dashboard.period");
+
+  const periodLabel =
+    period.preset === "custom"
+      ? `${formatCalendarDate(period.from, locale, "P")} – ${formatCalendarDate(period.to, locale, "P")}`
+      : tPeriod(period.preset);
 
   const items = [
     {
@@ -26,7 +36,7 @@ export async function FinancialCards({
       iconClass: "bg-emerald-100 text-emerald-600",
       label: t("income"),
       value: formatMoney(financial.incomeCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
     {
       icon: Receipt,
@@ -40,14 +50,14 @@ export async function FinancialCards({
       iconClass: "bg-rose-100 text-rose-600",
       label: t("noShowRate"),
       value: `${Math.round(financial.noShowRate * 100)}%`,
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
     {
       icon: Scale,
       iconClass: "bg-violet-100 text-violet-600",
       label: t("cashDifference"),
       value: formatMoney(financial.cashDifferenceCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
   ];
 

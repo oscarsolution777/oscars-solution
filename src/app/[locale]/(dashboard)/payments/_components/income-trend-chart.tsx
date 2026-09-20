@@ -19,10 +19,10 @@ export function IncomeTrendChart({
 
   return (
     <ChartCard title={t("title")} isEmpty={buckets.length === 0} emptyTitle={t("emptyTitle")}>
-      <BarChart data={buckets} layout="vertical" margin={{ left: 8, right: 16 }}>
-        <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-        <XAxis type="number" tickFormatter={(value) => formatMoney(value, currency, locale)} />
-        <YAxis type="category" dataKey="label" width={90} tick={{ fontSize: 12 }} />
+      <BarChart data={buckets} margin={{ left: 8, right: 8 }}>
+        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <XAxis dataKey="label" tick={{ fontSize: 12 }} />
+        <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={90} />
         <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
         <Bar dataKey="incomeCents" fill="var(--color-primary)" radius={4} />
       </BarChart>

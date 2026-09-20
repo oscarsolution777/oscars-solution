@@ -53,12 +53,11 @@
     "currency": "Moeda",
     "timezone": "Fuso horário",
     "kpis": {
-      "income": "Receita do mês",
+      "income": "Receita",
       "avgTicket": "Ticket médio",
       "completedCount": "{count, plural, one {# atendimento concluído} other {# atendimentos concluídos}}",
       "noShowRate": "Taxa de não comparecimento",
       "cashDifference": "Diferença de caixa acumulada",
-      "thisMonth": "Este mês",
       "pendingRequests": "Solicitações pendentes",
       "pendingCaption": "Aguardando confirmação ou recusa",
       "todayAppointments": "Atendimentos de hoje",
@@ -66,13 +65,20 @@
       "lowStock": "Produtos abaixo do mínimo",
       "lowStockCaption": "Verifique o estoque"
     },
+    "period": {
+      "thisMonth": "Este mês",
+      "lastMonth": "Mês passado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
+    },
     "topServices": {
       "title": "Serviços mais vendidos",
-      "emptyTitle": "Ainda sem vendas de serviços este mês"
+      "emptyTitle": "Ainda sem vendas de serviços neste período"
     },
     "staffWorkload": {
       "title": "Carga de trabalho por profissional",
-      "emptyTitle": "Ainda sem atendimentos atribuídos este mês",
+      "emptyTitle": "Ainda sem atendimentos atribuídos neste período",
       "assignedCount": "{count, plural, one {# serviço} other {# serviços}}"
     },
     "clientSegments": {
@@ -82,11 +88,11 @@
     },
     "revenueTrend": {
       "title": "Tendência de receita",
-      "emptyTitle": "Ainda sem receita registrada este mês"
+      "emptyTitle": "Ainda sem receita registrada neste período"
     },
     "completionBreakdown": {
       "title": "Concluídos vs. no-show",
-      "emptyTitle": "Ainda sem concluídos ou no-show este mês",
+      "emptyTitle": "Ainda sem concluídos ou no-show neste período",
       "completed": "Concluídos",
       "noShow": "No-show"
     },
@@ -166,8 +172,8 @@
       "existingClientNone": "Cliente novo",
       "clientNameLabel": "Nome completo",
       "clientNameError": "Digite o nome do cliente",
-      "clientPhoneLabel": "Telefone",
-      "clientPhoneError": "Digite um telefone de contato",
+      "clientPhoneLabel": "Telefone (opcional)",
+      "clientPhoneError": "Digite um telefone válido",
       "clientEmailLabel": "E-mail (opcional)",
       "clientEmailError": "Digite um e-mail válido",
       "preferredDateLabel": "Data preferida (opcional)",
@@ -336,8 +342,8 @@
       "subtitle": "Dados de contato e preferências do cliente.",
       "nameLabel": "Nome completo",
       "nameError": "Digite o nome do cliente",
-      "phoneLabel": "Telefone",
-      "phoneError": "Digite um telefone de contato",
+      "phoneLabel": "Telefone (opcional)",
+      "phoneError": "Digite um telefone válido",
       "emailLabel": "E-mail (opcional)",
       "emailError": "Digite um e-mail válido",
       "notesLabel": "Notas",

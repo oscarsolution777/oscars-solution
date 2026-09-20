@@ -12,9 +12,10 @@ export const requestItemSchema = z.object({
 export const requestSchema = z.object({
   clientId: z.string().trim().uuid().optional().or(z.literal("")),
   clientName: z.string().trim().min(1).max(120),
-  // Requerido: si la solicitud no termina vinculada a un cliente existente,
-  // se usa para crear el cliente al confirmar (clients.phone es NOT NULL).
-  clientPhone: z.string().trim().min(1).max(40),
+  // Opcional (clients.phone ya no es NOT NULL, migración 0018): si falta y la
+  // solicitud no queda vinculada a un cliente existente, el cliente se crea
+  // con phone = null.
+  clientPhone: z.string().trim().max(40).optional().or(z.literal("")),
   clientEmail: z.string().trim().email().max(160).optional().or(z.literal("")),
   preferredDate: z.string().trim().regex(DATE_PATTERN).optional().or(z.literal("")),
   items: z.array(requestItemSchema).min(1),

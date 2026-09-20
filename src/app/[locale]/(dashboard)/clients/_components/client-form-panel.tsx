@@ -76,7 +76,7 @@ export function ClientFormPanel({
     setServerError(null);
     const formData = new FormData();
     formData.set("fullName", data.fullName);
-    formData.set("phone", data.phone);
+    formData.set("phone", data.phone ?? "");
     formData.set("email", data.email ?? "");
     formData.set("notes", data.notes ?? "");
     formData.set("preferences", data.preferences ?? "");

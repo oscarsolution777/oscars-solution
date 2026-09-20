@@ -45,7 +45,7 @@ export async function createRequestAction(input: RequestInput): Promise<ActionRe
       salonId: access.salonId,
       clientId: parsed.data.clientId || null,
       clientName: parsed.data.clientName,
-      clientPhone: parsed.data.clientPhone,
+      clientPhone: parsed.data.clientPhone || null,
       clientEmail: parsed.data.clientEmail || null,
       preferredDate: parsed.data.preferredDate || null,
       items: parsed.data.items.map((item) => ({
@@ -125,7 +125,7 @@ export async function confirmRequestAction(
       const newClient = await createClientRow(supabase, {
         salonId: access.salonId,
         fullName: request.client_name,
-        phone: request.client_phone || "—",
+        phone: request.client_phone || null,
         email: request.client_email,
         notes: null,
         preferences: [],

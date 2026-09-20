@@ -30,11 +30,11 @@ export function ProductsValueChart({
     .slice(0, 8);
 
   return (
-    <ChartCard title={title} isEmpty={data.length === 0} emptyTitle={emptyTitle}>
-      <BarChart data={data} layout="vertical" margin={{ left: 16, right: 16 }}>
-        <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-        <XAxis type="number" tickFormatter={(value) => formatMoney(value, currency, locale)} />
-        <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 12 }} />
+    <ChartCard title={title} isEmpty={data.length === 0} emptyTitle={emptyTitle} height={300}>
+      <BarChart data={data} margin={{ left: 8, right: 8, bottom: 32 }}>
+        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-30} textAnchor="end" height={60} />
+        <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={70} />
         <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
         <Bar dataKey="valueCents" fill="var(--color-primary)" radius={4} />
       </BarChart>

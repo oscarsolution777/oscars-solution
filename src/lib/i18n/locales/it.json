@@ -53,12 +53,11 @@
     "currency": "Valuta",
     "timezone": "Fuso orario",
     "kpis": {
-      "income": "Incasso del mese",
+      "income": "Incasso",
       "avgTicket": "Scontrino medio",
       "completedCount": "{count, plural, one {# appuntamento completato} other {# appuntamenti completati}}",
       "noShowRate": "Tasso di mancata presentazione",
       "cashDifference": "Differenza di cassa accumulata",
-      "thisMonth": "Questo mese",
       "pendingRequests": "Richieste in attesa",
       "pendingCaption": "Da confermare o rifiutare",
       "todayAppointments": "Appuntamenti di oggi",
@@ -66,13 +65,20 @@
       "lowStock": "Prodotti sotto la scorta minima",
       "lowStockCaption": "Controlla il magazzino"
     },
+    "period": {
+      "thisMonth": "Questo mese",
+      "lastMonth": "Mese scorso",
+      "last3Months": "Ultimi 3 mesi",
+      "custom": "Personalizzato",
+      "apply": "Applica"
+    },
     "topServices": {
       "title": "Servizi più venduti",
-      "emptyTitle": "Ancora nessuna vendita di servizi questo mese"
+      "emptyTitle": "Ancora nessuna vendita di servizi in questo periodo"
     },
     "staffWorkload": {
       "title": "Carico di lavoro per collaboratore",
-      "emptyTitle": "Ancora nessun appuntamento assegnato questo mese",
+      "emptyTitle": "Ancora nessun appuntamento assegnato in questo periodo",
       "assignedCount": "{count, plural, one {# servizio} other {# servizi}}"
     },
     "clientSegments": {
@@ -82,11 +88,11 @@
     },
     "revenueTrend": {
       "title": "Andamento dei ricavi",
-      "emptyTitle": "Ancora nessun ricavo registrato questo mese"
+      "emptyTitle": "Ancora nessun ricavo registrato in questo periodo"
     },
     "completionBreakdown": {
       "title": "Completati vs. no-show",
-      "emptyTitle": "Ancora nessun completato o no-show questo mese",
+      "emptyTitle": "Ancora nessun completato o no-show in questo periodo",
       "completed": "Completati",
       "noShow": "No-show"
     },
@@ -166,8 +172,8 @@
       "existingClientNone": "Nuovo cliente",
       "clientNameLabel": "Nome completo",
       "clientNameError": "Inserisci il nome del cliente",
-      "clientPhoneLabel": "Telefono",
-      "clientPhoneError": "Inserisci un telefono di contatto",
+      "clientPhoneLabel": "Telefono (opzionale)",
+      "clientPhoneError": "Inserisci un telefono valido",
       "clientEmailLabel": "Email (opzionale)",
       "clientEmailError": "Inserisci un'email valida",
       "preferredDateLabel": "Data preferita (opzionale)",
@@ -336,8 +342,8 @@
       "subtitle": "Dati di contatto e preferenze del cliente.",
       "nameLabel": "Nome completo",
       "nameError": "Inserisci il nome del cliente",
-      "phoneLabel": "Telefono",
-      "phoneError": "Inserisci un telefono di contatto",
+      "phoneLabel": "Telefono (opzionale)",
+      "phoneError": "Inserisci un telefono valido",
       "emailLabel": "Email (opzionale)",
       "emailError": "Inserisci un'email valida",
       "notesLabel": "Note",

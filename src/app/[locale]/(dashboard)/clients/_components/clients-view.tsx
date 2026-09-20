@@ -45,7 +45,7 @@ export function ClientsView({
     return clients.filter(
       (client) =>
         client.full_name.toLowerCase().includes(term) ||
-        client.phone.toLowerCase().includes(term)
+        (client.phone ?? "").toLowerCase().includes(term)
     );
   }, [clients, search]);
 

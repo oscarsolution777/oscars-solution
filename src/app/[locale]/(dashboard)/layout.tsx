@@ -26,6 +26,7 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen bg-content-bg">
       <Sidebar
         salonName={salonName}
+        logoUrl={session.activeMembership?.salon?.logo_url ?? null}
         role={roleLabel}
         salons={salons}
         activeSalonId={session.activeMembership?.salon?.id}

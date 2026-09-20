@@ -53,12 +53,11 @@
     "currency": "Currency",
     "timezone": "Timezone",
     "kpis": {
-      "income": "Income this month",
+      "income": "Income",
       "avgTicket": "Average ticket",
       "completedCount": "{count, plural, one {# completed appointment} other {# completed appointments}}",
       "noShowRate": "No-show rate",
       "cashDifference": "Accumulated cash difference",
-      "thisMonth": "This month",
       "pendingRequests": "Pending requests",
       "pendingCaption": "Waiting to confirm or reject",
       "todayAppointments": "Today's appointments",
@@ -66,13 +65,20 @@
       "lowStock": "Products below minimum",
       "lowStockCaption": "Check inventory"
     },
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
+    },
     "topServices": {
       "title": "Best-selling services",
-      "emptyTitle": "No service sales yet this month"
+      "emptyTitle": "No service sales yet in this period"
     },
     "staffWorkload": {
       "title": "Workload by staff member",
-      "emptyTitle": "No appointments assigned yet this month",
+      "emptyTitle": "No appointments assigned yet in this period",
       "assignedCount": "{count, plural, one {# service} other {# services}}"
     },
     "clientSegments": {
@@ -82,11 +88,11 @@
     },
     "revenueTrend": {
       "title": "Revenue trend",
-      "emptyTitle": "No revenue recorded this month yet"
+      "emptyTitle": "No revenue recorded yet in this period"
     },
     "completionBreakdown": {
       "title": "Completed vs. no-show",
-      "emptyTitle": "No completed or no-show appointments yet this month",
+      "emptyTitle": "No completed or no-show appointments yet in this period",
       "completed": "Completed",
       "noShow": "No-show"
     },
@@ -166,8 +172,8 @@
       "existingClientNone": "New client",
       "clientNameLabel": "Full name",
       "clientNameError": "Enter the client's name",
-      "clientPhoneLabel": "Phone",
-      "clientPhoneError": "Enter a contact phone number",
+      "clientPhoneLabel": "Phone (optional)",
+      "clientPhoneError": "Enter a valid phone number",
       "clientEmailLabel": "Email (optional)",
       "clientEmailError": "Enter a valid email",
       "preferredDateLabel": "Preferred date (optional)",
@@ -336,8 +342,8 @@
       "subtitle": "Contact details and preferences for this client.",
       "nameLabel": "Full name",
       "nameError": "Enter the client's name",
-      "phoneLabel": "Phone",
-      "phoneError": "Enter a contact phone number",
+      "phoneLabel": "Phone (optional)",
+      "phoneError": "Enter a valid phone number",
       "emailLabel": "Email (optional)",
       "emailError": "Enter a valid email",
       "notesLabel": "Notes",

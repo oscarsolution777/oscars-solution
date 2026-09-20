@@ -10,7 +10,7 @@ import { listClients } from "@/lib/db/clients";
 import { listStaff } from "@/lib/db/staff";
 import { listServices } from "@/lib/db/services";
 import { listCashClosures } from "@/lib/db/cash-closures";
-import { getPresetRange } from "@/lib/utils/period";
+import { resolvePeriod } from "@/lib/utils/period";
 import {
   sumPaidIncomeCents,
   computeNoShowRate,
@@ -23,7 +23,11 @@ import {
 import { EmptyState } from "@/components/shared/empty-state";
 import { DashboardView } from "./_components/dashboard-view";
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ preset?: string; from?: string; to?: string }>;
+}) {
   const session = await requireAuth();
   const locale = await getLocale();
   const salon = session.activeMembership?.salon;
@@ -54,8 +58,10 @@ export default async function DashboardPage() {
     appointments.map((a) => a.id)
   );
 
+  const params = await searchParams;
   const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
-  const { from, to } = getPresetRange("thisMonth", todayStr);
+  const period = resolvePeriod(params, todayStr);
+  const { from, to } = period;
 
   const pendingRequestsCount = requests.filter((r) => r.status === "pending").length;
   const todayAppointmentsCount = appointments.filter(
@@ -95,6 +101,7 @@ export default async function DashboardPage() {
       variant="full"
       locale={locale}
       currency={salon.currency}
+      period={period}
       operational={{ pendingRequestsCount, todayAppointmentsCount, lowStockProducts }}
       financial={{
         incomeCents,

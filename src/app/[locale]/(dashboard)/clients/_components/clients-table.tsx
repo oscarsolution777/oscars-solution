@@ -80,7 +80,7 @@ export function ClientsTable({
                   </span>
                 </button>
               </TableCell>
-              <TableCell>{client.phone}</TableCell>
+              <TableCell>{client.phone || "—"}</TableCell>
               <TableCell className="text-text-secondary">
                 {client.email || "—"}
               </TableCell>

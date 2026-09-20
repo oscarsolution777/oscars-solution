@@ -92,7 +92,7 @@ export function RequestFormPanel({
     const client = clients.find((c) => c.id === selectedClientId);
     if (!client) return;
     setValue("clientName", client.full_name);
-    setValue("clientPhone", client.phone);
+    setValue("clientPhone", client.phone ?? "");
     setValue("clientEmail", client.email ?? "");
   }, [selectedClientId, clients, setValue]);
 

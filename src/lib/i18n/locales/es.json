@@ -53,12 +53,11 @@
     "currency": "Moneda",
     "timezone": "Zona horaria",
     "kpis": {
-      "income": "Ingresos del mes",
+      "income": "Ingresos",
       "avgTicket": "Ticket promedio",
       "completedCount": "{count, plural, one {# cita completada} other {# citas completadas}}",
       "noShowRate": "Tasa de no-show",
       "cashDifference": "Diferencia de caja acumulada",
-      "thisMonth": "Este mes",
       "pendingRequests": "Solicitudes pendientes",
       "pendingCaption": "Por confirmar o rechazar",
       "todayAppointments": "Citas de hoy",
@@ -66,13 +65,20 @@
       "lowStock": "Productos bajo mínimo",
       "lowStockCaption": "Revisa el inventario"
     },
+    "period": {
+      "thisMonth": "Este mes",
+      "lastMonth": "Mes pasado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
+    },
     "topServices": {
       "title": "Servicios más vendidos",
-      "emptyTitle": "Sin ventas de servicios este mes todavía"
+      "emptyTitle": "Sin ventas de servicios en este periodo todavía"
     },
     "staffWorkload": {
       "title": "Carga de trabajo por trabajador",
-      "emptyTitle": "Sin citas asignadas este mes todavía",
+      "emptyTitle": "Sin citas asignadas en este periodo todavía",
       "assignedCount": "{count, plural, one {# servicio} other {# servicios}}"
     },
     "clientSegments": {
@@ -82,11 +88,11 @@
     },
     "revenueTrend": {
       "title": "Tendencia de ingresos",
-      "emptyTitle": "Sin ingresos registrados este mes todavía"
+      "emptyTitle": "Sin ingresos registrados en este periodo todavía"
     },
     "completionBreakdown": {
       "title": "Citas completadas vs. no-show",
-      "emptyTitle": "Sin citas completadas ni no-show este mes todavía",
+      "emptyTitle": "Sin citas completadas ni no-show en este periodo todavía",
       "completed": "Completadas",
       "noShow": "No-show"
     },
@@ -166,8 +172,8 @@
       "existingClientNone": "Cliente nuevo",
       "clientNameLabel": "Nombre completo",
       "clientNameError": "Escribe el nombre del cliente",
-      "clientPhoneLabel": "Teléfono",
-      "clientPhoneError": "Escribe un teléfono de contacto",
+      "clientPhoneLabel": "Teléfono (opcional)",
+      "clientPhoneError": "Escribe un teléfono válido",
       "clientEmailLabel": "Correo electrónico (opcional)",
       "clientEmailError": "Escribe un correo válido",
       "preferredDateLabel": "Fecha preferida (opcional)",
@@ -336,8 +342,8 @@
       "subtitle": "Datos de contacto y preferencias del cliente.",
       "nameLabel": "Nombre completo",
       "nameError": "Escribe el nombre del cliente",
-      "phoneLabel": "Teléfono",
-      "phoneError": "Escribe un teléfono de contacto",
+      "phoneLabel": "Teléfono (opcional)",
+      "phoneError": "Escribe un teléfono válido",
       "emailLabel": "Correo electrónico (opcional)",
       "emailError": "Escribe un correo válido",
       "notesLabel": "Notas",

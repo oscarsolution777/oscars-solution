@@ -1,10 +1,12 @@
 import type { Tables } from "@/types/database";
+import type { Period } from "@/lib/utils/period";
 import type {
   SalesBucket,
   ServiceSalesRow,
   StaffWorkloadRow,
   ClientSegments,
 } from "@/lib/reports/aggregations";
+import { PeriodSelector } from "@/components/shared/period-selector";
 import { OperationalCards } from "./operational-cards";
 import { FinancialCards } from "./financial-cards";
 import { RevenueTrendChart } from "./revenue-trend-chart";
@@ -31,6 +33,7 @@ export function DashboardView(
         variant: "full";
         locale: string;
         currency: string;
+        period: Period;
         operational: {
           pendingRequestsCount: number;
           todayAppointmentsCount: number;
@@ -53,7 +56,18 @@ export function DashboardView(
   return (
     <div className="space-y-6">
       {props.variant === "full" && (
-        <FinancialCards financial={props.financial} currency={props.currency} locale={props.locale} />
+        <div className="flex justify-end">
+          <PeriodSelector period={props.period} namespace="dashboard.period" />
+        </div>
+      )}
+
+      {props.variant === "full" && (
+        <FinancialCards
+          financial={props.financial}
+          currency={props.currency}
+          locale={props.locale}
+          period={props.period}
+        />
       )}
 
       <OperationalCards operational={props.operational} />

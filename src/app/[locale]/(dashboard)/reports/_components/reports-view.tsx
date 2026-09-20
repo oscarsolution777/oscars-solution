@@ -11,7 +11,7 @@ import type {
   StaffWorkloadRow,
   ClientSegments,
 } from "@/lib/reports/aggregations";
-import { PeriodSelector } from "./period-selector";
+import { PeriodSelector } from "@/components/shared/period-selector";
 import { SalesTab } from "./sales-tab";
 import { ClientsTab } from "./clients-tab";
 import { ServicesTab } from "./services-tab";

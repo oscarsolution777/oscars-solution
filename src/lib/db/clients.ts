@@ -22,7 +22,7 @@ export async function createClientRow(
   input: {
     salonId: string;
     fullName: string;
-    phone: string;
+    phone: string | null;
     email: string | null;
     notes: string | null;
     preferences: string[];
@@ -50,7 +50,7 @@ export async function updateClientRow(
   clientId: string,
   input: {
     fullName?: string;
-    phone?: string;
+    phone?: string | null;
     email?: string | null;
     notes?: string | null;
     preferences?: string[];

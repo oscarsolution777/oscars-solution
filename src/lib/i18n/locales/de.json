@@ -53,12 +53,11 @@
     "currency": "Währung",
     "timezone": "Zeitzone",
     "kpis": {
-      "income": "Umsatz diesen Monat",
+      "income": "Umsatz",
       "avgTicket": "Durchschnittlicher Bon",
       "completedCount": "{count, plural, one {# abgeschlossener Termin} other {# abgeschlossene Termine}}",
       "noShowRate": "Nichterscheinen-Quote",
       "cashDifference": "Kumulierte Kassendifferenz",
-      "thisMonth": "Diesen Monat",
       "pendingRequests": "Offene Anfragen",
       "pendingCaption": "Zu bestätigen oder abzulehnen",
       "todayAppointments": "Termine heute",
@@ -66,13 +65,20 @@
       "lowStock": "Produkte unter Mindestbestand",
       "lowStockCaption": "Lagerbestand prüfen"
     },
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
+    },
     "topServices": {
       "title": "Meistverkaufte Dienstleistungen",
-      "emptyTitle": "Diesen Monat noch keine Dienstleistungsverkäufe"
+      "emptyTitle": "In diesem Zeitraum noch keine Dienstleistungsverkäufe"
     },
     "staffWorkload": {
       "title": "Arbeitslast pro Mitarbeiter",
-      "emptyTitle": "Diesen Monat noch keine zugewiesenen Termine",
+      "emptyTitle": "In diesem Zeitraum noch keine zugewiesenen Termine",
       "assignedCount": "{count, plural, one {# Dienstleistung} other {# Dienstleistungen}}"
     },
     "clientSegments": {
@@ -82,11 +88,11 @@
     },
     "revenueTrend": {
       "title": "Umsatzentwicklung",
-      "emptyTitle": "Diesen Monat noch keine Einnahmen erfasst"
+      "emptyTitle": "In diesem Zeitraum noch keine Einnahmen erfasst"
     },
     "completionBreakdown": {
       "title": "Abgeschlossen vs. Nichterscheinen",
-      "emptyTitle": "Diesen Monat noch keine abgeschlossenen Termine oder Nichterscheinen",
+      "emptyTitle": "In diesem Zeitraum noch keine abgeschlossenen Termine oder Nichterscheinen",
       "completed": "Abgeschlossen",
       "noShow": "Nichterscheinen"
     },
@@ -166,8 +172,8 @@
       "existingClientNone": "Neuer Kunde",
       "clientNameLabel": "Vollständiger Name",
       "clientNameError": "Geben Sie den Namen des Kunden ein",
-      "clientPhoneLabel": "Telefon",
-      "clientPhoneError": "Geben Sie eine Kontakttelefonnummer ein",
+      "clientPhoneLabel": "Telefon (optional)",
+      "clientPhoneError": "Geben Sie eine gültige Telefonnummer ein",
       "clientEmailLabel": "E-Mail (optional)",
       "clientEmailError": "Geben Sie eine gültige E-Mail-Adresse ein",
       "preferredDateLabel": "Wunschdatum (optional)",
@@ -336,8 +342,8 @@
       "subtitle": "Kontaktdaten und Präferenzen des Kunden.",
       "nameLabel": "Vollständiger Name",
       "nameError": "Geben Sie den Namen des Kunden ein",
-      "phoneLabel": "Telefon",
-      "phoneError": "Geben Sie eine Kontakttelefonnummer ein",
+      "phoneLabel": "Telefon (optional)",
+      "phoneError": "Geben Sie eine gültige Telefonnummer ein",
       "emailLabel": "E-Mail (optional)",
       "emailError": "Geben Sie eine gültige E-Mail-Adresse ein",
       "notesLabel": "Notizen",

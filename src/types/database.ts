@@ -297,7 +297,7 @@ export type Database = {
           is_active: boolean
           last_visit_at: string | null
           notes: string | null
-          phone: string
+          phone: string | null
           preferences: Json
           salon_id: string
           total_spent_cents: number
@@ -312,7 +312,7 @@ export type Database = {
           is_active?: boolean
           last_visit_at?: string | null
           notes?: string | null
-          phone: string
+          phone?: string | null
           preferences?: Json
           salon_id: string
           total_spent_cents?: number
@@ -327,7 +327,7 @@ export type Database = {
           is_active?: boolean
           last_visit_at?: string | null
           notes?: string | null
-          phone?: string
+          phone?: string | null
           preferences?: Json
           salon_id?: string
           total_spent_cents?: number

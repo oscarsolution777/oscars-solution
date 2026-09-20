@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { usePathname, Link } from "@/lib/i18n/navigation";
 import { navItems } from "./nav-items";
@@ -8,11 +9,13 @@ import { SalonSwitcher } from "./salon-switcher";
 
 export function Sidebar({
   salonName,
+  logoUrl,
   role,
   salons,
   activeSalonId,
 }: {
   salonName: string;
+  logoUrl?: string | null;
   role: string;
   salons?: { id: string; name: string }[];
   activeSalonId?: string;
@@ -30,7 +33,19 @@ export function Sidebar({
   return (
     <aside className="flex w-[200px] shrink-0 flex-col bg-sidebar-bg text-sidebar-text">
       <div className="flex items-center gap-2 px-4 py-5">
-        <div className="h-8 w-8 shrink-0 rounded-full bg-primary" aria-hidden />
+        <Link
+          href="/settings"
+          className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-primary transition-opacity hover:opacity-80"
+          title={t("settings")}
+        >
+          {logoUrl ? (
+            <Image src={logoUrl} alt={salonName} width={32} height={32} className="h-8 w-8 object-cover" />
+          ) : (
+            <span className="flex h-8 w-8 items-center justify-center text-sm font-semibold text-white">
+              {salonName.charAt(0).toUpperCase()}
+            </span>
+          )}
+        </Link>
         <div className="min-w-0 flex-1">
           {salons && salons.length > 1 && activeSalonId ? (
             <SalonSwitcher salons={salons} activeSalonId={activeSalonId} activeSalonName={salonName} />

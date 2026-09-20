@@ -83,7 +83,7 @@ export function ClientDetailPanel({
             <div className="flex items-center gap-2 text-sm">
               <Phone size={16} className="text-text-muted" />
               <dt className="text-text-muted">{t("phone")}</dt>
-              <dd className="ml-auto font-medium text-text-primary">{client.phone}</dd>
+              <dd className="ml-auto font-medium text-text-primary">{client.phone || "—"}</dd>
             </div>
             {client.email && (
               <div className="flex items-center gap-2 text-sm">

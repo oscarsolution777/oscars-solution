@@ -39,7 +39,7 @@ export function ClientsTab({
 
   const csvRows = sorted.map((c) => ({
     nombre: c.full_name,
-    telefono: c.phone,
+    telefono: c.phone ?? "—",
     gasto_total: (c.total_spent_cents / 100).toFixed(2),
     ultima_visita: c.last_visit_at ? formatSalonDate(c.last_visit_at, timezone, locale, "yyyy-MM-dd") : "",
   }));
@@ -73,7 +73,7 @@ export function ClientsTab({
               {sorted.map((client) => (
                 <TableRow key={client.id}>
                   <TableCell className="font-medium text-text-primary">{client.full_name}</TableCell>
-                  <TableCell className="text-text-secondary">{client.phone}</TableCell>
+                  <TableCell className="text-text-secondary">{client.phone || "—"}</TableCell>
                   <TableCell className="text-text-primary">
                     {formatMoney(client.total_spent_cents, currency, locale)}
                   </TableCell>

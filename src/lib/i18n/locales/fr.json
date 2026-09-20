@@ -53,12 +53,11 @@
     "currency": "Devise",
     "timezone": "Fuseau horaire",
     "kpis": {
-      "income": "Revenus du mois",
+      "income": "Revenus",
       "avgTicket": "Panier moyen",
       "completedCount": "{count, plural, one {# rendez-vous terminé} other {# rendez-vous terminés}}",
       "noShowRate": "Taux d'absence",
       "cashDifference": "Écart de caisse cumulé",
-      "thisMonth": "Ce mois-ci",
       "pendingRequests": "Demandes en attente",
       "pendingCaption": "À confirmer ou refuser",
       "todayAppointments": "Rendez-vous du jour",
@@ -66,13 +65,20 @@
       "lowStock": "Produits sous le seuil minimum",
       "lowStockCaption": "Vérifiez l'inventaire"
     },
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
+    },
     "topServices": {
       "title": "Services les plus vendus",
-      "emptyTitle": "Aucune vente de service ce mois-ci pour l'instant"
+      "emptyTitle": "Aucune vente de service pour l'instant sur cette période"
     },
     "staffWorkload": {
       "title": "Charge de travail par employé",
-      "emptyTitle": "Aucun rendez-vous assigné ce mois-ci pour l'instant",
+      "emptyTitle": "Aucun rendez-vous assigné pour l'instant sur cette période",
       "assignedCount": "{count, plural, one {# service} other {# services}}"
     },
     "clientSegments": {
@@ -82,11 +88,11 @@
     },
     "revenueTrend": {
       "title": "Évolution des revenus",
-      "emptyTitle": "Pas encore de revenus ce mois-ci"
+      "emptyTitle": "Pas encore de revenus sur cette période"
     },
     "completionBreakdown": {
       "title": "Rendez-vous honorés vs. absences",
-      "emptyTitle": "Pas encore de rendez-vous honorés ou d'absences ce mois-ci",
+      "emptyTitle": "Pas encore de rendez-vous honorés ou d'absences sur cette période",
       "completed": "Honorés",
       "noShow": "Absences"
     },
@@ -166,8 +172,8 @@
       "existingClientNone": "Nouveau client",
       "clientNameLabel": "Nom complet",
       "clientNameError": "Saisissez le nom du client",
-      "clientPhoneLabel": "Téléphone",
-      "clientPhoneError": "Saisissez un numéro de contact",
+      "clientPhoneLabel": "Téléphone (optionnel)",
+      "clientPhoneError": "Saisissez un numéro de téléphone valide",
       "clientEmailLabel": "E-mail (optionnel)",
       "clientEmailError": "Saisissez un e-mail valide",
       "preferredDateLabel": "Date préférée (optionnelle)",
@@ -336,8 +342,8 @@
       "subtitle": "Coordonnées et préférences du client.",
       "nameLabel": "Nom complet",
       "nameError": "Saisissez le nom du client",
-      "phoneLabel": "Téléphone",
-      "phoneError": "Saisissez un numéro de contact",
+      "phoneLabel": "Téléphone (optionnel)",
+      "phoneError": "Saisissez un numéro de téléphone valide",
       "emailLabel": "E-mail (optionnel)",
       "emailError": "Saisissez un e-mail valide",
       "notesLabel": "Notes",
