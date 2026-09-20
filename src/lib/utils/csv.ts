@@ -7,13 +7,14 @@ export function rowsToCsv(rows: Record<string, string | number>[], headers?: str
 
   const escape = (value: string | number | undefined): string => {
     const str = String(value ?? "");
-    if (/[",\n]/.test(str)) return `"${str.replace(/"/g, '""')}"`;
+    if (/[",\r\n]/.test(str)) return `"${str.replace(/"/g, '""')}"`;
     return str;
   };
 
-  const lines = [columns.join(",")];
+  const lines = [columns.map((col) => escape(col)).join(",")];
   for (const row of rows) {
     lines.push(columns.map((col) => escape(row[col])).join(","));
   }
-  return lines.join("\n");
+  // CRLF: fin de línea estándar de CSV (RFC 4180), el que mejor abre Excel.
+  return lines.join("\r\n");
 }

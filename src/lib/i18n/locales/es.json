@@ -133,6 +133,7 @@
       }
     },
     "agenda": {
+      "createButton": "Nueva cita",
       "columnDate": "Fecha",
       "columnClient": "Cliente",
       "columnServices": "Servicios",
@@ -185,6 +186,28 @@
       "staffUnassigned": "Sin asignar todavía",
       "itemsError": "Agrega al menos un servicio",
       "genericError": "No se pudo guardar la solicitud. Intenta de nuevo."
+    },
+    "appointmentForm": {
+      "createTitle": "Nueva cita",
+      "subtitle": "Crea una cita directamente, sin pasar por una solicitud.",
+      "existingClientLabel": "Cliente existente (opcional)",
+      "existingClientPlaceholder": "Buscar cliente...",
+      "existingClientNone": "Cliente nuevo",
+      "clientNameLabel": "Nombre completo",
+      "clientNameError": "Escribe el nombre del cliente",
+      "clientPhoneLabel": "Teléfono (opcional)",
+      "clientPhoneError": "Escribe un teléfono válido",
+      "clientEmailLabel": "Correo electrónico (opcional)",
+      "clientEmailError": "Escribe un correo válido",
+      "dateLabel": "Fecha de la cita",
+      "dateError": "Selecciona una fecha válida",
+      "itemsLabel": "Servicios y trabajador asignado",
+      "addItem": "Agregar servicio",
+      "removeItem": "Quitar",
+      "servicePlaceholder": "Selecciona un servicio",
+      "staffPlaceholder": "Selecciona un trabajador",
+      "itemsError": "Agrega al menos un servicio y asigna un trabajador a cada uno",
+      "genericError": "No se pudo crear la cita. Intenta de nuevo."
     },
     "confirm": {
       "title": "Confirmar solicitud de {name}",
@@ -825,6 +848,12 @@
       "apply": "Aplicar"
     },
     "exportCsv": "Exportar CSV",
+    "exportPdf": "Exportar PDF",
+    "pdf": {
+      "period": "Período",
+      "generatedOn": "Generado el",
+      "page": "Página {page} de {total}"
+    },
     "sales": {
       "totalIncome": "Ingresos del periodo",
       "totalRefunded": "Reembolsado en el periodo",

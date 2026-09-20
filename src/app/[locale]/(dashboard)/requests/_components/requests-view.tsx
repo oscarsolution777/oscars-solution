@@ -10,6 +10,7 @@ import { KpiCards } from "./kpi-cards";
 import { RequestsTable } from "./requests-table";
 import { RequestFormPanel } from "./request-form-panel";
 import { ConfirmRequestPanel } from "./confirm-request-panel";
+import { AppointmentFormPanel } from "./appointment-form-panel";
 import { AppointmentsTable } from "./appointments-table";
 
 type RequestRow = Tables<"requests">;
@@ -52,6 +53,7 @@ export function RequestsView({
 
   const [tab, setTab] = useState<"inbox" | "agenda">("inbox");
   const [requestFormOpen, setRequestFormOpen] = useState(false);
+  const [appointmentFormOpen, setAppointmentFormOpen] = useState(false);
   const [confirmingRequestId, setConfirmingRequestId] = useState<string | null>(null);
 
   const itemsByRequestId = useMemo(() => {
@@ -109,6 +111,13 @@ export function RequestsView({
               {t("inbox.createButton")}
             </Button>
           )}
+
+          {tab === "agenda" && (
+            <Button onClick={() => setAppointmentFormOpen(true)}>
+              <Plus size={16} />
+              {t("agenda.createButton")}
+            </Button>
+          )}
         </div>
 
         <TabsContent value="inbox">
@@ -135,6 +144,14 @@ export function RequestsView({
       <RequestFormPanel
         open={requestFormOpen}
         onOpenChange={setRequestFormOpen}
+        clients={clients}
+        services={services}
+        staff={staff}
+      />
+
+      <AppointmentFormPanel
+        open={appointmentFormOpen}
+        onOpenChange={setAppointmentFormOpen}
         clients={clients}
         services={services}
         staff={staff}

@@ -126,8 +126,8 @@ export function AppointmentsTable({
                   </Badge>
                 </TableCell>
                 <TableCell className="text-right">
-                  {appointment.status === "scheduled" && (
-                    <div className="flex justify-end gap-1">
+                  <div className="flex justify-end gap-1">
+                    {appointment.status !== "completed" && (
                       <Button
                         variant="ghost"
                         size="icon-sm"
@@ -137,6 +137,8 @@ export function AppointmentsTable({
                       >
                         <CheckCircle2 size={16} />
                       </Button>
+                    )}
+                    {appointment.status !== "no_show" && (
                       <Button
                         variant="ghost"
                         size="icon-sm"
@@ -146,6 +148,8 @@ export function AppointmentsTable({
                       >
                         <UserX size={16} />
                       </Button>
+                    )}
+                    {appointment.status !== "cancelled" && (
                       <Button
                         variant="ghost"
                         size="icon-sm"
@@ -155,8 +159,8 @@ export function AppointmentsTable({
                       >
                         <Ban size={16} />
                       </Button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </TableCell>
               </TableRow>
             );

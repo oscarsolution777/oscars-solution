@@ -133,6 +133,7 @@
       }
     },
     "agenda": {
+      "createButton": "Neuer Termin",
       "columnDate": "Datum",
       "columnClient": "Kunde",
       "columnServices": "Dienstleistungen",
@@ -185,6 +186,28 @@
       "staffUnassigned": "Noch nicht zugewiesen",
       "itemsError": "Fügen Sie mindestens eine Dienstleistung hinzu",
       "genericError": "Die Anfrage konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+    },
+    "appointmentForm": {
+      "createTitle": "Neuer Termin",
+      "subtitle": "Erstellen Sie einen Termin direkt, ohne über eine Anfrage zu gehen.",
+      "existingClientLabel": "Bestehender Kunde (optional)",
+      "existingClientPlaceholder": "Kunde suchen...",
+      "existingClientNone": "Neuer Kunde",
+      "clientNameLabel": "Vollständiger Name",
+      "clientNameError": "Geben Sie den Namen des Kunden ein",
+      "clientPhoneLabel": "Telefon (optional)",
+      "clientPhoneError": "Geben Sie eine gültige Telefonnummer ein",
+      "clientEmailLabel": "E-Mail (optional)",
+      "clientEmailError": "Geben Sie eine gültige E-Mail-Adresse ein",
+      "dateLabel": "Termindatum",
+      "dateError": "Wählen Sie ein gültiges Datum",
+      "itemsLabel": "Dienstleistungen und zugewiesener Mitarbeiter",
+      "addItem": "Dienstleistung hinzufügen",
+      "removeItem": "Entfernen",
+      "servicePlaceholder": "Wählen Sie eine Dienstleistung",
+      "staffPlaceholder": "Wählen Sie einen Mitarbeiter",
+      "itemsError": "Fügen Sie mindestens eine Dienstleistung hinzu und weisen Sie jeder einen Mitarbeiter zu",
+      "genericError": "Der Termin konnte nicht erstellt werden. Bitte versuchen Sie es erneut."
     },
     "confirm": {
       "title": "Anfrage von {name} bestätigen",
@@ -825,6 +848,12 @@
       "apply": "Anwenden"
     },
     "exportCsv": "CSV exportieren",
+    "exportPdf": "PDF exportieren",
+    "pdf": {
+      "period": "Zeitraum",
+      "generatedOn": "Erstellt am",
+      "page": "Seite {page} von {total}"
+    },
     "sales": {
       "totalIncome": "Umsatz im Zeitraum",
       "totalRefunded": "Erstattet im Zeitraum",

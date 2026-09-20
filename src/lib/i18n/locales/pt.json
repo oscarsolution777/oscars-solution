@@ -133,6 +133,7 @@
       }
     },
     "agenda": {
+      "createButton": "Novo atendimento",
       "columnDate": "Data",
       "columnClient": "Cliente",
       "columnServices": "Serviços",
@@ -185,6 +186,28 @@
       "staffUnassigned": "Ainda não atribuído",
       "itemsError": "Adicione pelo menos um serviço",
       "genericError": "Não foi possível salvar a solicitação. Tente novamente."
+    },
+    "appointmentForm": {
+      "createTitle": "Novo atendimento",
+      "subtitle": "Crie um atendimento diretamente, sem passar por uma solicitação.",
+      "existingClientLabel": "Cliente existente (opcional)",
+      "existingClientPlaceholder": "Buscar cliente...",
+      "existingClientNone": "Cliente novo",
+      "clientNameLabel": "Nome completo",
+      "clientNameError": "Digite o nome do cliente",
+      "clientPhoneLabel": "Telefone (opcional)",
+      "clientPhoneError": "Digite um telefone válido",
+      "clientEmailLabel": "E-mail (opcional)",
+      "clientEmailError": "Digite um e-mail válido",
+      "dateLabel": "Data do atendimento",
+      "dateError": "Selecione uma data válida",
+      "itemsLabel": "Serviços e profissional atribuído",
+      "addItem": "Adicionar serviço",
+      "removeItem": "Remover",
+      "servicePlaceholder": "Selecione um serviço",
+      "staffPlaceholder": "Selecione um profissional",
+      "itemsError": "Adicione pelo menos um serviço e atribua um profissional a cada um",
+      "genericError": "Não foi possível criar o atendimento. Tente novamente."
     },
     "confirm": {
       "title": "Confirmar solicitação de {name}",
@@ -825,6 +848,12 @@
       "apply": "Aplicar"
     },
     "exportCsv": "Exportar CSV",
+    "exportPdf": "Exportar PDF",
+    "pdf": {
+      "period": "Período",
+      "generatedOn": "Gerado em",
+      "page": "Página {page} de {total}"
+    },
     "sales": {
       "totalIncome": "Receita do período",
       "totalRefunded": "Reembolsado no período",

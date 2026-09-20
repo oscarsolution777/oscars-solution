@@ -16,7 +16,7 @@ import { formatSalonDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import type { SalesBucket } from "@/lib/reports/aggregations";
 import { SalesChart } from "./sales-chart";
-import { ExportCsvButton } from "./export-csv-button";
+import { ExportButtons } from "./export-buttons";
 
 type PaymentRow = Tables<"payments">;
 type ClientRow = Tables<"clients">;
@@ -48,11 +48,11 @@ export function SalesTab({
     .reduce((sum, p) => sum + p.amount_cents, 0);
 
   const csvRows = payments.map((p) => ({
-    fecha: formatSalonDate(p.paid_at, timezone, locale, "yyyy-MM-dd"),
-    cliente: clientsById.get(p.client_id)?.full_name ?? "",
-    monto: (p.amount_cents / 100).toFixed(2),
-    metodo: tMethods(p.method),
-    estado: tStatuses(p.status),
+    [t("columnDate")]: formatSalonDate(p.paid_at, timezone, locale, "yyyy-MM-dd"),
+    [t("columnClient")]: clientsById.get(p.client_id)?.full_name ?? "",
+    [t("columnAmount")]: (p.amount_cents / 100).toFixed(2),
+    [t("columnMethod")]: tMethods(p.method),
+    [t("columnStatus")]: tStatuses(p.status),
   }));
 
   return (
@@ -87,7 +87,7 @@ export function SalesTab({
       </Card>
 
       <div className="flex justify-end">
-        <ExportCsvButton rows={csvRows} filename="ventas.csv" />
+        <ExportButtons rows={csvRows} baseFilename="ventas" tabKey="sales" />
       </div>
 
       {payments.length === 0 ? (

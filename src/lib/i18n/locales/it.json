@@ -133,6 +133,7 @@
       }
     },
     "agenda": {
+      "createButton": "Nuovo appuntamento",
       "columnDate": "Data",
       "columnClient": "Cliente",
       "columnServices": "Servizi",
@@ -185,6 +186,28 @@
       "staffUnassigned": "Non ancora assegnato",
       "itemsError": "Aggiungi almeno un servizio",
       "genericError": "Impossibile salvare la richiesta. Riprova."
+    },
+    "appointmentForm": {
+      "createTitle": "Nuovo appuntamento",
+      "subtitle": "Crea un appuntamento direttamente, senza passare da una richiesta.",
+      "existingClientLabel": "Cliente esistente (opzionale)",
+      "existingClientPlaceholder": "Cerca cliente...",
+      "existingClientNone": "Nuovo cliente",
+      "clientNameLabel": "Nome completo",
+      "clientNameError": "Inserisci il nome del cliente",
+      "clientPhoneLabel": "Telefono (opzionale)",
+      "clientPhoneError": "Inserisci un telefono valido",
+      "clientEmailLabel": "Email (opzionale)",
+      "clientEmailError": "Inserisci un'email valida",
+      "dateLabel": "Data dell'appuntamento",
+      "dateError": "Seleziona una data valida",
+      "itemsLabel": "Servizi e collaboratore assegnato",
+      "addItem": "Aggiungi servizio",
+      "removeItem": "Rimuovi",
+      "servicePlaceholder": "Seleziona un servizio",
+      "staffPlaceholder": "Seleziona un collaboratore",
+      "itemsError": "Aggiungi almeno un servizio e assegna un collaboratore a ciascuno",
+      "genericError": "Impossibile creare l'appuntamento. Riprova."
     },
     "confirm": {
       "title": "Conferma la richiesta di {name}",
@@ -825,6 +848,12 @@
       "apply": "Applica"
     },
     "exportCsv": "Esporta CSV",
+    "exportPdf": "Esporta PDF",
+    "pdf": {
+      "period": "Periodo",
+      "generatedOn": "Generato il",
+      "page": "Pagina {page} di {total}"
+    },
     "sales": {
       "totalIncome": "Incasso del periodo",
       "totalRefunded": "Rimborsato nel periodo",

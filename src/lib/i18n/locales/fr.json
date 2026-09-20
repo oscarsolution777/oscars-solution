@@ -133,6 +133,7 @@
       }
     },
     "agenda": {
+      "createButton": "Nouveau rendez-vous",
       "columnDate": "Date",
       "columnClient": "Client",
       "columnServices": "Services",
@@ -185,6 +186,28 @@
       "staffUnassigned": "Pas encore assigné",
       "itemsError": "Ajoutez au moins un service",
       "genericError": "Impossible d'enregistrer la demande. Réessayez."
+    },
+    "appointmentForm": {
+      "createTitle": "Nouveau rendez-vous",
+      "subtitle": "Créez un rendez-vous directement, sans passer par une demande.",
+      "existingClientLabel": "Client existant (optionnel)",
+      "existingClientPlaceholder": "Rechercher un client...",
+      "existingClientNone": "Nouveau client",
+      "clientNameLabel": "Nom complet",
+      "clientNameError": "Saisissez le nom du client",
+      "clientPhoneLabel": "Téléphone (optionnel)",
+      "clientPhoneError": "Saisissez un numéro de téléphone valide",
+      "clientEmailLabel": "E-mail (optionnel)",
+      "clientEmailError": "Saisissez un e-mail valide",
+      "dateLabel": "Date du rendez-vous",
+      "dateError": "Sélectionnez une date valide",
+      "itemsLabel": "Services et employé assigné",
+      "addItem": "Ajouter un service",
+      "removeItem": "Retirer",
+      "servicePlaceholder": "Sélectionnez un service",
+      "staffPlaceholder": "Sélectionnez un employé",
+      "itemsError": "Ajoutez au moins un service et assignez un employé à chacun",
+      "genericError": "Impossible de créer le rendez-vous. Réessayez."
     },
     "confirm": {
       "title": "Confirmer la demande de {name}",
@@ -825,6 +848,12 @@
       "apply": "Appliquer"
     },
     "exportCsv": "Exporter en CSV",
+    "exportPdf": "Exporter en PDF",
+    "pdf": {
+      "period": "Période",
+      "generatedOn": "Généré le",
+      "page": "Page {page} sur {total}"
+    },
     "sales": {
       "totalIncome": "Revenus de la période",
       "totalRefunded": "Remboursé sur la période",

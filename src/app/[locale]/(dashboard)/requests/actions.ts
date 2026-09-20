@@ -3,13 +3,21 @@
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentSession } from "@/lib/auth/session";
 import { requestSchema, requestStatuses } from "@/lib/validations/requests";
-import { confirmRequestSchema, appointmentStatuses } from "@/lib/validations/appointments";
+import {
+  confirmRequestSchema,
+  createAppointmentSchema,
+  appointmentStatuses,
+} from "@/lib/validations/appointments";
 import { createRequestWithItems, getRequestById, updateRequestRow } from "@/lib/db/requests";
-import { createAppointmentFromRequest, updateAppointmentRow } from "@/lib/db/appointments";
+import {
+  createAppointmentFromRequest,
+  createAppointmentDirect,
+  updateAppointmentRow,
+} from "@/lib/db/appointments";
 import { createClientRow } from "@/lib/db/clients";
 import { logAuditEvent } from "@/lib/db/audit-log";
 import type { RequestInput } from "@/lib/validations/requests";
-import type { ConfirmRequestInput } from "@/lib/validations/appointments";
+import type { ConfirmRequestInput, CreateAppointmentInput } from "@/lib/validations/appointments";
 
 type ActionResult<T = undefined> = { ok: true; data: T } | { ok: false; error: string };
 
@@ -155,6 +163,53 @@ export async function confirmRequestAction(
       // Best-effort: la cita ya quedó creada, no se revierte por un fallo
       // al registrar la auditoría.
     }
+
+    return { ok: true, data: undefined };
+  } catch {
+    return { ok: false, error: "requests.errors.generic" };
+  }
+}
+
+// Crea una cita directamente desde la pestaña "Agenda", sin pasar por el
+// flujo de solicitudes (elegido explícitamente sobre exigir siempre una
+// solicitud primero: la dueña puede agendar un walk-in o una llamada sin
+// dejar rastro de una "solicitud" que nunca existió como tal).
+export async function createAppointmentDirectAction(
+  input: CreateAppointmentInput
+): Promise<ActionResult> {
+  const access = await requireRequestsAccess();
+  if (!access.ok) return access;
+
+  const parsed = createAppointmentSchema.safeParse(input);
+  if (!parsed.success) {
+    return { ok: false, error: "requests.errors.invalidInput" };
+  }
+
+  try {
+    const supabase = await createClient();
+
+    let clientId = parsed.data.clientId;
+    if (!clientId) {
+      const newClient = await createClientRow(supabase, {
+        salonId: access.salonId,
+        fullName: parsed.data.clientName,
+        phone: parsed.data.clientPhone || null,
+        email: parsed.data.clientEmail || null,
+        notes: null,
+        preferences: [],
+      });
+      clientId = newClient.id;
+    }
+
+    await createAppointmentDirect(supabase, {
+      salonId: access.salonId,
+      clientId,
+      appointmentDate: parsed.data.appointmentDate,
+      items: parsed.data.items.map((item) => ({
+        serviceId: item.serviceId,
+        staffId: item.staffId,
+      })),
+    });
 
     return { ok: true, data: undefined };
   } catch {

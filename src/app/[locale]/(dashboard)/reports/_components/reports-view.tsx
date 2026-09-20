@@ -12,6 +12,7 @@ import type {
   ClientSegments,
 } from "@/lib/reports/aggregations";
 import { PeriodSelector } from "@/components/shared/period-selector";
+import { ReportExportContext } from "./export-buttons";
 import { SalesTab } from "./sales-tab";
 import { ClientsTab } from "./clients-tab";
 import { ServicesTab } from "./services-tab";
@@ -24,6 +25,7 @@ type ProductRow = Tables<"products">;
 
 export function ReportsView({
   period,
+  salonName,
   currency,
   timezone,
   locale,
@@ -34,6 +36,7 @@ export function ReportsView({
   inventory,
 }: {
   period: Period;
+  salonName: string;
   currency: string;
   timezone: string;
   locale: string;
@@ -52,6 +55,7 @@ export function ReportsView({
   );
 
   return (
+    <ReportExportContext.Provider value={{ salonName, timezone, period }}>
     <div className="space-y-6">
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -106,5 +110,6 @@ export function ReportsView({
         </TabsContent>
       </Tabs>
     </div>
+    </ReportExportContext.Provider>
   );
 }

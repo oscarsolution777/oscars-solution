@@ -15,7 +15,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { ProductsValueChart } from "@/components/shared/charts/products-value-chart";
 import { formatMoney } from "@/lib/utils/money";
 import type { Tables } from "@/types/database";
-import { ExportCsvButton } from "./export-csv-button";
+import { ExportButtons } from "./export-buttons";
 
 type ProductRow = Tables<"products">;
 
@@ -38,10 +38,11 @@ export function InventoryTab({
   const sorted = [...products].sort((a, b) => a.stock_qty - b.stock_qty);
 
   const csvRows = sorted.map((p) => ({
-    producto: p.name,
-    stock: p.stock_qty,
-    minimo: p.min_stock,
-    valor: ((p.stock_qty * p.cost_cents) / 100).toFixed(2),
+    [t("columnProduct")]: p.name,
+    [t("columnStock")]: p.stock_qty,
+    [t("columnMinStock")]: p.min_stock,
+    [t("columnValue")]: ((p.stock_qty * p.cost_cents) / 100).toFixed(2),
+    [t("columnStatus")]: lowStockIds.has(p.id) ? t("lowStockBadge") : t("okBadge"),
   }));
 
   return (
@@ -72,7 +73,12 @@ export function InventoryTab({
       />
 
       <div className="flex justify-end">
-        <ExportCsvButton rows={csvRows} filename="inventario.csv" />
+        <ExportButtons
+          rows={csvRows}
+          baseFilename="inventario"
+          tabKey="inventory"
+          withPeriod={false}
+        />
       </div>
 
       {sorted.length === 0 ? (

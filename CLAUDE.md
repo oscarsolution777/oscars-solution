@@ -214,12 +214,12 @@ Construido en dos etapas: el flujo del panel (confirmar/rechazar, crear la cita)
   - source: `qr` | `manual`
   - Sin `DELETE`: una corrección se hace cambiando el `status`.
 - `request_items` — request_id, service_id, staff_id (nullable hasta que la dueña asigne), service_name_snapshot, price_cents_snapshot. El trigger `snapshot_request_item` fija siempre `service_name_snapshot`/`price_cents_snapshot` leyendo `services` en ese momento, nunca se confía en lo que envíe la aplicación. Sin `salon_id` propio (se deriva vía `request_id`, mismo patrón que `service_staff`).
-- `appointments` — cita creada al confirmar la solicitud (`createAppointmentFromRequest`: crea la cita + sus items y marca la solicitud `confirmed`, vinculando o creando el cliente)
+- `appointments` — cita creada al confirmar la solicitud (`createAppointmentFromRequest`: crea la cita + sus items y marca la solicitud `confirmed`, vinculando o creando el cliente) **o directamente desde la pestaña "Agenda"** (`createAppointmentDirect`/`createAppointmentDirectAction`, sin pasar por una solicitud — `request_id` queda `null`; mismo patrón de vincular o crear el cliente)
   - salon_id, request_id (nullable), client_id, **appointment_date (date)**, total_cents, notes
   - status: `scheduled` | `completed` | `no_show` | `cancelled`
   - El orden dentro del día lo maneja la dueña de palabra; el sistema no gestiona turnos ni horario.
   - `total_cents` lo recalcula siempre el trigger `set_appointment_total` sumando `appointment_items`. Sin `DELETE`: correcciones vía `status`; cambiar la fecha es un `UPDATE` directo de `appointment_date` desde el panel; la reprogramación pedida por el cliente (Fase 3) nunca actualiza esta fila directamente — crea una solicitud nueva, ver sección 6 "Portal QR (Fase 2) y cancelar/reprogramar (Fase 3)".
-  - Al pasar a `completed`, el trigger `apply_appointment_completion` (a) inserta en `stock_movements` un movimiento `out` por cada `service_products` de cada servicio de la cita (descuento automático de inventario) y (b) actualiza `clients.first_visit_at`/`last_visit_at`.
+  - Al pasar a `completed`, el trigger `apply_appointment_completion` (a) inserta en `stock_movements` un movimiento `out` por cada `service_products` de cada servicio de la cita (descuento automático de inventario) y (b) actualiza `clients.first_visit_at`/`last_visit_at`. **El estado se puede corregir en cualquier momento desde el panel** (`appointments-table.tsx` ya no oculta las acciones fuera de `scheduled` — se decidió permitir editar el estado después en vez de pedir confirmación antes, sección "Decisiones cerradas"): al salir de `completed` hacia cualquier otro estado, la migración `0019` extiende el mismo trigger para insertar el movimiento `in` compensatorio inverso, revirtiendo el descuento de inventario. Limitación conocida: la reversión usa las cantidades *actuales* de `service_products`, no una foto de las que existían al completar (misma limitación que ya tenía el sentido directo).
 - `appointment_items` — appointment_id, service_id, staff_id (el trabajador asignado, obligatorio), price_cents. El trigger `snapshot_appointment_item` fija siempre `price_cents` desde `services`. Sin `salon_id` propio. Sin `DELETE`.
 
 ### Portal QR (Fase 2) y cancelar/reprogramar (Fase 3)
@@ -530,7 +530,7 @@ Se construye en la **Fase 9**, pero el modelo de datos se deja listo desde la Fa
 - **Fase 5 — Clientes y Trabajadores (panel):** fichas, historial, habilidades, rendimiento, salario.
 - **Fase 6 — Pagos y Finanzas:** cobros, cuadre de caja diario (por salón), gastos, nóminas, resumen.
 - **Fase 7 — Inventario:** productos, proveedores, movimientos, descuento automático, alertas.
-- **Fase 8 — Dashboard y Reportes:** KPIs, gráficos, exportación a CSV.
+- **Fase 8 — Dashboard y Reportes:** KPIs, gráficos, exportación a CSV. Ampliada después con exportación a **PDF** (`jspdf` + `jspdf-autotable`, dependencia añadida a petición expresa; generación 100% en el navegador, `src/lib/utils/pdf-export.ts`, cabecera de marca con `--primary` `#e8375a`), encabezados de columna traducidos, BOM UTF-8 y fin de línea CRLF en el CSV, y un selector de periodo compartido (`components/shared/period-selector.tsx`) que también usa el Dashboard.
 - **Fase 9 — IA + SuperAdmin:** análisis y recomendaciones (proveedor intercambiable); panel SuperAdmin completo (salones, demos, monedas, precios de suscripción). **Panel SuperAdmin (9A) y módulo de IA (9B) construidos** — ver secciones 9 y 10. Pendiente real: cargar `ANTHROPIC_API_KEY`/`OPENAI_API_KEY` en producción (hoy vacías, el módulo de IA degrada a "no configurada").
 - **Fase 10 — Multi-salón y pulido:** selector de salón para dueñas con cadena, configuración, auditoría, revisión de traducciones en los 6 idiomas. **Construida y en producción** — ver sección 6, "Configuración y multi-salón (Fase 10)".
 
@@ -558,6 +558,8 @@ compila · pasa lint y typecheck · migraciones aplicadas · RLS probada con dos
 - La reprogramación pedida desde `/estado/[code]` **no notifica** a la dueña por ningún canal externo — simplemente aparece como una solicitud pendiente más en su bandeja.
 - La traducción del contenido de cada salón la hace **cada dueña, en su propio idioma**, al cargar su catálogo. El texto fijo del sistema (los 6 archivos de `locales/`) lo mantiene Oscar/Claude Code.
 - Configuración (Fase 10) no incluye invitar usuarios nuevos por email: la dueña solo administra membresías que ya existen (ver, cambiar rol, activar/desactivar). Los usuarios nuevos los sigue dando de alta el equipo de Oscar's Solution.
+- Corregir el estado de una cita (`completed`/`no_show`/`cancelled`) se resuelve dejando **editar el estado después** en vez de pedir confirmación antes de aplicarlo — más simple para el flujo real de la dueña, y el stock se revierte automáticamente al salir de `completed` (migración `0019`) para que la corrección no deje el inventario descuadrado.
+- El teléfono de `clients` y de la solicitud manual del panel es **opcional** (migración `0018`), igual que el correo — la solicitud del portal QR (`/s/[slug]/solicitud`) sigue exigiéndolo porque es la única forma de identificar y limitar por tasa (`check_request_rate_limit`) a un cliente anónimo.
 
 No hay preguntas abiertas pendientes por el momento. Este documento está listo para empezar la Fase 0.
 

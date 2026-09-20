@@ -14,7 +14,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { formatMoney } from "@/lib/utils/money";
 import type { ServiceSalesRow } from "@/lib/reports/aggregations";
 import { ServicesChart } from "./services-chart";
-import { ExportCsvButton } from "./export-csv-button";
+import { ExportButtons } from "./export-buttons";
 
 export function ServicesTab({
   rows,
@@ -28,9 +28,9 @@ export function ServicesTab({
   const t = useTranslations("reports.services");
 
   const csvRows = rows.map((r) => ({
-    servicio: r.name,
-    unidades: r.units,
-    ingresos: (r.revenueCents / 100).toFixed(2),
+    [t("columnService")]: r.name,
+    [t("columnUnits")]: r.units,
+    [t("columnRevenue")]: (r.revenueCents / 100).toFixed(2),
   }));
 
   return (
@@ -46,7 +46,7 @@ export function ServicesTab({
       </Card>
 
       <div className="flex justify-end">
-        <ExportCsvButton rows={csvRows} filename="servicios.csv" />
+        <ExportButtons rows={csvRows} baseFilename="servicios" tabKey="services" />
       </div>
 
       {rows.length === 0 ? (

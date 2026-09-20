@@ -14,7 +14,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { formatMoney } from "@/lib/utils/money";
 import type { StaffWorkloadRow } from "@/lib/reports/aggregations";
 import { StaffChart } from "./staff-chart";
-import { ExportCsvButton } from "./export-csv-button";
+import { ExportButtons } from "./export-buttons";
 
 export function StaffTab({
   rows,
@@ -28,9 +28,9 @@ export function StaffTab({
   const t = useTranslations("reports.staff");
 
   const csvRows = rows.map((r) => ({
-    trabajador: r.name,
-    servicios_asignados: r.assignedCount,
-    ingresos_generados: (r.revenueCents / 100).toFixed(2),
+    [t("columnStaff")]: r.name,
+    [t("columnAssigned")]: r.assignedCount,
+    [t("columnRevenue")]: (r.revenueCents / 100).toFixed(2),
   }));
 
   return (
@@ -46,7 +46,7 @@ export function StaffTab({
       </Card>
 
       <div className="flex justify-end">
-        <ExportCsvButton rows={csvRows} filename="trabajadores.csv" />
+        <ExportButtons rows={csvRows} baseFilename="trabajadores" tabKey="staff" />
       </div>
 
       {rows.length === 0 ? (

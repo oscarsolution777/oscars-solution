@@ -133,6 +133,7 @@
       }
     },
     "agenda": {
+      "createButton": "New appointment",
       "columnDate": "Date",
       "columnClient": "Client",
       "columnServices": "Services",
@@ -185,6 +186,28 @@
       "staffUnassigned": "Not assigned yet",
       "itemsError": "Add at least one service",
       "genericError": "Couldn't save the request. Please try again."
+    },
+    "appointmentForm": {
+      "createTitle": "New appointment",
+      "subtitle": "Create an appointment directly, without going through a request.",
+      "existingClientLabel": "Existing client (optional)",
+      "existingClientPlaceholder": "Search client...",
+      "existingClientNone": "New client",
+      "clientNameLabel": "Full name",
+      "clientNameError": "Enter the client's name",
+      "clientPhoneLabel": "Phone (optional)",
+      "clientPhoneError": "Enter a valid phone number",
+      "clientEmailLabel": "Email (optional)",
+      "clientEmailError": "Enter a valid email",
+      "dateLabel": "Appointment date",
+      "dateError": "Select a valid date",
+      "itemsLabel": "Services and assigned staff",
+      "addItem": "Add service",
+      "removeItem": "Remove",
+      "servicePlaceholder": "Select a service",
+      "staffPlaceholder": "Select a staff member",
+      "itemsError": "Add at least one service and assign a staff member to each",
+      "genericError": "Couldn't create the appointment. Please try again."
     },
     "confirm": {
       "title": "Confirm {name}'s request",
@@ -825,6 +848,12 @@
       "apply": "Apply"
     },
     "exportCsv": "Export CSV",
+    "exportPdf": "Export PDF",
+    "pdf": {
+      "period": "Period",
+      "generatedOn": "Generated on",
+      "page": "Page {page} of {total}"
+    },
     "sales": {
       "totalIncome": "Income this period",
       "totalRefunded": "Refunded this period",

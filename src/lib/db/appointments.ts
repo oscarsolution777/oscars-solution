@@ -87,6 +87,50 @@ export async function createAppointmentFromRequest(
   return refreshed;
 }
 
+// Crea una cita directamente desde la pestaña "Agenda", sin pasar por el
+// flujo de solicitudes (request_id queda null). Mismo patrón de dos inserts
+// no atómicos entre sí que createAppointmentFromRequest.
+export async function createAppointmentDirect(
+  supabase: SupabaseServerClient,
+  input: {
+    salonId: string;
+    clientId: string;
+    appointmentDate: string;
+    items: { serviceId: string; staffId: string }[];
+  }
+) {
+  const { data: appointment, error: appointmentError } = await supabase
+    .from("appointments")
+    .insert({
+      salon_id: input.salonId,
+      client_id: input.clientId,
+      appointment_date: input.appointmentDate,
+    })
+    .select(SELECT_COLUMNS)
+    .single();
+
+  if (appointmentError) throw appointmentError;
+
+  const { error: itemsError } = await supabase.from("appointment_items").insert(
+    input.items.map((item) => ({
+      appointment_id: appointment.id,
+      service_id: item.serviceId,
+      staff_id: item.staffId,
+    }))
+  );
+
+  if (itemsError) throw itemsError;
+
+  const { data: refreshed, error: refreshError } = await supabase
+    .from("appointments")
+    .select(SELECT_COLUMNS)
+    .eq("id", appointment.id)
+    .single();
+
+  if (refreshError) throw refreshError;
+  return refreshed;
+}
+
 export async function updateAppointmentRow(
   supabase: SupabaseServerClient,
   appointmentId: string,

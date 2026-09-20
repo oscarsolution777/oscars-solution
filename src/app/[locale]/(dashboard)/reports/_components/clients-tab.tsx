@@ -16,7 +16,7 @@ import { formatSalonDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import type { ClientSegments } from "@/lib/reports/aggregations";
 import { ClientsChart } from "./clients-chart";
-import { ExportCsvButton } from "./export-csv-button";
+import { ExportButtons } from "./export-buttons";
 
 type ClientRow = Tables<"clients">;
 
@@ -38,10 +38,12 @@ export function ClientsTab({
   const sorted = [...clients].sort((a, b) => b.total_spent_cents - a.total_spent_cents);
 
   const csvRows = sorted.map((c) => ({
-    nombre: c.full_name,
-    telefono: c.phone ?? "—",
-    gasto_total: (c.total_spent_cents / 100).toFixed(2),
-    ultima_visita: c.last_visit_at ? formatSalonDate(c.last_visit_at, timezone, locale, "yyyy-MM-dd") : "",
+    [t("columnName")]: c.full_name,
+    [t("columnPhone")]: c.phone ?? "—",
+    [t("columnTotalSpent")]: (c.total_spent_cents / 100).toFixed(2),
+    [t("columnLastVisit")]: c.last_visit_at
+      ? formatSalonDate(c.last_visit_at, timezone, locale, "yyyy-MM-dd")
+      : "—",
   }));
 
   return (
@@ -53,7 +55,7 @@ export function ClientsTab({
       </Card>
 
       <div className="flex justify-end">
-        <ExportCsvButton rows={csvRows} filename="clientes.csv" />
+        <ExportButtons rows={csvRows} baseFilename="clientes" tabKey="clients" />
       </div>
 
       {sorted.length === 0 ? (
