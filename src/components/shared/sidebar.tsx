@@ -13,12 +13,14 @@ export function Sidebar({
   role,
   salons,
   activeSalonId,
+  pendingRequestsCount = 0,
 }: {
   salonName: string;
   logoUrl?: string | null;
   role: string;
   salons?: { id: string; name: string }[];
   activeSalonId?: string;
+  pendingRequestsCount?: number;
 }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
@@ -86,7 +88,12 @@ export function Sidebar({
               )}
             >
               <Icon size={18} />
-              <span className="truncate">{t(item.key)}</span>
+              <span className="min-w-0 flex-1 truncate">{t(item.key)}</span>
+              {item.key === "requests" && pendingRequestsCount > 0 && (
+                <span className="flex h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-danger px-1 text-xs font-semibold text-white">
+                  {pendingRequestsCount > 99 ? "99+" : pendingRequestsCount}
+                </span>
+              )}
             </Link>
           );
         })}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { CheckCircle2, UserX, Ban } from "lucide-react";
+import { Eye, CheckCircle2, UserX, Ban } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n/navigation";
 import {
@@ -48,12 +48,14 @@ export function AppointmentsTable({
   clientsById,
   currency,
   locale,
+  onView,
 }: {
   appointments: AppointmentRow[];
   itemsByAppointmentId: Map<string, AppointmentItemRow[]>;
   clientsById: Map<string, ClientRow>;
   currency: string;
   locale: string;
+  onView: (appointment: AppointmentRow) => void;
 }) {
   const t = useTranslations("requests.agenda");
   const tStatuses = useTranslations("requests.appointmentStatuses");
@@ -127,6 +129,14 @@ export function AppointmentsTable({
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-1">
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => onView(appointment)}
+                      aria-label={t("viewAction")}
+                    >
+                      <Eye size={16} />
+                    </Button>
                     {appointment.status !== "completed" && (
                       <Button
                         variant="ghost"

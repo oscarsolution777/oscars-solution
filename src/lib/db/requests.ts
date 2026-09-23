@@ -17,6 +17,23 @@ export async function listRequests(supabase: SupabaseServerClient, salonId: stri
   return data;
 }
 
+// Solo el conteo (head: true → sin traer filas), para el badge de
+// "pendientes" del sidebar (se pide en cada navegación junto al resto del
+// layout del panel, no en tiempo real).
+export async function countPendingRequests(
+  supabase: SupabaseServerClient,
+  salonId: string
+): Promise<number> {
+  const { count, error } = await supabase
+    .from("requests")
+    .select("id", { count: "exact", head: true })
+    .eq("salon_id", salonId)
+    .eq("status", "pending");
+
+  if (error) throw error;
+  return count ?? 0;
+}
+
 const ITEM_SELECT_COLUMNS =
   "id, request_id, service_id, staff_id, service_name_snapshot, price_cents_snapshot, created_at";
 

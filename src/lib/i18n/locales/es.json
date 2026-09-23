@@ -141,6 +141,7 @@
       "columnStatus": "Estado",
       "columnActions": "Acciones",
       "serviceCount": "{count, plural, one {servicio} other {servicios}}",
+      "viewAction": "Ver detalle",
       "completeAction": "Marcar completada",
       "noShowAction": "Marcar no asistió",
       "cancelAction": "Cancelar cita",
@@ -151,6 +152,18 @@
         "description": "La cita pasará a cancelada. Esta acción no se puede deshacer.",
         "cancel": "Volver",
         "confirm": "Cancelar cita"
+      },
+      "detail": {
+        "title": "Detalle de la cita",
+        "date": "Fecha",
+        "status": "Estado",
+        "client": "Cliente",
+        "phone": "Teléfono",
+        "email": "Correo electrónico",
+        "servicesLabel": "Servicios",
+        "unassignedStaff": "Sin asignar",
+        "total": "Total",
+        "notes": "Notas"
       }
     },
     "statuses": {

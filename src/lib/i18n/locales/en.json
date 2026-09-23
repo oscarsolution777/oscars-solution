@@ -141,6 +141,7 @@
       "columnStatus": "Status",
       "columnActions": "Actions",
       "serviceCount": "{count, plural, one {service} other {services}}",
+      "viewAction": "View detail",
       "completeAction": "Mark completed",
       "noShowAction": "Mark no-show",
       "cancelAction": "Cancel appointment",
@@ -151,6 +152,18 @@
         "description": "The appointment will be marked as cancelled. This can't be undone.",
         "cancel": "Go back",
         "confirm": "Cancel appointment"
+      },
+      "detail": {
+        "title": "Appointment detail",
+        "date": "Date",
+        "status": "Status",
+        "client": "Client",
+        "phone": "Phone",
+        "email": "Email",
+        "servicesLabel": "Services",
+        "unassignedStaff": "Unassigned",
+        "total": "Total",
+        "notes": "Notes"
       }
     },
     "statuses": {

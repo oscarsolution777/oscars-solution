@@ -168,9 +168,57 @@ function mondayOf(dateStr: string): string {
   return d.toISOString().slice(0, 10);
 }
 
+function addMonthKey(key: string, delta: number): string {
+  const [year, month] = key.split("-").map(Number);
+  const total = year * 12 + (month - 1) + delta;
+  return `${Math.floor(total / 12)}-${String((total % 12) + 1).padStart(2, "0")}`;
+}
+
+// Enumera todas las claves de bucket entre from/to a una granularidad dada,
+// aunque no haya habido ningún pago ese día/semana/mes — así el eje X del
+// gráfico siempre representa el rango completo del periodo, con cero donde
+// no hubo ingreso, en vez de saltarse los huecos (CLAUDE.md sección 9,
+// "mes completo" del Dashboard).
+function enumerateBucketKeys(from: string, to: string, granularity: "day" | "week" | "month"): string[] {
+  const keys: string[] = [];
+
+  if (granularity === "month") {
+    let key = from.slice(0, 7);
+    const last = to.slice(0, 7);
+    while (key <= last) {
+      keys.push(key);
+      key = addMonthKey(key, 1);
+    }
+    return keys;
+  }
+
+  if (granularity === "week") {
+    let key = mondayOf(from);
+    const last = mondayOf(to);
+    while (key <= last) {
+      keys.push(key);
+      const d = new Date(`${key}T00:00:00Z`);
+      d.setUTCDate(d.getUTCDate() + 7);
+      key = d.toISOString().slice(0, 10);
+    }
+    return keys;
+  }
+
+  let key = from;
+  while (key <= to) {
+    keys.push(key);
+    const d = new Date(`${key}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() + 1);
+    key = d.toISOString().slice(0, 10);
+  }
+  return keys;
+}
+
 // Agrupa ingresos por día (rango <= 31 días), semana (<= 120 días) o mes
 // (rangos mayores) para que el eje X del gráfico de Ventas siga siendo legible
-// sin pedirle al usuario que elija la granularidad.
+// sin pedirle al usuario que elija la granularidad. Siempre devuelve un punto
+// por cada día/semana/mes del rango (relleno en cero), no solo los que
+// tuvieron ingreso, para que el gráfico muestre el periodo completo.
 export function computeSalesBuckets(
   payments: PaymentRow[],
   from: string,
@@ -180,7 +228,7 @@ export function computeSalesBuckets(
   const span = daysBetween(from, to);
   const granularity: "day" | "week" | "month" = span <= 31 ? "day" : span <= 120 ? "week" : "month";
 
-  const buckets = new Map<string, number>();
+  const buckets = new Map<string, number>(enumerateBucketKeys(from, to, granularity).map((key) => [key, 0]));
   for (const payment of payments) {
     if (payment.status !== "paid") continue;
     const dateStr = formatInTimeZone(new Date(payment.paid_at), timezone, "yyyy-MM-dd");

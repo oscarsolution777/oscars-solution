@@ -141,6 +141,7 @@
       "columnStatus": "Status",
       "columnActions": "Aktionen",
       "serviceCount": "{count, plural, one {Dienstleistung} other {Dienstleistungen}}",
+      "viewAction": "Details ansehen",
       "completeAction": "Als abgeschlossen markieren",
       "noShowAction": "Als nicht erschienen markieren",
       "cancelAction": "Termin stornieren",
@@ -151,6 +152,18 @@
         "description": "Der Termin wird als storniert markiert. Dies kann nicht rückgängig gemacht werden.",
         "cancel": "Zurück",
         "confirm": "Termin stornieren"
+      },
+      "detail": {
+        "title": "Termindetails",
+        "date": "Datum",
+        "status": "Status",
+        "client": "Kunde",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "servicesLabel": "Dienstleistungen",
+        "unassignedStaff": "Nicht zugewiesen",
+        "total": "Gesamt",
+        "notes": "Notizen"
       }
     },
     "statuses": {

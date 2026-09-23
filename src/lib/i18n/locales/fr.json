@@ -141,6 +141,7 @@
       "columnStatus": "Statut",
       "columnActions": "Actions",
       "serviceCount": "{count, plural, one {service} other {services}}",
+      "viewAction": "Voir le détail",
       "completeAction": "Marquer terminé",
       "noShowAction": "Marquer absence",
       "cancelAction": "Annuler le rendez-vous",
@@ -151,6 +152,18 @@
         "description": "Le rendez-vous sera marqué comme annulé. Cette action est irréversible.",
         "cancel": "Retour",
         "confirm": "Annuler le rendez-vous"
+      },
+      "detail": {
+        "title": "Détail du rendez-vous",
+        "date": "Date",
+        "status": "Statut",
+        "client": "Client",
+        "phone": "Téléphone",
+        "email": "E-mail",
+        "servicesLabel": "Services",
+        "unassignedStaff": "Non assigné",
+        "total": "Total",
+        "notes": "Notes"
       }
     },
     "statuses": {

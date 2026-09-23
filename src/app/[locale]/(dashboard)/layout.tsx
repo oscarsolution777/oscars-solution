@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { requireAuth } from "@/lib/auth/guards";
+import { createClient } from "@/lib/supabase/server";
+import { countPendingRequests } from "@/lib/db/requests";
 import { Sidebar } from "@/components/shared/sidebar";
 import { Topbar } from "@/components/shared/topbar";
 import { SalonSuspendedState } from "@/components/shared/salon-suspended-state";
@@ -22,6 +24,16 @@ export default async function DashboardLayout({
     .filter((m) => m.salon)
     .map((m) => ({ id: m.salon!.id, name: m.salon!.name }));
 
+  // Badge del sidebar en "Solicitudes y Citas": se pide junto al resto del
+  // layout (se refresca al navegar, no en tiempo real). Si el salón está
+  // suspendido no hace falta la consulta: el layout va a bloquear el acceso
+  // igual más abajo.
+  let pendingRequestsCount = 0;
+  if (session.activeMembership?.salon && !isSuspended) {
+    const supabase = await createClient();
+    pendingRequestsCount = await countPendingRequests(supabase, session.activeMembership.salon.id);
+  }
+
   return (
     <div className="flex min-h-screen bg-content-bg">
       <Sidebar
@@ -30,6 +42,7 @@ export default async function DashboardLayout({
         role={roleLabel}
         salons={salons}
         activeSalonId={session.activeMembership?.salon?.id}
+        pendingRequestsCount={pendingRequestsCount}
       />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar

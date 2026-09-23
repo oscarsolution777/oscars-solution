@@ -141,6 +141,7 @@
       "columnStatus": "Stato",
       "columnActions": "Azioni",
       "serviceCount": "{count, plural, one {servizio} other {servizi}}",
+      "viewAction": "Vedi dettaglio",
       "completeAction": "Segna come completato",
       "noShowAction": "Segna mancata presentazione",
       "cancelAction": "Annulla appuntamento",
@@ -151,6 +152,18 @@
         "description": "L'appuntamento sarà segnato come annullato. Questa azione non può essere annullata.",
         "cancel": "Indietro",
         "confirm": "Annulla appuntamento"
+      },
+      "detail": {
+        "title": "Dettaglio appuntamento",
+        "date": "Data",
+        "status": "Stato",
+        "client": "Cliente",
+        "phone": "Telefono",
+        "email": "Email",
+        "servicesLabel": "Servizi",
+        "unassignedStaff": "Non assegnato",
+        "total": "Totale",
+        "notes": "Note"
       }
     },
     "statuses": {

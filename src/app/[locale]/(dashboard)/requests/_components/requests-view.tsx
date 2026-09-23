@@ -12,6 +12,7 @@ import { RequestFormPanel } from "./request-form-panel";
 import { ConfirmRequestPanel } from "./confirm-request-panel";
 import { AppointmentFormPanel } from "./appointment-form-panel";
 import { AppointmentsTable } from "./appointments-table";
+import { AppointmentDetailPanel } from "./appointment-detail-panel";
 
 type RequestRow = Tables<"requests">;
 type RequestItemRow = Tables<"request_items">;
@@ -55,6 +56,7 @@ export function RequestsView({
   const [requestFormOpen, setRequestFormOpen] = useState(false);
   const [appointmentFormOpen, setAppointmentFormOpen] = useState(false);
   const [confirmingRequestId, setConfirmingRequestId] = useState<string | null>(null);
+  const [viewingAppointmentId, setViewingAppointmentId] = useState<string | null>(null);
 
   const itemsByRequestId = useMemo(() => {
     const map = new Map<string, RequestItemRow[]>();
@@ -80,12 +82,26 @@ export function RequestsView({
     clients,
   ]);
 
+  const servicesById = useMemo(() => new Map(services.map((service) => [service.id, service])), [
+    services,
+  ]);
+
+  const staffById = useMemo(() => new Map(staff.map((member) => [member.id, member])), [staff]);
+
   const confirmingRequest = confirmingRequestId
     ? (requests.find((request) => request.id === confirmingRequestId) ?? null)
     : null;
   const confirmingItems = confirmingRequestId
     ? (itemsByRequestId.get(confirmingRequestId) ?? [])
     : [];
+
+  const viewingAppointment = viewingAppointmentId
+    ? (appointments.find((appointment) => appointment.id === viewingAppointmentId) ?? null)
+    : null;
+  const viewingItems = viewingAppointmentId
+    ? (itemsByAppointmentId.get(viewingAppointmentId) ?? [])
+    : [];
+  const viewingClient = viewingAppointment ? (clientsById.get(viewingAppointment.client_id) ?? null) : null;
 
   return (
     <div className="space-y-6">
@@ -137,6 +153,7 @@ export function RequestsView({
             clientsById={clientsById}
             currency={currency}
             locale={locale}
+            onView={(appointment) => setViewingAppointmentId(appointment.id)}
           />
         </TabsContent>
       </Tabs>
@@ -164,6 +181,18 @@ export function RequestsView({
         items={confirmingItems}
         clients={clients}
         staff={staff}
+      />
+
+      <AppointmentDetailPanel
+        open={viewingAppointmentId !== null}
+        onOpenChange={(open) => !open && setViewingAppointmentId(null)}
+        appointment={viewingAppointment}
+        items={viewingItems}
+        client={viewingClient}
+        servicesById={servicesById}
+        staffById={staffById}
+        currency={currency}
+        locale={locale}
       />
     </div>
   );

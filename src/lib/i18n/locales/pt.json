@@ -141,6 +141,7 @@
       "columnStatus": "Status",
       "columnActions": "Ações",
       "serviceCount": "{count, plural, one {serviço} other {serviços}}",
+      "viewAction": "Ver detalhe",
       "completeAction": "Marcar como concluído",
       "noShowAction": "Marcar não compareceu",
       "cancelAction": "Cancelar atendimento",
@@ -151,6 +152,18 @@
         "description": "O atendimento será marcado como cancelado. Esta ação não pode ser desfeita.",
         "cancel": "Voltar",
         "confirm": "Cancelar atendimento"
+      },
+      "detail": {
+        "title": "Detalhe do atendimento",
+        "date": "Data",
+        "status": "Status",
+        "client": "Cliente",
+        "phone": "Telefone",
+        "email": "E-mail",
+        "servicesLabel": "Serviços",
+        "unassignedStaff": "Não atribuído",
+        "total": "Total",
+        "notes": "Observações"
       }
     },
     "statuses": {
