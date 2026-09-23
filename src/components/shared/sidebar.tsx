@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { usePathname, Link } from "@/lib/i18n/navigation";
+import { usePathname, useRouter, Link } from "@/lib/i18n/navigation";
 import { navItems } from "./nav-items";
 import { cn } from "@/lib/utils";
 import { SalonSwitcher } from "./salon-switcher";
+import { createClient } from "@/lib/supabase/browser";
 
 export function Sidebar({
   salonName,
@@ -24,6 +26,34 @@ export function Sidebar({
 }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
+  const router = useRouter();
+
+  // Badge en vivo de "Solicitudes y Citas": se suscribe a Supabase Realtime
+  // sobre la tabla requests filtrada por el salón activo (migración 0020) y
+  // pide un refresh del árbol de Server Components ante cualquier
+  // insert/update — así el número se actualiza apenas entra una solicitud
+  // nueva por QR o cambia el estado de una existente, sin depender de
+  // recargar la página ni de navegar a otro módulo (mismo patrón de
+  // router.refresh() ya usado tras las Server Actions del panel). La
+  // autorización de qué filas llegan la sigue resolviendo la política RLS
+  // requests_select_members (migración 0008), no este componente.
+  useEffect(() => {
+    if (!activeSalonId) return;
+
+    const supabase = createClient();
+    const channel = supabase
+      .channel(`requests-badge-${activeSalonId}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "requests", filter: `salon_id=eq.${activeSalonId}` },
+        () => router.refresh()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [activeSalonId, router]);
 
   // "finances" (y cualquier otro módulo futuro con restrictedToRoles) no se
   // muestra en absoluto a quien no tenga el rol requerido — CLAUDE.md
