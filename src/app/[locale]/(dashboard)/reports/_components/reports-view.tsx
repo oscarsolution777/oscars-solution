@@ -22,6 +22,7 @@ import { InventoryTab } from "./inventory-tab";
 type PaymentRow = Tables<"payments">;
 type ClientRow = Tables<"clients">;
 type ProductRow = Tables<"products">;
+type AppointmentRow = Tables<"appointments">;
 
 export function ReportsView({
   period,
@@ -41,7 +42,7 @@ export function ReportsView({
   timezone: string;
   locale: string;
   sales: { buckets: SalesBucket[]; payments: PaymentRow[] };
-  clients: { segments: ClientSegments; clients: ClientRow[] };
+  clients: { segments: ClientSegments; clients: ClientRow[]; appointments: AppointmentRow[] };
   services: { rows: ServiceSalesRow[] };
   staff: { rows: StaffWorkloadRow[] };
   inventory: { products: ProductRow[]; lowStockProducts: ProductRow[]; inventoryValueCents: number };
@@ -85,6 +86,7 @@ export function ReportsView({
           <ClientsTab
             segments={clients.segments}
             clients={clients.clients}
+            appointments={clients.appointments}
             currency={currency}
             timezone={timezone}
             locale={locale}

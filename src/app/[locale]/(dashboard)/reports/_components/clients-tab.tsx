@@ -21,16 +21,19 @@ import { ClientsChart } from "./clients-chart";
 import { ExportButtons } from "./export-buttons";
 
 type ClientRow = Tables<"clients">;
+type AppointmentRow = Tables<"appointments">;
 
 export function ClientsTab({
   segments,
   clients,
+  appointments,
   currency,
   timezone,
   locale,
 }: {
   segments: ClientSegments;
   clients: ClientRow[];
+  appointments: AppointmentRow[];
   currency: string;
   timezone: string;
   locale: string;
@@ -39,6 +42,30 @@ export function ClientsTab({
 
   const sorted = [...clients].sort((a, b) => b.total_spent_cents - a.total_spent_cents);
   const { page, setPage, totalPages, pageItems } = usePagination(sorted);
+
+  // "Cliente con más gasto" / "cliente más frecuente": a diferencia del resto
+  // de Reportes (filtrado por el periodo del selector), estos dos KPIs usan
+  // el mismo dato de por-vida que ya muestra la columna "Gasto total" de esta
+  // misma tabla (clients.total_spent_cents) -- mezclar un ranking "de todo el
+  // tiempo" arriba con uno "del periodo" abajo, en la misma pestaña, sería
+  // más confuso que útil. Frecuencia = nº de citas completadas históricas.
+  const topSpender = sorted.length > 0 && sorted[0].total_spent_cents > 0 ? sorted[0] : null;
+
+  const visitCountByClient = new Map<string, number>();
+  for (const appointment of appointments) {
+    if (appointment.status !== "completed") continue;
+    visitCountByClient.set(
+      appointment.client_id,
+      (visitCountByClient.get(appointment.client_id) ?? 0) + 1
+    );
+  }
+  let mostFrequent: { client: ClientRow; count: number } | null = null;
+  for (const client of clients) {
+    const count = visitCountByClient.get(client.id) ?? 0;
+    if (count > 0 && (!mostFrequent || count > mostFrequent.count)) {
+      mostFrequent = { client, count };
+    }
+  }
 
   const csvRows = sorted.map((c) => ({
     [t("columnName")]: c.full_name,
@@ -51,6 +78,31 @@ export function ClientsTab({
 
   return (
     <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Card>
+          <CardContent>
+            <p className="text-xs text-text-muted">{t("topSpenderLabel")}</p>
+            <p className="truncate text-xl font-bold text-text-primary">
+              {topSpender ? topSpender.full_name : "—"}
+            </p>
+            <p className="text-xs text-text-secondary">
+              {topSpender ? formatMoney(topSpender.total_spent_cents, currency, locale) : ""}
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <p className="text-xs text-text-muted">{t("mostFrequentLabel")}</p>
+            <p className="truncate text-xl font-bold text-text-primary">
+              {mostFrequent ? mostFrequent.client.full_name : "—"}
+            </p>
+            <p className="text-xs text-text-secondary">
+              {mostFrequent ? t("visitsCaption", { count: mostFrequent.count }) : ""}
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
       <Card>
         <CardContent>
           <ClientsChart segments={segments} />

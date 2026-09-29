@@ -98,7 +98,7 @@ export default async function ReportsPage({
       timezone={salon.timezone}
       locale={locale}
       sales={{ buckets: salesBuckets, payments: paymentsInPeriod }}
-      clients={{ segments: clientSegments, clients }}
+      clients={{ segments: clientSegments, clients, appointments }}
       services={{ rows: topServices }}
       staff={{ rows: staffWorkload }}
       inventory={{ products: activeProducts, lowStockProducts, inventoryValueCents }}

@@ -30,6 +30,13 @@ export function ServicesTab({
   const t = useTranslations("reports.services");
   const { page, setPage, totalPages, pageItems } = usePagination(rows);
 
+  let topByUnits: ServiceSalesRow | null = null;
+  let topByRevenue: ServiceSalesRow | null = null;
+  for (const row of rows) {
+    if (!topByUnits || row.units > topByUnits.units) topByUnits = row;
+    if (!topByRevenue || row.revenueCents > topByRevenue.revenueCents) topByRevenue = row;
+  }
+
   const csvRows = rows.map((r) => ({
     [t("columnService")]: r.name,
     [t("columnUnits")]: r.units,
@@ -38,6 +45,31 @@ export function ServicesTab({
 
   return (
     <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Card>
+          <CardContent>
+            <p className="text-xs text-text-muted">{t("topSellingLabel")}</p>
+            <p className="truncate text-xl font-bold text-text-primary">
+              {topByUnits ? topByUnits.name : "—"}
+            </p>
+            <p className="text-xs text-text-secondary">
+              {topByUnits ? t("unitsCaption", { count: topByUnits.units }) : ""}
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <p className="text-xs text-text-muted">{t("topProfitableLabel")}</p>
+            <p className="truncate text-xl font-bold text-text-primary">
+              {topByRevenue ? topByRevenue.name : "—"}
+            </p>
+            <p className="text-xs text-text-secondary">
+              {topByRevenue ? formatMoney(topByRevenue.revenueCents, currency, locale) : ""}
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
       <Card>
         <CardContent>
           {rows.length === 0 ? (

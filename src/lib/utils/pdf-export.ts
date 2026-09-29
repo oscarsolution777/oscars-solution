@@ -7,6 +7,26 @@ const TEXT_DARK: [number, number, number] = [31, 41, 55];
 const TEXT_MUTED: [number, number, number] = [107, 114, 128];
 const ROW_ALT: [number, number, number] = [243, 244, 246]; // --secondary #f3f4f6
 
+const LOGO_URL = "/brand/oscars-solution-logo.png";
+
+// Cacheado en memoria: varias exportaciones seguidas en la misma sesión no
+// vuelven a pedir el archivo. Solo tiene sentido en el navegador (esta
+// función entera es "100% cliente", ver comentario de arriba).
+let cachedLogo: HTMLImageElement | null = null;
+
+function loadLogoImage(): Promise<HTMLImageElement> {
+  if (cachedLogo) return Promise.resolve(cachedLogo);
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      cachedLogo = img;
+      resolve(img);
+    };
+    img.onerror = () => reject(new Error("No se pudo cargar el logo para el PDF"));
+    img.src = LOGO_URL;
+  });
+}
+
 export interface PdfExportOptions {
   title: string;
   salonName: string;
@@ -25,19 +45,25 @@ export async function exportRowsToPdf(options: PdfExportOptions): Promise<void> 
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 14;
 
-  // Marca vectorial: cuadro redondeado con inicial + nombre.
-  doc.setFillColor(...BRAND_PRIMARY);
-  doc.roundedRect(margin, 12, 12, 12, 2.5, 2.5, "F");
-  doc.setTextColor(255, 255, 255);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(13);
-  doc.text("O", margin + 6, 20.2, { align: "center" });
-
-  doc.setTextColor(...TEXT_DARK);
-  doc.setFontSize(13);
-  doc.text("Oscar's Solution", margin + 16, 20);
+  // Logo real de la marca (public/brand/oscars-solution-logo.png), a la misma
+  // altura (12mm) que antes ocupaba el placeholder vectorial. Si por lo que
+  // sea no carga (archivo movido, entorno raro), se degrada al texto solo en
+  // vez de romper la exportación completa.
+  const logoHeight = 12;
+  try {
+    const logo = await loadLogoImage();
+    const logoWidth = logoHeight * (logo.naturalWidth / logo.naturalHeight);
+    doc.addImage(logo, "PNG", margin, 12, logoWidth, logoHeight);
+  } catch {
+    doc.setTextColor(...TEXT_DARK);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.text("Oscar's Solution", margin, 20);
+  }
 
   // Título del reporte y salón, alineados a la derecha.
+  doc.setTextColor(...TEXT_DARK);
+  doc.setFont("helvetica", "bold");
   doc.setFontSize(16);
   doc.text(options.title, pageWidth - margin, 17, { align: "right" });
   doc.setFont("helvetica", "normal");

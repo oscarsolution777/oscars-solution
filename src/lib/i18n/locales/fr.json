@@ -899,6 +899,9 @@
       "new": "Nouveaux",
       "recurring": "Récurrents",
       "countLabel": "Clients",
+      "topSpenderLabel": "Client qui dépense le plus",
+      "mostFrequentLabel": "Client le plus fréquent",
+      "visitsCaption": "{count, plural, one {# visite} other {# visites}}",
       "emptyTable": "Aucun client pour l'instant",
       "columnName": "Client",
       "columnPhone": "Téléphone",
@@ -908,6 +911,9 @@
     "services": {
       "emptyChart": "Aucun service terminé sur cette période",
       "emptyTable": "Aucun service terminé sur cette période",
+      "topSellingLabel": "Le plus vendu",
+      "topProfitableLabel": "Le plus rentable",
+      "unitsCaption": "{count, plural, one {# unité vendue} other {# unités vendues}}",
       "columnService": "Service",
       "columnUnits": "Unités",
       "columnRevenue": "Revenus"
@@ -915,6 +921,9 @@
     "staff": {
       "emptyChart": "Aucun rendez-vous assigné sur cette période",
       "emptyTable": "Aucun rendez-vous assigné sur cette période",
+      "topLoadLabel": "Charge la plus élevée",
+      "topRevenueLabel": "Revenus générés les plus élevés",
+      "assignedCaption": "{count, plural, one {# service assigné} other {# services assignés}}",
       "columnStaff": "Employé",
       "columnAssigned": "Services assignés",
       "columnRevenue": "Revenus générés"

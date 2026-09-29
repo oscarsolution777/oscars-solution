@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { requirePlatformAdmin } from "@/lib/auth/guards";
 import { PanelLocaleSwitcher } from "@/components/shared/panel-locale-switcher";
@@ -23,10 +24,14 @@ export default async function SuperAdminLayout({
     <div className="flex min-h-screen flex-col bg-content-bg">
       <header className="flex items-center justify-between border-b border-card-border bg-card-bg px-6 py-3">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 shrink-0 rounded-full bg-primary" aria-hidden />
-            <span className="font-semibold text-text-primary">Oscar&apos;s Solution</span>
-          </div>
+          <Image
+            src="/brand/oscars-solution-logo.png"
+            alt="Oscar's Solution"
+            width={480}
+            height={310}
+            priority
+            className="h-9 w-auto shrink-0"
+          />
           <SuperAdminNav
             items={[
               { href: "/admin/salons", label: t("salons") },

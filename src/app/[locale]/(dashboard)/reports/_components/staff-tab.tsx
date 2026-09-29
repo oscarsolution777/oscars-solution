@@ -30,6 +30,13 @@ export function StaffTab({
   const t = useTranslations("reports.staff");
   const { page, setPage, totalPages, pageItems } = usePagination(rows);
 
+  let topByLoad: StaffWorkloadRow | null = null;
+  let topByRevenue: StaffWorkloadRow | null = null;
+  for (const row of rows) {
+    if (!topByLoad || row.assignedCount > topByLoad.assignedCount) topByLoad = row;
+    if (!topByRevenue || row.revenueCents > topByRevenue.revenueCents) topByRevenue = row;
+  }
+
   const csvRows = rows.map((r) => ({
     [t("columnStaff")]: r.name,
     [t("columnAssigned")]: r.assignedCount,
@@ -38,6 +45,31 @@ export function StaffTab({
 
   return (
     <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Card>
+          <CardContent>
+            <p className="text-xs text-text-muted">{t("topLoadLabel")}</p>
+            <p className="truncate text-xl font-bold text-text-primary">
+              {topByLoad ? topByLoad.name : "—"}
+            </p>
+            <p className="text-xs text-text-secondary">
+              {topByLoad ? t("assignedCaption", { count: topByLoad.assignedCount }) : ""}
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <p className="text-xs text-text-muted">{t("topRevenueLabel")}</p>
+            <p className="truncate text-xl font-bold text-text-primary">
+              {topByRevenue ? topByRevenue.name : "—"}
+            </p>
+            <p className="text-xs text-text-secondary">
+              {topByRevenue ? formatMoney(topByRevenue.revenueCents, currency, locale) : ""}
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
       <Card>
         <CardContent>
           {rows.length === 0 ? (
