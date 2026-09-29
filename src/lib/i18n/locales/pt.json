@@ -692,9 +692,11 @@
   "cashClosures": {
     "createButton": "Novo fechamento",
     "charts": {
-      "differenceTrend": {
-        "title": "Diferença de caixa ao longo do tempo",
-        "emptyTitle": "Sem fechamentos registrados nos últimos 3 meses"
+      "expectedVsCounted": {
+        "title": "Dinheiro esperado vs. contado",
+        "emptyTitle": "Sem fechamentos registrados nos últimos 3 meses",
+        "expected": "Esperado",
+        "counted": "Contado"
       }
     },
     "kpis": {

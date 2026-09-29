@@ -692,9 +692,11 @@
   "cashClosures": {
     "createButton": "Nuova chiusura",
     "charts": {
-      "differenceTrend": {
-        "title": "Differenza di cassa nel tempo",
-        "emptyTitle": "Nessuna chiusura registrata negli ultimi 3 mesi"
+      "expectedVsCounted": {
+        "title": "Contanti previsti vs. contati",
+        "emptyTitle": "Nessuna chiusura registrata negli ultimi 3 mesi",
+        "expected": "Previsto",
+        "counted": "Contato"
       }
     },
     "kpis": {

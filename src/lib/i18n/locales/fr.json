@@ -692,9 +692,11 @@
   "cashClosures": {
     "createButton": "Nouvelle clôture",
     "charts": {
-      "differenceTrend": {
-        "title": "Écart de caisse dans le temps",
-        "emptyTitle": "Aucune clôture enregistrée lors des 3 derniers mois"
+      "expectedVsCounted": {
+        "title": "Espèces attendues vs. comptées",
+        "emptyTitle": "Aucune clôture enregistrée lors des 3 derniers mois",
+        "expected": "Attendu",
+        "counted": "Compté"
       }
     },
     "kpis": {

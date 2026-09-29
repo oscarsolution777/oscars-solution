@@ -692,9 +692,11 @@
   "cashClosures": {
     "createButton": "New closure",
     "charts": {
-      "differenceTrend": {
-        "title": "Cash difference over time",
-        "emptyTitle": "No closures recorded in the last 3 months"
+      "expectedVsCounted": {
+        "title": "Expected vs. counted cash",
+        "emptyTitle": "No closures recorded in the last 3 months",
+        "expected": "Expected",
+        "counted": "Counted"
       }
     },
     "kpis": {

@@ -692,9 +692,11 @@
   "cashClosures": {
     "createButton": "Nuevo cuadre",
     "charts": {
-      "differenceTrend": {
-        "title": "Diferencia de caja en el tiempo",
-        "emptyTitle": "Sin cuadres registrados en los últimos 3 meses"
+      "expectedVsCounted": {
+        "title": "Efectivo esperado vs. contado",
+        "emptyTitle": "Sin cuadres registrados en los últimos 3 meses",
+        "expected": "Esperado",
+        "counted": "Contado"
       }
     },
     "kpis": {

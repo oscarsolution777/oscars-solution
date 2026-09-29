@@ -209,23 +209,30 @@ export function computeCashDifferenceTotal(
     .reduce((sum, c) => sum + c.difference_cents, 0);
 }
 
-export interface CashDifferencePoint {
+export interface CashClosureComparisonPoint {
   label: string; // closure_date (yyyy-MM-dd), sin conversión de zona horaria (es una columna "date" pura)
-  differenceCents: number;
+  expectedCashCents: number;
+  countedCashCents: number;
 }
 
-// Serie de la diferencia de caja por día para el gráfico de tendencia de
-// Cuadre de caja. A diferencia de computeCashDifferenceTotal (un solo número
+// Serie de Esperado vs. Contado por cierre, para el gráfico de barras
+// agrupadas de Cuadre de caja (mismo patrón que StockMovementsChart de
+// Inventario: dos series comparadas por punto, en vez de un único valor
+// derivado). A diferencia de computeCashDifferenceTotal (un solo número
 // acumulado), aquí se conserva un punto por cierre para poder graficarlo.
-export function computeCashDifferenceTrend(
+export function computeCashClosureComparison(
   cashClosures: CashClosureRow[],
   from: string,
   to: string
-): CashDifferencePoint[] {
+): CashClosureComparisonPoint[] {
   return cashClosures
     .filter((c) => inRange(c.closure_date, from, to))
     .sort((a, b) => (a.closure_date < b.closure_date ? -1 : a.closure_date > b.closure_date ? 1 : 0))
-    .map((c) => ({ label: c.closure_date, differenceCents: c.difference_cents }));
+    .map((c) => ({
+      label: c.closure_date,
+      expectedCashCents: c.expected_cash_cents,
+      countedCashCents: c.counted_cash_cents,
+    }));
 }
 
 export interface PaymentMethodSlice {

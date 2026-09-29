@@ -692,9 +692,11 @@
   "cashClosures": {
     "createButton": "Neuer Kassenabschluss",
     "charts": {
-      "differenceTrend": {
-        "title": "Kassendifferenz im Zeitverlauf",
-        "emptyTitle": "Keine Abschlüsse in den letzten 3 Monaten"
+      "expectedVsCounted": {
+        "title": "Erwarteter vs. gezählter Bargeldbestand",
+        "emptyTitle": "Keine Abschlüsse in den letzten 3 Monaten",
+        "expected": "Erwartet",
+        "counted": "Gezählt"
       }
     },
     "kpis": {

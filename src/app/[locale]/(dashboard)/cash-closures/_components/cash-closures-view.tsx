@@ -5,9 +5,9 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import type { Tables } from "@/types/database";
-import type { CashDifferencePoint } from "@/lib/reports/aggregations";
+import type { CashClosureComparisonPoint } from "@/lib/reports/aggregations";
 import { KpiCards } from "./kpi-cards";
-import { CashDifferenceChart } from "./cash-difference-chart";
+import { CashComparisonChart } from "./cash-comparison-chart";
 import { ClosuresTable } from "./closures-table";
 import { ClosureFormPanel } from "./closure-form-panel";
 
@@ -15,13 +15,13 @@ type CashClosureRow = Tables<"cash_closures">;
 
 export function CashClosuresView({
   closures,
-  differenceTrend,
+  comparisonPoints,
   kpis,
   currency,
   locale,
 }: {
   closures: CashClosureRow[];
-  differenceTrend: CashDifferencePoint[];
+  comparisonPoints: CashClosureComparisonPoint[];
   kpis: {
     closuresThisMonth: number;
     accumulatedDifferenceCents: number;
@@ -49,7 +49,7 @@ export function CashClosuresView({
         locale={locale}
       />
 
-      <CashDifferenceChart points={differenceTrend} currency={currency} locale={locale} />
+      <CashComparisonChart points={comparisonPoints} currency={currency} locale={locale} />
 
       <div className="flex justify-end">
         <Button onClick={() => setFormState({ mode: "create" })}>

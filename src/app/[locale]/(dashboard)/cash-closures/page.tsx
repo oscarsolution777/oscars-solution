@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { listCashClosures } from "@/lib/db/cash-closures";
 import { getPresetRange } from "@/lib/utils/period";
 import { getTodayInTimeZone } from "@/lib/utils/dates";
-import { computeCashDifferenceTrend } from "@/lib/reports/aggregations";
+import { computeCashClosureComparison } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { CashClosuresView } from "./_components/cash-closures-view";
 
@@ -37,12 +37,12 @@ export default async function CashClosuresPage() {
   );
 
   const { from, to } = getPresetRange("last3Months", todayStr);
-  const differenceTrend = computeCashDifferenceTrend(closures, from, to);
+  const comparisonPoints = computeCashClosureComparison(closures, from, to);
 
   return (
     <CashClosuresView
       closures={closures}
-      differenceTrend={differenceTrend}
+      comparisonPoints={comparisonPoints}
       kpis={{
         closuresThisMonth: closuresThisMonth.length,
         accumulatedDifferenceCents,
