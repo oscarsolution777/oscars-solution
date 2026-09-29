@@ -27,6 +27,7 @@ type AppointmentRow = Tables<"appointments">;
 export function ReportsView({
   period,
   salonName,
+  salonLogoUrl,
   currency,
   timezone,
   locale,
@@ -38,6 +39,7 @@ export function ReportsView({
 }: {
   period: Period;
   salonName: string;
+  salonLogoUrl: string | null;
   currency: string;
   timezone: string;
   locale: string;
@@ -56,7 +58,7 @@ export function ReportsView({
   );
 
   return (
-    <ReportExportContext.Provider value={{ salonName, timezone, period }}>
+    <ReportExportContext.Provider value={{ salonName, salonLogoUrl, timezone, period }}>
     <div className="space-y-6">
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
         <div className="flex flex-wrap items-center justify-between gap-3">

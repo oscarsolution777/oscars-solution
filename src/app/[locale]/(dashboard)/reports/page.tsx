@@ -94,6 +94,7 @@ export default async function ReportsPage({
     <ReportsView
       period={period}
       salonName={salon.name}
+      salonLogoUrl={salon.logo_url}
       currency={salon.currency}
       timezone={salon.timezone}
       locale={locale}

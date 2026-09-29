@@ -14,6 +14,7 @@ import type { Period } from "@/lib/utils/period";
 // pestaña no tenga que recibirlos solo para poder exportar.
 export const ReportExportContext = createContext<{
   salonName: string;
+  salonLogoUrl: string | null;
   timezone: string;
   period: Period;
 } | null>(null);
@@ -73,6 +74,7 @@ export function ExportButtons({
       await exportRowsToPdf({
         title: t(`tabs.${tabKey}`),
         salonName: context.salonName,
+        salonLogoUrl: context.salonLogoUrl,
         metaLines,
         rows,
         filename: `${baseFilename}${suffix}.pdf`,

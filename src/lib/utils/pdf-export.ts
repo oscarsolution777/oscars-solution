@@ -7,29 +7,39 @@ const TEXT_DARK: [number, number, number] = [31, 41, 55];
 const TEXT_MUTED: [number, number, number] = [107, 114, 128];
 const ROW_ALT: [number, number, number] = [243, 244, 246]; // --secondary #f3f4f6
 
-const LOGO_URL = "/brand/oscars-solution-logo.png";
-
-// Cacheado en memoria: varias exportaciones seguidas en la misma sesión no
-// vuelven a pedir el archivo. Solo tiene sentido en el navegador (esta
+// El logo de este PDF es el del SALÓN (salons.logo_url, subido por la propia
+// dueña en Configuración) -- nunca el de Oscar's Solution. Este reporte le
+// pertenece a ella y muestra sus propios datos; ponerle la marca de la
+// agencia encima sería mezclar la identidad de su negocio con la del
+// proveedor del software. El logo de Oscar's Solution sí tiene sentido en el
+// Panel SuperAdmin (esa sí es la herramienta interna de la agencia), pero no
+// aquí. Cacheado por URL: varias exportaciones seguidas en la misma sesión
+// no vuelven a pedir el archivo. Solo tiene sentido en el navegador (esta
 // función entera es "100% cliente", ver comentario de arriba).
-let cachedLogo: HTMLImageElement | null = null;
+const logoCache = new Map<string, HTMLImageElement>();
 
-function loadLogoImage(): Promise<HTMLImageElement> {
-  if (cachedLogo) return Promise.resolve(cachedLogo);
+function loadLogoImage(url: string): Promise<HTMLImageElement> {
+  const cached = logoCache.get(url);
+  if (cached) return Promise.resolve(cached);
   return new Promise((resolve, reject) => {
     const img = new Image();
+    // El logo del salón vive en Supabase Storage (otro origen) -- sin esto,
+    // el navegador puede negarse a dejar que jsPDF lea los píxeles de la
+    // imagen al insertarla en el PDF.
+    img.crossOrigin = "anonymous";
     img.onload = () => {
-      cachedLogo = img;
+      logoCache.set(url, img);
       resolve(img);
     };
-    img.onerror = () => reject(new Error("No se pudo cargar el logo para el PDF"));
-    img.src = LOGO_URL;
+    img.onerror = () => reject(new Error("No se pudo cargar el logo del salón para el PDF"));
+    img.src = url;
   });
 }
 
 export interface PdfExportOptions {
   title: string;
   salonName: string;
+  salonLogoUrl: string | null;
   metaLines: string[];
   rows: Record<string, string | number>[];
   filename: string;
@@ -45,20 +55,27 @@ export async function exportRowsToPdf(options: PdfExportOptions): Promise<void> 
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 14;
 
-  // Logo real de la marca (public/brand/oscars-solution-logo.png), a la misma
-  // altura (12mm) que antes ocupaba el placeholder vectorial. Si por lo que
-  // sea no carga (archivo movido, entorno raro), se degrada al texto solo en
-  // vez de romper la exportación completa.
+  // Logo del salón, a 12mm de alto. Si no tiene uno subido (o falla la
+  // carga: red, CORS, archivo borrado...) se degrada al nombre del salón en
+  // texto, nunca al logo de Oscar's Solution ni a un error que rompa la
+  // exportación completa.
   const logoHeight = 12;
-  try {
-    const logo = await loadLogoImage();
-    const logoWidth = logoHeight * (logo.naturalWidth / logo.naturalHeight);
-    doc.addImage(logo, "PNG", margin, 12, logoWidth, logoHeight);
-  } catch {
+  let logoLoaded = false;
+  if (options.salonLogoUrl) {
+    try {
+      const logo = await loadLogoImage(options.salonLogoUrl);
+      const logoWidth = logoHeight * (logo.naturalWidth / logo.naturalHeight);
+      doc.addImage(logo, "PNG", margin, 12, logoWidth, logoHeight);
+      logoLoaded = true;
+    } catch {
+      // sigue al fallback de texto de abajo
+    }
+  }
+  if (!logoLoaded) {
     doc.setTextColor(...TEXT_DARK);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(13);
-    doc.text("Oscar's Solution", margin, 20);
+    doc.text(options.salonName, margin, 20);
   }
 
   // Título del reporte y salón, alineados a la derecha.
