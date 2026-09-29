@@ -8,6 +8,7 @@ import { listPayments } from "@/lib/db/payments";
 import { listStaff } from "@/lib/db/staff";
 import { listSuppliers } from "@/lib/db/suppliers";
 import { getPresetRange } from "@/lib/utils/period";
+import { getStartOfCurrentMonthInTimeZone } from "@/lib/utils/dates";
 import { computeExpensesByCategory, computeMonthlyFinanceTrend } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { FinancesView } from "./_components/finances-view";
@@ -44,16 +45,21 @@ export default async function FinancesPage() {
     listSuppliers(supabase, salon.id),
   ]);
 
-  const startOfMonth = new Date();
-  startOfMonth.setDate(1);
-  startOfMonth.setHours(0, 0, 0, 0);
+  // paid_at es timestamptz: el límite de "este mes" se calcula en la zona
+  // horaria del salón, no en la del servidor (CLAUDE.md sección 5,
+  // "Fechas") — importante aquí porque son los totales de dinero del mes.
+  const startOfMonth = getStartOfCurrentMonthInTimeZone(salon.timezone);
+  const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
+  const currentMonthPrefix = todayStr.slice(0, 7);
 
   const incomeCents = payments
     .filter((payment) => payment.status === "paid" && new Date(payment.paid_at) >= startOfMonth)
     .reduce((sum, payment) => sum + payment.amount_cents, 0);
 
+  // spent_at es una columna `date` pura (a diferencia de paid_at): se
+  // compara como string calendario, nunca como instante convertido a Date.
   const expensesCents = expenses
-    .filter((expense) => new Date(`${expense.spent_at}T00:00:00`) >= startOfMonth)
+    .filter((expense) => expense.spent_at.startsWith(currentMonthPrefix))
     .reduce((sum, expense) => sum + expense.amount_cents, 0);
 
   const payoutsCents = payouts
@@ -61,8 +67,6 @@ export default async function FinancesPage() {
     .reduce((sum, payout) => sum + payout.total_cents, 0);
 
   const balanceCents = incomeCents - expensesCents - payoutsCents;
-
-  const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
   const thisMonth = getPresetRange("thisMonth", todayStr);
   const expenseCategories = computeExpensesByCategory(expenses, thisMonth.from, thisMonth.to);
   const monthlyTrend = computeMonthlyFinanceTrend(

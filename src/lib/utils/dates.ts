@@ -1,4 +1,4 @@
-import { formatInTimeZone } from "date-fns-tz";
+import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { es, enUS, pt, it, fr, de } from "date-fns/locale";
 
 // Las fechas se guardan en UTC. Se muestran en la zona horaria del salón
@@ -35,4 +35,25 @@ export function formatCalendarDate(
   const dateFnsLocale =
     DATE_FNS_LOCALES[locale as keyof typeof DATE_FNS_LOCALES] ?? es;
   return formatInTimeZone(new Date(date), "UTC", pattern, { locale: dateFnsLocale });
+}
+
+// "Hoy" como string calendario ("yyyy-MM-dd") en la zona horaria del salón.
+// Punto único para que ninguna página vuelva a calcular "hoy" con `new
+// Date()` a secas, que usa la zona horaria del proceso de Node (UTC en
+// Vercel) en vez de la del salón.
+export function getTodayInTimeZone(timezone: string): string {
+  return formatInTimeZone(new Date(), timezone, "yyyy-MM-dd");
+}
+
+// Instante UTC de la medianoche del día 1 del mes actual, en la zona
+// horaria del salón — para filtrar columnas timestamptz ("¿esto es de este
+// mes?": created_at, paid_at...). Nunca usar `new Date()` + `setDate(1)`: esa
+// operación usa la zona horaria del proceso de Node, no la del salón, y
+// desplaza el límite del mes varias horas en salones detrás de UTC (ej.
+// America/Guyana, UTC-4) — mismo bug de fondo que ya documentaba
+// formatCalendarDate para columnas `date` puras, aplicado aquí a instantes.
+export function getStartOfCurrentMonthInTimeZone(timezone: string): Date {
+  const todayStr = getTodayInTimeZone(timezone);
+  const firstOfMonth = `${todayStr.slice(0, 7)}-01T00:00:00`;
+  return fromZonedTime(firstOfMonth, timezone);
 }

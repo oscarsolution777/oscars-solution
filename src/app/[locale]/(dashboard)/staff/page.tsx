@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { listStaff } from "@/lib/db/staff";
 import { listServices } from "@/lib/db/services";
 import { listServiceStaffForSalon } from "@/lib/db/service-staff";
+import { getStartOfCurrentMonthInTimeZone } from "@/lib/utils/dates";
 import { EmptyState } from "@/components/shared/empty-state";
 import { StaffView } from "./_components/staff-view";
 
@@ -33,9 +34,9 @@ export default async function StaffPage() {
   );
 
   const activeStaff = staff.filter((member) => member.is_active);
-  const startOfMonth = new Date();
-  startOfMonth.setDate(1);
-  startOfMonth.setHours(0, 0, 0, 0);
+  // created_at es timestamptz: el límite de "este mes" se calcula en la zona
+  // horaria del salón, no en la del servidor (CLAUDE.md sección 5, "Fechas").
+  const startOfMonth = getStartOfCurrentMonthInTimeZone(salon.timezone);
 
   const newThisMonth = activeStaff.filter(
     (member) => new Date(member.created_at) >= startOfMonth
