@@ -24,7 +24,7 @@ export function RevenueTrendChart({
         <XAxis dataKey="label" tick={{ fontSize: 12 }} />
         <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={90} />
         <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
-        <Bar dataKey="incomeCents" fill="var(--color-primary)" radius={4} />
+        <Bar dataKey="incomeCents" name={t("incomeLabel")} fill="var(--color-primary)" radius={4} />
       </BarChart>
     </ChartCard>
   );

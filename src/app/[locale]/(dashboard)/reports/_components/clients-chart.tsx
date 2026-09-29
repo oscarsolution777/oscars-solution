@@ -19,7 +19,7 @@ export function ClientsChart({ segments }: { segments: ClientSegments }) {
           <XAxis dataKey="label" tick={{ fontSize: 12 }} />
           <YAxis allowDecimals={false} width={40} />
           <Tooltip />
-          <Bar dataKey="count" fill="var(--color-primary)" radius={4} />
+          <Bar dataKey="count" name={t("countLabel")} fill="var(--color-primary)" radius={4} />
         </BarChart>
       </ResponsiveContainer>
     </div>

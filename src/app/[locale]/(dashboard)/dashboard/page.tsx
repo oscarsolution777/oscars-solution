@@ -6,7 +6,6 @@ import { listPayments } from "@/lib/db/payments";
 import { listAppointments, listAppointmentItemsForAppointments } from "@/lib/db/appointments";
 import { listRequests } from "@/lib/db/requests";
 import { listProducts } from "@/lib/db/products";
-import { listClients } from "@/lib/db/clients";
 import { listStaff } from "@/lib/db/staff";
 import { listServices } from "@/lib/db/services";
 import { listCashClosures } from "@/lib/db/cash-closures";
@@ -16,7 +15,6 @@ import {
   computeNoShowRate,
   computeTopServices,
   computeStaffWorkload,
-  computeClientSegments,
   computeCashDifferenceTotal,
   computeSalesBuckets,
 } from "@/lib/reports/aggregations";
@@ -41,13 +39,12 @@ export default async function DashboardPage({
   const role = session.activeMembership.role;
   const supabase = await createClient();
 
-  const [payments, appointments, requests, products, clients, staff, services, cashClosures] =
+  const [payments, appointments, requests, products, staff, services, cashClosures] =
     await Promise.all([
       listPayments(supabase, salon.id),
       listAppointments(supabase, salon.id),
       listRequests(supabase, salon.id),
       listProducts(supabase, salon.id),
-      listClients(supabase, salon.id),
       listStaff(supabase, salon.id),
       listServices(supabase, salon.id),
       listCashClosures(supabase, salon.id),
@@ -85,14 +82,13 @@ export default async function DashboardPage({
   const staffById = new Map(staff.map((s) => [s.id, s]));
 
   const incomeCents = sumPaidIncomeCents(payments, from, to);
-  const { completed, noShow, rate: noShowRate } = computeNoShowRate(appointments, from, to);
+  const { completed, rate: noShowRate } = computeNoShowRate(appointments, from, to);
   const avgTicketCents = completed > 0 ? Math.round(incomeCents / completed) : 0;
   const topServices = computeTopServices(appointmentItems, appointmentsById, servicesById, from, to).slice(
     0,
     5
   );
   const staffWorkload = computeStaffWorkload(appointmentItems, appointmentsById, staffById, from, to);
-  const clientSegments = computeClientSegments(clients, appointments, from, to);
   const cashDifferenceCents = computeCashDifferenceTotal(cashClosures, from, to);
   const revenueTrend = computeSalesBuckets(payments, from, to, salon.timezone);
 
@@ -113,8 +109,6 @@ export default async function DashboardPage({
       revenueTrend={revenueTrend}
       topServices={topServices}
       staffWorkload={staffWorkload}
-      clientSegments={clientSegments}
-      completionBreakdown={{ completed, noShow }}
     />
   );
 }

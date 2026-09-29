@@ -1,19 +1,12 @@
 import type { Tables } from "@/types/database";
 import type { Period } from "@/lib/utils/period";
-import type {
-  SalesBucket,
-  ServiceSalesRow,
-  StaffWorkloadRow,
-  ClientSegments,
-} from "@/lib/reports/aggregations";
+import type { SalesBucket, ServiceSalesRow, StaffWorkloadRow } from "@/lib/reports/aggregations";
 import { PeriodSelector } from "@/components/shared/period-selector";
 import { OperationalCards } from "./operational-cards";
 import { FinancialCards } from "./financial-cards";
 import { RevenueTrendChart } from "./revenue-trend-chart";
 import { TopServicesChart } from "./top-services-chart";
 import { StaffWorkloadChart } from "./staff-workload-chart";
-import { ClientSegmentsChart } from "./client-segments-chart";
-import { CompletionBreakdownChart } from "./completion-breakdown-chart";
 
 type ProductRow = Tables<"products">;
 
@@ -49,8 +42,6 @@ export function DashboardView(
         revenueTrend: SalesBucket[];
         topServices: ServiceSalesRow[];
         staffWorkload: StaffWorkloadRow[];
-        clientSegments: ClientSegments;
-        completionBreakdown: { completed: number; noShow: number };
       }
 ) {
   return (
@@ -87,11 +78,6 @@ export function DashboardView(
               locale={props.locale}
             />
             <StaffWorkloadChart staffWorkload={props.staffWorkload} />
-            <ClientSegmentsChart segments={props.clientSegments} />
-            <CompletionBreakdownChart
-              completed={props.completionBreakdown.completed}
-              noShow={props.completionBreakdown.noShow}
-            />
           </div>
         </>
       )}

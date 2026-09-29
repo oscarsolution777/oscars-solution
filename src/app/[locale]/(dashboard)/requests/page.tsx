@@ -7,10 +7,17 @@ import { listAppointments, listAppointmentItemsForAppointments } from "@/lib/db/
 import { listClients } from "@/lib/db/clients";
 import { listServices } from "@/lib/db/services";
 import { listStaff } from "@/lib/db/staff";
+import { resolvePeriod } from "@/lib/utils/period";
+import { formatCalendarDate } from "@/lib/utils/dates";
+import { computeNoShowRate, inRange } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { RequestsView } from "./_components/requests-view";
 
-export default async function RequestsPage() {
+export default async function RequestsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ preset?: string; from?: string; to?: string }>;
+}) {
   const session = await requireAuth();
   const locale = await getLocale();
   const salon = session.activeMembership?.salon;
@@ -42,30 +49,29 @@ export default async function RequestsPage() {
   ]);
 
   const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
-  const currentMonthPrefix = todayStr.slice(0, 7);
 
   const pendingRequestsCount = requests.filter((request) => request.status === "pending").length;
   const todayAppointmentsCount = appointments.filter(
     (appointment) => appointment.appointment_date === todayStr && appointment.status === "scheduled"
   ).length;
 
-  const appointmentsThisMonth = appointments.filter((appointment) =>
-    appointment.appointment_date.startsWith(currentMonthPrefix)
-  );
-  const completedThisMonth = appointmentsThisMonth.filter(
-    (appointment) => appointment.status === "completed"
-  );
-  const noShowThisMonth = appointmentsThisMonth.filter(
-    (appointment) => appointment.status === "no_show"
-  );
-  const noShowRate =
-    completedThisMonth.length + noShowThisMonth.length > 0
-      ? noShowThisMonth.length / (completedThisMonth.length + noShowThisMonth.length)
-      : 0;
-  const completedRevenueCents = completedThisMonth.reduce(
-    (sum, appointment) => sum + appointment.total_cents,
-    0
-  );
+  const params = await searchParams;
+  const period = resolvePeriod(params, todayStr);
+  const { from, to } = period;
+
+  const { rate: noShowRate } = computeNoShowRate(appointments, from, to);
+  const completedRevenueCents = appointments
+    .filter(
+      (appointment) =>
+        appointment.status === "completed" && inRange(appointment.appointment_date, from, to)
+    )
+    .reduce((sum, appointment) => sum + appointment.total_cents, 0);
+
+  const tPeriod = await getTranslations("requests.period");
+  const periodLabel =
+    period.preset === "custom"
+      ? `${formatCalendarDate(period.from, locale, "P")} – ${formatCalendarDate(period.to, locale, "P")}`
+      : tPeriod(period.preset);
 
   return (
     <RequestsView
@@ -76,12 +82,14 @@ export default async function RequestsPage() {
       clients={clients.filter((client) => client.is_active)}
       services={services.filter((service) => service.is_active)}
       staff={staff.filter((member) => member.is_active)}
+      period={period}
       kpis={{
         pendingRequestsCount,
         todayAppointmentsCount,
         noShowRate,
         completedRevenueCents,
       }}
+      periodLabel={periodLabel}
       currency={salon.currency}
       locale={locale}
     />

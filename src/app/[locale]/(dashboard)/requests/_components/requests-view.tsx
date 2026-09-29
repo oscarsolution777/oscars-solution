@@ -5,7 +5,9 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { PeriodSelector } from "@/components/shared/period-selector";
 import type { Tables } from "@/types/database";
+import type { Period } from "@/lib/utils/period";
 import { KpiCards } from "./kpi-cards";
 import { RequestsTable } from "./requests-table";
 import { RequestFormPanel } from "./request-form-panel";
@@ -30,7 +32,9 @@ export function RequestsView({
   clients,
   services,
   staff,
+  period,
   kpis,
+  periodLabel,
   currency,
   locale,
 }: {
@@ -41,12 +45,14 @@ export function RequestsView({
   clients: ClientRow[];
   services: ServiceRow[];
   staff: StaffRow[];
+  period: Period;
   kpis: {
     pendingRequestsCount: number;
     todayAppointmentsCount: number;
     noShowRate: number;
     completedRevenueCents: number;
   };
+  periodLabel: string;
   currency: string;
   locale: string;
 }) {
@@ -105,11 +111,16 @@ export function RequestsView({
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <PeriodSelector period={period} namespace="requests.period" />
+      </div>
+
       <KpiCards
         pendingRequestsCount={kpis.pendingRequestsCount}
         todayAppointmentsCount={kpis.todayAppointmentsCount}
         noShowRate={kpis.noShowRate}
         completedRevenueCents={kpis.completedRevenueCents}
+        periodLabel={periodLabel}
         currency={currency}
         locale={locale}
       />

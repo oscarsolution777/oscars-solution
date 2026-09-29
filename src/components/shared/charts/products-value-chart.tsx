@@ -17,12 +17,14 @@ export function ProductsValueChart({
   locale,
   title,
   emptyTitle,
+  valueLabel,
 }: {
   products: ProductRow[];
   currency: string;
   locale: string;
   title: string;
   emptyTitle: string;
+  valueLabel: string;
 }) {
   const data = [...products]
     .map((product) => ({ name: product.name, valueCents: product.stock_qty * product.cost_cents }))
@@ -36,7 +38,7 @@ export function ProductsValueChart({
         <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-30} textAnchor="end" height={60} />
         <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={70} />
         <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
-        <Bar dataKey="valueCents" fill="var(--color-primary)" radius={4} />
+        <Bar dataKey="valueCents" name={valueLabel} fill="var(--color-primary)" radius={4} />
       </BarChart>
     </ChartCard>
   );

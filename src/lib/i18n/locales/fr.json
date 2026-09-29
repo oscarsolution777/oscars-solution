@@ -82,27 +82,19 @@
     },
     "topServices": {
       "title": "Services les plus vendus",
-      "emptyTitle": "Aucune vente de service pour l'instant sur cette période"
+      "emptyTitle": "Aucune vente de service pour l'instant sur cette période",
+      "revenueLabel": "Revenus"
     },
     "staffWorkload": {
       "title": "Charge de travail par employé",
       "emptyTitle": "Aucun rendez-vous assigné pour l'instant sur cette période",
-      "assignedCount": "{count, plural, one {# service} other {# services}}"
-    },
-    "clientSegments": {
-      "title": "Clients nouveaux vs. récurrents",
-      "new": "Nouveaux",
-      "recurring": "Récurrents"
+      "assignedCount": "{count, plural, one {# service} other {# services}}",
+      "seriesName": "Services assignés"
     },
     "revenueTrend": {
       "title": "Évolution des revenus",
-      "emptyTitle": "Pas encore de revenus sur cette période"
-    },
-    "completionBreakdown": {
-      "title": "Rendez-vous honorés vs. absences",
-      "emptyTitle": "Pas encore de rendez-vous honorés ou d'absences sur cette période",
-      "completed": "Honorés",
-      "noShow": "Absences"
+      "emptyTitle": "Pas encore de revenus sur cette période",
+      "incomeLabel": "Revenus"
     },
     "suspended": {
       "title": "Ce salon est suspendu",
@@ -118,8 +110,14 @@
       "todayAppointments": "Rendez-vous du jour",
       "todayCaption": "Prévus aujourd'hui",
       "noShowRate": "Taux d'absence",
-      "thisMonth": "Ce mois-ci",
       "completedRevenue": "Revenus des rendez-vous terminés"
+    },
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
     },
     "inbox": {
       "createButton": "Nouvelle demande",
@@ -474,8 +472,14 @@
       "lowStockCaption": "À réapprovisionner",
       "inventoryValue": "Valeur du stock",
       "inventoryValueCaption": "Au prix de revient",
-      "movementsThisMonth": "Mouvements",
-      "thisMonth": "Ce mois-ci"
+      "movementsInPeriod": "Mouvements"
+    },
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
     },
     "tabs": {
       "products": "Produits",
@@ -485,7 +489,8 @@
     "charts": {
       "productsValue": {
         "title": "Valeur de l'inventaire par produit",
-        "emptyTitle": "Pas encore de produits en stock"
+        "emptyTitle": "Pas encore de produits en stock",
+        "valueLabel": "Valeur"
       },
       "stockMovements": {
         "title": "Mouvements de stock",
@@ -629,7 +634,8 @@
     "charts": {
       "incomeTrend": {
         "title": "Évolution des revenus",
-        "emptyTitle": "Aucun paiement encaissé lors des 3 derniers mois"
+        "emptyTitle": "Aucun paiement encaissé lors des 3 derniers mois",
+        "incomeLabel": "Revenus"
       },
       "methodBreakdown": {
         "title": "Paiements par mode de règlement",
@@ -882,6 +888,7 @@
       "totalRefunded": "Remboursé sur la période",
       "emptyChart": "Aucun revenu sur cette période",
       "emptyTable": "Aucun paiement sur cette période",
+      "incomeLabel": "Revenus",
       "columnDate": "Date",
       "columnClient": "Client",
       "columnAmount": "Montant",
@@ -891,6 +898,7 @@
     "clients": {
       "new": "Nouveaux",
       "recurring": "Récurrents",
+      "countLabel": "Clients",
       "emptyTable": "Aucun client pour l'instant",
       "columnName": "Client",
       "columnPhone": "Téléphone",

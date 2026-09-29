@@ -16,7 +16,7 @@ export function StaffWorkloadChart({ staffWorkload }: { staffWorkload: StaffWork
         <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-30} textAnchor="end" height={60} />
         <YAxis allowDecimals={false} width={40} />
         <Tooltip formatter={(value) => t("assignedCount", { count: Number(value) })} />
-        <Bar dataKey="assignedCount" fill="var(--color-info)" radius={4} />
+        <Bar dataKey="assignedCount" name={t("seriesName")} fill="var(--color-info)" radius={4} />
       </BarChart>
     </ChartCard>
   );

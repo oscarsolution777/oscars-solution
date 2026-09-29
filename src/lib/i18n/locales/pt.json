@@ -82,27 +82,19 @@
     },
     "topServices": {
       "title": "Serviços mais vendidos",
-      "emptyTitle": "Ainda sem vendas de serviços neste período"
+      "emptyTitle": "Ainda sem vendas de serviços neste período",
+      "revenueLabel": "Receita"
     },
     "staffWorkload": {
       "title": "Carga de trabalho por profissional",
       "emptyTitle": "Ainda sem atendimentos atribuídos neste período",
-      "assignedCount": "{count, plural, one {# serviço} other {# serviços}}"
-    },
-    "clientSegments": {
-      "title": "Clientes novos vs. recorrentes",
-      "new": "Novos",
-      "recurring": "Recorrentes"
+      "assignedCount": "{count, plural, one {# serviço} other {# serviços}}",
+      "seriesName": "Serviços atribuídos"
     },
     "revenueTrend": {
       "title": "Tendência de receita",
-      "emptyTitle": "Ainda sem receita registrada neste período"
-    },
-    "completionBreakdown": {
-      "title": "Concluídos vs. no-show",
-      "emptyTitle": "Ainda sem concluídos ou no-show neste período",
-      "completed": "Concluídos",
-      "noShow": "No-show"
+      "emptyTitle": "Ainda sem receita registrada neste período",
+      "incomeLabel": "Receita"
     },
     "suspended": {
       "title": "Este salão está suspenso",
@@ -118,8 +110,14 @@
       "todayAppointments": "Atendimentos de hoje",
       "todayCaption": "Agendados para hoje",
       "noShowRate": "Taxa de não comparecimento",
-      "thisMonth": "Este mês",
       "completedRevenue": "Receita de atendimentos concluídos"
+    },
+    "period": {
+      "thisMonth": "Este mês",
+      "lastMonth": "Mês passado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
     },
     "inbox": {
       "createButton": "Nova solicitação",
@@ -474,8 +472,14 @@
       "lowStockCaption": "Precisam de reposição",
       "inventoryValue": "Valor do estoque",
       "inventoryValueCaption": "A preço de custo",
-      "movementsThisMonth": "Movimentações",
-      "thisMonth": "Este mês"
+      "movementsInPeriod": "Movimentações"
+    },
+    "period": {
+      "thisMonth": "Este mês",
+      "lastMonth": "Mês passado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
     },
     "tabs": {
       "products": "Produtos",
@@ -485,7 +489,8 @@
     "charts": {
       "productsValue": {
         "title": "Valor de estoque por produto",
-        "emptyTitle": "Ainda não há produtos com estoque"
+        "emptyTitle": "Ainda não há produtos com estoque",
+        "valueLabel": "Valor"
       },
       "stockMovements": {
         "title": "Movimentações de estoque",
@@ -629,7 +634,8 @@
     "charts": {
       "incomeTrend": {
         "title": "Tendência de receita",
-        "emptyTitle": "Sem pagamentos recebidos nos últimos 3 meses"
+        "emptyTitle": "Sem pagamentos recebidos nos últimos 3 meses",
+        "incomeLabel": "Receita"
       },
       "methodBreakdown": {
         "title": "Pagamentos por método",
@@ -882,6 +888,7 @@
       "totalRefunded": "Reembolsado no período",
       "emptyChart": "Sem receita neste período",
       "emptyTable": "Sem pagamentos neste período",
+      "incomeLabel": "Receita",
       "columnDate": "Data",
       "columnClient": "Cliente",
       "columnAmount": "Valor",
@@ -891,6 +898,7 @@
     "clients": {
       "new": "Novos",
       "recurring": "Recorrentes",
+      "countLabel": "Clientes",
       "emptyTable": "Ainda não há clientes",
       "columnName": "Cliente",
       "columnPhone": "Telefone",

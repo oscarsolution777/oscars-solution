@@ -7,14 +7,16 @@ export function KpiCards({
   totalProducts,
   lowStockCount,
   inventoryValueCents,
-  movementsThisMonth,
+  movementsInPeriod,
+  periodLabel,
   currency,
   locale,
 }: {
   totalProducts: number;
   lowStockCount: number;
   inventoryValueCents: number;
-  movementsThisMonth: number;
+  movementsInPeriod: number;
+  periodLabel: string;
   currency: string;
   locale: string;
 }) {
@@ -45,9 +47,9 @@ export function KpiCards({
     {
       icon: ArrowLeftRight,
       iconClass: "bg-violet-100 text-violet-600",
-      label: t("movementsThisMonth"),
-      value: movementsThisMonth,
-      caption: t("thisMonth"),
+      label: t("movementsInPeriod"),
+      value: movementsInPeriod,
+      caption: periodLabel,
     },
   ];
 

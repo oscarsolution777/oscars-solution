@@ -8,6 +8,7 @@ export function KpiCards({
   todayAppointmentsCount,
   noShowRate,
   completedRevenueCents,
+  periodLabel,
   currency,
   locale,
 }: {
@@ -15,6 +16,7 @@ export function KpiCards({
   todayAppointmentsCount: number;
   noShowRate: number;
   completedRevenueCents: number;
+  periodLabel: string;
   currency: string;
   locale: string;
 }) {
@@ -40,14 +42,14 @@ export function KpiCards({
       iconClass: "bg-rose-100 text-rose-600",
       label: t("noShowRate"),
       value: `${Math.round(noShowRate * 100)}%`,
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
     {
       icon: TrendingUp,
       iconClass: "bg-emerald-100 text-emerald-600",
       label: t("completedRevenue"),
       value: formatMoney(completedRevenueCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
   ];
 

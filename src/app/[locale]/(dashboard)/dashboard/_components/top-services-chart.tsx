@@ -35,7 +35,7 @@ export function TopServicesChart({
                 <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={70} />
                 <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
 
-                <Bar dataKey="revenueCents" fill="var(--color-primary)" radius={4} />
+                <Bar dataKey="revenueCents" name={t("revenueLabel")} fill="var(--color-primary)" radius={4} />
               </BarChart>
             </ResponsiveContainer>
           </div>

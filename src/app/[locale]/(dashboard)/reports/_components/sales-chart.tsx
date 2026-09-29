@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { formatMoney } from "@/lib/utils/money";
 import type { SalesBucket } from "@/lib/reports/aggregations";
@@ -13,6 +14,8 @@ export function SalesChart({
   currency: string;
   locale: string;
 }) {
+  const t = useTranslations("reports.sales");
+
   return (
     <div className="h-64 w-full">
       <ResponsiveContainer width="100%" height="100%">
@@ -21,7 +24,7 @@ export function SalesChart({
           <XAxis dataKey="label" tick={{ fontSize: 12 }} />
           <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={90} />
           <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
-          <Bar dataKey="incomeCents" fill="var(--color-primary)" radius={4} />
+          <Bar dataKey="incomeCents" name={t("incomeLabel")} fill="var(--color-primary)" radius={4} />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -5,8 +5,10 @@ import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { PeriodSelector } from "@/components/shared/period-selector";
 import { ProductsValueChart } from "@/components/shared/charts/products-value-chart";
 import type { Tables } from "@/types/database";
+import type { Period } from "@/lib/utils/period";
 import type { StockMovementPoint } from "@/lib/reports/aggregations";
 import { KpiCards } from "./kpi-cards";
 import { StockMovementsChart } from "./stock-movements-chart";
@@ -27,7 +29,9 @@ export function InventoryView({
   suppliers,
   movements,
   stockMovementTrend,
+  period,
   kpis,
+  periodLabel,
   currency,
   timezone,
   locale,
@@ -36,12 +40,14 @@ export function InventoryView({
   suppliers: SupplierRow[];
   movements: StockMovementRow[];
   stockMovementTrend: StockMovementPoint[];
+  period: Period;
   kpis: {
     totalProducts: number;
     lowStockCount: number;
     inventoryValueCents: number;
-    movementsThisMonth: number;
+    movementsInPeriod: number;
   };
+  periodLabel: string;
   currency: string;
   timezone: string;
   locale: string;
@@ -86,11 +92,16 @@ export function InventoryView({
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <PeriodSelector period={period} namespace="inventory.period" />
+      </div>
+
       <KpiCards
         totalProducts={kpis.totalProducts}
         lowStockCount={kpis.lowStockCount}
         inventoryValueCents={kpis.inventoryValueCents}
-        movementsThisMonth={kpis.movementsThisMonth}
+        movementsInPeriod={kpis.movementsInPeriod}
+        periodLabel={periodLabel}
         currency={currency}
         locale={locale}
       />
@@ -102,6 +113,7 @@ export function InventoryView({
           locale={locale}
           title={t("charts.productsValue.title")}
           emptyTitle={t("charts.productsValue.emptyTitle")}
+          valueLabel={t("charts.productsValue.valueLabel")}
         />
         <StockMovementsChart points={stockMovementTrend} />
       </div>

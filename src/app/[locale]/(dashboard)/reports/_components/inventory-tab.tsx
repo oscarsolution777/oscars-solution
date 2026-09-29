@@ -73,6 +73,7 @@ export function InventoryTab({
         locale={locale}
         title={t("chartTitle")}
         emptyTitle={t("emptyChart")}
+        valueLabel={t("columnValue")}
       />
 
       <div className="flex justify-end">

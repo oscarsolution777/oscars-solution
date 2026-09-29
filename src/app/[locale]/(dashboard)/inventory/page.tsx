@@ -5,13 +5,17 @@ import { createClient } from "@/lib/supabase/server";
 import { listProducts } from "@/lib/db/products";
 import { listSuppliers } from "@/lib/db/suppliers";
 import { listStockMovements } from "@/lib/db/stock-movements";
-import { getPresetRange } from "@/lib/utils/period";
-import { getStartOfCurrentMonthInTimeZone } from "@/lib/utils/dates";
-import { computeStockMovementTrend } from "@/lib/reports/aggregations";
+import { resolvePeriod } from "@/lib/utils/period";
+import { formatCalendarDate } from "@/lib/utils/dates";
+import { computeStockMovementTrend, inRange } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
 import { InventoryView } from "./_components/inventory-view";
 
-export default async function InventoryPage() {
+export default async function InventoryPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ preset?: string; from?: string; to?: string }>;
+}) {
   const session = await requireAuth();
   const locale = await getLocale();
   const salon = session.activeMembership?.salon;
@@ -30,9 +34,6 @@ export default async function InventoryPage() {
   ]);
 
   const activeProducts = products.filter((product) => product.is_active);
-  // created_at es timestamptz: el límite de "este mes" se calcula en la zona
-  // horaria del salón, no en la del servidor (CLAUDE.md sección 5, "Fechas").
-  const startOfMonth = getStartOfCurrentMonthInTimeZone(salon.timezone);
 
   const lowStockCount = activeProducts.filter(
     (product) => product.stock_qty <= product.min_stock
@@ -41,13 +42,25 @@ export default async function InventoryPage() {
     (sum, product) => sum + product.stock_qty * product.cost_cents,
     0
   );
-  const movementsThisMonth = movements.filter(
-    (movement) => new Date(movement.created_at) >= startOfMonth
-  ).length;
 
+  const params = await searchParams;
   const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
-  const { from, to } = getPresetRange("last3Months", todayStr);
+  const period = resolvePeriod(params, todayStr);
+  const { from, to } = period;
+
+  // created_at es timestamptz: se convierte a la zona horaria del salón antes
+  // de compararlo con el periodo seleccionado (CLAUDE.md sección 5, "Fechas")
+  // — mismo patrón ya usado dentro de computeStockMovementTrend.
+  const movementsInPeriod = movements.filter((movement) =>
+    inRange(formatInTimeZone(new Date(movement.created_at), salon.timezone, "yyyy-MM-dd"), from, to)
+  ).length;
   const stockMovementTrend = computeStockMovementTrend(movements, from, to, salon.timezone);
+
+  const tPeriod = await getTranslations("inventory.period");
+  const periodLabel =
+    period.preset === "custom"
+      ? `${formatCalendarDate(period.from, locale, "P")} – ${formatCalendarDate(period.to, locale, "P")}`
+      : tPeriod(period.preset);
 
   return (
     <InventoryView
@@ -55,12 +68,14 @@ export default async function InventoryPage() {
       suppliers={suppliers}
       movements={movements}
       stockMovementTrend={stockMovementTrend}
+      period={period}
       kpis={{
         totalProducts: activeProducts.length,
         lowStockCount,
         inventoryValueCents,
-        movementsThisMonth,
+        movementsInPeriod,
       }}
+      periodLabel={periodLabel}
       currency={salon.currency}
       timezone={salon.timezone}
       locale={locale}

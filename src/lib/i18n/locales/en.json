@@ -82,27 +82,19 @@
     },
     "topServices": {
       "title": "Best-selling services",
-      "emptyTitle": "No service sales yet in this period"
+      "emptyTitle": "No service sales yet in this period",
+      "revenueLabel": "Revenue"
     },
     "staffWorkload": {
       "title": "Workload by staff member",
       "emptyTitle": "No appointments assigned yet in this period",
-      "assignedCount": "{count, plural, one {# service} other {# services}}"
-    },
-    "clientSegments": {
-      "title": "New vs. recurring clients",
-      "new": "New",
-      "recurring": "Recurring"
+      "assignedCount": "{count, plural, one {# service} other {# services}}",
+      "seriesName": "Services assigned"
     },
     "revenueTrend": {
       "title": "Revenue trend",
-      "emptyTitle": "No revenue recorded yet in this period"
-    },
-    "completionBreakdown": {
-      "title": "Completed vs. no-show",
-      "emptyTitle": "No completed or no-show appointments yet in this period",
-      "completed": "Completed",
-      "noShow": "No-show"
+      "emptyTitle": "No revenue recorded yet in this period",
+      "incomeLabel": "Revenue"
     },
     "suspended": {
       "title": "This salon is suspended",
@@ -118,8 +110,14 @@
       "todayAppointments": "Today's appointments",
       "todayCaption": "Scheduled for today",
       "noShowRate": "No-show rate",
-      "thisMonth": "This month",
       "completedRevenue": "Revenue from completed appointments"
+    },
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
     },
     "inbox": {
       "createButton": "New request",
@@ -474,8 +472,14 @@
       "lowStockCaption": "Need restocking",
       "inventoryValue": "Inventory value",
       "inventoryValueCaption": "At cost price",
-      "movementsThisMonth": "Movements",
-      "thisMonth": "This month"
+      "movementsInPeriod": "Movements"
+    },
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
     },
     "tabs": {
       "products": "Products",
@@ -485,7 +489,8 @@
     "charts": {
       "productsValue": {
         "title": "Inventory value by product",
-        "emptyTitle": "No products with stock yet"
+        "emptyTitle": "No products with stock yet",
+        "valueLabel": "Value"
       },
       "stockMovements": {
         "title": "Stock movements",
@@ -629,7 +634,8 @@
     "charts": {
       "incomeTrend": {
         "title": "Revenue trend",
-        "emptyTitle": "No paid charges in the last 3 months"
+        "emptyTitle": "No paid charges in the last 3 months",
+        "incomeLabel": "Income"
       },
       "methodBreakdown": {
         "title": "Charges by payment method",
@@ -882,6 +888,7 @@
       "totalRefunded": "Refunded this period",
       "emptyChart": "No income in this period",
       "emptyTable": "No payments in this period",
+      "incomeLabel": "Income",
       "columnDate": "Date",
       "columnClient": "Client",
       "columnAmount": "Amount",
@@ -891,6 +898,7 @@
     "clients": {
       "new": "New",
       "recurring": "Recurring",
+      "countLabel": "Clients",
       "emptyTable": "No clients yet",
       "columnName": "Client",
       "columnPhone": "Phone",

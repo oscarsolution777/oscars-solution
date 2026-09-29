@@ -82,27 +82,19 @@
     },
     "topServices": {
       "title": "Meistverkaufte Dienstleistungen",
-      "emptyTitle": "In diesem Zeitraum noch keine Dienstleistungsverkäufe"
+      "emptyTitle": "In diesem Zeitraum noch keine Dienstleistungsverkäufe",
+      "revenueLabel": "Umsatz"
     },
     "staffWorkload": {
       "title": "Arbeitslast pro Mitarbeiter",
       "emptyTitle": "In diesem Zeitraum noch keine zugewiesenen Termine",
-      "assignedCount": "{count, plural, one {# Dienstleistung} other {# Dienstleistungen}}"
-    },
-    "clientSegments": {
-      "title": "Neue vs. wiederkehrende Kunden",
-      "new": "Neu",
-      "recurring": "Wiederkehrend"
+      "assignedCount": "{count, plural, one {# Dienstleistung} other {# Dienstleistungen}}",
+      "seriesName": "Zugewiesene Dienstleistungen"
     },
     "revenueTrend": {
       "title": "Umsatzentwicklung",
-      "emptyTitle": "In diesem Zeitraum noch keine Einnahmen erfasst"
-    },
-    "completionBreakdown": {
-      "title": "Abgeschlossen vs. Nichterscheinen",
-      "emptyTitle": "In diesem Zeitraum noch keine abgeschlossenen Termine oder Nichterscheinen",
-      "completed": "Abgeschlossen",
-      "noShow": "Nichterscheinen"
+      "emptyTitle": "In diesem Zeitraum noch keine Einnahmen erfasst",
+      "incomeLabel": "Umsatz"
     },
     "suspended": {
       "title": "Dieser Salon ist gesperrt",
@@ -118,8 +110,14 @@
       "todayAppointments": "Termine heute",
       "todayCaption": "Für heute geplant",
       "noShowRate": "Nichterscheinen-Quote",
-      "thisMonth": "Diesen Monat",
       "completedRevenue": "Umsatz aus abgeschlossenen Terminen"
+    },
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
     },
     "inbox": {
       "createButton": "Neue Anfrage",
@@ -474,8 +472,14 @@
       "lowStockCaption": "Müssen nachbestellt werden",
       "inventoryValue": "Lagerwert",
       "inventoryValueCaption": "Zum Einkaufspreis",
-      "movementsThisMonth": "Bewegungen",
-      "thisMonth": "Diesen Monat"
+      "movementsInPeriod": "Bewegungen"
+    },
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
     },
     "tabs": {
       "products": "Produkte",
@@ -485,7 +489,8 @@
     "charts": {
       "productsValue": {
         "title": "Lagerwert nach Produkt",
-        "emptyTitle": "Noch keine Produkte mit Bestand"
+        "emptyTitle": "Noch keine Produkte mit Bestand",
+        "valueLabel": "Wert"
       },
       "stockMovements": {
         "title": "Lagerbewegungen",
@@ -629,7 +634,8 @@
     "charts": {
       "incomeTrend": {
         "title": "Umsatzentwicklung",
-        "emptyTitle": "Keine bezahlten Zahlungen in den letzten 3 Monaten"
+        "emptyTitle": "Keine bezahlten Zahlungen in den letzten 3 Monaten",
+        "incomeLabel": "Umsatz"
       },
       "methodBreakdown": {
         "title": "Zahlungen nach Zahlungsmethode",
@@ -882,6 +888,7 @@
       "totalRefunded": "Erstattet im Zeitraum",
       "emptyChart": "Kein Umsatz in diesem Zeitraum",
       "emptyTable": "Keine Zahlungen in diesem Zeitraum",
+      "incomeLabel": "Umsatz",
       "columnDate": "Datum",
       "columnClient": "Kunde",
       "columnAmount": "Betrag",
@@ -891,6 +898,7 @@
     "clients": {
       "new": "Neu",
       "recurring": "Wiederkehrend",
+      "countLabel": "Kunden",
       "emptyTable": "Noch keine Kunden",
       "columnName": "Kunde",
       "columnPhone": "Telefon",
