@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n/navigation";
 import { routing } from "@/lib/i18n/routing";
 import { salonProfileSchema, SALON_TIMEZONES, type SalonProfileInput } from "@/lib/validations/salons";
+import { LOCALE_LABELS } from "@/lib/i18n/locale-labels";
 import { updateSalonProfileAction } from "../actions";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,15 +22,6 @@ import {
 } from "@/components/ui/select";
 import { SalonLogoUploader } from "./salon-logo-uploader";
 import { useSettingsErrorMessage } from "./use-settings-error-message";
-
-const LOCALE_LABELS: Record<string, string> = {
-  es: "Español",
-  en: "English",
-  pt: "Português",
-  it: "Italiano",
-  fr: "Français",
-  de: "Deutsch",
-};
 
 type Salon = {
   name: string;

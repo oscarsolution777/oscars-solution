@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { requirePlatformAdmin } from "@/lib/auth/guards";
+import { PanelLocaleSwitcher } from "@/components/shared/panel-locale-switcher";
 import { UserMenu } from "@/components/shared/user-menu";
 import { SuperAdminNav } from "./_components/superadmin-nav";
 
@@ -34,7 +35,10 @@ export default async function SuperAdminLayout({
             ]}
           />
         </div>
-        <UserMenu fullName={fullName} roleLabel="SuperAdmin" />
+        <div className="flex items-center gap-1">
+          <PanelLocaleSwitcher />
+          <UserMenu fullName={fullName} roleLabel="SuperAdmin" />
+        </div>
       </header>
       <main className="flex-1 overflow-y-auto p-6">{children}</main>
     </div>

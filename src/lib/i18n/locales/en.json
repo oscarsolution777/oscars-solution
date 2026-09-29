@@ -44,6 +44,9 @@
     "comingSoon": "Coming soon",
     "salonSwitcher": {
       "label": "Switch salon"
+    },
+    "languageSwitcher": {
+      "label": "Change language"
     }
   },
   "dashboard": {

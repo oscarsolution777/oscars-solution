@@ -44,6 +44,9 @@
     "comingSoon": "Prossimamente",
     "salonSwitcher": {
       "label": "Cambia salone"
+    },
+    "languageSwitcher": {
+      "label": "Cambia lingua"
     }
   },
   "dashboard": {

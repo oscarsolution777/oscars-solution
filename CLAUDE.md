@@ -119,6 +119,19 @@ NEXT_PUBLIC_DEFAULT_LOCALE=es
 - **Detección de idioma:**
   - Portal del cliente: se puede fijar un idioma por defecto por salón (`salons.default_locale`, útil si el salón está en Brasil → `pt`), con selector manual visible para el cliente.
   - Panel de gestión / SuperAdmin: preferencia del usuario (`profiles.locale`), con selector en el header.
+    **Construido**: `PanelLocaleSwitcher` (`src/components/shared/panel-locale-switcher.tsx`),
+    montado en el `Topbar` del panel de gestión y en el header del panel
+    SuperAdmin. Al elegir un idioma cambia la URL actual al mismo path con ese
+    locale (mismo patrón que el `LocaleSwitcher` del portal QR,
+    `router.replace(pathname, { locale })`) y además persiste la preferencia
+    en `profiles.locale` vía `updateProfileLocaleAction`
+    (`src/lib/auth/actions.ts`) — escritura directa protegida por la política
+    RLS `profiles_update_self` (migración `0003`), sin función `security
+    definer` nueva. Los nombres de idioma (`LOCALE_LABELS`,
+    `src/lib/i18n/locale-labels.ts`) son una sola fuente compartida con el
+    selector del portal QR y los dos formularios que eligen
+    `salons.default_locale` (Configuración y alta de salón en SuperAdmin) —
+    antes estaban triplicados.
 - **Componentes:** Server Components por defecto. `"use client"` solo cuando haga falta interactividad.
 - **Mutaciones:** Server Actions en `actions.ts` junto a la feature. Validar con Zod al entrar.
 - **Acceso a datos:** todas las consultas viven en `src/lib/db/<entity>.ts`. Ningún componente llama a Supabase directamente.

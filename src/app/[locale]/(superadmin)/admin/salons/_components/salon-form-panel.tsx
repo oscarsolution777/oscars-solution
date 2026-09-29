@@ -11,6 +11,7 @@ import {
   type CreateDemoSalonInput,
 } from "@/lib/validations/platform-salon";
 import { createSalonAction, createDemoSalonAction } from "../actions";
+import { LOCALE_LABELS } from "@/lib/i18n/locale-labels";
 import type { Tables } from "@/types/database";
 import {
   Sheet,
@@ -33,15 +34,6 @@ import {
 
 type CurrencyRow = Tables<"currencies">;
 type FormValues = CreateDemoSalonInput;
-
-const LOCALE_LABELS: Record<string, string> = {
-  es: "Español",
-  en: "English",
-  pt: "Português",
-  it: "Italiano",
-  fr: "Français",
-  de: "Deutsch",
-};
 
 export function SalonFormPanel({
   open,

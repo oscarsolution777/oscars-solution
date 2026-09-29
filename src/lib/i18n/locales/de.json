@@ -44,6 +44,9 @@
     "comingSoon": "Demnächst verfügbar",
     "salonSwitcher": {
       "label": "Salon wechseln"
+    },
+    "languageSwitcher": {
+      "label": "Sprache wechseln"
     }
   },
   "dashboard": {

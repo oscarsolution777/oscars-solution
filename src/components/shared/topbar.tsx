@@ -1,6 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import { getLocale } from "next-intl/server";
 import { formatSalonDate } from "@/lib/utils/dates";
+import { PanelLocaleSwitcher } from "./panel-locale-switcher";
 import { UserMenu } from "./user-menu";
 
 export async function Topbar({
@@ -39,6 +40,7 @@ export async function Topbar({
           <CalendarDays size={16} />
           <span>{today}</span>
         </div>
+        <PanelLocaleSwitcher />
         <UserMenu fullName={userFullName} roleLabel={userRoleLabel} />
       </div>
     </header>

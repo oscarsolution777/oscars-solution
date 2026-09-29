@@ -3,6 +3,7 @@
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/lib/i18n/navigation";
 import { routing } from "@/lib/i18n/routing";
+import { LOCALE_LABELS } from "@/lib/i18n/locale-labels";
 import {
   Select,
   SelectContent,
@@ -14,15 +15,6 @@ import {
 // Selector manual de idioma para el cliente del portal (CLAUDE.md sección 5:
 // "selector manual visible para el cliente"). Cambia de idioma manteniendo la
 // misma ruta (catálogo, solicitud o estado).
-const LOCALE_LABELS: Record<string, string> = {
-  es: "Español",
-  en: "English",
-  pt: "Português",
-  it: "Italiano",
-  fr: "Français",
-  de: "Deutsch",
-};
-
 export function LocaleSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
