@@ -1237,6 +1237,7 @@ export type Database = {
       cancel_request_by_code: { Args: { p_public_code: string }; Returns: Json }
       expire_due_demo_salons: { Args: never; Returns: undefined }
       get_request_status: { Args: { p_public_code: string }; Returns: Json }
+      get_salon_reset_preview: { Args: { p_salon_id: string }; Returns: Json }
       has_role_in_salon: {
         Args: { allowed_roles: string[]; target_salon_id: string }
         Returns: boolean
@@ -1287,6 +1288,7 @@ export type Database = {
         Args: { p_preferred_date: string; p_public_code: string }
         Returns: Json
       }
+      reset_salon_data: { Args: { p_salon_id: string }; Returns: Json }
       update_salon_membership: {
         Args: { p_is_active: boolean; p_membership_id: string; p_role: string }
         Returns: Json

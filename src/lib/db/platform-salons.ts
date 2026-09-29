@@ -53,6 +53,52 @@ export async function createSalonRow(
   return data;
 }
 
+export type SalonResetCounts = {
+  requests: number;
+  appointments: number;
+  payments: number;
+  cash_closures: number;
+  stock_movements: number;
+  expenses: number;
+  staff_payouts: number;
+  clients: number;
+  ai_analyses?: number;
+};
+
+// Conteo por tabla antes de borrar, para que el diálogo de confirmación
+// muestre el impacto real (CLAUDE.md sección 12: acciones destructivas
+// siempre con confirmación — para un borrado sin vuelta atrás, un solo
+// AlertDialog como el de suspender no basta).
+export async function getSalonResetPreview(
+  supabase: SupabaseServerClient,
+  salonId: string
+): Promise<SalonResetCounts> {
+  const { data, error } = await supabase.rpc("get_salon_reset_preview", {
+    p_salon_id: salonId,
+  });
+  if (error) throw error;
+
+  const result = data as { ok: boolean; error?: string; counts?: SalonResetCounts };
+  if (!result.ok) throw new Error(result.error ?? "forbidden");
+  return result.counts as SalonResetCounts;
+}
+
+// Borrado destructivo real. La función SQL ya valida is_platform_admin() y
+// que el salón exista; aquí solo se propaga el resultado.
+export async function resetSalonData(
+  supabase: SupabaseServerClient,
+  salonId: string
+): Promise<SalonResetCounts> {
+  const { data, error } = await supabase.rpc("reset_salon_data", {
+    p_salon_id: salonId,
+  });
+  if (error) throw error;
+
+  const result = data as { ok: boolean; error?: string; deleted?: SalonResetCounts };
+  if (!result.ok) throw new Error(result.error ?? "forbidden");
+  return result.deleted as SalonResetCounts;
+}
+
 export async function updateSalonStatus(
   supabase: SupabaseServerClient,
   salonId: string,

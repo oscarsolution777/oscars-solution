@@ -1150,6 +1150,7 @@
         "emptyDescription": "Erstelle den ersten echten Salon oder eine Demo für einen Interessenten.",
         "activateAction": "Aktivieren",
         "suspendAction": "Sperren",
+        "resetAction": "Salon zurücksetzen",
         "demoExpiresOn": "Läuft ab am {date}",
         "notDemo": "—",
         "suspendDialog": {
@@ -1157,6 +1158,30 @@
           "description": "Die Inhaberin und ihr Team verlieren sofort den Zugriff auf das Panel von \"{name}\". Du kannst ihn jederzeit wieder aktivieren.",
           "confirm": "Sperren",
           "cancel": "Abbrechen"
+        }
+      },
+      "resetDialog": {
+        "title": "\"{name}\" zurücksetzen",
+        "warning": "Damit werden alle Anfragen, Termine, Zahlungen, Kassenabschlüsse, Lagerbewegungen, Ausgaben, Gehaltsabrechnungen und Kunden dieses Salons endgültig gelöscht. Das kann nicht rückgängig gemacht werden. Katalog, Personal, Produkte und Lieferanten bleiben unberührt.",
+        "loadingPreview": "Es wird berechnet, wie viele Datensätze gelöscht werden…",
+        "confirmInputLabel": "Gib \"{slug}\" ein, um zu bestätigen",
+        "confirmButton": "Salon zurücksetzen",
+        "confirmButtonPending": "Wird zurückgesetzt…",
+        "cancel": "Abbrechen",
+        "close": "Schließen",
+        "doneMessage": "Fertig. Diese Datensätze wurden gelöscht:",
+        "counts": {
+          "requests": "Anfragen",
+          "appointments": "Termine",
+          "payments": "Zahlungen",
+          "cash_closures": "Kassenabschlüsse",
+          "stock_movements": "Lagerbewegungen",
+          "expenses": "Ausgaben",
+          "staff_payouts": "Gehaltsabrechnungen",
+          "clients": "Kunden"
+        },
+        "errors": {
+          "slugMismatch": "Der eingegebene Slug stimmt nicht mit dem dieses Salons überein."
         }
       },
       "status": {

@@ -1150,6 +1150,7 @@
         "emptyDescription": "Crea el primer salón real o una demo para un prospecto.",
         "activateAction": "Activar",
         "suspendAction": "Suspender",
+        "resetAction": "Reiniciar salón",
         "demoExpiresOn": "Vence {date}",
         "notDemo": "—",
         "suspendDialog": {
@@ -1157,6 +1158,30 @@
           "description": "La dueña y su equipo perderán acceso al panel de \"{name}\" de inmediato. Puedes reactivarlo cuando quieras.",
           "confirm": "Suspender",
           "cancel": "Cancelar"
+        }
+      },
+      "resetDialog": {
+        "title": "Reiniciar \"{name}\"",
+        "warning": "Esto borra permanentemente todas las solicitudes, citas, pagos, cuadres de caja, movimientos de inventario, gastos, nóminas y clientes de este salón. No hay forma de deshacerlo. El catálogo, el personal, los productos y los proveedores no se tocan.",
+        "loadingPreview": "Calculando cuántos registros se van a borrar…",
+        "confirmInputLabel": "Escribe \"{slug}\" para confirmar",
+        "confirmButton": "Reiniciar salón",
+        "confirmButtonPending": "Reiniciando…",
+        "cancel": "Cancelar",
+        "close": "Cerrar",
+        "doneMessage": "Listo. Se borraron estos registros:",
+        "counts": {
+          "requests": "Solicitudes",
+          "appointments": "Citas",
+          "payments": "Pagos",
+          "cash_closures": "Cuadres de caja",
+          "stock_movements": "Movimientos de inventario",
+          "expenses": "Gastos",
+          "staff_payouts": "Nóminas",
+          "clients": "Clientes"
+        },
+        "errors": {
+          "slugMismatch": "El slug que escribiste no coincide con el de este salón."
         }
       },
       "status": {

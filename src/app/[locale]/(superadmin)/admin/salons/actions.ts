@@ -13,6 +13,9 @@ import {
   createOwnerAccountForSalon,
   cloneCatalogToSalon,
   updateSalonStatus,
+  getSalonResetPreview,
+  resetSalonData,
+  type SalonResetCounts,
 } from "@/lib/db/platform-salons";
 
 type ActionResult<T = undefined> =
@@ -171,6 +174,55 @@ export async function setSalonStatusAction(
     await updateSalonStatus(supabase, salonId, status);
     return { ok: true, data: undefined };
   } catch {
+    return { ok: false, error: "superadmin.salons.errors.generic" };
+  }
+}
+
+export async function getSalonResetPreviewAction(
+  salonId: string
+): Promise<ActionResult<SalonResetCounts>> {
+  const access = await requirePlatformAdminAccess();
+  if (!access.ok) return access;
+
+  try {
+    const supabase = await createClient();
+    const counts = await getSalonResetPreview(supabase, salonId);
+    return { ok: true, data: counts };
+  } catch {
+    return { ok: false, error: "superadmin.salons.errors.generic" };
+  }
+}
+
+// Borrado destructivo real: además del guard de platform admin, exige que
+// Oscar escriba el slug EXACTO del salón (leído aquí en servidor, nunca
+// confiado del cliente) — mismo patrón "type-to-confirm" de herramientas
+// como Vercel/GitHub para operaciones sin vuelta atrás. Un solo AlertDialog
+// (como el de suspender) no es suficiente para esto.
+export async function resetSalonDataAction(
+  salonId: string,
+  confirmSlug: string
+): Promise<ActionResult<SalonResetCounts>> {
+  const access = await requirePlatformAdminAccess();
+  if (!access.ok) return access;
+
+  try {
+    const supabase = await createClient();
+    const { data: salon, error: salonError } = await supabase
+      .from("salons")
+      .select("slug")
+      .eq("id", salonId)
+      .single();
+    if (salonError || !salon) {
+      return { ok: false, error: "superadmin.salons.errors.generic" };
+    }
+    if (salon.slug !== confirmSlug.trim()) {
+      return { ok: false, error: "superadmin.salons.resetDialog.errors.slugMismatch" };
+    }
+
+    const deleted = await resetSalonData(supabase, salonId);
+    return { ok: true, data: deleted };
+  } catch (error) {
+    console.error("[resetSalonDataAction] failed to reset salon", error);
     return { ok: false, error: "superadmin.salons.errors.generic" };
   }
 }

@@ -1150,6 +1150,7 @@
         "emptyDescription": "Create the first real salon or a demo for a prospect.",
         "activateAction": "Activate",
         "suspendAction": "Suspend",
+        "resetAction": "Reset salon",
         "demoExpiresOn": "Expires {date}",
         "notDemo": "—",
         "suspendDialog": {
@@ -1157,6 +1158,30 @@
           "description": "The owner and her team will immediately lose access to the \"{name}\" panel. You can reactivate it anytime.",
           "confirm": "Suspend",
           "cancel": "Cancel"
+        }
+      },
+      "resetDialog": {
+        "title": "Reset \"{name}\"",
+        "warning": "This permanently deletes all of this salon's requests, appointments, payments, cash closures, inventory movements, expenses, payouts and clients. There is no way to undo it. Its catalog, staff, products and suppliers are not touched.",
+        "loadingPreview": "Calculating how many records will be deleted…",
+        "confirmInputLabel": "Type \"{slug}\" to confirm",
+        "confirmButton": "Reset salon",
+        "confirmButtonPending": "Resetting…",
+        "cancel": "Cancel",
+        "close": "Close",
+        "doneMessage": "Done. These records were deleted:",
+        "counts": {
+          "requests": "Requests",
+          "appointments": "Appointments",
+          "payments": "Payments",
+          "cash_closures": "Cash closures",
+          "stock_movements": "Inventory movements",
+          "expenses": "Expenses",
+          "staff_payouts": "Payouts",
+          "clients": "Clients"
+        },
+        "errors": {
+          "slugMismatch": "The slug you typed doesn't match this salon's."
         }
       },
       "status": {

@@ -27,6 +27,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { formatSalonDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import { SalonStatusBadge } from "./salon-status-badge";
+import { ResetSalonDialog } from "./reset-salon-dialog";
 import { setSalonStatusAction } from "../actions";
 
 type SalonRow = Tables<"salons">;
@@ -45,6 +46,9 @@ export function SalonsTable({
   // dueña: le corta el acceso al panel — CLAUDE.md sección 12, "acciones
   // destructivas siempre con confirmación").
   const [salonToSuspend, setSalonToSuspend] = useState<SalonRow | null>(null);
+  // Salón pendiente del borrado destructivo "Reiniciar salón" (sin vuelta
+  // atrás, ver reset-salon-dialog.tsx).
+  const [salonToReset, setSalonToReset] = useState<SalonRow | null>(null);
 
   if (salons.length === 0) {
     return <EmptyState title={t("emptyTitle")} description={t("emptyDescription")} />;
@@ -108,25 +112,36 @@ export function SalonsTable({
                 {formatSalonDate(salon.created_at, salon.timezone, locale)}
               </TableCell>
               <TableCell className="text-right">
-                {isActive(salon) ? (
+                <div className="flex items-center justify-end gap-1">
+                  {isActive(salon) ? (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      disabled={isPending}
+                      onClick={() => setSalonToSuspend(salon)}
+                    >
+                      {t("suspendAction")}
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={isPending}
+                      onClick={() => applyStatus(salon, "active")}
+                    >
+                      {t("activateAction")}
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
+                    className="text-destructive hover:text-destructive"
                     disabled={isPending}
-                    onClick={() => setSalonToSuspend(salon)}
+                    onClick={() => setSalonToReset(salon)}
                   >
-                    {t("suspendAction")}
+                    {t("resetAction")}
                   </Button>
-                ) : (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    disabled={isPending}
-                    onClick={() => applyStatus(salon, "active")}
-                  >
-                    {t("activateAction")}
-                  </Button>
-                )}
+                </div>
               </TableCell>
             </TableRow>
           ))}
@@ -155,6 +170,12 @@ export function SalonsTable({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <ResetSalonDialog
+        salon={salonToReset}
+        open={salonToReset !== null}
+        onOpenChange={(open) => !open && setSalonToReset(null)}
+      />
     </div>
   );
 }

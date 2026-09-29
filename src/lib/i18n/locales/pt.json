@@ -1150,6 +1150,7 @@
         "emptyDescription": "Crie o primeiro salão real ou uma demo para um cliente em potencial.",
         "activateAction": "Ativar",
         "suspendAction": "Suspender",
+        "resetAction": "Reiniciar salão",
         "demoExpiresOn": "Expira em {date}",
         "notDemo": "—",
         "suspendDialog": {
@@ -1157,6 +1158,30 @@
           "description": "A dona e sua equipe perderão o acesso ao painel de \"{name}\" imediatamente. Você pode reativá-lo quando quiser.",
           "confirm": "Suspender",
           "cancel": "Cancelar"
+        }
+      },
+      "resetDialog": {
+        "title": "Reiniciar \"{name}\"",
+        "warning": "Isso apaga permanentemente todas as solicitações, agendamentos, pagamentos, fechamentos de caixa, movimentações de estoque, despesas, folhas de pagamento e clientes deste salão. Não há como desfazer. O catálogo, a equipe, os produtos e os fornecedores não são afetados.",
+        "loadingPreview": "Calculando quantos registros serão apagados…",
+        "confirmInputLabel": "Digite \"{slug}\" para confirmar",
+        "confirmButton": "Reiniciar salão",
+        "confirmButtonPending": "Reiniciando…",
+        "cancel": "Cancelar",
+        "close": "Fechar",
+        "doneMessage": "Pronto. Estes registros foram apagados:",
+        "counts": {
+          "requests": "Solicitações",
+          "appointments": "Agendamentos",
+          "payments": "Pagamentos",
+          "cash_closures": "Fechamentos de caixa",
+          "stock_movements": "Movimentações de estoque",
+          "expenses": "Despesas",
+          "staff_payouts": "Folhas de pagamento",
+          "clients": "Clientes"
+        },
+        "errors": {
+          "slugMismatch": "O slug digitado não corresponde ao deste salão."
         }
       },
       "status": {

@@ -1150,6 +1150,7 @@
         "emptyDescription": "Créez le premier salon réel ou une démo pour un prospect.",
         "activateAction": "Activer",
         "suspendAction": "Suspendre",
+        "resetAction": "Réinitialiser le salon",
         "demoExpiresOn": "Expire le {date}",
         "notDemo": "—",
         "suspendDialog": {
@@ -1157,6 +1158,30 @@
           "description": "La propriétaire et son équipe perdront immédiatement l'accès au panneau de \"{name}\". Vous pourrez le réactiver à tout moment.",
           "confirm": "Suspendre",
           "cancel": "Annuler"
+        }
+      },
+      "resetDialog": {
+        "title": "Réinitialiser \"{name}\"",
+        "warning": "Ceci supprime définitivement toutes les demandes, rendez-vous, paiements, clôtures de caisse, mouvements de stock, dépenses, paies et clients de ce salon. Il n'y a aucun moyen d'annuler cette action. Le catalogue, le personnel, les produits et les fournisseurs ne sont pas touchés.",
+        "loadingPreview": "Calcul du nombre d'enregistrements qui seront supprimés…",
+        "confirmInputLabel": "Tapez \"{slug}\" pour confirmer",
+        "confirmButton": "Réinitialiser le salon",
+        "confirmButtonPending": "Réinitialisation…",
+        "cancel": "Annuler",
+        "close": "Fermer",
+        "doneMessage": "Terminé. Ces enregistrements ont été supprimés :",
+        "counts": {
+          "requests": "Demandes",
+          "appointments": "Rendez-vous",
+          "payments": "Paiements",
+          "cash_closures": "Clôtures de caisse",
+          "stock_movements": "Mouvements de stock",
+          "expenses": "Dépenses",
+          "staff_payouts": "Paies",
+          "clients": "Clients"
+        },
+        "errors": {
+          "slugMismatch": "Le slug saisi ne correspond pas à celui de ce salon."
         }
       },
       "status": {

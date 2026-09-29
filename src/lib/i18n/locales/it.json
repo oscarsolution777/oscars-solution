@@ -1150,6 +1150,7 @@
         "emptyDescription": "Crea il primo salone reale o una demo per un potenziale cliente.",
         "activateAction": "Attiva",
         "suspendAction": "Sospendi",
+        "resetAction": "Ripristina salone",
         "demoExpiresOn": "Scade il {date}",
         "notDemo": "—",
         "suspendDialog": {
@@ -1157,6 +1158,30 @@
           "description": "La proprietaria e il suo team perderanno subito l'accesso al pannello di \"{name}\". Puoi riattivarlo quando vuoi.",
           "confirm": "Sospendi",
           "cancel": "Annulla"
+        }
+      },
+      "resetDialog": {
+        "title": "Ripristina \"{name}\"",
+        "warning": "Questa azione elimina definitivamente tutte le richieste, gli appuntamenti, i pagamenti, le chiusure cassa, i movimenti di magazzino, le spese, gli stipendi e i clienti di questo salone. Non è possibile annullarla. Il catalogo, il personale, i prodotti e i fornitori non vengono toccati.",
+        "loadingPreview": "Calcolo di quanti record verranno eliminati…",
+        "confirmInputLabel": "Scrivi \"{slug}\" per confermare",
+        "confirmButton": "Ripristina salone",
+        "confirmButtonPending": "Ripristino in corso…",
+        "cancel": "Annulla",
+        "close": "Chiudi",
+        "doneMessage": "Fatto. Sono stati eliminati questi record:",
+        "counts": {
+          "requests": "Richieste",
+          "appointments": "Appuntamenti",
+          "payments": "Pagamenti",
+          "cash_closures": "Chiusure cassa",
+          "stock_movements": "Movimenti di magazzino",
+          "expenses": "Spese",
+          "staff_payouts": "Stipendi",
+          "clients": "Clienti"
+        },
+        "errors": {
+          "slugMismatch": "Lo slug che hai scritto non corrisponde a quello di questo salone."
         }
       },
       "status": {
