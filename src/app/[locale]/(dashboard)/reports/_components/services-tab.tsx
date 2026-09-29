@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
+import { usePagination } from "@/lib/utils/pagination";
 import type { ServiceSalesRow } from "@/lib/reports/aggregations";
 import { ServicesChart } from "./services-chart";
 import { ExportButtons } from "./export-buttons";
@@ -26,6 +28,7 @@ export function ServicesTab({
   locale: string;
 }) {
   const t = useTranslations("reports.services");
+  const { page, setPage, totalPages, pageItems } = usePagination(rows);
 
   const csvRows = rows.map((r) => ({
     [t("columnService")]: r.name,
@@ -62,7 +65,7 @@ export function ServicesTab({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {rows.map((row) => (
+              {pageItems.map((row) => (
                 <TableRow key={row.serviceId}>
                   <TableCell className="font-medium text-text-primary">{row.name}</TableCell>
                   <TableCell className="text-text-secondary">{row.units}</TableCell>
@@ -75,6 +78,8 @@ export function ServicesTab({
           </Table>
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );
 }

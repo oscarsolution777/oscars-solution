@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
 import { formatCalendarDate } from "@/lib/utils/dates";
+import { usePagination } from "@/lib/utils/pagination";
 import type { Tables } from "@/types/database";
 
 type CashClosureRow = Tables<"cash_closures">;
@@ -32,6 +34,7 @@ export function ClosuresTable({
   onCreate: () => void;
 }) {
   const t = useTranslations("cashClosures.table");
+  const { page, setPage, totalPages, pageItems } = usePagination(closures);
 
   if (closures.length === 0) {
     return (
@@ -44,62 +47,66 @@ export function ClosuresTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-card-border">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t("columnDate")}</TableHead>
-            <TableHead>{t("columnOpening")}</TableHead>
-            <TableHead>{t("columnExpected")}</TableHead>
-            <TableHead>{t("columnCounted")}</TableHead>
-            <TableHead>{t("columnDifference")}</TableHead>
-            <TableHead className="text-right">{t("columnActions")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {closures.map((closure) => {
-            const isBalanced = closure.difference_cents === 0;
-            return (
-              <TableRow key={closure.id}>
-                <TableCell className="font-medium text-text-primary">
-                  {formatCalendarDate(closure.closure_date, locale, "PP")}
-                </TableCell>
-                <TableCell className="text-text-secondary">
-                  {formatMoney(closure.opening_cash_cents, currency, locale)}
-                </TableCell>
-                <TableCell className="text-text-secondary">
-                  {formatMoney(closure.expected_cash_cents, currency, locale)}
-                </TableCell>
-                <TableCell className="text-text-secondary">
-                  {formatMoney(closure.counted_cash_cents, currency, locale)}
-                </TableCell>
-                <TableCell>
-                  <span
-                    className={
-                      isBalanced
-                        ? "font-medium text-emerald-600"
-                        : "font-medium text-amber-600"
-                    }
-                  >
-                    {closure.difference_cents > 0 ? "+" : ""}
-                    {formatMoney(closure.difference_cents, currency, locale)}
-                  </span>
-                </TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    onClick={() => onEdit(closure)}
-                    aria-label={t("editAction")}
-                  >
-                    <Pencil size={16} />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
+    <>
+      <div className="overflow-x-auto rounded-xl border border-card-border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t("columnDate")}</TableHead>
+              <TableHead>{t("columnOpening")}</TableHead>
+              <TableHead>{t("columnExpected")}</TableHead>
+              <TableHead>{t("columnCounted")}</TableHead>
+              <TableHead>{t("columnDifference")}</TableHead>
+              <TableHead className="text-right">{t("columnActions")}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {pageItems.map((closure) => {
+              const isBalanced = closure.difference_cents === 0;
+              return (
+                <TableRow key={closure.id}>
+                  <TableCell className="font-medium text-text-primary">
+                    {formatCalendarDate(closure.closure_date, locale, "PP")}
+                  </TableCell>
+                  <TableCell className="text-text-secondary">
+                    {formatMoney(closure.opening_cash_cents, currency, locale)}
+                  </TableCell>
+                  <TableCell className="text-text-secondary">
+                    {formatMoney(closure.expected_cash_cents, currency, locale)}
+                  </TableCell>
+                  <TableCell className="text-text-secondary">
+                    {formatMoney(closure.counted_cash_cents, currency, locale)}
+                  </TableCell>
+                  <TableCell>
+                    <span
+                      className={
+                        isBalanced
+                          ? "font-medium text-emerald-600"
+                          : "font-medium text-amber-600"
+                      }
+                    >
+                      {closure.difference_cents > 0 ? "+" : ""}
+                      {formatMoney(closure.difference_cents, currency, locale)}
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => onEdit(closure)}
+                      aria-label={t("editAction")}
+                    >
+                      <Pencil size={16} />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+    </>
   );
 }

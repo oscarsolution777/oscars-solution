@@ -24,8 +24,10 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
 import { formatCalendarDate } from "@/lib/utils/dates";
+import { usePagination } from "@/lib/utils/pagination";
 import type { Tables } from "@/types/database";
 import { deleteExpenseAction } from "../actions";
 
@@ -51,6 +53,7 @@ export function ExpensesTab({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [deleteTarget, setDeleteTarget] = useState<ExpenseRow | null>(null);
+  const { page, setPage, totalPages, pageItems } = usePagination(expenses);
 
   const confirmDelete = () => {
     if (!deleteTarget) return;
@@ -91,7 +94,7 @@ export function ExpensesTab({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {expenses.map((expense) => (
+              {pageItems.map((expense) => (
                 <TableRow key={expense.id}>
                   <TableCell className="font-medium text-text-primary">
                     {expense.category}
@@ -137,6 +140,8 @@ export function ExpensesTab({
           </Table>
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       <AlertDialog open={deleteTarget !== null} onOpenChange={(open) => !open && setDeleteTarget(null)}>
         <AlertDialogContent>

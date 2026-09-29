@@ -581,6 +581,17 @@ compila · pasa lint y typecheck · migraciones aplicadas · RLS probada con dos
 - Formularios: validación en línea, mensajes claros, nunca perder lo escrito por un error.
 - Máximo 3 clics desde el dashboard hasta cualquier acción frecuente.
 - Accesibilidad: contraste suficiente, labels reales, navegación por teclado.
+- **Paginación** en las tablas que crecen sin límite con el tiempo (Pagos,
+  Cuadre de caja, Finanzas — Gastos y Nóminas — y las 5 pestañas de
+  Reportes): `usePagination` (`src/lib/utils/pagination.ts`) + `Pagination`
+  (`src/components/shared/pagination.tsx`), 20 registros por página.
+  Paginación **del lado del cliente**: recorta el array que ya llegó completo
+  del servidor, sin tocar la consulta a Supabase ni los KPIs/gráficos/export
+  CSV de cada pantalla, que siguen calculándose sobre el dataset completo —
+  decisión deliberada (rule 3 de la sección 3): el volumen de datos de un
+  salón no justifica reescribir cada query con `range()`/`?page=` en la URL.
+  No se aplica a listas de catálogo (Servicios, Trabajadores, Productos...),
+  que para un salón normal caben cómodas en una sola pantalla.
 
 ---
 

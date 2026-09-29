@@ -25,8 +25,10 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
 import { formatSalonDate } from "@/lib/utils/dates";
+import { usePagination } from "@/lib/utils/pagination";
 import type { Tables } from "@/types/database";
 import { setPaymentStatusAction } from "../actions";
 
@@ -62,6 +64,7 @@ export function PaymentsTable({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [refundTarget, setRefundTarget] = useState<PaymentRow | null>(null);
+  const { page, setPage, totalPages, pageItems } = usePagination(payments);
 
   const applyStatus = (paymentId: string, status: string) => {
     startTransition(async () => {
@@ -81,74 +84,78 @@ export function PaymentsTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-card-border">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t("columnClient")}</TableHead>
-            <TableHead>{t("columnAmount")}</TableHead>
-            <TableHead>{t("columnMethod")}</TableHead>
-            <TableHead>{t("columnStatus")}</TableHead>
-            <TableHead>{t("columnDate")}</TableHead>
-            <TableHead className="text-right">{t("columnActions")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {payments.map((payment) => (
-            <TableRow key={payment.id}>
-              <TableCell className="font-medium text-text-primary">
-                {clientsById.get(payment.client_id)?.full_name ?? "—"}
-              </TableCell>
-              <TableCell className="font-medium text-text-primary">
-                {formatMoney(payment.amount_cents, currency, locale)}
-              </TableCell>
-              <TableCell className="text-text-secondary">{tMethods(payment.method)}</TableCell>
-              <TableCell>
-                <Badge variant={STATUS_BADGE_VARIANT[payment.status] ?? "outline"}>
-                  {tStatuses(payment.status)}
-                </Badge>
-              </TableCell>
-              <TableCell className="text-text-secondary">
-                {formatSalonDate(payment.paid_at, timezone, locale, "PP")}
-              </TableCell>
-              <TableCell className="text-right">
-                <div className="flex justify-end gap-1">
-                  {payment.status === "pending" && (
-                    <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      disabled={isPending}
-                      onClick={() => applyStatus(payment.id, "paid")}
-                      aria-label={t("markPaidAction")}
-                    >
-                      <Check size={16} />
-                    </Button>
-                  )}
-                  {payment.status === "paid" && (
-                    <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      disabled={isPending}
-                      onClick={() => setRefundTarget(payment)}
-                      aria-label={t("refundAction")}
-                    >
-                      <RotateCcw size={16} />
-                    </Button>
-                  )}
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    onClick={() => onEdit(payment)}
-                    aria-label={t("editAction")}
-                  >
-                    <Pencil size={16} />
-                  </Button>
-                </div>
-              </TableCell>
+    <>
+      <div className="overflow-x-auto rounded-xl border border-card-border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t("columnClient")}</TableHead>
+              <TableHead>{t("columnAmount")}</TableHead>
+              <TableHead>{t("columnMethod")}</TableHead>
+              <TableHead>{t("columnStatus")}</TableHead>
+              <TableHead>{t("columnDate")}</TableHead>
+              <TableHead className="text-right">{t("columnActions")}</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {pageItems.map((payment) => (
+              <TableRow key={payment.id}>
+                <TableCell className="font-medium text-text-primary">
+                  {clientsById.get(payment.client_id)?.full_name ?? "—"}
+                </TableCell>
+                <TableCell className="font-medium text-text-primary">
+                  {formatMoney(payment.amount_cents, currency, locale)}
+                </TableCell>
+                <TableCell className="text-text-secondary">{tMethods(payment.method)}</TableCell>
+                <TableCell>
+                  <Badge variant={STATUS_BADGE_VARIANT[payment.status] ?? "outline"}>
+                    {tStatuses(payment.status)}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-text-secondary">
+                  {formatSalonDate(payment.paid_at, timezone, locale, "PP")}
+                </TableCell>
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-1">
+                    {payment.status === "pending" && (
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        disabled={isPending}
+                        onClick={() => applyStatus(payment.id, "paid")}
+                        aria-label={t("markPaidAction")}
+                      >
+                        <Check size={16} />
+                      </Button>
+                    )}
+                    {payment.status === "paid" && (
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        disabled={isPending}
+                        onClick={() => setRefundTarget(payment)}
+                        aria-label={t("refundAction")}
+                      >
+                        <RotateCcw size={16} />
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => onEdit(payment)}
+                      aria-label={t("editAction")}
+                    >
+                      <Pencil size={16} />
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       <AlertDialog open={refundTarget !== null} onOpenChange={(open) => !open && setRefundTarget(null)}>
         <AlertDialogContent>
@@ -176,6 +183,6 @@ export function PaymentsTable({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+    </>
   );
 }

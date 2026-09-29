@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
 import { formatSalonDate } from "@/lib/utils/dates";
+import { usePagination } from "@/lib/utils/pagination";
 import type { Tables } from "@/types/database";
 import type { ClientSegments } from "@/lib/reports/aggregations";
 import { ClientsChart } from "./clients-chart";
@@ -36,6 +38,7 @@ export function ClientsTab({
   const t = useTranslations("reports.clients");
 
   const sorted = [...clients].sort((a, b) => b.total_spent_cents - a.total_spent_cents);
+  const { page, setPage, totalPages, pageItems } = usePagination(sorted);
 
   const csvRows = sorted.map((c) => ({
     [t("columnName")]: c.full_name,
@@ -72,7 +75,7 @@ export function ClientsTab({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sorted.map((client) => (
+              {pageItems.map((client) => (
                 <TableRow key={client.id}>
                   <TableCell className="font-medium text-text-primary">{client.full_name}</TableCell>
                   <TableCell className="text-text-secondary">{client.phone || "—"}</TableCell>
@@ -90,6 +93,8 @@ export function ClientsTab({
           </Table>
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );
 }

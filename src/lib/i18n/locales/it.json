@@ -14,6 +14,11 @@
       "description": "\"{name}\" non verrà più mostrato come attivo. Potrai riattivarlo quando vuoi.",
       "cancel": "Annulla",
       "confirm": "Disattiva"
+    },
+    "pagination": {
+      "pageLabel": "Pagina {page} di {totalPages}",
+      "previous": "Precedente",
+      "next": "Successiva"
     }
   },
   "auth": {

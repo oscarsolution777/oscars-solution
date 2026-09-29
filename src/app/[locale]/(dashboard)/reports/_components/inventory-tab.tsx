@@ -12,8 +12,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { ProductsValueChart } from "@/components/shared/charts/products-value-chart";
 import { formatMoney } from "@/lib/utils/money";
+import { usePagination } from "@/lib/utils/pagination";
 import type { Tables } from "@/types/database";
 import { ExportButtons } from "./export-buttons";
 
@@ -36,6 +38,7 @@ export function InventoryTab({
 
   const lowStockIds = new Set(lowStockProducts.map((p) => p.id));
   const sorted = [...products].sort((a, b) => a.stock_qty - b.stock_qty);
+  const { page, setPage, totalPages, pageItems } = usePagination(sorted);
 
   const csvRows = sorted.map((p) => ({
     [t("columnProduct")]: p.name,
@@ -96,7 +99,7 @@ export function InventoryTab({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sorted.map((product) => (
+              {pageItems.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell className="font-medium text-text-primary">{product.name}</TableCell>
                   <TableCell className="text-text-secondary">{product.stock_qty}</TableCell>
@@ -117,6 +120,8 @@ export function InventoryTab({
           </Table>
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );
 }

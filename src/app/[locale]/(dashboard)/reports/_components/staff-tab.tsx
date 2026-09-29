@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
+import { usePagination } from "@/lib/utils/pagination";
 import type { StaffWorkloadRow } from "@/lib/reports/aggregations";
 import { StaffChart } from "./staff-chart";
 import { ExportButtons } from "./export-buttons";
@@ -26,6 +28,7 @@ export function StaffTab({
   locale: string;
 }) {
   const t = useTranslations("reports.staff");
+  const { page, setPage, totalPages, pageItems } = usePagination(rows);
 
   const csvRows = rows.map((r) => ({
     [t("columnStaff")]: r.name,
@@ -62,7 +65,7 @@ export function StaffTab({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {rows.map((row) => (
+              {pageItems.map((row) => (
                 <TableRow key={row.staffId}>
                   <TableCell className="font-medium text-text-primary">{row.name}</TableCell>
                   <TableCell className="text-text-secondary">{row.assignedCount}</TableCell>
@@ -75,6 +78,8 @@ export function StaffTab({
           </Table>
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );
 }

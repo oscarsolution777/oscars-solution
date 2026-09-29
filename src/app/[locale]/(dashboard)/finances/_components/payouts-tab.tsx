@@ -15,8 +15,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
 import { formatCalendarDate } from "@/lib/utils/dates";
+import { usePagination } from "@/lib/utils/pagination";
 import type { Tables } from "@/types/database";
 import { markPayoutPaidAction } from "../actions";
 
@@ -42,6 +44,7 @@ export function PayoutsTab({
   const tStatuses = useTranslations("finances.payouts.statuses");
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const { page, setPage, totalPages, pageItems } = usePagination(payouts);
 
   const markPaid = (payoutId: string) => {
     startTransition(async () => {
@@ -77,7 +80,7 @@ export function PayoutsTab({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {payouts.map((payout) => (
+              {pageItems.map((payout) => (
                 <TableRow key={payout.id}>
                   <TableCell className="font-medium text-text-primary">
                     {staffById.get(payout.staff_id)?.full_name ?? "—"}
@@ -132,6 +135,8 @@ export function PayoutsTab({
           </Table>
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );
 }

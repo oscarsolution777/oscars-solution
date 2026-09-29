@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { Pagination } from "@/components/shared/pagination";
 import { formatMoney } from "@/lib/utils/money";
 import { formatSalonDate } from "@/lib/utils/dates";
+import { usePagination } from "@/lib/utils/pagination";
 import type { Tables } from "@/types/database";
 import type { SalesBucket } from "@/lib/reports/aggregations";
 import { SalesChart } from "./sales-chart";
@@ -39,6 +41,7 @@ export function SalesTab({
   const t = useTranslations("reports.sales");
   const tMethods = useTranslations("payments.methods");
   const tStatuses = useTranslations("payments.statuses");
+  const { page, setPage, totalPages, pageItems } = usePagination(payments);
 
   const incomeCents = payments
     .filter((p) => p.status === "paid")
@@ -105,7 +108,7 @@ export function SalesTab({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {payments.map((payment) => (
+              {pageItems.map((payment) => (
                 <TableRow key={payment.id}>
                   <TableCell className="text-text-secondary">
                     {formatSalonDate(payment.paid_at, timezone, locale, "PP")}
@@ -124,6 +127,8 @@ export function SalesTab({
           </Table>
         </div>
       )}
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </div>
   );
 }
