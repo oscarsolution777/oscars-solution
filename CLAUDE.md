@@ -318,6 +318,21 @@ mismo archivo pero la tabla nunca se había creado).
   si la dueña intenta tocar su propia fila, para que no pueda bloquearse a sí
   misma. Los usuarios nuevos los sigue dando de alta el equipo de Oscar's
   Solution, como antes de esta fase.
+- **Acceso de soporte del desarrollador (migración `0022`, sin fase propia)**:
+  se evaluó y se descartó un cuarto rol "administrador" exclusivo del dueño
+  de la agencia (hubiera exigido nuevas políticas RLS en Finanzas/
+  Configuración, solo para él). En su lugar, **cada cuenta en
+  `platform_admins` recibe automáticamente una membership `owner`** en todo
+  salón — existente (backfill en la propia migración) y futuro (trigger
+  `salons_grant_platform_admin_memberships` en `salons`, `after insert`) —
+  mismo nivel de acceso que la dueña, con su propia cuenta (nunca se
+  comparte contraseña con nadie) y usando el `SalonSwitcher` de arriba para
+  moverse entre todos los salones. Los 3 roles de `memberships`
+  (owner/admin/reception) y sus permisos (sección 7) no cambian en absoluto.
+  `list_salon_members` excluye esas filas (helper `is_platform_admin_user`)
+  para que la dueña no vea ni pueda tocar una membership que no dio de alta
+  ella; `update_salon_membership` la protege también del lado del servidor
+  (`cannot_edit_platform_admin`) por si se intenta editar directo por RPC.
 - **Auditoría** (`audit_log`, migración `0017`): alcance acotado a acciones
   sensibles, no a cada Server Action del panel — cambios de datos del salón y
   de membresías (registrados dentro de las propias funciones SQL de arriba,
@@ -560,6 +575,7 @@ compila · pasa lint y typecheck · migraciones aplicadas · RLS probada con dos
 - Configuración (Fase 10) no incluye invitar usuarios nuevos por email: la dueña solo administra membresías que ya existen (ver, cambiar rol, activar/desactivar). Los usuarios nuevos los sigue dando de alta el equipo de Oscar's Solution.
 - Corregir el estado de una cita (`completed`/`no_show`/`cancelled`) se resuelve dejando **editar el estado después** en vez de pedir confirmación antes de aplicarlo — más simple para el flujo real de la dueña, y el stock se revierte automáticamente al salir de `completed` (migración `0019`) para que la corrección no deje el inventario descuadrado.
 - El teléfono de `clients` y de la solicitud manual del panel es **opcional** (migración `0018`), igual que el correo — la solicitud del portal QR (`/s/[slug]/solicitud`) sigue exigiéndolo porque es la única forma de identificar y limitar por tasa (`check_request_rate_limit`) a un cliente anónimo.
+- No existe (ni se va a construir) un cuarto rol "administrador" exclusivo del dueño de la agencia: su acceso de soporte a cualquier salón se resuelve dándole una membership `owner` en cada uno (migración `0022`, ver sección 6 "Acceso de soporte del desarrollador"), con su propia cuenta y el mismo selector de salón que ya usa una dueña con varios locales. Los 3 roles de `memberships` (owner/admin/reception) de la sección 7 siguen siendo los únicos.
 
 No hay preguntas abiertas pendientes por el momento. Este documento está listo para empezar la Fase 0.
 

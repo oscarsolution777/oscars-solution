@@ -1242,6 +1242,7 @@ export type Database = {
         Returns: boolean
       }
       is_platform_admin: { Args: never; Returns: boolean }
+      is_platform_admin_user: { Args: { p_user_id: string }; Returns: boolean }
       list_public_staff_for_salon: {
         Args: { p_salon_id: string }
         Returns: {
