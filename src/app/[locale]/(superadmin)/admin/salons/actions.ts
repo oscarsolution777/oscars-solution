@@ -22,6 +22,21 @@ type ActionResult<T = undefined> =
 const PILOT_SALON_ID = "11111111-1111-1111-1111-111111111111";
 const DEFAULT_DEMO_DURATION_DAYS = "3";
 
+// Antes, cualquier error (slug repetido, RLS, falta de service role key...)
+// se tragaba en el mismo mensaje genérico "Ocurrió un error inesperado",
+// haciendo imposible diagnosticar por qué "no se puede crear un salón/demo"
+// sin mirar los logs del servidor. Se distingue el caso más común (slug
+// duplicado, unique_violation de Postgres) y se deja rastro en consola del
+// servidor para los demás casos.
+function isUniqueViolation(error: unknown): error is { code: string } {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code: unknown }).code === "23505"
+  );
+}
+
 async function requirePlatformAdminAccess() {
   const session = await getCurrentSession();
 
@@ -83,7 +98,11 @@ export async function createSalonAction(
     });
 
     return { ok: true, data: { email: parsed.data.ownerEmail, temporaryPassword } };
-  } catch {
+  } catch (error) {
+    console.error("[createSalonAction] failed to create salon", error);
+    if (isUniqueViolation(error)) {
+      return { ok: false, error: "superadmin.salons.errors.slugTaken" };
+    }
     return { ok: false, error: "superadmin.salons.errors.generic" };
   }
 }
@@ -131,7 +150,11 @@ export async function createDemoSalonAction(
     });
 
     return { ok: true, data: { email: parsed.data.ownerEmail, temporaryPassword } };
-  } catch {
+  } catch (error) {
+    console.error("[createDemoSalonAction] failed to create demo salon", error);
+    if (isUniqueViolation(error)) {
+      return { ok: false, error: "superadmin.salons.errors.slugTaken" };
+    }
     return { ok: false, error: "superadmin.salons.errors.generic" };
   }
 }

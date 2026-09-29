@@ -1271,7 +1271,7 @@ export type Database = {
         Returns: undefined
       }
       platform_usage_summary: {
-        Args: never
+        Args: { p_from?: string; p_to?: string }
         Returns: {
           appointments_count: number
           clients_count: number

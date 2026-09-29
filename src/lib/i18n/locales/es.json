@@ -1123,7 +1123,13 @@
         "activateAction": "Activar",
         "suspendAction": "Suspender",
         "demoExpiresOn": "Vence {date}",
-        "notDemo": "—"
+        "notDemo": "—",
+        "suspendDialog": {
+          "title": "¿Suspender este salón?",
+          "description": "La dueña y su equipo perderán acceso al panel de \"{name}\" de inmediato. Puedes reactivarlo cuando quieras.",
+          "confirm": "Suspender",
+          "cancel": "Cancelar"
+        }
       },
       "status": {
         "trial": "Prueba",
@@ -1153,8 +1159,9 @@
       },
       "createDemoForm": {
         "title": "Nueva demo",
-        "subtitle": "Crea un salón de demostración con el catálogo del salón piloto ya cargado.",
+        "subtitle": "Crea un salón de demostración con el catálogo del salón piloto ya cargado, listo para que el prospecto lo pruebe con sus propios datos.",
         "demoDurationLabel": "Días de duración",
+        "demoDurationHint": "Al vencer, el salón se suspende automáticamente. Puedes reactivarlo o crear otra demo cuando quieras.",
         "genericError": "No se pudo crear la demo. Verifica los datos e intenta de nuevo."
       },
       "credentialsDialog": {
@@ -1213,6 +1220,15 @@
     "usage": {
       "pageTitle": "Uso agregado",
       "pageSubtitle": "Métricas agregadas por salón. No incluye datos individuales de clientes.",
+      "period": {
+        "all": "Todo",
+        "today": "Hoy",
+        "yesterday": "Ayer",
+        "week": "Últimos 7 días",
+        "month": "Últimos 30 días",
+        "custom": "Personalizado",
+        "apply": "Aplicar"
+      },
       "table": {
         "columnSalon": "Salón",
         "columnAppointments": "Citas",

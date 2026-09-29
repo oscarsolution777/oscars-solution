@@ -1123,7 +1123,13 @@
         "activateAction": "Aktivieren",
         "suspendAction": "Sperren",
         "demoExpiresOn": "Läuft ab am {date}",
-        "notDemo": "—"
+        "notDemo": "—",
+        "suspendDialog": {
+          "title": "Diesen Salon sperren?",
+          "description": "Die Inhaberin und ihr Team verlieren sofort den Zugriff auf das Panel von \"{name}\". Du kannst ihn jederzeit wieder aktivieren.",
+          "confirm": "Sperren",
+          "cancel": "Abbrechen"
+        }
       },
       "status": {
         "trial": "Testphase",
@@ -1153,8 +1159,9 @@
       },
       "createDemoForm": {
         "title": "Neue Demo",
-        "subtitle": "Erstelle einen Demo-Salon mit dem bereits geladenen Katalog des Pilotsalons.",
+        "subtitle": "Erstelle einen Demo-Salon mit dem bereits geladenen Katalog des Pilotsalons, bereit dafür, dass der Interessent ihn mit eigenen Daten ausprobiert.",
         "demoDurationLabel": "Dauer (Tage)",
+        "demoDurationHint": "Nach Ablauf wird der Salon automatisch gesperrt. Du kannst ihn jederzeit wieder aktivieren oder eine neue Demo erstellen.",
         "genericError": "Die Demo konnte nicht erstellt werden. Überprüfe die Angaben und versuche es erneut."
       },
       "credentialsDialog": {
@@ -1213,6 +1220,15 @@
     "usage": {
       "pageTitle": "Aggregierte Nutzung",
       "pageSubtitle": "Aggregierte Kennzahlen pro Salon. Enthält keine individuellen Kundendaten.",
+      "period": {
+        "all": "Gesamt",
+        "today": "Heute",
+        "yesterday": "Gestern",
+        "week": "Letzte 7 Tage",
+        "month": "Letzte 30 Tage",
+        "custom": "Benutzerdefiniert",
+        "apply": "Anwenden"
+      },
       "table": {
         "columnSalon": "Salon",
         "columnAppointments": "Termine",

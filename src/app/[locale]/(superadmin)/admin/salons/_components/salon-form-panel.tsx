@@ -60,6 +60,11 @@ export function SalonFormPanel({
     mode === "demo" ? "superadmin.salons.createDemoForm" : "superadmin.salons.createRealForm"
   );
   const tCommon = useTranslations("common");
+  // El servidor puede devolver un error más específico que el genérico del
+  // formulario (ej. "slugTaken") — sin esto, cualquier fallo (slug repetido,
+  // RLS, falta de configuración) mostraba siempre el mismo mensaje opaco y
+  // era imposible saber qué corregir sin mirar los logs del servidor.
+  const tErrors = useTranslations("superadmin.salons.errors");
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
@@ -249,6 +254,7 @@ export function SalonFormPanel({
                 max={30}
                 {...register("demoDurationDays")}
               />
+              <p className="text-xs text-text-muted">{t("demoDurationHint")}</p>
             </div>
           )}
 
@@ -270,7 +276,9 @@ export function SalonFormPanel({
 
           {serverError && (
             <p role="alert" className="text-xs text-danger">
-              {t("genericError")}
+              {serverError === "superadmin.salons.errors.slugTaken"
+                ? tErrors("slugTaken")
+                : t("genericError")}
             </p>
           )}
 

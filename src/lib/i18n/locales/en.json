@@ -1123,7 +1123,13 @@
         "activateAction": "Activate",
         "suspendAction": "Suspend",
         "demoExpiresOn": "Expires {date}",
-        "notDemo": "—"
+        "notDemo": "—",
+        "suspendDialog": {
+          "title": "Suspend this salon?",
+          "description": "The owner and her team will immediately lose access to the \"{name}\" panel. You can reactivate it anytime.",
+          "confirm": "Suspend",
+          "cancel": "Cancel"
+        }
       },
       "status": {
         "trial": "Trial",
@@ -1153,8 +1159,9 @@
       },
       "createDemoForm": {
         "title": "New demo",
-        "subtitle": "Create a demo salon with the pilot salon's catalog already loaded.",
+        "subtitle": "Create a demo salon with the pilot salon's catalog already loaded, ready for the prospect to try with their own data.",
         "demoDurationLabel": "Duration (days)",
+        "demoDurationHint": "Once it expires, the salon is suspended automatically. You can reactivate it or create another demo anytime.",
         "genericError": "Could not create the demo. Check the data and try again."
       },
       "credentialsDialog": {
@@ -1213,6 +1220,15 @@
     "usage": {
       "pageTitle": "Aggregate usage",
       "pageSubtitle": "Aggregated metrics per salon. Does not include individual client data.",
+      "period": {
+        "all": "All time",
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "week": "Last 7 days",
+        "month": "Last 30 days",
+        "custom": "Custom",
+        "apply": "Apply"
+      },
       "table": {
         "columnSalon": "Salon",
         "columnAppointments": "Appointments",
