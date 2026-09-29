@@ -998,7 +998,8 @@
       "roles": {
         "owner": "Proprietária",
         "admin": "Administrador",
-        "reception": "Recepção"
+        "reception": "Recepção",
+        "platformAdmin": "Acesso da plataforma"
       }
     },
     "audit": {

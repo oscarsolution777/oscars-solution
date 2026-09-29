@@ -333,6 +333,11 @@ mismo archivo pero la tabla nunca se había creado).
   para que la dueña no vea ni pueda tocar una membership que no dio de alta
   ella; `update_salon_membership` la protege también del lado del servidor
   (`cannot_edit_platform_admin`) por si se intenta editar directo por RPC.
+  Distinción visual: `(dashboard)/layout.tsx` separa el rol crudo (`activeRole`,
+  usado solo para las reglas de permisos del Sidebar) del label mostrado en
+  Topbar/UserMenu — a quien tiene acceso de plataforma se le muestra
+  "Acceso de plataforma" (`settings.members.roles.platformAdmin`) en vez de
+  "Dueña", aunque su `memberships.role` siga guardado como `owner`.
 - **Auditoría** (`audit_log`, migración `0017`): alcance acotado a acciones
   sensibles, no a cada Server Action del panel — cambios de datos del salón y
   de membresías (registrados dentro de las propias funciones SQL de arriba,

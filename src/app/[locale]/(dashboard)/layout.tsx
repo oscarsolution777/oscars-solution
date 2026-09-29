@@ -14,10 +14,20 @@ export default async function DashboardLayout({
 }) {
   const session = await requireAuth();
   const t = await getTranslations("dashboard");
+  const tRoles = await getTranslations("settings.members.roles");
 
   const salonName = session.activeMembership?.salon?.name ?? "—";
   const fullName = session.profile?.full_name ?? session.user.email ?? "";
-  const roleLabel = session.activeMembership?.role ?? "";
+  // Rol crudo (owner/admin/reception): controla qué ve el Sidebar
+  // (restrictedToRoles) — nunca se muestra tal cual al usuario.
+  const activeRole = session.activeMembership?.role ?? "";
+  // Label mostrado en Topbar/UserMenu: traducido, y distinto para quien tiene
+  // acceso de plataforma (migración 0022) — su membership queda guardada
+  // como "owner" por mecanismo interno, pero mostrarle literalmente "Dueña"
+  // sería confuso: no es la dueña del salón, es soporte de Oscar's Solution.
+  const roleLabel = session.isPlatformAdmin
+    ? tRoles("platformAdmin")
+    : tRoles(activeRole || "reception");
   const subscriptionStatus = session.activeMembership?.salon?.subscription_status;
   const isSuspended = subscriptionStatus === "suspended" || subscriptionStatus === "cancelled";
   const salons = session.memberships
@@ -39,7 +49,7 @@ export default async function DashboardLayout({
       <Sidebar
         salonName={salonName}
         logoUrl={session.activeMembership?.salon?.logo_url ?? null}
-        role={roleLabel}
+        role={activeRole}
         salons={salons}
         activeSalonId={session.activeMembership?.salon?.id}
         pendingRequestsCount={pendingRequestsCount}
