@@ -24,7 +24,19 @@ export async function loadBusinessMetrics(
 ): Promise<BusinessMetrics> {
   const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
   const { from, to } = getLast30DaysRange(todayStr);
+  return loadBusinessMetricsForRange(supabase, salon, from, to);
+}
 
+// Misma carga que loadBusinessMetrics pero con un rango arbitrario, para la
+// herramienta get_business_metrics del chat libre (Fase 10B) -- alguien
+// puede preguntar "¿cómo me fue el mes pasado?" y no solo por los últimos 30
+// días fijos que usan Analizar negocio/Recomendaciones.
+export async function loadBusinessMetricsForRange(
+  supabase: SupabaseServerClient,
+  salon: { id: string; currency: string },
+  from: string,
+  to: string
+): Promise<BusinessMetrics> {
   const [payments, appointments, requests, products, clients, staff, services, cashClosures] =
     await Promise.all([
       listPayments(supabase, salon.id),

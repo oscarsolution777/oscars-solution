@@ -972,7 +972,20 @@
       "forbiddenTitle": "Kein Zugriff",
       "forbidden": "Nur die Inhaberin oder eine Administratorin können diesen Bereich sehen.",
       "notConfigured": "Die KI ist noch nicht konfiguriert.",
-      "providerFailed": "Das Ergebnis konnte nicht erstellt werden. Bitte erneut versuchen."
+      "providerFailed": "Das Ergebnis konnte nicht erstellt werden. Bitte erneut versuchen.",
+      "regenerateLimitReached": "Du hast deine 3 Regenerierungen für heute schon verwendet. Versuche es morgen wieder."
+    },
+    "chat": {
+      "title": "Frag die KI",
+      "subtitle": "Gezielte Fragen zu deinen Kundinnen, Zahlungen und Terminen, mit echten Daten dieses Salons.",
+      "placeholder": "Z. B.: Wie viel hat Maria Gonzalez dieses Jahr ausgegeben?",
+      "sending": "Denkt nach...",
+      "emptyState": "Frag alles zu deinen Kundinnen, Zahlungen oder Terminen. Telefonnummern, E-Mails oder private Notizen werden nie geteilt.",
+      "errors": {
+        "invalidInput": "Schreib eine Frage, bevor du sendest.",
+        "rateLimited": "Du hast das stündliche Nachrichtenlimit erreicht. Versuche es später erneut.",
+        "generic": "Deine Frage konnte nicht beantwortet werden. Bitte erneut versuchen."
+      }
     }
   },
   "settings": {

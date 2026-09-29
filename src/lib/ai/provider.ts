@@ -11,12 +11,48 @@ export interface Recommendation {
   action: string;
 }
 
+// Turno de texto final del chat libre (Fase 10B) -- nunca incluye las
+// llamadas a herramientas intermedias de un turno, solo lo que terminó
+// mostrándose. Es lo que se persiste en ai_chat_messages y lo que se le
+// vuelve a mandar al modelo como historial en el siguiente mensaje.
+export interface AiChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+// Firma provider-agnóstica para que cada proveedor ejecute herramientas sin
+// que provider.ts conozca Supabase ni el registro de herramientas (ver
+// src/lib/ai/tools/). Se construye una vez por turno en la Server Action,
+// ya cerrada sobre el salón activo.
+export type AiExecuteTool = (
+  name: string,
+  rawArgs: unknown
+) => Promise<{ ok: boolean; data?: unknown; error?: string }>;
+
+export interface AiChatToolDeclaration {
+  name: string;
+  description: string;
+  inputSchema: { type: "object"; properties: Record<string, unknown>; required?: string[] };
+}
+
 // Interfaz de proveedor intercambiable (CLAUDE.md sección 9). `locale` se
 // añade a la firma del documento (no está literal ahí) porque el análisis
 // y las recomendaciones deben responder "en el idioma activo del usuario".
 export interface AiProvider {
   analyzeBusiness(metrics: BusinessMetrics, locale: string): Promise<string>;
   getRecommendations(metrics: BusinessMetrics, locale: string): Promise<Recommendation[]>;
+  // Chat libre con datos reales (Fase 10B, function calling con RPCs
+  // acotadas -- CLAUDE.md sección 7.8). Cada proveedor implementa su propio
+  // loop de tool-use con el formato de su SDK, pero todos ejecutan las
+  // mismas herramientas a través de `executeTool`.
+  chat(input: {
+    history: AiChatMessage[];
+    userMessage: string;
+    locale: string;
+    salonContext: { salonName: string; currency: string; timezone: string };
+    tools: AiChatToolDeclaration[];
+    executeTool: AiExecuteTool;
+  }): Promise<string>;
 }
 
 // Se lanza cuando falta la API key del proveedor seleccionado por

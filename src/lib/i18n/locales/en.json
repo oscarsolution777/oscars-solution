@@ -972,7 +972,20 @@
       "forbiddenTitle": "No access",
       "forbidden": "Only the owner or an admin can view this section.",
       "notConfigured": "AI is not configured yet.",
-      "providerFailed": "Could not generate the result. Please try again."
+      "providerFailed": "Could not generate the result. Please try again.",
+      "regenerateLimitReached": "You've already used your 3 regenerations for today. Try again tomorrow."
+    },
+    "chat": {
+      "title": "Ask the AI",
+      "subtitle": "Specific questions about your clients, payments and appointments, with this salon's real data.",
+      "placeholder": "E.g.: How much has Maria Gonzalez spent this year?",
+      "sending": "Thinking...",
+      "emptyState": "Ask anything about your clients, payments or appointments. It never shares phone numbers, emails or private notes.",
+      "errors": {
+        "invalidInput": "Type a question before sending.",
+        "rateLimited": "You've reached the hourly message limit. Try again later.",
+        "generic": "Couldn't answer your question. Please try again."
+      }
     }
   },
   "settings": {

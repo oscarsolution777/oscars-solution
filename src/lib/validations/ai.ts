@@ -13,3 +13,8 @@ export const recommendationSchema = z.object({
 });
 
 export const recommendationsResponseSchema = z.array(recommendationSchema).max(10);
+
+// Mensaje del chat libre (Fase 10B): límite de longitud generoso para una
+// pregunta real, pero acotado para no mandar un prompt gigante por error al
+// proveedor de IA.
+export const chatMessageSchema = z.string().trim().min(1).max(2000);

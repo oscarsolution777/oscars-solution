@@ -972,7 +972,20 @@
       "forbiddenTitle": "Accès refusé",
       "forbidden": "Seule la propriétaire ou une administratrice peuvent voir cette section.",
       "notConfigured": "L'IA n'est pas encore configurée.",
-      "providerFailed": "Impossible de générer le résultat. Réessaie."
+      "providerFailed": "Impossible de générer le résultat. Réessaie.",
+      "regenerateLimitReached": "Tu as déjà utilisé tes 3 régénérations d'aujourd'hui. Réessaie demain."
+    },
+    "chat": {
+      "title": "Demande à l'IA",
+      "subtitle": "Questions ponctuelles sur tes clients, paiements et rendez-vous, avec les données réelles de ce salon.",
+      "placeholder": "Ex : Combien Maria Gonzalez a-t-elle dépensé cette année ?",
+      "sending": "Réflexion...",
+      "emptyState": "Demande ce que tu veux sur tes clients, paiements ou rendez-vous. Ne partage jamais de téléphone, email ou note privée.",
+      "errors": {
+        "invalidInput": "Écris une question avant d'envoyer.",
+        "rateLimited": "Tu as atteint la limite de messages par heure. Réessaie plus tard.",
+        "generic": "Impossible de répondre à ta question. Réessaie."
+      }
     }
   },
   "settings": {

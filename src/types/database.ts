@@ -83,6 +83,70 @@ export type Database = {
           },
         ]
       }
+      ai_chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          role: string
+          salon_id: string
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          role: string
+          salon_id: string
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          role?: string
+          salon_id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_chat_messages_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ai_regenerate_usage: {
+        Row: {
+          count: number
+          count_date: string
+          salon_id: string
+          updated_at: string
+        }
+        Insert: {
+          count?: number
+          count_date?: string
+          salon_id: string
+          updated_at?: string
+        }
+        Update: {
+          count?: number
+          count_date?: string
+          salon_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_regenerate_usage_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: true
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       appointment_items: {
         Row: {
           appointment_id: string
@@ -1241,6 +1305,10 @@ export type Database = {
       has_role_in_salon: {
         Args: { allowed_roles: string[]; target_salon_id: string }
         Returns: boolean
+      }
+      increment_ai_regenerate_usage: {
+        Args: { p_max: number; p_salon_id: string }
+        Returns: Json
       }
       is_platform_admin: { Args: never; Returns: boolean }
       is_platform_admin_user: { Args: { p_user_id: string }; Returns: boolean }

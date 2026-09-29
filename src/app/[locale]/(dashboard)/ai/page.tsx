@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { EmptyState } from "@/components/shared/empty-state";
 import { loadBusinessMetrics } from "@/lib/ai/load-business-metrics";
 import { getCachedAnalysis, upsertAnalysisCache } from "@/lib/db/ai-analyses";
+import { listChatMessages } from "@/lib/db/ai-chat";
 import { getAiProvider } from "@/lib/ai/get-provider";
 import { AiNotConfiguredError } from "@/lib/ai/provider";
 import type { Recommendation } from "@/lib/ai/provider";
@@ -30,9 +31,10 @@ export default async function AiPage() {
 
   const supabase = await createClient();
 
-  const [cachedAnalysis, cachedRecommendations] = await Promise.all([
+  const [cachedAnalysis, cachedRecommendations, chatHistory] = await Promise.all([
     getCachedAnalysis(supabase, salon.id, "analysis", locale),
     getCachedAnalysis(supabase, salon.id, "recommendations", locale),
+    listChatMessages(supabase, salon.id),
   ]);
 
   const now = new Date().getTime();
@@ -102,6 +104,10 @@ export default async function AiPage() {
       notConfigured={notConfigured}
       generationFailed={generationFailed}
       locale={locale}
+      initialChatMessages={chatHistory.map((m) => ({
+        role: m.role as "user" | "assistant",
+        content: m.content,
+      }))}
     />
   );
 }

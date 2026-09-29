@@ -972,7 +972,20 @@
       "forbiddenTitle": "Sin acceso",
       "forbidden": "Solo la propietaria o un administrador pueden ver esta sección.",
       "notConfigured": "La IA todavía no está configurada.",
-      "providerFailed": "No se pudo generar el resultado. Intenta de nuevo."
+      "providerFailed": "No se pudo generar el resultado. Intenta de nuevo.",
+      "regenerateLimitReached": "Ya usaste tus 3 regeneraciones de hoy. Vuelve a intentarlo mañana."
+    },
+    "chat": {
+      "title": "Pregúntale a la IA",
+      "subtitle": "Preguntas puntuales sobre tus clientes, pagos y citas, con datos reales de este salón.",
+      "placeholder": "Ej: ¿Cuánto ha gastado María González este año?",
+      "sending": "Pensando...",
+      "emptyState": "Pregunta lo que quieras sobre tus clientes, pagos o citas. Nunca comparte teléfonos, emails ni notas privadas.",
+      "errors": {
+        "invalidInput": "Escribe una pregunta antes de enviar.",
+        "rateLimited": "Alcanzaste el límite de mensajes por hora. Intenta de nuevo más tarde.",
+        "generic": "No se pudo responder tu pregunta. Intenta de nuevo."
+      }
     }
   },
   "settings": {
