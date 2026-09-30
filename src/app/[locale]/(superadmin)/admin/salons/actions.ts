@@ -6,6 +6,7 @@ import { getCurrentSession } from "@/lib/auth/session";
 import {
   createSalonSchema,
   createDemoSalonSchema,
+  updateSalonSlugSchema,
   parseDemoDurationDays,
 } from "@/lib/validations/platform-salon";
 import {
@@ -13,6 +14,8 @@ import {
   createOwnerAccountForSalon,
   cloneCatalogToSalon,
   updateSalonStatus,
+  convertDemoToReal,
+  updateSalonSlug,
   getSalonResetPreview,
   resetSalonData,
   type SalonResetCounts,
@@ -174,6 +177,50 @@ export async function setSalonStatusAction(
     await updateSalonStatus(supabase, salonId, status);
     return { ok: true, data: undefined };
   } catch {
+    return { ok: false, error: "superadmin.salons.errors.generic" };
+  }
+}
+
+// Punto 3: convierte una demo en salón real tal cual está (sin borrar sus
+// datos de prueba -- para eso está "Reiniciar salón", una acción aparte).
+export async function convertDemoToRealAction(salonId: string): Promise<ActionResult> {
+  const access = await requirePlatformAdminAccess();
+  if (!access.ok) return access;
+
+  try {
+    const supabase = await createClient();
+    await convertDemoToReal(supabase, salonId);
+    return { ok: true, data: undefined };
+  } catch (error) {
+    console.error("[convertDemoToRealAction] failed to convert demo", error);
+    return { ok: false, error: "superadmin.salons.errors.generic" };
+  }
+}
+
+// Punto 3.2: reasignar el slug de un salón existente a otro cliente. Acción
+// deliberadamente separada de "Reiniciar salón" (ver comentario en
+// db/platform-salons.ts).
+export async function updateSalonSlugAction(
+  salonId: string,
+  slug: string
+): Promise<ActionResult> {
+  const access = await requirePlatformAdminAccess();
+  if (!access.ok) return access;
+
+  const parsed = updateSalonSlugSchema.safeParse({ slug });
+  if (!parsed.success) {
+    return { ok: false, error: "superadmin.salons.errors.invalidInput" };
+  }
+
+  try {
+    const supabase = await createClient();
+    await updateSalonSlug(supabase, salonId, parsed.data.slug);
+    return { ok: true, data: undefined };
+  } catch (error) {
+    if (isUniqueViolation(error)) {
+      return { ok: false, error: "superadmin.salons.errors.slugTaken" };
+    }
+    console.error("[updateSalonSlugAction] failed to update slug", error);
     return { ok: false, error: "superadmin.salons.errors.generic" };
   }
 }

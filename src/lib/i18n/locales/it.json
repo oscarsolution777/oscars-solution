@@ -19,6 +19,25 @@
       "pageLabel": "Pagina {page} di {totalPages}",
       "previous": "Precedente",
       "next": "Successiva"
+    },
+    "changePassword": {
+      "menuItem": "Cambia password",
+      "title": "Cambia password",
+      "subtitle": "Conferma la tua password attuale e scegline una nuova.",
+      "currentLabel": "Password attuale",
+      "newLabel": "Nuova password",
+      "confirmLabel": "Conferma nuova password",
+      "cancel": "Annulla",
+      "submit": "Cambia password",
+      "submitPending": "Modifica in corso…",
+      "close": "Chiudi",
+      "success": "La tua password è stata aggiornata correttamente.",
+      "errors": {
+        "tooShort": "La nuova password deve avere almeno 8 caratteri.",
+        "mismatch": "Le nuove password non coincidono.",
+        "wrongCurrent": "La password attuale non è corretta.",
+        "generic": "Non è stato possibile cambiare la password. Riprova."
+      }
     }
   },
   "auth": {
@@ -1163,6 +1182,8 @@
         "emptyDescription": "Crea il primo salone reale o una demo per un potenziale cliente.",
         "activateAction": "Attiva",
         "suspendAction": "Sospendi",
+        "convertAction": "Converti in salone reale",
+        "editSlugAction": "Modifica slug",
         "resetAction": "Ripristina salone",
         "demoExpiresOn": "Scade il {date}",
         "notDemo": "—",
@@ -1171,6 +1192,24 @@
           "description": "La proprietaria e il suo team perderanno subito l'accesso al pannello di \"{name}\". Puoi riattivarlo quando vuoi.",
           "confirm": "Sospendi",
           "cancel": "Annulla"
+        }
+      },
+      "convertDialog": {
+        "title": "Convertire \"{name}\" in un salone reale?",
+        "description": "Smette di essere una demo: non scadrà più e diventa attivo come qualsiasi salone che paga. Mantiene così come sono i dati già caricati -- se preferisci che riparta pulito, usa \"Ripristina salone\" prima o dopo.",
+        "confirm": "Converti in salone reale",
+        "cancel": "Annulla"
+      },
+      "editSlugDialog": {
+        "title": "Modifica lo slug di \"{name}\"",
+        "description": "Cambia l'URL del portale pubblico di questo salone (/s/[slug]). Qualsiasi QR code o link con lo slug precedente smetterà di funzionare.",
+        "slugLabel": "Nuovo slug",
+        "slugError": "Solo lettere minuscole, numeri e trattini",
+        "confirm": "Salva",
+        "confirmPending": "Salvataggio…",
+        "cancel": "Annulla",
+        "errors": {
+          "slugTaken": "Questo slug è già usato da un altro salone."
         }
       },
       "resetDialog": {
@@ -1226,6 +1265,21 @@
       "createDemoForm": {
         "title": "Nuova demo",
         "subtitle": "Crea un salone demo con il catalogo del salone pilota già caricato, pronto perché il potenziale cliente lo provi con i propri dati.",
+        "nameLabel": "Nome del salone",
+        "slugLabel": "Slug (URL del portale)",
+        "phoneLabel": "Telefono",
+        "addressLabel": "Indirizzo",
+        "timezoneLabel": "Fuso orario",
+        "currencyLabel": "Valuta",
+        "defaultLocaleLabel": "Lingua predefinita",
+        "ownerFullNameLabel": "Nome della titolare",
+        "ownerEmailLabel": "Email della titolare",
+        "nameError": "Inserisci un nome valido",
+        "slugError": "Solo lettere minuscole, numeri e trattini",
+        "timezoneError": "Inserisci un fuso orario valido (es. America/Guyana)",
+        "currencyError": "Seleziona una valuta",
+        "ownerEmailError": "Inserisci un'email valida",
+        "ownerFullNameError": "Inserisci un nome valido",
         "demoDurationLabel": "Durata (giorni)",
         "demoDurationHint": "Alla scadenza, il salone viene sospeso automaticamente. Puoi riattivarlo o crearne un'altra demo quando vuoi.",
         "genericError": "Impossibile creare la demo. Controlla i dati e riprova."

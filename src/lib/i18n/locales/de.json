@@ -19,6 +19,25 @@
       "pageLabel": "Seite {page} von {totalPages}",
       "previous": "Zurück",
       "next": "Weiter"
+    },
+    "changePassword": {
+      "menuItem": "Passwort ändern",
+      "title": "Passwort ändern",
+      "subtitle": "Bestätige dein aktuelles Passwort und wähle ein neues.",
+      "currentLabel": "Aktuelles Passwort",
+      "newLabel": "Neues Passwort",
+      "confirmLabel": "Neues Passwort bestätigen",
+      "cancel": "Abbrechen",
+      "submit": "Passwort ändern",
+      "submitPending": "Wird geändert…",
+      "close": "Schließen",
+      "success": "Dein Passwort wurde erfolgreich aktualisiert.",
+      "errors": {
+        "tooShort": "Das neue Passwort muss mindestens 8 Zeichen lang sein.",
+        "mismatch": "Die neuen Passwörter stimmen nicht überein.",
+        "wrongCurrent": "Das aktuelle Passwort ist falsch.",
+        "generic": "Passwort konnte nicht geändert werden. Bitte erneut versuchen."
+      }
     }
   },
   "auth": {
@@ -1163,6 +1182,8 @@
         "emptyDescription": "Erstelle den ersten echten Salon oder eine Demo für einen Interessenten.",
         "activateAction": "Aktivieren",
         "suspendAction": "Sperren",
+        "convertAction": "In echten Salon umwandeln",
+        "editSlugAction": "Slug bearbeiten",
         "resetAction": "Salon zurücksetzen",
         "demoExpiresOn": "Läuft ab am {date}",
         "notDemo": "—",
@@ -1171,6 +1192,24 @@
           "description": "Die Inhaberin und ihr Team verlieren sofort den Zugriff auf das Panel von \"{name}\". Du kannst ihn jederzeit wieder aktivieren.",
           "confirm": "Sperren",
           "cancel": "Abbrechen"
+        }
+      },
+      "convertDialog": {
+        "title": "\"{name}\" in einen echten Salon umwandeln?",
+        "description": "Er ist dann keine Demo mehr: läuft nicht mehr ab und wird aktiv wie jeder zahlende Salon. Vorhandene Daten bleiben unverändert erhalten -- soll er stattdessen sauber starten, nutze \"Salon zurücksetzen\" davor oder danach.",
+        "confirm": "In echten Salon umwandeln",
+        "cancel": "Abbrechen"
+      },
+      "editSlugDialog": {
+        "title": "Slug von \"{name}\" bearbeiten",
+        "description": "Ändert die öffentliche Portal-URL dieses Salons (/s/[slug]). Jeder QR-Code oder Link mit dem alten Slug funktioniert danach nicht mehr.",
+        "slugLabel": "Neuer Slug",
+        "slugError": "Nur Kleinbuchstaben, Zahlen und Bindestriche",
+        "confirm": "Speichern",
+        "confirmPending": "Wird gespeichert…",
+        "cancel": "Abbrechen",
+        "errors": {
+          "slugTaken": "Dieser Slug wird bereits von einem anderen Salon verwendet."
         }
       },
       "resetDialog": {
@@ -1226,6 +1265,21 @@
       "createDemoForm": {
         "title": "Neue Demo",
         "subtitle": "Erstelle einen Demo-Salon mit dem bereits geladenen Katalog des Pilotsalons, bereit dafür, dass der Interessent ihn mit eigenen Daten ausprobiert.",
+        "nameLabel": "Name des Salons",
+        "slugLabel": "Slug (Portal-URL)",
+        "phoneLabel": "Telefon",
+        "addressLabel": "Adresse",
+        "timezoneLabel": "Zeitzone",
+        "currencyLabel": "Währung",
+        "defaultLocaleLabel": "Standardsprache",
+        "ownerFullNameLabel": "Name der Inhaberin",
+        "ownerEmailLabel": "E-Mail der Inhaberin",
+        "nameError": "Gib einen gültigen Namen ein",
+        "slugError": "Nur Kleinbuchstaben, Zahlen und Bindestriche",
+        "timezoneError": "Gib eine gültige Zeitzone ein (z. B. America/Guyana)",
+        "currencyError": "Wähle eine Währung",
+        "ownerEmailError": "Gib eine gültige E-Mail-Adresse ein",
+        "ownerFullNameError": "Gib einen gültigen Namen ein",
         "demoDurationLabel": "Dauer (Tage)",
         "demoDurationHint": "Nach Ablauf wird der Salon automatisch gesperrt. Du kannst ihn jederzeit wieder aktivieren oder eine neue Demo erstellen.",
         "genericError": "Die Demo konnte nicht erstellt werden. Überprüfe die Angaben und versuche es erneut."

@@ -44,3 +44,9 @@ export type CreateDemoSalonInput = z.infer<typeof createDemoSalonSchema>;
 export function parseDemoDurationDays(value: string): number {
   return Number.parseInt(value, 10);
 }
+
+// Editar slug (bloque de ajustes posterior a Fase 10, punto 3.2): mismo
+// formato que el slug de alta, reutilizado para no duplicar la regex.
+export const updateSalonSlugSchema = z.object({
+  slug: baseSalonFields.slug,
+});

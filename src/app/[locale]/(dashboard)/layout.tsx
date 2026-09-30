@@ -60,6 +60,7 @@ export default async function DashboardLayout({
           subtitle={t("welcomeBody")}
           userFullName={fullName}
           userRoleLabel={roleLabel}
+          userEmail={session.user.email ?? ""}
           salonTimezone={session.activeMembership?.salon?.timezone ?? "America/Guyana"}
         />
         <main className="flex-1 overflow-y-auto p-6">

@@ -9,12 +9,14 @@ export async function Topbar({
   subtitle,
   userFullName,
   userRoleLabel,
+  userEmail,
   salonTimezone,
 }: {
   title: string;
   subtitle?: string;
   userFullName: string;
   userRoleLabel: string;
+  userEmail: string;
   salonTimezone: string;
 }) {
   const locale = await getLocale();
@@ -41,7 +43,7 @@ export async function Topbar({
           <span>{today}</span>
         </div>
         <PanelLocaleSwitcher />
-        <UserMenu fullName={userFullName} roleLabel={userRoleLabel} />
+        <UserMenu fullName={userFullName} roleLabel={userRoleLabel} email={userEmail} />
       </div>
     </header>
   );

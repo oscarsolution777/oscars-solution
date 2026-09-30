@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/browser";
@@ -11,16 +12,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ChangePasswordDialog } from "./change-password-dialog";
 
 export function UserMenu({
   fullName,
   roleLabel,
+  email,
 }: {
   fullName: string;
   roleLabel: string;
+  email: string;
 }) {
   const t = useTranslations("common");
   const router = useRouter();
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false);
 
   const initials = getInitials(fullName);
 
@@ -45,10 +50,18 @@ export function UserMenu({
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setChangePasswordOpen(true)}>
+          {t("changePassword.menuItem")}
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogout}>
           {t("logout")}
         </DropdownMenuItem>
       </DropdownMenuContent>
+      <ChangePasswordDialog
+        email={email}
+        open={changePasswordOpen}
+        onOpenChange={setChangePasswordOpen}
+      />
     </DropdownMenu>
   );
 }

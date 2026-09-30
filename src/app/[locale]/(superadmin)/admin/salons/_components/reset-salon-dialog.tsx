@@ -69,11 +69,14 @@ export function ResetSalonDialog({
   const [result, setResult] = useState<SalonResetCounts | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // El diálogo entero se desmonta cuando `salon` vuelve a null (early return
-  // de abajo) -- el estado local ya queda descartado por React en ese
-  // momento, no hace falta resetearlo a mano aquí. Este efecto solo pide el
-  // preview, y siempre dentro del .then() (nunca setState síncrono en el
-  // cuerpo del efecto), mismo patrón que closure-form-panel.tsx.
+  // Bug real detectado y corregido: el estado local (`result`, en particular)
+  // sobrevivía de un reinicio a otro porque el diálogo nunca se desmontaba
+  // entre uno y el siguiente -- al reabrirlo, saltaba directo a la pantalla
+  // "listo" sin volver a pedir confirmación. La corrección real vive en
+  // SalonsTable: le pasa un `key` que cambia en cada apertura, forzando un
+  // remount completo (todo el useState vuelve a su valor inicial) en vez de
+  // resetear el estado a mano acá dentro del efecto (evita el antipatrón
+  // "setState síncrono dentro de un efecto", regla react-hooks/set-state-in-effect).
   useEffect(() => {
     if (!open || !salon) return;
     let cancelled = false;

@@ -115,6 +115,46 @@ export async function updateSalonStatus(
   return data;
 }
 
+// "Convertir a salón real" (bloque de ajustes posterior a Fase 10, punto 3):
+// un prospecto que probó con una demo y decide pagar no necesita un salón
+// nuevo -- su demo pasa a ser su salón real tal cual está (con los datos que
+// ya haya cargado durante la prueba; si Oscar prefiere que empiece limpio,
+// puede usar "Reiniciar salón" antes o después de convertir, son acciones
+// independientes). Deja de contar como demo y de poder expirar sola.
+export async function convertDemoToReal(supabase: SupabaseServerClient, salonId: string) {
+  const { data, error } = await supabase
+    .from("salons")
+    .update({ is_demo: false, demo_expires_at: null, subscription_status: "active" })
+    .eq("id", salonId)
+    .select(SELECT_COLUMNS)
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
+// Editar slug (punto 3.2): reasignar la URL del portal de un salón existente
+// a otro cliente (típicamente después de "Reiniciar salón"). Deliberadamente
+// separado del reinicio: reiniciar borra actividad pero conserva la
+// identidad del salón, para no romper un QR que el prospecto todavía tenga
+// en uso; cambiar el slug es un paso aparte que Oscar dispara a mano cuando
+// decide reasignarlo.
+export async function updateSalonSlug(
+  supabase: SupabaseServerClient,
+  salonId: string,
+  slug: string
+) {
+  const { data, error } = await supabase
+    .from("salons")
+    .update({ slug })
+    .eq("id", salonId)
+    .select(SELECT_COLUMNS)
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
 // Crea el usuario de Supabase Auth para la dueña de un salón nuevo (real o
 // demo) y su membership owner. Mismo patrón que scripts/seed-demo-user.mjs,
 // ahora reutilizable desde una Server Action. Requiere el cliente

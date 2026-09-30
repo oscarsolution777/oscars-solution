@@ -29,8 +29,8 @@ export function CashComparisonChart({
         <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={90} />
         <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
         <Legend />
-        <Bar dataKey="expectedCashCents" name={t("expected")} fill="var(--color-primary)" radius={4} />
-        <Bar dataKey="countedCashCents" name={t("counted")} fill="var(--color-info)" radius={4} />
+        <Bar dataKey="expectedCashCents" name={t("expected")} fill="var(--color-info)" radius={4} />
+        <Bar dataKey="countedCashCents" name={t("counted")} fill="var(--color-primary)" radius={4} />
       </BarChart>
     </ChartCard>
   );

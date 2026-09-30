@@ -35,6 +35,21 @@ import {
 type CurrencyRow = Tables<"currencies">;
 type FormValues = CreateDemoSalonInput;
 
+// Sugerencia automática de slug a partir del nombre (punto 3.1 del bloque de
+// ajustes posterior a Fase 10) -- el slug sigue siendo obligatorio (es la
+// única dirección del portal QR), esto solo evita que Oscar tenga que
+// inventarlo a mano cada vez. Se deja de autogenerar en cuanto la persona
+// toca el campo slug directamente (ver slugTouched más abajo).
+function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export function SalonFormPanel({
   open,
   onOpenChange,
@@ -61,6 +76,7 @@ export function SalonFormPanel({
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
   const [prevOpen, setPrevOpen] = useState(open);
+  const [slugTouched, setSlugTouched] = useState(false);
 
   const defaults: FormValues = {
     name: "",
@@ -84,6 +100,7 @@ export function SalonFormPanel({
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(createDemoSalonSchema),
@@ -94,9 +111,13 @@ export function SalonFormPanel({
     setPrevOpen(open);
     if (open) {
       setServerError(null);
+      setSlugTouched(false);
       reset(defaults);
     }
   }
+
+  const nameField = register("name");
+  const slugField = register("slug");
 
   const onSubmit = (data: FormValues) => {
     setServerError(null);
@@ -146,13 +167,29 @@ export function SalonFormPanel({
         >
           <div className="space-y-1.5">
             <Label htmlFor="name">{t("nameLabel")}</Label>
-            <Input id="name" {...register("name")} />
+            <Input
+              id="name"
+              {...nameField}
+              onChange={(e) => {
+                nameField.onChange(e);
+                if (!slugTouched) {
+                  setValue("slug", slugify(e.target.value), { shouldValidate: true });
+                }
+              }}
+            />
             {errors.name && <p className="text-xs text-danger">{t("nameError")}</p>}
           </div>
 
           <div className="space-y-1.5">
             <Label htmlFor="slug">{t("slugLabel")}</Label>
-            <Input id="slug" {...register("slug")} />
+            <Input
+              id="slug"
+              {...slugField}
+              onChange={(e) => {
+                setSlugTouched(true);
+                slugField.onChange(e);
+              }}
+            />
             {errors.slug && <p className="text-xs text-danger">{t("slugError")}</p>}
           </div>
 

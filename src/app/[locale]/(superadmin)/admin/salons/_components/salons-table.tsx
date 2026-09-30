@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Pagination } from "@/components/shared/pagination";
+import { usePagination } from "@/lib/utils/pagination";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,7 +30,8 @@ import { formatSalonDate } from "@/lib/utils/dates";
 import type { Tables } from "@/types/database";
 import { SalonStatusBadge } from "./salon-status-badge";
 import { ResetSalonDialog } from "./reset-salon-dialog";
-import { setSalonStatusAction } from "../actions";
+import { EditSlugDialog } from "./edit-slug-dialog";
+import { setSalonStatusAction, convertDemoToRealAction } from "../actions";
 
 type SalonRow = Tables<"salons">;
 
@@ -40,6 +43,7 @@ export function SalonsTable({
   locale: string;
 }) {
   const t = useTranslations("superadmin.salons.table");
+  const tConvert = useTranslations("superadmin.salons.convertDialog");
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   // Salón pendiente de confirmar suspensión (acción destructiva para la
@@ -49,6 +53,22 @@ export function SalonsTable({
   // Salón pendiente del borrado destructivo "Reiniciar salón" (sin vuelta
   // atrás, ver reset-salon-dialog.tsx).
   const [salonToReset, setSalonToReset] = useState<SalonRow | null>(null);
+  // Punto 3 del bloque de ajustes posterior a Fase 10: "Convertir a salón
+  // real" (deja de ser demo, no borra sus datos) y "Editar slug" (ver
+  // edit-slug-dialog.tsx) -- ambas acciones nuevas, con su propia
+  // confirmación (CLAUDE.md sección 12).
+  const [salonToConvert, setSalonToConvert] = useState<SalonRow | null>(null);
+  const [salonToEditSlug, setSalonToEditSlug] = useState<SalonRow | null>(null);
+  // Fuerzan un remount completo de ResetSalonDialog/EditSlugDialog en cada
+  // apertura (incluso para el mismo salón dos veces seguidas): es la forma
+  // recomendada por React de "resetear todo el estado" sin hacerlo a mano
+  // con setState dentro de un efecto -- ver el comentario en cada diálogo.
+  const [resetDialogKey, setResetDialogKey] = useState(0);
+  const [editSlugDialogKey, setEditSlugDialogKey] = useState(0);
+  // Paginación (bloque de ajustes posterior a Fase 10, punto 10): mismo
+  // patrón/tamaño de página (20) que Pagos/Cuadre de caja/Reportes -- esta
+  // tabla no la tenía y podía crecer sin límite con el número de salones.
+  const { page, setPage, totalPages, pageItems } = usePagination(salons);
 
   if (salons.length === 0) {
     return <EmptyState title={t("emptyTitle")} description={t("emptyDescription")} />;
@@ -61,6 +81,13 @@ export function SalonsTable({
     });
   };
 
+  const applyConvert = (salon: SalonRow) => {
+    startTransition(async () => {
+      const result = await convertDemoToRealAction(salon.id);
+      if (result.ok) router.refresh();
+    });
+  };
+
   // "Activo" es el único estado que se puede suspender; cualquier otro
   // (trial, suspended, cancelled) se reactiva con el mismo botón — antes solo
   // alternaba entre active/suspended y una demo en "trial" nunca podía
@@ -68,7 +95,8 @@ export function SalonsTable({
   const isActive = (salon: SalonRow) => salon.subscription_status === "active";
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-card-border">
+    <div className="space-y-4">
+      <div className="overflow-x-auto rounded-xl border border-card-border">
       <Table>
         <TableHeader>
           <TableRow>
@@ -82,7 +110,7 @@ export function SalonsTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {salons.map((salon) => (
+          {pageItems.map((salon) => (
             <TableRow key={salon.id}>
               <TableCell>
                 <div className="font-medium text-text-primary">{salon.name}</div>
@@ -132,12 +160,36 @@ export function SalonsTable({
                       {t("activateAction")}
                     </Button>
                   )}
+                  {salon.is_demo && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={isPending}
+                      onClick={() => setSalonToConvert(salon)}
+                    >
+                      {t("convertAction")}
+                    </Button>
+                  )}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    disabled={isPending}
+                    onClick={() => {
+                      setSalonToEditSlug(salon);
+                      setEditSlugDialogKey((k) => k + 1);
+                    }}
+                  >
+                    {t("editSlugAction")}
+                  </Button>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="text-destructive hover:text-destructive"
                     disabled={isPending}
-                    onClick={() => setSalonToReset(salon)}
+                    onClick={() => {
+                      setSalonToReset(salon);
+                      setResetDialogKey((k) => k + 1);
+                    }}
                   >
                     {t("resetAction")}
                   </Button>
@@ -147,6 +199,9 @@ export function SalonsTable({
           ))}
         </TableBody>
       </Table>
+      </div>
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
 
       <AlertDialog open={salonToSuspend !== null} onOpenChange={(open) => !open && setSalonToSuspend(null)}>
         <AlertDialogContent>
@@ -171,7 +226,35 @@ export function SalonsTable({
         </AlertDialogContent>
       </AlertDialog>
 
+      <AlertDialog open={salonToConvert !== null} onOpenChange={(open) => !open && setSalonToConvert(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{tConvert("title", { name: salonToConvert?.name ?? "" })}</AlertDialogTitle>
+            <AlertDialogDescription>{tConvert("description")}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{tConvert("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (salonToConvert) applyConvert(salonToConvert);
+                setSalonToConvert(null);
+              }}
+            >
+              {tConvert("confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <EditSlugDialog
+        key={editSlugDialogKey}
+        salon={salonToEditSlug}
+        open={salonToEditSlug !== null}
+        onOpenChange={(open) => !open && setSalonToEditSlug(null)}
+      />
+
       <ResetSalonDialog
+        key={resetDialogKey}
         salon={salonToReset}
         open={salonToReset !== null}
         onOpenChange={(open) => !open && setSalonToReset(null)}

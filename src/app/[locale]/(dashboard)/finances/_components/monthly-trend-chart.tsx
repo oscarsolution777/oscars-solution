@@ -33,9 +33,13 @@ export function MonthlyTrendChart({
         <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={70} />
         <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
         <Legend />
+        {/* Orden fijo a pedido de Oscar (bloque de ajustes posterior a Fase
+            10, punto 7): Ingresos, Nómina, Gastos -- antes era Ingresos,
+            Gastos, Nómina. Recharts respeta el orden de declaración de los
+            <Bar> tanto para las barras como para la leyenda. */}
         <Bar dataKey="incomeCents" name={t("summary.income")} fill="var(--color-success)" radius={4} />
-        <Bar dataKey="expensesCents" name={t("summary.expenses")} fill="var(--color-danger)" radius={4} />
         <Bar dataKey="payoutsCents" name={t("summary.payouts")} fill="var(--color-info)" radius={4} />
+        <Bar dataKey="expensesCents" name={t("summary.expenses")} fill="var(--color-danger)" radius={4} />
       </BarChart>
     </ChartCard>
   );

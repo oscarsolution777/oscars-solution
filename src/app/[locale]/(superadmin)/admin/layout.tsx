@@ -42,7 +42,7 @@ export default async function SuperAdminLayout({
         </div>
         <div className="flex items-center gap-1">
           <PanelLocaleSwitcher />
-          <UserMenu fullName={fullName} roleLabel="SuperAdmin" />
+          <UserMenu fullName={fullName} roleLabel="SuperAdmin" email={session.user.email ?? ""} />
         </div>
       </header>
       <main className="flex-1 overflow-y-auto p-6">{children}</main>
