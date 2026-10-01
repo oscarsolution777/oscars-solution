@@ -1180,6 +1180,7 @@
         "columnActions": "Actions",
         "emptyTitle": "No salons yet",
         "emptyDescription": "Create the first real salon or a demo for a prospect.",
+        "enterAction": "Enter panel",
         "activateAction": "Activate",
         "suspendAction": "Suspend",
         "convertAction": "Convert to real salon",

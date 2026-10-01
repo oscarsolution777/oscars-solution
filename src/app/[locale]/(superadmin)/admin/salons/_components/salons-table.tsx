@@ -32,6 +32,7 @@ import { SalonStatusBadge } from "./salon-status-badge";
 import { ResetSalonDialog } from "./reset-salon-dialog";
 import { EditSlugDialog } from "./edit-slug-dialog";
 import { setSalonStatusAction, convertDemoToRealAction } from "../actions";
+import { setActiveSalonAction } from "@/lib/auth/actions";
 
 type SalonRow = Tables<"salons">;
 
@@ -141,6 +142,26 @@ export function SalonsTable({
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex items-center justify-end gap-1">
+                  {/* Punto pedido por Oscar: antes no había forma de entrar a
+                      propósito al panel de gestión de un salón concreto desde
+                      SuperAdmin -- había que escribir /dashboard a mano y se
+                      caía en memberships[0] (orden arbitrario). Reutiliza la
+                      misma Server Action del SalonSwitcher: fija la cookie
+                      active_salon_id a este salón (valida la membership del
+                      lado del servidor) y redirige a /dashboard. Desde ahí el
+                      SalonSwitcher ya permite moverse a cualquier otro. */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={isPending}
+                    onClick={() =>
+                      startTransition(() => {
+                        void setActiveSalonAction(salon.id);
+                      })
+                    }
+                  >
+                    {t("enterAction")}
+                  </Button>
                   {isActive(salon) ? (
                     <Button
                       variant="ghost"
