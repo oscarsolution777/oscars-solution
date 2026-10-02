@@ -167,6 +167,7 @@
       "columnActions": "Azioni",
       "serviceCount": "{count, plural, one {servizio} other {servizi}}",
       "viewAction": "Vedi dettaglio",
+      "editAction": "Modifica",
       "completeAction": "Segna come completato",
       "noShowAction": "Segna mancata presentazione",
       "cancelAction": "Annulla appuntamento",
@@ -248,7 +249,10 @@
       "servicePlaceholder": "Seleziona un servizio",
       "staffPlaceholder": "Seleziona un collaboratore",
       "itemsError": "Aggiungi almeno un servizio e assegna un collaboratore a ciascuno",
-      "genericError": "Impossibile creare l'appuntamento. Riprova."
+      "genericError": "Impossibile creare l'appuntamento. Riprova.",
+      "editTitle": "Modifica appuntamento",
+      "editSubtitle": "Cambia il servizio o il collaboratore assegnato di ogni riga. Disponibile solo mentre l'appuntamento è \"Programmato\".",
+      "editNotEditableError": "Questo appuntamento non si può più modificare -- solo mentre è \"Programmato\"."
     },
     "confirm": {
       "title": "Conferma la richiesta di {name}",
@@ -265,6 +269,7 @@
     },
     "errors": {
       "invalidInput": "Controlla i campi del modulo",
+      "notEditable": "Questo appuntamento non si può più modificare -- solo mentre è \"Programmato\".",
       "generic": "Si è verificato un errore. Riprova."
     }
   },
@@ -876,6 +881,12 @@
         "createFirst": "Registra il primo stipendio",
         "editAction": "Modifica",
         "markPaidAction": "Segna come pagato"
+      },
+      "confirmDialog": {
+        "title": "Segnare questo stipendio come pagato?",
+        "description": "{name} riceverà {amount}. Una volta pagato non si può più modificare -- controlla l'importo prima di confermare; se emerge un errore dopo, si corregge con un nuovo registro nel periodo successivo.",
+        "cancel": "Indietro",
+        "confirm": "Sì, segna come pagato"
       },
       "statuses": {
         "pending": "In sospeso",

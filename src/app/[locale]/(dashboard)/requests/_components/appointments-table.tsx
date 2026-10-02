@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Eye, CheckCircle2, UserX, Ban } from "lucide-react";
+import { Eye, Pencil, CheckCircle2, UserX, Ban } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n/navigation";
 import {
@@ -49,6 +49,7 @@ export function AppointmentsTable({
   currency,
   locale,
   onView,
+  onEdit,
 }: {
   appointments: AppointmentRow[];
   itemsByAppointmentId: Map<string, AppointmentItemRow[]>;
@@ -56,6 +57,7 @@ export function AppointmentsTable({
   currency: string;
   locale: string;
   onView: (appointment: AppointmentRow) => void;
+  onEdit: (appointment: AppointmentRow) => void;
 }) {
   const t = useTranslations("requests.agenda");
   const tStatuses = useTranslations("requests.appointmentStatuses");
@@ -162,6 +164,16 @@ export function AppointmentsTable({
                     >
                       <Eye size={16} />
                     </Button>
+                    {appointment.status === "scheduled" && (
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={() => onEdit(appointment)}
+                        aria-label={t("editAction")}
+                      >
+                        <Pencil size={16} />
+                      </Button>
+                    )}
                     {appointment.status !== "completed" && (
                       <Button
                         variant="ghost"

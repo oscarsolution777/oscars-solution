@@ -18,6 +18,17 @@ export async function listAppointments(supabase: SupabaseServerClient, salonId: 
   return data;
 }
 
+export async function getAppointmentById(supabase: SupabaseServerClient, appointmentId: string) {
+  const { data, error } = await supabase
+    .from("appointments")
+    .select(SELECT_COLUMNS)
+    .eq("id", appointmentId)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
 const ITEM_SELECT_COLUMNS = "id, appointment_id, service_id, staff_id, price_cents, created_at";
 
 export async function listAppointmentItemsForAppointments(
@@ -129,6 +140,27 @@ export async function createAppointmentDirect(
 
   if (refreshError) throw refreshError;
   return refreshed;
+}
+
+// Puntos 14/15 del bloque de ajustes: edita las filas de appointment_items
+// YA EXISTENTES (identificadas por su id) -- nunca agrega ni quita filas
+// (appointment_items sigue sin DELETE, comentario original de la migración
+// 0008). price_cents y la validación de salón las recalcula siempre el
+// trigger snapshot_appointment_item, extendido en la migración 0027 para
+// correr también en UPDATE of service_id/staff_id -- nunca se confía en el
+// valor que traiga la app. Mismo patrón de llamadas no atómicas entre sí ya
+// aceptado en el resto de este archivo.
+export async function updateAppointmentItems(
+  supabase: SupabaseServerClient,
+  items: { appointmentItemId: string; serviceId: string; staffId: string }[]
+) {
+  for (const item of items) {
+    const { error } = await supabase
+      .from("appointment_items")
+      .update({ service_id: item.serviceId, staff_id: item.staffId })
+      .eq("id", item.appointmentItemId);
+    if (error) throw error;
+  }
 }
 
 export async function updateAppointmentRow(

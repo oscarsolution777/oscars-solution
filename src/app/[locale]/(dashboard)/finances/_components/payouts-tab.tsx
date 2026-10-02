@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Pencil, Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n/navigation";
@@ -12,6 +12,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -42,9 +52,15 @@ export function PayoutsTab({
 }) {
   const t = useTranslations("finances.payouts.table");
   const tStatuses = useTranslations("finances.payouts.statuses");
+  const tConfirm = useTranslations("finances.payouts.confirmDialog");
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const { page, setPage, totalPages, pageItems } = usePagination(payouts);
+  // Punto 11 del bloque de ajustes: pasar a "pagada" ya no ocurre con un
+  // solo clic -- pide confirmación explícita (sin deshacer posible, igual
+  // que el resto de acciones irreversibles de la sección 12 de CLAUDE.md),
+  // porque una vez pagada la nómina queda bloqueada para editar.
+  const [confirmTarget, setConfirmTarget] = useState<StaffPayoutRow | null>(null);
 
   const markPaid = (payoutId: string) => {
     startTransition(async () => {
@@ -120,7 +136,7 @@ export function PayoutsTab({
                             variant="ghost"
                             size="icon-sm"
                             disabled={isPending}
-                            onClick={() => markPaid(payout.id)}
+                            onClick={() => setConfirmTarget(payout)}
                             aria-label={t("markPaidAction")}
                           >
                             <Check size={16} />
@@ -137,6 +153,32 @@ export function PayoutsTab({
       )}
 
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+
+      <AlertDialog open={confirmTarget !== null} onOpenChange={(open) => !open && setConfirmTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{tConfirm("title")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {confirmTarget &&
+                tConfirm("description", {
+                  name: staffById.get(confirmTarget.staff_id)?.full_name ?? "—",
+                  amount: formatMoney(confirmTarget.total_cents, currency, locale),
+                })}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{tConfirm("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (confirmTarget) markPaid(confirmTarget.id);
+                setConfirmTarget(null);
+              }}
+            >
+              {tConfirm("confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

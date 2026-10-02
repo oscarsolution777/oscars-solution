@@ -167,6 +167,7 @@
       "columnActions": "Actions",
       "serviceCount": "{count, plural, one {service} other {services}}",
       "viewAction": "View detail",
+      "editAction": "Edit",
       "completeAction": "Mark completed",
       "noShowAction": "Mark no-show",
       "cancelAction": "Cancel appointment",
@@ -248,7 +249,10 @@
       "servicePlaceholder": "Select a service",
       "staffPlaceholder": "Select a staff member",
       "itemsError": "Add at least one service and assign a staff member to each",
-      "genericError": "Couldn't create the appointment. Please try again."
+      "genericError": "Couldn't create the appointment. Please try again.",
+      "editTitle": "Edit appointment",
+      "editSubtitle": "Change the service or assigned staff for each line. Only available while the appointment is \"Scheduled\".",
+      "editNotEditableError": "This appointment can no longer be edited -- only while it's \"Scheduled\"."
     },
     "confirm": {
       "title": "Confirm {name}'s request",
@@ -265,6 +269,7 @@
     },
     "errors": {
       "invalidInput": "Check the form fields",
+      "notEditable": "This appointment can no longer be edited -- only while it's \"Scheduled\".",
       "generic": "Something went wrong. Please try again."
     }
   },
@@ -876,6 +881,12 @@
         "createFirst": "Record the first payout",
         "editAction": "Edit",
         "markPaidAction": "Mark as paid"
+      },
+      "confirmDialog": {
+        "title": "Mark this payout as paid?",
+        "description": "{name} will receive {amount}. Once paid it can't be edited -- double-check the amount before confirming; if an error turns up later, fix it with a new entry in the next period.",
+        "cancel": "Go back",
+        "confirm": "Yes, mark as paid"
       },
       "statuses": {
         "pending": "Pending",

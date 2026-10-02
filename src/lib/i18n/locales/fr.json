@@ -167,6 +167,7 @@
       "columnActions": "Actions",
       "serviceCount": "{count, plural, one {service} other {services}}",
       "viewAction": "Voir le détail",
+      "editAction": "Modifier",
       "completeAction": "Marquer terminé",
       "noShowAction": "Marquer absence",
       "cancelAction": "Annuler le rendez-vous",
@@ -248,7 +249,10 @@
       "servicePlaceholder": "Sélectionnez un service",
       "staffPlaceholder": "Sélectionnez un employé",
       "itemsError": "Ajoutez au moins un service et assignez un employé à chacun",
-      "genericError": "Impossible de créer le rendez-vous. Réessayez."
+      "genericError": "Impossible de créer le rendez-vous. Réessayez.",
+      "editTitle": "Modifier le rendez-vous",
+      "editSubtitle": "Changez le service ou l'employé assigné de chaque ligne. Disponible uniquement tant que le rendez-vous est \"Programmé\".",
+      "editNotEditableError": "Ce rendez-vous ne peut plus être modifié -- uniquement tant qu'il est \"Programmé\"."
     },
     "confirm": {
       "title": "Confirmer la demande de {name}",
@@ -265,6 +269,7 @@
     },
     "errors": {
       "invalidInput": "Vérifiez les champs du formulaire",
+      "notEditable": "Ce rendez-vous ne peut plus être modifié -- uniquement tant qu'il est \"Programmé\".",
       "generic": "Une erreur est survenue. Réessayez."
     }
   },
@@ -876,6 +881,12 @@
         "createFirst": "Enregistrer la première paie",
         "editAction": "Modifier",
         "markPaidAction": "Marquer comme payée"
+      },
+      "confirmDialog": {
+        "title": "Marquer cette paie comme payée ?",
+        "description": "{name} recevra {amount}. Une fois payée, elle ne peut plus être modifiée -- vérifiez le montant avant de confirmer ; en cas d'erreur découverte plus tard, elle se corrige avec une nouvelle entrée lors de la période suivante.",
+        "cancel": "Retour",
+        "confirm": "Oui, marquer comme payée"
       },
       "statuses": {
         "pending": "En attente",

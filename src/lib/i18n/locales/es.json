@@ -167,6 +167,7 @@
       "columnActions": "Acciones",
       "serviceCount": "{count, plural, one {servicio} other {servicios}}",
       "viewAction": "Ver detalle",
+      "editAction": "Editar",
       "completeAction": "Marcar completada",
       "noShowAction": "Marcar no asistió",
       "cancelAction": "Cancelar cita",
@@ -248,7 +249,10 @@
       "servicePlaceholder": "Selecciona un servicio",
       "staffPlaceholder": "Selecciona un trabajador",
       "itemsError": "Agrega al menos un servicio y asigna un trabajador a cada uno",
-      "genericError": "No se pudo crear la cita. Intenta de nuevo."
+      "genericError": "No se pudo crear la cita. Intenta de nuevo.",
+      "editTitle": "Editar cita",
+      "editSubtitle": "Cambia el servicio o el trabajador asignado de cada línea. Solo disponible mientras la cita está \"Programada\".",
+      "editNotEditableError": "Esta cita ya no se puede editar -- solo mientras está \"Programada\"."
     },
     "confirm": {
       "title": "Confirmar solicitud de {name}",
@@ -265,6 +269,7 @@
     },
     "errors": {
       "invalidInput": "Revisa los datos del formulario",
+      "notEditable": "Esta cita ya no se puede editar -- solo mientras está \"Programada\".",
       "generic": "Ha ocurrido un error. Intenta de nuevo."
     }
   },
@@ -876,6 +881,12 @@
         "createFirst": "Registrar la primera nómina",
         "editAction": "Editar",
         "markPaidAction": "Marcar como pagada"
+      },
+      "confirmDialog": {
+        "title": "¿Marcar esta nómina como pagada?",
+        "description": "{name} recibirá {amount}. Una vez pagada ya no se puede editar -- revisa el monto antes de confirmar; si hay un error después, se corrige con un nuevo registro en el siguiente periodo.",
+        "cancel": "Volver",
+        "confirm": "Sí, marcar como pagada"
       },
       "statuses": {
         "pending": "Pendiente",

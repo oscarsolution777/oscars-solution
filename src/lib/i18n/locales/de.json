@@ -167,6 +167,7 @@
       "columnActions": "Aktionen",
       "serviceCount": "{count, plural, one {Dienstleistung} other {Dienstleistungen}}",
       "viewAction": "Details ansehen",
+      "editAction": "Bearbeiten",
       "completeAction": "Als abgeschlossen markieren",
       "noShowAction": "Als nicht erschienen markieren",
       "cancelAction": "Termin stornieren",
@@ -248,7 +249,10 @@
       "servicePlaceholder": "Wählen Sie eine Dienstleistung",
       "staffPlaceholder": "Wählen Sie einen Mitarbeiter",
       "itemsError": "Fügen Sie mindestens eine Dienstleistung hinzu und weisen Sie jeder einen Mitarbeiter zu",
-      "genericError": "Der Termin konnte nicht erstellt werden. Bitte versuchen Sie es erneut."
+      "genericError": "Der Termin konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+      "editTitle": "Termin bearbeiten",
+      "editSubtitle": "Ändern Sie die Dienstleistung oder den zugewiesenen Mitarbeiter jeder Zeile. Nur verfügbar, solange der Termin \"Geplant\" ist.",
+      "editNotEditableError": "Dieser Termin kann nicht mehr bearbeitet werden -- nur solange er \"Geplant\" ist."
     },
     "confirm": {
       "title": "Anfrage von {name} bestätigen",
@@ -265,6 +269,7 @@
     },
     "errors": {
       "invalidInput": "Überprüfen Sie die Formularfelder",
+      "notEditable": "Dieser Termin kann nicht mehr bearbeitet werden -- nur solange er \"Geplant\" ist.",
       "generic": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
     }
   },
@@ -876,6 +881,12 @@
         "createFirst": "Erste Gehaltsabrechnung erfassen",
         "editAction": "Bearbeiten",
         "markPaidAction": "Als bezahlt markieren"
+      },
+      "confirmDialog": {
+        "title": "Diese Gehaltsabrechnung als bezahlt markieren?",
+        "description": "{name} erhält {amount}. Nach der Zahlung kann sie nicht mehr bearbeitet werden -- prüfen Sie den Betrag vor der Bestätigung; falls später ein Fehler auffällt, wird er mit einem neuen Eintrag in der nächsten Periode korrigiert.",
+        "cancel": "Zurück",
+        "confirm": "Ja, als bezahlt markieren"
       },
       "statuses": {
         "pending": "Ausstehend",

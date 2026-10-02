@@ -6,6 +6,7 @@ import { requestSchema, requestStatuses } from "@/lib/validations/requests";
 import {
   confirmRequestSchema,
   createAppointmentSchema,
+  editAppointmentSchema,
   appointmentStatuses,
 } from "@/lib/validations/appointments";
 import { createRequestWithItems, getRequestById, updateRequestRow } from "@/lib/db/requests";
@@ -13,11 +14,17 @@ import {
   createAppointmentFromRequest,
   createAppointmentDirect,
   updateAppointmentRow,
+  updateAppointmentItems,
+  getAppointmentById,
 } from "@/lib/db/appointments";
 import { createClientRow } from "@/lib/db/clients";
 import { logAuditEvent } from "@/lib/db/audit-log";
 import type { RequestInput } from "@/lib/validations/requests";
-import type { ConfirmRequestInput, CreateAppointmentInput } from "@/lib/validations/appointments";
+import type {
+  ConfirmRequestInput,
+  CreateAppointmentInput,
+  EditAppointmentInput,
+} from "@/lib/validations/appointments";
 
 type ActionResult<T = undefined> = { ok: true; data: T } | { ok: false; error: string };
 
@@ -248,6 +255,39 @@ export async function setAppointmentStatusAction(
       }
     }
 
+    return { ok: true, data: undefined };
+  } catch {
+    return { ok: false, error: "requests.errors.generic" };
+  }
+}
+
+// Puntos 14/15 del bloque de ajustes: edita servicio/trabajador de una cita
+// ya creada, solo mientras sigue "scheduled" -- una vez completada/no_show/
+// cancelada, se corrige por estado (sección "Decisiones cerradas" de
+// CLAUDE.md), no editando los items retroactivamente.
+export async function editAppointmentAction(
+  appointmentId: string,
+  input: EditAppointmentInput
+): Promise<ActionResult> {
+  const access = await requireRequestsAccess();
+  if (!access.ok) return access;
+
+  const parsed = editAppointmentSchema.safeParse(input);
+  if (!parsed.success) {
+    return { ok: false, error: "requests.errors.invalidInput" };
+  }
+
+  try {
+    const supabase = await createClient();
+    const appointment = await getAppointmentById(supabase, appointmentId);
+    if (!appointment || appointment.salon_id !== access.salonId) {
+      return { ok: false, error: "requests.errors.generic" };
+    }
+    if (appointment.status !== "scheduled") {
+      return { ok: false, error: "requests.errors.notEditable" };
+    }
+
+    await updateAppointmentItems(supabase, parsed.data.items);
     return { ok: true, data: undefined };
   } catch {
     return { ok: false, error: "requests.errors.generic" };

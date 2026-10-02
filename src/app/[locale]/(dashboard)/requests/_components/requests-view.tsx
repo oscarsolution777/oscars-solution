@@ -15,6 +15,7 @@ import { ConfirmRequestPanel } from "./confirm-request-panel";
 import { AppointmentFormPanel } from "./appointment-form-panel";
 import { AppointmentsTable } from "./appointments-table";
 import { AppointmentDetailPanel } from "./appointment-detail-panel";
+import { EditAppointmentPanel } from "./edit-appointment-panel";
 
 type RequestRow = Tables<"requests">;
 type RequestItemRow = Tables<"request_items">;
@@ -65,6 +66,7 @@ export function RequestsView({
   const [appointmentFormOpen, setAppointmentFormOpen] = useState(false);
   const [confirmingRequestId, setConfirmingRequestId] = useState<string | null>(null);
   const [viewingAppointmentId, setViewingAppointmentId] = useState<string | null>(null);
+  const [editingAppointmentId, setEditingAppointmentId] = useState<string | null>(null);
 
   const itemsByRequestId = useMemo(() => {
     const map = new Map<string, RequestItemRow[]>();
@@ -110,6 +112,13 @@ export function RequestsView({
     ? (itemsByAppointmentId.get(viewingAppointmentId) ?? [])
     : [];
   const viewingClient = viewingAppointment ? (clientsById.get(viewingAppointment.client_id) ?? null) : null;
+
+  const editingAppointment = editingAppointmentId
+    ? (appointments.find((appointment) => appointment.id === editingAppointmentId) ?? null)
+    : null;
+  const editingItems = editingAppointmentId
+    ? (itemsByAppointmentId.get(editingAppointmentId) ?? [])
+    : [];
 
   return (
     <div className="space-y-6">
@@ -167,6 +176,7 @@ export function RequestsView({
             currency={currency}
             locale={locale}
             onView={(appointment) => setViewingAppointmentId(appointment.id)}
+            onEdit={(appointment) => setEditingAppointmentId(appointment.id)}
           />
         </TabsContent>
       </Tabs>
@@ -209,6 +219,16 @@ export function RequestsView({
         staffById={staffById}
         currency={currency}
         locale={locale}
+      />
+
+      <EditAppointmentPanel
+        open={editingAppointmentId !== null}
+        onOpenChange={(open) => !open && setEditingAppointmentId(null)}
+        appointment={editingAppointment}
+        items={editingItems}
+        services={services}
+        staff={staff}
+        serviceStaffMap={serviceStaffMap}
       />
     </div>
   );

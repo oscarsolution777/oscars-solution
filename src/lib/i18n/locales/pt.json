@@ -167,6 +167,7 @@
       "columnActions": "Ações",
       "serviceCount": "{count, plural, one {serviço} other {serviços}}",
       "viewAction": "Ver detalhe",
+      "editAction": "Editar",
       "completeAction": "Marcar como concluído",
       "noShowAction": "Marcar não compareceu",
       "cancelAction": "Cancelar atendimento",
@@ -248,7 +249,10 @@
       "servicePlaceholder": "Selecione um serviço",
       "staffPlaceholder": "Selecione um profissional",
       "itemsError": "Adicione pelo menos um serviço e atribua um profissional a cada um",
-      "genericError": "Não foi possível criar o atendimento. Tente novamente."
+      "genericError": "Não foi possível criar o atendimento. Tente novamente.",
+      "editTitle": "Editar atendimento",
+      "editSubtitle": "Altere o serviço ou o profissional atribuído de cada linha. Disponível apenas enquanto o atendimento está \"Agendado\".",
+      "editNotEditableError": "Este atendimento já não pode ser editado -- só enquanto está \"Agendado\"."
     },
     "confirm": {
       "title": "Confirmar solicitação de {name}",
@@ -265,6 +269,7 @@
     },
     "errors": {
       "invalidInput": "Revise os campos do formulário",
+      "notEditable": "Este atendimento já não pode ser editado -- só enquanto está \"Agendado\".",
       "generic": "Ocorreu um erro. Tente novamente."
     }
   },
@@ -876,6 +881,12 @@
         "createFirst": "Registrar a primeira folha",
         "editAction": "Editar",
         "markPaidAction": "Marcar como paga"
+      },
+      "confirmDialog": {
+        "title": "Marcar esta folha como paga?",
+        "description": "{name} receberá {amount}. Depois de paga não pode mais ser editada -- confira o valor antes de confirmar; se aparecer um erro depois, corrija com um novo registro no próximo período.",
+        "cancel": "Voltar",
+        "confirm": "Sim, marcar como paga"
       },
       "statuses": {
         "pending": "Pendente",

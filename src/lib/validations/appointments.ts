@@ -43,3 +43,20 @@ export const createAppointmentSchema = z.object({
 });
 
 export type CreateAppointmentInput = z.infer<typeof createAppointmentSchema>;
+
+// Puntos 14/15 del bloque de ajustes: editar servicio/trabajador de una
+// cita ya creada, solo mientras sigue "scheduled" (lo exige la Server
+// Action, no este esquema). appointment_items no admite agregar/quitar
+// filas desde aquí -- son las mismas filas existentes, identificadas por
+// appointmentItemId, solo cambia su serviceId/staffId.
+export const editAppointmentItemSchema = z.object({
+  appointmentItemId: z.string().trim().uuid(),
+  serviceId: z.string().trim().uuid(),
+  staffId: z.string().trim().uuid(),
+});
+
+export const editAppointmentSchema = z.object({
+  items: z.array(editAppointmentItemSchema).min(1),
+});
+
+export type EditAppointmentInput = z.infer<typeof editAppointmentSchema>;
