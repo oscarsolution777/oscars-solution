@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
+import { Controller, useFieldArray, useForm, useWatch, type Control } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -37,18 +37,108 @@ type StaffRow = Tables<"staff">;
 
 const NO_CLIENT = "__none__";
 
+// Punto 7 del bloque de ajustes -- mismo criterio que RequestItemRow en
+// request-form-panel.tsx: filtra el trabajador a los asignados a ese
+// servicio (service_staff), con fallback a la lista completa si el
+// servicio aún no tiene ninguno asignado. Componente propio por el mismo
+// motivo: necesita su useWatch del serviceId de su propia fila.
+function AppointmentItemRow({
+  control,
+  index,
+  services,
+  staff,
+  serviceStaffMap,
+  showRemove,
+  onRemove,
+  t,
+}: {
+  control: Control<CreateAppointmentInput>;
+  index: number;
+  services: ServiceRow[];
+  staff: StaffRow[];
+  serviceStaffMap: Record<string, string[]>;
+  showRemove: boolean;
+  onRemove: () => void;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const selectedServiceId = useWatch({ control, name: `items.${index}.serviceId` });
+  const assignedIds = serviceStaffMap[selectedServiceId];
+  const staffOptions =
+    !assignedIds || assignedIds.length === 0
+      ? staff
+      : staff.filter((member) => assignedIds.includes(member.id));
+
+  return (
+    <div className="flex items-start gap-2 rounded-lg border border-card-border p-2">
+      <div className="grid flex-1 grid-cols-2 gap-2">
+        <Controller
+          control={control}
+          name={`items.${index}.serviceId`}
+          render={({ field: serviceField }) => (
+            <Select
+              value={serviceField.value}
+              onValueChange={serviceField.onChange}
+              items={Object.fromEntries(services.map((service) => [service.id, service.name]))}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={t("servicePlaceholder")} />
+              </SelectTrigger>
+              <SelectContent>
+                {services.map((service) => (
+                  <SelectItem key={service.id} value={service.id}>
+                    {service.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+        <Controller
+          control={control}
+          name={`items.${index}.staffId`}
+          render={({ field: staffField }) => (
+            <Select
+              value={staffField.value}
+              onValueChange={staffField.onChange}
+              items={Object.fromEntries(staffOptions.map((member) => [member.id, member.full_name]))}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={t("staffPlaceholder")} />
+              </SelectTrigger>
+              <SelectContent>
+                {staffOptions.map((member) => (
+                  <SelectItem key={member.id} value={member.id}>
+                    {member.full_name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      </div>
+      {showRemove && (
+        <Button type="button" variant="ghost" size="icon-sm" onClick={onRemove} aria-label={t("removeItem")}>
+          <Trash2 size={16} />
+        </Button>
+      )}
+    </div>
+  );
+}
+
 export function AppointmentFormPanel({
   open,
   onOpenChange,
   clients,
   services,
   staff,
+  serviceStaffMap,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   clients: ClientRow[];
   services: ServiceRow[];
   staff: StaffRow[];
+  serviceStaffMap: Record<string, string[]>;
 }) {
   const t = useTranslations("requests.appointmentForm");
   const tCommon = useTranslations("common");
@@ -203,65 +293,17 @@ export function AppointmentFormPanel({
             </div>
 
             {fields.map((field, index) => (
-              <div key={field.id} className="flex items-start gap-2 rounded-lg border border-card-border p-2">
-                <div className="grid flex-1 grid-cols-2 gap-2">
-                  <Controller
-                    control={control}
-                    name={`items.${index}.serviceId`}
-                    render={({ field: serviceField }) => (
-                      <Select
-                        value={serviceField.value}
-                        onValueChange={serviceField.onChange}
-                        items={Object.fromEntries(services.map((service) => [service.id, service.name]))}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("servicePlaceholder")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {services.map((service) => (
-                            <SelectItem key={service.id} value={service.id}>
-                              {service.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name={`items.${index}.staffId`}
-                    render={({ field: staffField }) => (
-                      <Select
-                        value={staffField.value}
-                        onValueChange={staffField.onChange}
-                        items={Object.fromEntries(staff.map((member) => [member.id, member.full_name]))}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("staffPlaceholder")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {staff.map((member) => (
-                            <SelectItem key={member.id} value={member.id}>
-                              {member.full_name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </div>
-                {fields.length > 1 && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon-sm"
-                    onClick={() => remove(index)}
-                    aria-label={t("removeItem")}
-                  >
-                    <Trash2 size={16} />
-                  </Button>
-                )}
-              </div>
+              <AppointmentItemRow
+                key={field.id}
+                control={control}
+                index={index}
+                services={services}
+                staff={staff}
+                serviceStaffMap={serviceStaffMap}
+                showRemove={fields.length > 1}
+                onRemove={() => remove(index)}
+                t={t}
+              />
             ))}
             {errors.items && <p className="text-xs text-danger">{t("itemsError")}</p>}
           </div>

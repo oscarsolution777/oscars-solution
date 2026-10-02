@@ -41,6 +41,7 @@ export function ConfirmRequestPanel({
   items,
   clients,
   staff,
+  serviceStaffMap,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -48,6 +49,7 @@ export function ConfirmRequestPanel({
   items: RequestItemRow[];
   clients: ClientRow[];
   staff: StaffRow[];
+  serviceStaffMap: Record<string, string[]>;
 }) {
   const t = useTranslations("requests.confirm");
   const tCommon = useTranslations("common");
@@ -157,36 +159,52 @@ export function ConfirmRequestPanel({
 
           <div className="space-y-2">
             <Label>{t("itemsLabel")}</Label>
-            {items.map((item, index) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between gap-2 rounded-lg border border-card-border p-2"
-              >
-                <span className="text-sm text-text-primary">{item.service_name_snapshot}</span>
-                <Controller
-                  control={control}
-                  name={`items.${index}.staffId`}
-                  render={({ field }) => (
-                    <Select
-                      value={field.value}
-                      onValueChange={field.onChange}
-                      items={Object.fromEntries(staff.map((member) => [member.id, member.full_name]))}
-                    >
-                      <SelectTrigger className="w-44">
-                        <SelectValue placeholder={t("staffPlaceholder")} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {staff.map((member) => (
-                          <SelectItem key={member.id} value={member.id}>
-                            {member.full_name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-              </div>
-            ))}
+            {items.map((item, index) => {
+              // Punto 7 del bloque de ajustes: filtra a los trabajadores
+              // asignados (service_staff) al servicio de esta solicitud, con
+              // fallback a la lista completa si ese servicio aún no tiene
+              // ninguno asignado. Aquí el servicio ya viene fijo
+              // (item.service_id, de la solicitud original) -- no hace falta
+              // useWatch como en los formularios donde el servicio se elige.
+              const assignedIds = serviceStaffMap[item.service_id];
+              const staffOptions =
+                !assignedIds || assignedIds.length === 0
+                  ? staff
+                  : staff.filter((member) => assignedIds.includes(member.id));
+
+              return (
+                <div
+                  key={item.id}
+                  className="flex items-center justify-between gap-2 rounded-lg border border-card-border p-2"
+                >
+                  <span className="text-sm text-text-primary">{item.service_name_snapshot}</span>
+                  <Controller
+                    control={control}
+                    name={`items.${index}.staffId`}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        items={Object.fromEntries(
+                          staffOptions.map((member) => [member.id, member.full_name])
+                        )}
+                      >
+                        <SelectTrigger className="w-44">
+                          <SelectValue placeholder={t("staffPlaceholder")} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {staffOptions.map((member) => (
+                            <SelectItem key={member.id} value={member.id}>
+                              {member.full_name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </div>
+              );
+            })}
             {errors.items && <p className="text-xs text-danger">{t("staffError")}</p>}
           </div>
 

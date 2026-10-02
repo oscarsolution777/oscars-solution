@@ -3,7 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getSalonBySlug } from "@/lib/db/salons";
 import { listServices } from "@/lib/db/services";
-import { listPublicStaffForSalon } from "@/lib/db/public-staff";
+import { listPublicStaffForSalon, listPublicServiceStaffForSalon } from "@/lib/db/public-staff";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Link } from "@/lib/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -52,7 +52,19 @@ export default async function PublicSolicitudPage({
     );
   }
 
-  const staff = await listPublicStaffForSalon(supabase, salon.id);
+  const [staff, serviceStaffRows] = await Promise.all([
+    listPublicStaffForSalon(supabase, salon.id),
+    listPublicServiceStaffForSalon(supabase, salon.id),
+  ]);
+
+  // Punto 7 del bloque de ajustes: mismo filtrado por service_staff que ya
+  // se aplicó en el panel de gestión -- el portal QR ya no ofrece todos los
+  // trabajadores activos como "trabajador preferido" para cualquier
+  // servicio.
+  const serviceStaffMap: Record<string, string[]> = {};
+  for (const row of serviceStaffRows) {
+    (serviceStaffMap[row.service_id] ??= []).push(row.staff_id);
+  }
 
   return (
     <RequestForm
@@ -61,6 +73,7 @@ export default async function PublicSolicitudPage({
       currency={salon.currency}
       services={selectedServices}
       staff={staff}
+      serviceStaffMap={serviceStaffMap}
     />
   );
 }

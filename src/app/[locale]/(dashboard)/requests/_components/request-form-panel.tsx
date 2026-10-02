@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
+import { Controller, useFieldArray, useForm, useWatch, type Control } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -35,18 +35,115 @@ type StaffRow = Tables<"staff">;
 const NO_CLIENT = "__none__";
 const NO_STAFF = "__none__";
 
+// Punto 7 del bloque de ajustes: antes se mostraban TODOS los trabajadores
+// activos sin importar el servicio elegido en esa fila. Ahora se filtra a
+// los que `service_staff` tiene asignados a ese servicio -- si el servicio
+// todavía no tiene ningún trabajador asignado, se cae de vuelta a la lista
+// completa (para no bloquear el flujo mientras se configura la asignación).
+// Componente propio (no solo una función) porque necesita su propio
+// useWatch del serviceId de esta fila -- llamarlo condicionalmente dentro
+// de fields.map() rompería las reglas de hooks al cambiar fields.length.
+function RequestItemRow({
+  control,
+  index,
+  services,
+  staff,
+  serviceStaffMap,
+  showRemove,
+  onRemove,
+  t,
+}: {
+  control: Control<RequestInput>;
+  index: number;
+  services: ServiceRow[];
+  staff: StaffRow[];
+  serviceStaffMap: Record<string, string[]>;
+  showRemove: boolean;
+  onRemove: () => void;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const selectedServiceId = useWatch({ control, name: `items.${index}.serviceId` });
+  const assignedIds = serviceStaffMap[selectedServiceId];
+  const staffOptions =
+    !assignedIds || assignedIds.length === 0
+      ? staff
+      : staff.filter((member) => assignedIds.includes(member.id));
+
+  return (
+    <div className="flex items-start gap-2 rounded-lg border border-card-border p-2">
+      <div className="grid flex-1 grid-cols-2 gap-2">
+        <Controller
+          control={control}
+          name={`items.${index}.serviceId`}
+          render={({ field: serviceField }) => (
+            <Select
+              value={serviceField.value}
+              onValueChange={serviceField.onChange}
+              items={Object.fromEntries(services.map((service) => [service.id, service.name]))}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={t("servicePlaceholder")} />
+              </SelectTrigger>
+              <SelectContent>
+                {services.map((service) => (
+                  <SelectItem key={service.id} value={service.id}>
+                    {service.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+        <Controller
+          control={control}
+          name={`items.${index}.staffId`}
+          render={({ field: staffField }) => (
+            <Select
+              value={staffField.value || NO_STAFF}
+              onValueChange={(value) => staffField.onChange(value === NO_STAFF ? "" : value)}
+              items={{
+                [NO_STAFF]: t("staffUnassigned"),
+                ...Object.fromEntries(staffOptions.map((member) => [member.id, member.full_name])),
+              }}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={t("staffPlaceholder")} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={NO_STAFF}>{t("staffUnassigned")}</SelectItem>
+                {staffOptions.map((member) => (
+                  <SelectItem key={member.id} value={member.id}>
+                    {member.full_name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      </div>
+      {showRemove && (
+        <Button type="button" variant="ghost" size="icon-sm" onClick={onRemove} aria-label={t("removeItem")}>
+          <Trash2 size={16} />
+        </Button>
+      )}
+    </div>
+  );
+}
+
 export function RequestFormPanel({
   open,
   onOpenChange,
   clients,
   services,
   staff,
+  serviceStaffMap,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   clients: ClientRow[];
   services: ServiceRow[];
   staff: StaffRow[];
+  serviceStaffMap: Record<string, string[]>;
 }) {
   const t = useTranslations("requests.form");
   const tCommon = useTranslations("common");
@@ -198,71 +295,17 @@ export function RequestFormPanel({
             </div>
 
             {fields.map((field, index) => (
-              <div key={field.id} className="flex items-start gap-2 rounded-lg border border-card-border p-2">
-                <div className="grid flex-1 grid-cols-2 gap-2">
-                  <Controller
-                    control={control}
-                    name={`items.${index}.serviceId`}
-                    render={({ field: serviceField }) => (
-                      <Select
-                        value={serviceField.value}
-                        onValueChange={serviceField.onChange}
-                        items={Object.fromEntries(services.map((service) => [service.id, service.name]))}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("servicePlaceholder")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {services.map((service) => (
-                            <SelectItem key={service.id} value={service.id}>
-                              {service.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name={`items.${index}.staffId`}
-                    render={({ field: staffField }) => (
-                      <Select
-                        value={staffField.value || NO_STAFF}
-                        onValueChange={(value) =>
-                          staffField.onChange(value === NO_STAFF ? "" : value)
-                        }
-                        items={{
-                          [NO_STAFF]: t("staffUnassigned"),
-                          ...Object.fromEntries(staff.map((member) => [member.id, member.full_name])),
-                        }}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder={t("staffPlaceholder")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value={NO_STAFF}>{t("staffUnassigned")}</SelectItem>
-                          {staff.map((member) => (
-                            <SelectItem key={member.id} value={member.id}>
-                              {member.full_name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </div>
-                {fields.length > 1 && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon-sm"
-                    onClick={() => remove(index)}
-                    aria-label={t("removeItem")}
-                  >
-                    <Trash2 size={16} />
-                  </Button>
-                )}
-              </div>
+              <RequestItemRow
+                key={field.id}
+                control={control}
+                index={index}
+                services={services}
+                staff={staff}
+                serviceStaffMap={serviceStaffMap}
+                showRemove={fields.length > 1}
+                onRemove={() => remove(index)}
+                t={t}
+              />
             ))}
             {errors.items && <p className="text-xs text-danger">{t("itemsError")}</p>}
           </div>

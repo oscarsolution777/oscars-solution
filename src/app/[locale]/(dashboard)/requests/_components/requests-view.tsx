@@ -32,6 +32,7 @@ export function RequestsView({
   clients,
   services,
   staff,
+  serviceStaffMap,
   period,
   kpis,
   periodLabel,
@@ -45,6 +46,7 @@ export function RequestsView({
   clients: ClientRow[];
   services: ServiceRow[];
   staff: StaffRow[];
+  serviceStaffMap: Record<string, string[]>;
   period: Period;
   kpis: {
     pendingRequestsCount: number;
@@ -175,6 +177,7 @@ export function RequestsView({
         clients={clients}
         services={services}
         staff={staff}
+        serviceStaffMap={serviceStaffMap}
       />
 
       <AppointmentFormPanel
@@ -183,6 +186,7 @@ export function RequestsView({
         clients={clients}
         services={services}
         staff={staff}
+        serviceStaffMap={serviceStaffMap}
       />
 
       <ConfirmRequestPanel
@@ -192,6 +196,7 @@ export function RequestsView({
         items={confirmingItems}
         clients={clients}
         staff={staff}
+        serviceStaffMap={serviceStaffMap}
       />
 
       <AppointmentDetailPanel

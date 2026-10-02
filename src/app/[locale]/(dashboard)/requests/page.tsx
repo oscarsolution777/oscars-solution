@@ -7,7 +7,8 @@ import { listAppointments, listAppointmentItemsForAppointments } from "@/lib/db/
 import { listClients } from "@/lib/db/clients";
 import { listServices } from "@/lib/db/services";
 import { listStaff } from "@/lib/db/staff";
-import { resolvePeriod } from "@/lib/utils/period";
+import { listServiceStaffForSalon } from "@/lib/db/service-staff";
+import { resolvePeriod, type PeriodSearchParams } from "@/lib/utils/period";
 import { formatCalendarDate } from "@/lib/utils/dates";
 import { computeNoShowRate, inRange } from "@/lib/reports/aggregations";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -16,7 +17,7 @@ import { RequestsView } from "./_components/requests-view";
 export default async function RequestsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ preset?: string; from?: string; to?: string }>;
+  searchParams: Promise<PeriodSearchParams>;
 }) {
   const session = await requireAuth();
   const locale = await getLocale();
@@ -37,7 +38,7 @@ export default async function RequestsPage({
     listStaff(supabase, salon.id),
   ]);
 
-  const [requestItems, appointmentItems] = await Promise.all([
+  const [requestItems, appointmentItems, serviceStaffRows] = await Promise.all([
     listRequestItemsForRequests(
       supabase,
       requests.map((request) => request.id)
@@ -46,7 +47,20 @@ export default async function RequestsPage({
       supabase,
       appointments.map((appointment) => appointment.id)
     ),
+    listServiceStaffForSalon(
+      supabase,
+      services.map((service) => service.id)
+    ),
   ]);
+
+  // Punto 7 del bloque de ajustes: los formularios de solicitud/cita ya no
+  // muestran TODOS los trabajadores activos para cualquier servicio -- se
+  // filtra a los que `service_staff` tiene asignados a ese servicio
+  // concreto. Se construye aquí (un solo query) en vez de en cada panel.
+  const serviceStaffMap: Record<string, string[]> = {};
+  for (const row of serviceStaffRows) {
+    (serviceStaffMap[row.service_id] ??= []).push(row.staff_id);
+  }
 
   const todayStr = formatInTimeZone(new Date(), salon.timezone, "yyyy-MM-dd");
 
@@ -82,6 +96,7 @@ export default async function RequestsPage({
       clients={clients.filter((client) => client.is_active)}
       services={services.filter((service) => service.is_active)}
       staff={staff.filter((member) => member.is_active)}
+      serviceStaffMap={serviceStaffMap}
       period={period}
       kpis={{
         pendingRequestsCount,

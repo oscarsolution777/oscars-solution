@@ -13,3 +13,19 @@ export async function listPublicStaffForSalon(supabase: SupabaseServerClient, sa
   if (error) throw error;
   return data as { id: string; full_name: string }[];
 }
+
+// Punto 7 del bloque de ajustes: pares (service_id, staff_id) para filtrar
+// el selector de "trabajador preferido" por servicio, vía
+// list_public_service_staff_for_salon (migración 0026) — mismo criterio de
+// exposición mínima que listPublicStaffForSalon.
+export async function listPublicServiceStaffForSalon(
+  supabase: SupabaseServerClient,
+  salonId: string
+) {
+  const { data, error } = await supabase.rpc("list_public_service_staff_for_salon", {
+    p_salon_id: salonId,
+  });
+
+  if (error) throw error;
+  return data as { service_id: string; staff_id: string }[];
+}

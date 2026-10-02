@@ -34,12 +34,14 @@ export function RequestForm({
   currency,
   services,
   staff,
+  serviceStaffMap,
 }: {
   slug: string;
   locale: string;
   currency: string;
   services: ServiceRow[];
   staff: { id: string; full_name: string }[];
+  serviceStaffMap: Record<string, string[]>;
 }) {
   const t = useTranslations("portal.form");
   const tCommon = useTranslations("common");
@@ -94,6 +96,14 @@ export function RequestForm({
         <h2 className="text-sm font-semibold text-text-secondary">{t("reviewTitle")}</h2>
         {fields.map((field, index) => {
           const service = servicesById.get(field.serviceId);
+          // Punto 7 del bloque de ajustes: filtra a los trabajadores
+          // asignados (service_staff) a este servicio, con fallback a la
+          // lista completa si el servicio aún no tiene ninguno asignado.
+          const assignedIds = serviceStaffMap[field.serviceId];
+          const staffOptions =
+            !assignedIds || assignedIds.length === 0
+              ? staff
+              : staff.filter((member) => assignedIds.includes(member.id));
           return (
             <div
               key={field.id}
@@ -130,7 +140,9 @@ export function RequestForm({
                     }
                     items={{
                       [NO_STAFF]: t("staffUnassigned"),
-                      ...Object.fromEntries(staff.map((member) => [member.id, member.full_name])),
+                      ...Object.fromEntries(
+                        staffOptions.map((member) => [member.id, member.full_name])
+                      ),
                     }}
                   >
                     <SelectTrigger className="w-full">
@@ -138,7 +150,7 @@ export function RequestForm({
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value={NO_STAFF}>{t("staffUnassigned")}</SelectItem>
-                      {staff.map((member) => (
+                      {staffOptions.map((member) => (
                         <SelectItem key={member.id} value={member.id}>
                           {member.full_name}
                         </SelectItem>
