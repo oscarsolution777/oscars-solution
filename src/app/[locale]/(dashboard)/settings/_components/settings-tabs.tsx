@@ -31,6 +31,7 @@ export function SettingsTabs({
   qrPortal,
   members,
   auditLog,
+  platformAdminUserIds,
   currentUserId,
 }: {
   role: string;
@@ -38,6 +39,7 @@ export function SettingsTabs({
   qrPortal: { url: string; dataUrl: string };
   members: Awaited<ReturnType<typeof listSalonMembers>>;
   auditLog: Awaited<ReturnType<typeof listAuditLog>>;
+  platformAdminUserIds: string[];
   currentUserId: string;
 }) {
   const t = useTranslations("settings");
@@ -67,7 +69,13 @@ export function SettingsTabs({
 
         {isOwner && (
           <TabsContent value="audit">
-            <AuditLogTab entries={auditLog} members={members} timezone={salon.timezone} locale={locale} />
+            <AuditLogTab
+              entries={auditLog}
+              members={members}
+              platformAdminUserIds={platformAdminUserIds}
+              timezone={salon.timezone}
+              locale={locale}
+            />
           </TabsContent>
         )}
       </Tabs>

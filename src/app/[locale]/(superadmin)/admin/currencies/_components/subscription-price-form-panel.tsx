@@ -35,10 +35,12 @@ export function SubscriptionPriceFormPanel({
   open,
   onOpenChange,
   currencies,
+  preselectedCurrencyCode,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   currencies: CurrencyRow[];
+  preselectedCurrencyCode?: string;
 }) {
   const t = useTranslations("superadmin.currencies.priceForm");
   const tCommon = useTranslations("common");
@@ -48,7 +50,7 @@ export function SubscriptionPriceFormPanel({
   const [prevOpen, setPrevOpen] = useState(open);
 
   const defaults: SubscriptionPriceInput = {
-    currencyCode: currencies[0]?.code ?? "",
+    currencyCode: preselectedCurrencyCode ?? currencies[0]?.code ?? "",
     price: "",
   };
 

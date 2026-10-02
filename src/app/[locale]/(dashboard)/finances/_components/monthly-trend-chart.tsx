@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import { ChartCard } from "@/components/shared/chart-card";
 import { formatMoney } from "@/lib/utils/money";
+import { formatCalendarDate } from "@/lib/utils/dates";
 import type { FinanceMonthPoint } from "@/lib/reports/aggregations";
 
 export function MonthlyTrendChart({
@@ -19,6 +20,12 @@ export function MonthlyTrendChart({
   const isEmpty = points.every(
     (point) => point.incomeCents === 0 && point.expensesCents === 0 && point.payoutsCents === 0
   );
+  // label es "yyyy-MM" crudo (FinanceMonthPoint, aggregations.ts) -- se
+  // formatea aquí a "MMM yyyy" en el idioma activo, nunca se muestra crudo
+  // (bug real detectado, punto 10 del bloque de ajustes). "yyyy-MM-01" es
+  // una fecha calendario pura, por eso formatCalendarDate (sin zona horaria
+  // del salón), mismo criterio que el resto de columnas `date`.
+  const formatMonthLabel = (label: string) => formatCalendarDate(`${label}-01`, locale, "MMM yyyy");
 
   return (
     <ChartCard
@@ -29,9 +36,12 @@ export function MonthlyTrendChart({
     >
       <BarChart data={points} margin={{ left: 8, right: 8 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
-        <XAxis dataKey="label" tick={{ fontSize: 12 }} />
+        <XAxis dataKey="label" tickFormatter={formatMonthLabel} tick={{ fontSize: 12 }} />
         <YAxis tickFormatter={(value) => formatMoney(value, currency, locale)} width={70} />
-        <Tooltip formatter={(value) => formatMoney(Number(value), currency, locale)} />
+        <Tooltip
+          formatter={(value) => formatMoney(Number(value), currency, locale)}
+          labelFormatter={(label) => (typeof label === "string" ? formatMonthLabel(label) : label)}
+        />
         <Legend />
         {/* Orden fijo a pedido de Oscar (bloque de ajustes posterior a Fase
             10, punto 7): Ingresos, Nómina, Gastos -- antes era Ingresos,

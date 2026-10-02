@@ -178,6 +178,9 @@
         "cancel": "Zurück",
         "confirm": "Termin stornieren"
       },
+      "errors": {
+        "completeFailed": "Der Termin konnte nicht als abgeschlossen markiert werden. Möglicherweise ist ein Produkt, das einer der Leistungen verbraucht, nicht ausreichend vorrätig -- bitte Lagerbestand prüfen."
+      },
       "detail": {
         "title": "Termindetails",
         "date": "Datum",
@@ -1069,6 +1072,7 @@
       "columnEntity": "Element",
       "columnAction": "Aktion",
       "unknownUser": "Unbekannter Benutzer",
+      "platformAdminUser": "Oscar's Solution (Support)",
       "entities": {
         "salon": "Salon",
         "membership": "Benutzer",

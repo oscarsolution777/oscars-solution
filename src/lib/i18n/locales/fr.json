@@ -178,6 +178,9 @@
         "cancel": "Retour",
         "confirm": "Annuler le rendez-vous"
       },
+      "errors": {
+        "completeFailed": "Impossible de marquer le rendez-vous comme terminé. Un produit utilisé par l'un de ses services est peut-être en rupture de stock -- vérifiez l'inventaire."
+      },
       "detail": {
         "title": "Détail du rendez-vous",
         "date": "Date",
@@ -1069,6 +1072,7 @@
       "columnEntity": "Élément",
       "columnAction": "Action",
       "unknownUser": "Utilisateur inconnu",
+      "platformAdminUser": "Oscar's Solution (support)",
       "entities": {
         "salon": "Salon",
         "membership": "Utilisateur",

@@ -178,6 +178,9 @@
         "cancel": "Go back",
         "confirm": "Cancel appointment"
       },
+      "errors": {
+        "completeFailed": "Couldn't mark the appointment as completed. One of the products used by its services may be out of stock -- check your inventory."
+      },
       "detail": {
         "title": "Appointment detail",
         "date": "Date",
@@ -1069,6 +1072,7 @@
       "columnEntity": "Item",
       "columnAction": "Action",
       "unknownUser": "Unknown user",
+      "platformAdminUser": "Oscar's Solution (support)",
       "entities": {
         "salon": "Salon",
         "membership": "User",

@@ -59,22 +59,41 @@ export function AppointmentsTable({
 }) {
   const t = useTranslations("requests.agenda");
   const tStatuses = useTranslations("requests.appointmentStatuses");
+  const tErrors = useTranslations("requests.errors");
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [cancelTarget, setCancelTarget] = useState<AppointmentRow | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
 
+  // Bug real corregido (punto 21 del bloque de ajustes): antes, si
+  // setAppointmentStatusAction fallaba (ej. un producto de service_products
+  // sin stock suficiente -- el check `stock_qty >= 0` rechaza el UPDATE), el
+  // resultado {ok:false} se descartaba en silencio: ningún mensaje, la fila
+  // simplemente no cambiaba. Ahora el error se muestra siempre.
   const applyStatus = (appointmentId: string, status: string) => {
+    setActionError(null);
     startTransition(async () => {
       const result = await setAppointmentStatusAction(appointmentId, status);
-      if (result.ok) router.refresh();
+      if (result.ok) {
+        router.refresh();
+        return;
+      }
+      setActionError(
+        status === "completed" ? t("errors.completeFailed") : tErrors("generic")
+      );
     });
   };
 
   const applyReschedule = (appointmentId: string, date: string) => {
     if (!date) return;
+    setActionError(null);
     startTransition(async () => {
       const result = await rescheduleAppointmentAction(appointmentId, date);
-      if (result.ok) router.refresh();
+      if (result.ok) {
+        router.refresh();
+        return;
+      }
+      setActionError(tErrors("generic"));
     });
   };
 
@@ -83,9 +102,15 @@ export function AppointmentsTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-card-border">
-      <Table>
-        <TableHeader>
+    <div className="space-y-3">
+      {actionError && (
+        <p role="alert" className="text-xs text-danger">
+          {actionError}
+        </p>
+      )}
+      <div className="overflow-x-auto rounded-xl border border-card-border">
+        <Table>
+          <TableHeader>
           <TableRow>
             <TableHead>{t("columnDate")}</TableHead>
             <TableHead>{t("columnClient")}</TableHead>
@@ -176,7 +201,8 @@ export function AppointmentsTable({
             );
           })}
         </TableBody>
-      </Table>
+        </Table>
+      </div>
 
       <AlertDialog open={cancelTarget !== null} onOpenChange={(open) => !open && setCancelTarget(null)}>
         <AlertDialogContent>

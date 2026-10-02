@@ -39,6 +39,7 @@ export function CurrenciesView({
   const [isPending, startTransition] = useTransition();
   const [currencyFormOpen, setCurrencyFormOpen] = useState(false);
   const [priceFormOpen, setPriceFormOpen] = useState(false);
+  const [priceFormCurrency, setPriceFormCurrency] = useState<string | undefined>(undefined);
 
   const toggleCurrency = (currency: CurrencyRow) => {
     startTransition(async () => {
@@ -47,7 +48,20 @@ export function CurrenciesView({
     });
   };
 
-  const activePrices = prices.filter((price) => price.is_active);
+  const openPriceForm = (currencyCode?: string) => {
+    setPriceFormCurrency(currencyCode);
+    setPriceFormOpen(true);
+  };
+
+  // Punto 19 del bloque de ajustes: antes esta tabla solo listaba las
+  // monedas que YA tenían un precio fijado (`prices.filter(is_active)`), así
+  // que una moneda nueva quedaba invisible hasta fijarle precio a mano.
+  // Ahora se recorren las monedas activas y se cruza con su precio si existe
+  // -- las que no tienen, muestran "—" y un botón para fijarlo ahí mismo.
+  const priceByCurrency = new Map(
+    prices.filter((price) => price.is_active).map((price) => [price.currency_code, price])
+  );
+  const activeCurrencies = currencies.filter((currency) => currency.is_active);
 
   return (
     <div className="space-y-6">
@@ -111,13 +125,13 @@ export function CurrenciesView({
       <Card className="p-4">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="font-semibold text-text-primary">{t("pricesTitle")}</h2>
-          <Button size="sm" onClick={() => setPriceFormOpen(true)}>
+          <Button size="sm" onClick={() => openPriceForm(undefined)}>
             <Plus size={16} />
             {t("pricesTable.setPriceAction")}
           </Button>
         </div>
 
-        {activePrices.length === 0 ? (
+        {activeCurrencies.length === 0 ? (
           <EmptyState title={t("pricesTable.emptyTitle")} />
         ) : (
           <div className="overflow-x-auto rounded-xl border border-card-border">
@@ -127,20 +141,33 @@ export function CurrenciesView({
                   <TableHead>{t("pricesTable.columnCurrency")}</TableHead>
                   <TableHead>{t("pricesTable.columnPrice")}</TableHead>
                   <TableHead>{t("pricesTable.columnUpdatedAt")}</TableHead>
+                  <TableHead className="text-right" />
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {activePrices.map((price) => (
-                  <TableRow key={price.id}>
-                    <TableCell className="font-medium">{price.currency_code}</TableCell>
-                    <TableCell>
-                      {formatMoney(price.price_cents, price.currency_code, locale)}
-                    </TableCell>
-                    <TableCell className="text-text-secondary">
-                      {new Date(price.updated_at).toLocaleDateString(locale)}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {activeCurrencies.map((currency) => {
+                  const price = priceByCurrency.get(currency.code);
+                  return (
+                    <TableRow key={currency.code}>
+                      <TableCell className="font-medium">{currency.code}</TableCell>
+                      <TableCell>
+                        {price ? formatMoney(price.price_cents, currency.code, locale) : "—"}
+                      </TableCell>
+                      <TableCell className="text-text-secondary">
+                        {price ? new Date(price.updated_at).toLocaleDateString(locale) : "—"}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => openPriceForm(currency.code)}
+                        >
+                          {t("pricesTable.setPriceAction")}
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </div>
@@ -151,7 +178,8 @@ export function CurrenciesView({
       <SubscriptionPriceFormPanel
         open={priceFormOpen}
         onOpenChange={setPriceFormOpen}
-        currencies={currencies.filter((currency) => currency.is_active)}
+        currencies={activeCurrencies}
+        preselectedCurrencyCode={priceFormCurrency}
       />
     </div>
   );

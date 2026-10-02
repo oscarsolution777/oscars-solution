@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { EmptyState } from "@/components/shared/empty-state";
 import { buildPortalUrl, generatePortalQrDataUrl } from "@/lib/qr/generate-portal-qr";
 import { listSalonMembers } from "@/lib/db/memberships";
-import { listAuditLog } from "@/lib/db/audit-log";
+import { listAuditLog, getPlatformAdminUserIds } from "@/lib/db/audit-log";
 import { SettingsTabs } from "./_components/settings-tabs";
 
 export default async function SettingsPage() {
@@ -33,6 +33,7 @@ export default async function SettingsPage() {
 
   let members: Awaited<ReturnType<typeof listSalonMembers>> = [];
   let auditLog: Awaited<ReturnType<typeof listAuditLog>> = [];
+  let platformAdminUserIds: string[] = [];
 
   if (role === "owner") {
     const supabase = await createClient();
@@ -40,6 +41,12 @@ export default async function SettingsPage() {
       listSalonMembers(supabase, salon.id),
       listAuditLog(supabase, salon.id),
     ]);
+
+    const memberIds = new Set(members.map((m) => m.user_id));
+    const unresolvedIds = auditLog
+      .map((entry) => entry.user_id)
+      .filter((id): id is string => Boolean(id) && !memberIds.has(id as string));
+    platformAdminUserIds = [...(await getPlatformAdminUserIds(supabase, unresolvedIds))];
   }
 
   return (
@@ -49,6 +56,7 @@ export default async function SettingsPage() {
       qrPortal={{ url: portalUrl, dataUrl: qrDataUrl }}
       members={members}
       auditLog={auditLog}
+      platformAdminUserIds={platformAdminUserIds}
       currentUserId={session.user.id}
     />
   );

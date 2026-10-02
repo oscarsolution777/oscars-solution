@@ -178,6 +178,9 @@
         "cancel": "Volver",
         "confirm": "Cancelar cita"
       },
+      "errors": {
+        "completeFailed": "No se pudo marcar la cita como completada. Es posible que algún producto que consume uno de sus servicios no tenga stock suficiente -- revisa el inventario."
+      },
       "detail": {
         "title": "Detalle de la cita",
         "date": "Fecha",
@@ -1069,6 +1072,7 @@
       "columnEntity": "Elemento",
       "columnAction": "Acción",
       "unknownUser": "Usuario desconocido",
+      "platformAdminUser": "Oscar's Solution (soporte)",
       "entities": {
         "salon": "Salón",
         "membership": "Usuario",

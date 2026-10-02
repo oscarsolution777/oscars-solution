@@ -178,6 +178,9 @@
         "cancel": "Voltar",
         "confirm": "Cancelar atendimento"
       },
+      "errors": {
+        "completeFailed": "Não foi possível marcar o atendimento como concluído. Algum produto consumido por um dos serviços pode estar sem estoque suficiente -- verifique o inventário."
+      },
       "detail": {
         "title": "Detalhe do atendimento",
         "date": "Data",
@@ -1069,6 +1072,7 @@
       "columnEntity": "Item",
       "columnAction": "Ação",
       "unknownUser": "Usuário desconhecido",
+      "platformAdminUser": "Oscar's Solution (suporte)",
       "entities": {
         "salon": "Salão",
         "membership": "Usuário",

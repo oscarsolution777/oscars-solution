@@ -178,6 +178,9 @@
         "cancel": "Indietro",
         "confirm": "Annulla appuntamento"
       },
+      "errors": {
+        "completeFailed": "Non è stato possibile segnare l'appuntamento come completato. Uno dei prodotti usati dai suoi servizi potrebbe non avere scorte sufficienti -- controlla l'inventario."
+      },
       "detail": {
         "title": "Dettaglio appuntamento",
         "date": "Data",
@@ -1069,6 +1072,7 @@
       "columnEntity": "Elemento",
       "columnAction": "Azione",
       "unknownUser": "Utente sconosciuto",
+      "platformAdminUser": "Oscar's Solution (supporto)",
       "entities": {
         "salon": "Salone",
         "membership": "Utente",
