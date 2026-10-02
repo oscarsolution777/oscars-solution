@@ -1384,8 +1384,8 @@
         "all": "Tout",
         "today": "Aujourd'hui",
         "yesterday": "Hier",
-        "week": "7 derniers jours",
-        "month": "30 derniers jours",
+        "week": "Cette semaine",
+        "month": "Ce mois-ci",
         "custom": "Personnalisé",
         "apply": "Appliquer"
       },

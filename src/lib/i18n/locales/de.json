@@ -1384,8 +1384,8 @@
         "all": "Gesamt",
         "today": "Heute",
         "yesterday": "Gestern",
-        "week": "Letzte 7 Tage",
-        "month": "Letzte 30 Tage",
+        "week": "Diese Woche",
+        "month": "Diesen Monat",
         "custom": "Benutzerdefiniert",
         "apply": "Anwenden"
       },

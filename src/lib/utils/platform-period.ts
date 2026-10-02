@@ -27,6 +27,24 @@ function addDaysUtc(date: Date, delta: number): Date {
   return copy;
 }
 
+// Punto 20 del bloque de ajustes: "week"/"month" dejan de ser una ventana
+// móvil de 7/30 días terminando hoy -- pasan a ser semana y mes calendario
+// completos, mismo criterio que el resto de la app (period.ts "thisMonth" =
+// mes calendario completo; mondayOf() en aggregations.ts para el lunes ISO
+// de una semana). Así la etiqueta nueva ("Última semana"/"Último mes") y
+// los datos que muestra coinciden, que es justo lo que pidió Oscar -- antes
+// cambiar solo la etiqueta sin la lógica hubiera prometido algo distinto a
+// lo que realmente se muestra.
+function mondayOfWeekUtc(date: Date): Date {
+  const day = date.getUTCDay();
+  const diff = (day === 0 ? -6 : 1) - day;
+  return addDaysUtc(date, diff);
+}
+
+function lastDayOfMonthUtc(year: number, month0to11: number): number {
+  return new Date(Date.UTC(year, month0to11 + 1, 0)).getUTCDate();
+}
+
 export function resolvePlatformUsagePeriod(
   searchParams: { preset?: string; from?: string; to?: string } | undefined
 ): PlatformUsagePeriod {
@@ -48,11 +66,22 @@ export function resolvePlatformUsagePeriod(
   }
 
   if (preset === "week") {
-    return { preset: "week", from: toDateStr(addDaysUtc(now, -6)), to: todayStr };
+    const monday = mondayOfWeekUtc(now);
+    return {
+      preset: "week",
+      from: toDateStr(monday),
+      to: toDateStr(addDaysUtc(monday, 6)),
+    };
   }
 
   if (preset === "month") {
-    return { preset: "month", from: toDateStr(addDaysUtc(now, -29)), to: todayStr };
+    const year = now.getUTCFullYear();
+    const month = now.getUTCMonth();
+    return {
+      preset: "month",
+      from: toDateStr(new Date(Date.UTC(year, month, 1))),
+      to: toDateStr(new Date(Date.UTC(year, month, lastDayOfMonthUtc(year, month)))),
+    };
   }
 
   // "all": totales acumulados desde siempre, mismo comportamiento que antes

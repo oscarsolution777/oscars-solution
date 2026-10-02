@@ -1384,8 +1384,8 @@
         "all": "Todo",
         "today": "Hoy",
         "yesterday": "Ayer",
-        "week": "Últimos 7 días",
-        "month": "Últimos 30 días",
+        "week": "Última semana",
+        "month": "Último mes",
         "custom": "Personalizado",
         "apply": "Aplicar"
       },
