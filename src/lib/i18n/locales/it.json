@@ -1224,6 +1224,7 @@
         "suspendAction": "Sospendi",
         "convertAction": "Converti in salone reale",
         "editSlugAction": "Modifica slug",
+        "createMemberAction": "Crea account",
         "resetAction": "Ripristina salone",
         "demoExpiresOn": "Scade il {date}",
         "notDemo": "—",
@@ -1250,6 +1251,21 @@
         "cancel": "Annulla",
         "errors": {
           "slugTaken": "Questo slug è già usato da un altro salone."
+        }
+      },
+      "createMemberDialog": {
+        "title": "Crea un account per \"{name}\"",
+        "description": "Crea un account nuovo con una propria password temporanea e lo aggiunge come admin o receptionist di questo salone. Per una nuova proprietaria, usa \"Nuovo salone\".",
+        "emailLabel": "Email",
+        "nameLabel": "Nome completo",
+        "roleLabel": "Ruolo",
+        "roleAdmin": "Amministratore",
+        "roleReception": "Receptionist",
+        "confirm": "Crea account",
+        "confirmPending": "Creazione…",
+        "cancel": "Annulla",
+        "errors": {
+          "emailTaken": "Esiste già un account con quell'email."
         }
       },
       "resetDialog": {

@@ -31,6 +31,7 @@ import type { Tables } from "@/types/database";
 import { SalonStatusBadge } from "./salon-status-badge";
 import { ResetSalonDialog } from "./reset-salon-dialog";
 import { EditSlugDialog } from "./edit-slug-dialog";
+import { CreateMemberAccountDialog } from "./create-member-account-dialog";
 import { setSalonStatusAction, convertDemoToRealAction } from "../actions";
 import { setActiveSalonAction } from "@/lib/auth/actions";
 
@@ -39,9 +40,11 @@ type SalonRow = Tables<"salons">;
 export function SalonsTable({
   salons,
   locale,
+  onMemberAccountCreated,
 }: {
   salons: SalonRow[];
   locale: string;
+  onMemberAccountCreated: (credentials: { email: string; temporaryPassword: string }) => void;
 }) {
   const t = useTranslations("superadmin.salons.table");
   const tConvert = useTranslations("superadmin.salons.convertDialog");
@@ -60,6 +63,11 @@ export function SalonsTable({
   // confirmación (CLAUDE.md sección 12).
   const [salonToConvert, setSalonToConvert] = useState<SalonRow | null>(null);
   const [salonToEditSlug, setSalonToEditSlug] = useState<SalonRow | null>(null);
+  // Punto 17 del bloque de ajustes: crear cuenta admin/recepcionista para
+  // un salón existente, con el mismo patrón de "key nueva en cada apertura"
+  // que EditSlugDialog/ResetSalonDialog.
+  const [salonToCreateMember, setSalonToCreateMember] = useState<SalonRow | null>(null);
+  const [createMemberDialogKey, setCreateMemberDialogKey] = useState(0);
   // Fuerzan un remount completo de ResetSalonDialog/EditSlugDialog en cada
   // apertura (incluso para el mismo salón dos veces seguidas): es la forma
   // recomendada por React de "resetear todo el estado" sin hacerlo a mano
@@ -205,6 +213,17 @@ export function SalonsTable({
                   <Button
                     variant="ghost"
                     size="sm"
+                    disabled={isPending}
+                    onClick={() => {
+                      setSalonToCreateMember(salon);
+                      setCreateMemberDialogKey((k) => k + 1);
+                    }}
+                  >
+                    {t("createMemberAction")}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
                     className="text-destructive hover:text-destructive"
                     disabled={isPending}
                     onClick={() => {
@@ -279,6 +298,14 @@ export function SalonsTable({
         salon={salonToReset}
         open={salonToReset !== null}
         onOpenChange={(open) => !open && setSalonToReset(null)}
+      />
+
+      <CreateMemberAccountDialog
+        key={createMemberDialogKey}
+        salon={salonToCreateMember}
+        open={salonToCreateMember !== null}
+        onOpenChange={(open) => !open && setSalonToCreateMember(null)}
+        onCreated={onMemberAccountCreated}
       />
     </div>
   );

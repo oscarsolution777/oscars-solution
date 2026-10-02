@@ -47,7 +47,7 @@ export function SalonsView({
         </div>
       </div>
 
-      <SalonsTable salons={salons} locale={locale} />
+      <SalonsTable salons={salons} locale={locale} onMemberAccountCreated={setCredentials} />
 
       <SalonFormPanel
         open={formMode !== null}

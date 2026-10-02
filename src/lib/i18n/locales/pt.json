@@ -1224,6 +1224,7 @@
         "suspendAction": "Suspender",
         "convertAction": "Converter em salão real",
         "editSlugAction": "Editar slug",
+        "createMemberAction": "Criar conta",
         "resetAction": "Reiniciar salão",
         "demoExpiresOn": "Expira em {date}",
         "notDemo": "—",
@@ -1250,6 +1251,21 @@
         "cancel": "Cancelar",
         "errors": {
           "slugTaken": "Esse slug já está em uso por outro salão."
+        }
+      },
+      "createMemberDialog": {
+        "title": "Criar conta para \"{name}\"",
+        "description": "Cria uma conta nova com sua própria senha temporária e a adiciona como admin ou recepcionista deste salão. Para uma nova proprietária, use \"Novo salão\".",
+        "emailLabel": "E-mail",
+        "nameLabel": "Nome completo",
+        "roleLabel": "Função",
+        "roleAdmin": "Administrador",
+        "roleReception": "Recepcionista",
+        "confirm": "Criar conta",
+        "confirmPending": "Criando…",
+        "cancel": "Cancelar",
+        "errors": {
+          "emailTaken": "Já existe uma conta com esse e-mail."
         }
       },
       "resetDialog": {

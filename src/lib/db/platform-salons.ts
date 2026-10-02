@@ -159,9 +159,19 @@ export async function updateSalonSlug(
 // demo) y su membership owner. Mismo patrón que scripts/seed-demo-user.mjs,
 // ahora reutilizable desde una Server Action. Requiere el cliente
 // service-role: no hay flujo de autoregistro para dueñas todavía.
+// `role` se agregó en el punto 17 del bloque de ajustes (crear cuentas
+// admin/recepcionista desde SuperAdmin para un salón existente, reutilizando
+// esta misma función) -- por defecto sigue siendo "owner" para no tocar los
+// dos llamadores existentes (alta de salón real/demo).
 export async function createOwnerAccountForSalon(
   adminClient: SupabaseAdminClient,
-  input: { email: string; fullName: string; locale: string; salonId: string }
+  input: {
+    email: string;
+    fullName: string;
+    locale: string;
+    salonId: string;
+    role?: "owner" | "admin" | "reception";
+  }
 ) {
   const temporaryPassword = crypto.randomUUID().slice(0, 12);
 
@@ -176,7 +186,7 @@ export async function createOwnerAccountForSalon(
   const { error: membershipError } = await adminClient.from("memberships").insert({
     user_id: created.user.id,
     salon_id: input.salonId,
-    role: "owner",
+    role: input.role ?? "owner",
     is_active: true,
   });
   if (membershipError) throw membershipError;

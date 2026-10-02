@@ -1224,6 +1224,7 @@
         "suspendAction": "Sperren",
         "convertAction": "In echten Salon umwandeln",
         "editSlugAction": "Slug bearbeiten",
+        "createMemberAction": "Konto erstellen",
         "resetAction": "Salon zurücksetzen",
         "demoExpiresOn": "Läuft ab am {date}",
         "notDemo": "—",
@@ -1250,6 +1251,21 @@
         "cancel": "Abbrechen",
         "errors": {
           "slugTaken": "Dieser Slug wird bereits von einem anderen Salon verwendet."
+        }
+      },
+      "createMemberDialog": {
+        "title": "Konto für \"{name}\" erstellen",
+        "description": "Erstellt ein neues Konto mit eigenem temporärem Passwort und fügt es als Admin oder Rezeption zu diesem Salon hinzu. Für eine neue Besitzerin stattdessen \"Neuer Salon\" verwenden.",
+        "emailLabel": "E-Mail",
+        "nameLabel": "Vollständiger Name",
+        "roleLabel": "Rolle",
+        "roleAdmin": "Administrator",
+        "roleReception": "Rezeption",
+        "confirm": "Konto erstellen",
+        "confirmPending": "Wird erstellt…",
+        "cancel": "Abbrechen",
+        "errors": {
+          "emailTaken": "Es gibt bereits ein Konto mit dieser E-Mail."
         }
       },
       "resetDialog": {

@@ -7,6 +7,7 @@ import {
   createSalonSchema,
   createDemoSalonSchema,
   updateSalonSlugSchema,
+  createMemberAccountSchema,
   parseDemoDurationDays,
 } from "@/lib/validations/platform-salon";
 import {
@@ -221,6 +222,60 @@ export async function updateSalonSlugAction(
       return { ok: false, error: "superadmin.salons.errors.slugTaken" };
     }
     console.error("[updateSalonSlugAction] failed to update slug", error);
+    return { ok: false, error: "superadmin.salons.errors.generic" };
+  }
+}
+
+// Punto 17 del bloque de ajustes: crea una cuenta admin/recepcionista para
+// un salón que ya existe, con un clic desde SuperAdmin -- antes esto era
+// 100% manual (Supabase/SQL editor). Reutiliza createOwnerAccountForSalon
+// con role explícito en vez de "owner" (sección 6 "Acceso de soporte del
+// desarrollador" ya decidió que no hay un cuarto rol ni invitaciones por
+// email para dueñas -- esto es una herramienta de soporte de Oscar, no un
+// flujo de autoservicio nuevo).
+export async function createMemberAccountAction(
+  salonId: string,
+  formData: FormData
+): Promise<ActionResult<{ email: string; temporaryPassword: string }>> {
+  const access = await requirePlatformAdminAccess();
+  if (!access.ok) return access;
+
+  const parsed = createMemberAccountSchema.safeParse({
+    email: formData.get("email"),
+    fullName: formData.get("fullName"),
+    role: formData.get("role"),
+  });
+  if (!parsed.success) {
+    return { ok: false, error: "superadmin.salons.errors.invalidInput" };
+  }
+
+  try {
+    const supabase = await createClient();
+    const { data: salon, error: salonError } = await supabase
+      .from("salons")
+      .select("default_locale")
+      .eq("id", salonId)
+      .single();
+    if (salonError || !salon) {
+      return { ok: false, error: "superadmin.salons.errors.generic" };
+    }
+
+    const adminClient = createAdminClient();
+    const { temporaryPassword } = await createOwnerAccountForSalon(adminClient, {
+      email: parsed.data.email,
+      fullName: parsed.data.fullName,
+      locale: salon.default_locale,
+      salonId,
+      role: parsed.data.role,
+    });
+
+    return { ok: true, data: { email: parsed.data.email, temporaryPassword } };
+  } catch (error) {
+    console.error("[createMemberAccountAction] failed to create member account", error);
+    const message = error instanceof Error ? error.message.toLowerCase() : "";
+    if (message.includes("already been registered") || message.includes("already registered")) {
+      return { ok: false, error: "superadmin.salons.createMemberDialog.errors.emailTaken" };
+    }
     return { ok: false, error: "superadmin.salons.errors.generic" };
   }
 }

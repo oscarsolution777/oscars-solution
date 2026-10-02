@@ -50,3 +50,16 @@ export function parseDemoDurationDays(value: string): number {
 export const updateSalonSlugSchema = z.object({
   slug: baseSalonFields.slug,
 });
+
+// Punto 17 del bloque de ajustes: Oscar crea desde SuperAdmin la cuenta de
+// un admin/recepcionista para un salón existente, en vez de hacerlo a mano
+// en Supabase cada vez. No incluye "owner" aquí -- dar de alta al primer
+// owner de un salón ya tiene su propio flujo (createSalonSchema/
+// createDemoSalonSchema); esto es para agregar una segunda cuenta a un
+// salón que ya existe.
+export const createMemberAccountSchema = z.object({
+  email: z.string().trim().min(1).email(),
+  fullName: z.string().trim().min(1).max(120),
+  role: z.enum(["admin", "reception"]),
+});
+export type CreateMemberAccountInput = z.infer<typeof createMemberAccountSchema>;

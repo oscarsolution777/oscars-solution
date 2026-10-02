@@ -1224,6 +1224,7 @@
         "suspendAction": "Suspend",
         "convertAction": "Convert to real salon",
         "editSlugAction": "Edit slug",
+        "createMemberAction": "Create account",
         "resetAction": "Reset salon",
         "demoExpiresOn": "Expires {date}",
         "notDemo": "—",
@@ -1250,6 +1251,21 @@
         "cancel": "Cancel",
         "errors": {
           "slugTaken": "That slug is already used by another salon."
+        }
+      },
+      "createMemberDialog": {
+        "title": "Create account for \"{name}\"",
+        "description": "Creates a new account with its own temporary password and adds it as admin or reception for this salon. For a new owner, use \"New salon\" instead.",
+        "emailLabel": "Email",
+        "nameLabel": "Full name",
+        "roleLabel": "Role",
+        "roleAdmin": "Admin",
+        "roleReception": "Reception",
+        "confirm": "Create account",
+        "confirmPending": "Creating…",
+        "cancel": "Cancel",
+        "errors": {
+          "emailTaken": "An account with that email already exists."
         }
       },
       "resetDialog": {
