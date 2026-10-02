@@ -5,6 +5,7 @@ import type { BusinessMetrics } from "../types";
 import { buildAnalyzeBusinessPrompt } from "../prompts/analyze-business";
 import { buildRecommendationsPrompt } from "../prompts/recommendations";
 import { buildChatSystemPrompt } from "../prompts/chat-system";
+import { buildHelpSystemPrompt } from "../prompts/help-system";
 import { parseJsonArray } from "../parse-json";
 import { recommendationsResponseSchema } from "@/lib/validations/ai";
 
@@ -107,5 +108,19 @@ export const openaiProvider: AiProvider = {
       de: "Ich konnte deine Frage nicht vollständig bearbeiten. Versuche es umformuliert.",
     };
     return languageFallback[locale] ?? languageFallback.es;
+  },
+
+  async helpChat({ history, userMessage, locale }) {
+    const completion = await getClient().chat.completions.create({
+      model: process.env.AI_MODEL ?? DEFAULT_MODEL,
+      messages: [
+        { role: "system", content: buildHelpSystemPrompt(locale) },
+        ...history.map(
+          (m): OpenAI.Chat.ChatCompletionMessageParam => ({ role: m.role, content: m.content })
+        ),
+        { role: "user", content: userMessage },
+      ],
+    });
+    return (completion.choices[0]?.message?.content ?? "").trim();
   },
 };

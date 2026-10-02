@@ -53,6 +53,16 @@ export interface AiProvider {
     tools: AiChatToolDeclaration[];
     executeTool: AiExecuteTool;
   }): Promise<string>;
+  // Asistente de ayuda sobre el funcionamiento del sistema (puntos 3/5 del
+  // bloque de ajustes posterior a Fase 10) -- deliberadamente separado de
+  // chat(): nunca ve datos de ningún salón, así que no necesita
+  // salonContext ni tools/executeTool, solo su propia base de conocimiento
+  // estática (prompts/help-system.ts).
+  helpChat(input: {
+    history: AiChatMessage[];
+    userMessage: string;
+    locale: string;
+  }): Promise<string>;
 }
 
 // Se lanza cuando falta la API key del proveedor seleccionado por

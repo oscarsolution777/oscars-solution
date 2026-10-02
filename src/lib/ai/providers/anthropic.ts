@@ -5,6 +5,7 @@ import type { BusinessMetrics } from "../types";
 import { buildAnalyzeBusinessPrompt } from "../prompts/analyze-business";
 import { buildRecommendationsPrompt } from "../prompts/recommendations";
 import { buildChatSystemPrompt } from "../prompts/chat-system";
+import { buildHelpSystemPrompt } from "../prompts/help-system";
 import { parseJsonArray } from "../parse-json";
 import { recommendationsResponseSchema } from "@/lib/validations/ai";
 
@@ -125,5 +126,18 @@ export const anthropicProvider: AiProvider = {
       de: "Ich konnte deine Frage nicht vollständig bearbeiten. Versuche es umformuliert.",
     };
     return languageFallback[locale] ?? languageFallback.es;
+  },
+
+  async helpChat({ history, userMessage, locale }) {
+    const message = await getClient().messages.create({
+      model: process.env.AI_MODEL ?? DEFAULT_MODEL,
+      max_tokens: 1024,
+      system: buildHelpSystemPrompt(locale),
+      messages: [
+        ...history.map((m): Anthropic.MessageParam => ({ role: m.role, content: m.content })),
+        { role: "user", content: userMessage },
+      ],
+    });
+    return extractText(message);
   },
 };

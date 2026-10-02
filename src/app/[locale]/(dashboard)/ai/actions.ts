@@ -180,3 +180,39 @@ export async function sendChatMessageAction(
     return { ok: false, error: "ai.errors.providerFailed" };
   }
 }
+
+// Asistente de ayuda sobre el funcionamiento del sistema (puntos 3/5 del
+// bloque de ajustes posterior a Fase 10) -- a diferencia del chat de datos
+// de arriba, nunca toca Supabase más allá del guard de acceso: no hay
+// salonContext, tools ni persistencia en ai_chat_messages (cero dato
+// personal en juego, así que no aplica el mismo límite de 20 msj/hora que
+// protege ese chat). El historial vive solo en el estado del cliente
+// (HelpChat), nunca se recarga desde el servidor.
+export async function sendHelpChatMessageAction(
+  rawMessage: string,
+  history: { role: "user" | "assistant"; content: string }[],
+  locale: string
+): Promise<ActionResult<string>> {
+  const access = await requireAiAccess();
+  if (!access.ok) return access;
+
+  const parsed = chatMessageSchema.safeParse(rawMessage);
+  if (!parsed.success) {
+    return { ok: false, error: "ai.chat.errors.invalidInput" };
+  }
+
+  try {
+    const provider = getAiProvider();
+    const replyText = await provider.helpChat({
+      history,
+      userMessage: parsed.data,
+      locale,
+    });
+    return { ok: true, data: replyText };
+  } catch (error) {
+    if (error instanceof AiNotConfiguredError) {
+      return { ok: false, error: "ai.errors.notConfigured" };
+    }
+    return { ok: false, error: "ai.errors.providerFailed" };
+  }
+}

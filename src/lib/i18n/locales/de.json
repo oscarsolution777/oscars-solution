@@ -1003,6 +1003,10 @@
   "ai": {
     "title": "KI-Assistent",
     "subtitle": "Analyse und Empfehlungen basierend auf der Aktivität der letzten 30 Tage.",
+    "tabs": {
+      "business": "Geschäft",
+      "help": "Hilfe"
+    },
     "regenerateButton": "Neu generieren",
     "regenerating": "Wird generiert...",
     "analysisTitle": "Geschäftsanalyse",
@@ -1041,6 +1045,17 @@
       "errors": {
         "invalidInput": "Schreib eine Frage, bevor du sendest.",
         "rateLimited": "Du hast das stündliche Nachrichtenlimit erreicht. Versuche es später erneut.",
+        "generic": "Deine Frage konnte nicht beantwortet werden. Bitte erneut versuchen."
+      }
+    },
+    "help": {
+      "title": "Hilfe-Assistent",
+      "subtitle": "Fragen zur Funktionsweise des Systems -- verwendet nie die echten Daten deines Salons.",
+      "placeholder": "Z. B.: Wie bearbeite ich einen bereits geplanten Termin?",
+      "sending": "Denkt nach...",
+      "emptyState": "Frag, wie du einen beliebigen Bildschirm des Systems benutzt. Dieser Assistent sieht deine echten Daten nicht -- dafür ist der andere Chat oben da.",
+      "errors": {
+        "invalidInput": "Schreib eine Frage, bevor du sendest.",
         "generic": "Deine Frage konnte nicht beantwortet werden. Bitte erneut versuchen."
       }
     }

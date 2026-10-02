@@ -1003,6 +1003,10 @@
   "ai": {
     "title": "IA - Assistant",
     "subtitle": "Analyse et recommandations basées sur l'activité des 30 derniers jours.",
+    "tabs": {
+      "business": "Activité",
+      "help": "Aide"
+    },
     "regenerateButton": "Régénérer",
     "regenerating": "Génération...",
     "analysisTitle": "Analyse du salon",
@@ -1041,6 +1045,17 @@
       "errors": {
         "invalidInput": "Écris une question avant d'envoyer.",
         "rateLimited": "Tu as atteint la limite de messages par heure. Réessaie plus tard.",
+        "generic": "Impossible de répondre à ta question. Réessaie."
+      }
+    },
+    "help": {
+      "title": "Assistant d'aide",
+      "subtitle": "Questions sur le fonctionnement du système -- n'utilise jamais les données réelles de ton salon.",
+      "placeholder": "Ex : Comment je modifie un rendez-vous déjà programmé ?",
+      "sending": "Réflexion...",
+      "emptyState": "Demande comment utiliser n'importe quel écran du système. Cet assistant ne voit pas tes données réelles -- c'est à ça que sert l'autre chat, au-dessus.",
+      "errors": {
+        "invalidInput": "Écris une question avant d'envoyer.",
         "generic": "Impossible de répondre à ta question. Réessaie."
       }
     }

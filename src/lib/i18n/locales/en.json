@@ -1003,6 +1003,10 @@
   "ai": {
     "title": "AI Assistant",
     "subtitle": "Analysis and recommendations based on the last 30 days of activity.",
+    "tabs": {
+      "business": "Business",
+      "help": "Help"
+    },
     "regenerateButton": "Regenerate",
     "regenerating": "Generating...",
     "analysisTitle": "Business analysis",
@@ -1041,6 +1045,17 @@
       "errors": {
         "invalidInput": "Type a question before sending.",
         "rateLimited": "You've reached the hourly message limit. Try again later.",
+        "generic": "Couldn't answer your question. Please try again."
+      }
+    },
+    "help": {
+      "title": "Help assistant",
+      "subtitle": "Questions about how the system works -- never uses your salon's real data.",
+      "placeholder": "E.g.: How do I edit an appointment that's already scheduled?",
+      "sending": "Thinking...",
+      "emptyState": "Ask how to use any screen in the system. This assistant can't see your real data -- that's what the other chat above is for.",
+      "errors": {
+        "invalidInput": "Type a question before sending.",
         "generic": "Couldn't answer your question. Please try again."
       }
     }

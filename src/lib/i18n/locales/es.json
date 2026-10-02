@@ -1003,6 +1003,10 @@
   "ai": {
     "title": "IA - Asistente",
     "subtitle": "Análisis y recomendaciones basados en la actividad de los últimos 30 días.",
+    "tabs": {
+      "business": "Negocio",
+      "help": "Ayuda"
+    },
     "regenerateButton": "Regenerar",
     "regenerating": "Generando...",
     "analysisTitle": "Análisis del negocio",
@@ -1041,6 +1045,17 @@
       "errors": {
         "invalidInput": "Escribe una pregunta antes de enviar.",
         "rateLimited": "Alcanzaste el límite de mensajes por hora. Intenta de nuevo más tarde.",
+        "generic": "No se pudo responder tu pregunta. Intenta de nuevo."
+      }
+    },
+    "help": {
+      "title": "Asistente de ayuda",
+      "subtitle": "Preguntas sobre cómo funciona el sistema -- nunca usa datos reales de tu salón.",
+      "placeholder": "Ej: ¿Cómo edito una cita que ya está programada?",
+      "sending": "Pensando...",
+      "emptyState": "Pregunta cómo usar cualquier pantalla del sistema. Este asistente no ve tus datos reales -- para eso está el otro chat, arriba.",
+      "errors": {
+        "invalidInput": "Escribe una pregunta antes de enviar.",
         "generic": "No se pudo responder tu pregunta. Intenta de nuevo."
       }
     }
