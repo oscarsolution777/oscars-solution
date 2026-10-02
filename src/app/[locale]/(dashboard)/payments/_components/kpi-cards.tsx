@@ -4,17 +4,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { formatMoney } from "@/lib/utils/money";
 
 export function KpiCards({
-  monthlyIncomeCents,
+  incomeInPeriodCents,
   pendingCount,
   averagePaymentCents,
-  refundedThisMonthCents,
+  refundedInPeriodCents,
+  periodLabel,
   currency,
   locale,
 }: {
-  monthlyIncomeCents: number;
+  incomeInPeriodCents: number;
   pendingCount: number;
   averagePaymentCents: number;
-  refundedThisMonthCents: number;
+  refundedInPeriodCents: number;
+  periodLabel: string;
   currency: string;
   locale: string;
 }) {
@@ -25,8 +27,8 @@ export function KpiCards({
       icon: TrendingUp,
       iconClass: "bg-emerald-100 text-emerald-600",
       label: t("monthlyIncome"),
-      value: formatMoney(monthlyIncomeCents, currency, locale),
-      caption: t("thisMonth"),
+      value: formatMoney(incomeInPeriodCents, currency, locale),
+      caption: periodLabel,
     },
     {
       icon: Clock,
@@ -40,14 +42,14 @@ export function KpiCards({
       iconClass: "bg-rose-100 text-rose-600",
       label: t("average"),
       value: formatMoney(averagePaymentCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
     {
       icon: RotateCcw,
       iconClass: "bg-violet-100 text-violet-600",
       label: t("refunded"),
-      value: formatMoney(refundedThisMonthCents, currency, locale),
-      caption: t("thisMonth"),
+      value: formatMoney(refundedInPeriodCents, currency, locale),
+      caption: periodLabel,
     },
   ];
 

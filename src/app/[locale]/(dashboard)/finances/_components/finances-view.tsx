@@ -3,7 +3,9 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PeriodSelector } from "@/components/shared/period-selector";
 import type { Tables } from "@/types/database";
+import type { Period } from "@/lib/utils/period";
 import type { ExpenseCategorySlice, FinanceMonthPoint } from "@/lib/reports/aggregations";
 import { SummaryCards } from "./summary-cards";
 import { MonthlyTrendChart } from "./monthly-trend-chart";
@@ -23,6 +25,8 @@ export function FinancesView({
   payouts,
   staff,
   suppliers,
+  period,
+  periodLabel,
   summary,
   expenseCategories,
   monthlyTrend,
@@ -33,6 +37,8 @@ export function FinancesView({
   payouts: StaffPayoutRow[];
   staff: StaffRow[];
   suppliers: SupplierRow[];
+  period: Period;
+  periodLabel: string;
   summary: {
     incomeCents: number;
     expensesCents: number;
@@ -72,11 +78,16 @@ export function FinancesView({
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <PeriodSelector period={period} namespace="finances.period" />
+      </div>
+
       <SummaryCards
         incomeCents={summary.incomeCents}
         expensesCents={summary.expensesCents}
         payoutsCents={summary.payoutsCents}
         balanceCents={summary.balanceCents}
+        periodLabel={periodLabel}
         currency={currency}
         locale={locale}
       />

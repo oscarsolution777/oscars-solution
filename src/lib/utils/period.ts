@@ -6,6 +6,13 @@
 
 export type PeriodPreset = "thisMonth" | "lastMonth" | "last3Months" | "custom";
 
+// Forma de los searchParams que cualquier page.tsx con selector de periodo
+// recibe (?preset=&from=&to=) -- tipo compartido para no repetir el inline
+// `{ preset?: string; from?: string; to?: string }` en cada módulo
+// (Dashboard, Reportes, Inventario, Solicitudes, Clientes, Pagos, Cuadre de
+// caja, Finanzas).
+export type PeriodSearchParams = { preset?: string; from?: string; to?: string };
+
 export interface Period {
   from: string; // yyyy-MM-dd, inclusive
   to: string; // yyyy-MM-dd, inclusive
@@ -52,7 +59,7 @@ export function getPresetRange(
 }
 
 export function resolvePeriod(
-  searchParams: { preset?: string; from?: string; to?: string } | undefined,
+  searchParams: PeriodSearchParams | undefined,
   todayInSalonTz: string
 ): Period {
   const requested = searchParams?.preset;

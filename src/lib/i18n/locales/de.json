@@ -361,11 +361,17 @@
   },
   "clients": {
     "createButton": "Neuer Kunde",
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
+    },
     "kpis": {
       "total": "Kunden gesamt",
       "active": "Aktiv",
-      "newThisMonth": "Neu diesen Monat",
-      "thisMonth": "Diesen Monat",
+      "newInPeriod": "Neu im Zeitraum",
       "withHistory": "Mit Besuchshistorie",
       "sinceFirstVisit": "Seit dem ersten Besuch",
       "totalSpent": "Gesamtausgaben",
@@ -653,6 +659,13 @@
   },
   "payments": {
     "createButton": "Neue Zahlung",
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
+    },
     "charts": {
       "incomeTrend": {
         "title": "Umsatzentwicklung",
@@ -661,12 +674,11 @@
       },
       "methodBreakdown": {
         "title": "Zahlungen nach Zahlungsmethode",
-        "emptyTitle": "Diesen Monat keine bezahlten Zahlungen"
+        "emptyTitle": "Keine bezahlten Zahlungen in diesem Zeitraum"
       }
     },
     "kpis": {
       "monthlyIncome": "Einnahmen",
-      "thisMonth": "Diesen Monat",
       "pending": "Ausstehende Zahlungen",
       "pendingCaption": "Zu kassieren",
       "average": "Durchschnittliche Zahlung",
@@ -724,6 +736,13 @@
   },
   "cashClosures": {
     "createButton": "Neuer Kassenabschluss",
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
+    },
     "charts": {
       "expectedVsCounted": {
         "title": "Erwarteter vs. gezählter Bargeldbestand",
@@ -734,7 +753,6 @@
     },
     "kpis": {
       "closuresThisMonth": "Erfasste Abschlüsse",
-      "thisMonth": "Diesen Monat",
       "accumulatedDifference": "Kumulierte Differenz"
     },
     "table": {
@@ -775,6 +793,13 @@
       "forbiddenTitle": "Kein Zugriff",
       "forbidden": "Nur die Salonbesitzerin kann diesen Bereich sehen."
     },
+    "period": {
+      "thisMonth": "Diesen Monat",
+      "lastMonth": "Letzten Monat",
+      "last3Months": "Letzte 3 Monate",
+      "custom": "Benutzerdefiniert",
+      "apply": "Anwenden"
+    },
     "charts": {
       "monthlyTrend": {
         "title": "Einnahmen, Ausgaben und Gehälter pro Monat",
@@ -782,15 +807,14 @@
       },
       "expenseCategory": {
         "title": "Ausgaben nach Kategorie",
-        "emptyTitle": "Diesen Monat keine Ausgaben erfasst"
+        "emptyTitle": "Keine Ausgaben in diesem Zeitraum erfasst"
       }
     },
     "summary": {
       "income": "Einnahmen",
       "expenses": "Ausgaben",
       "payouts": "Gehaltsabrechnung",
-      "balance": "Saldo",
-      "thisMonth": "Diesen Monat"
+      "balance": "Saldo"
     },
     "tabs": {
       "expenses": "Ausgaben",

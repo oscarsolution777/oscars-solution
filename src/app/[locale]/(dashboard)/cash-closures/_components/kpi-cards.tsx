@@ -4,13 +4,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { formatMoney } from "@/lib/utils/money";
 
 export function KpiCards({
-  closuresThisMonth,
+  closuresInPeriod,
   accumulatedDifferenceCents,
+  periodLabel,
   currency,
   locale,
 }: {
-  closuresThisMonth: number;
+  closuresInPeriod: number;
   accumulatedDifferenceCents: number;
+  periodLabel: string;
   currency: string;
   locale: string;
 }) {
@@ -21,8 +23,8 @@ export function KpiCards({
       icon: CalendarCheck,
       iconClass: "bg-emerald-100 text-emerald-600",
       label: t("closuresThisMonth"),
-      value: closuresThisMonth,
-      caption: t("thisMonth"),
+      value: closuresInPeriod,
+      caption: periodLabel,
     },
     {
       icon: Scale,
@@ -32,7 +34,7 @@ export function KpiCards({
           : "bg-amber-100 text-amber-600",
       label: t("accumulatedDifference"),
       value: formatMoney(accumulatedDifferenceCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
   ];
 

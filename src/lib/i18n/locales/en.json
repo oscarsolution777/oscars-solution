@@ -361,11 +361,17 @@
   },
   "clients": {
     "createButton": "New client",
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
+    },
     "kpis": {
       "total": "Total clients",
       "active": "Active",
-      "newThisMonth": "New this month",
-      "thisMonth": "This month",
+      "newInPeriod": "New in period",
       "withHistory": "With visit history",
       "sinceFirstVisit": "Since first visit",
       "totalSpent": "Total spent",
@@ -653,6 +659,13 @@
   },
   "payments": {
     "createButton": "New charge",
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
+    },
     "charts": {
       "incomeTrend": {
         "title": "Revenue trend",
@@ -661,12 +674,11 @@
       },
       "methodBreakdown": {
         "title": "Charges by payment method",
-        "emptyTitle": "No paid charges this month"
+        "emptyTitle": "No paid charges in this period"
       }
     },
     "kpis": {
       "monthlyIncome": "Income",
-      "thisMonth": "This month",
       "pending": "Pending charges",
       "pendingCaption": "To be collected",
       "average": "Average charge",
@@ -724,6 +736,13 @@
   },
   "cashClosures": {
     "createButton": "New closure",
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
+    },
     "charts": {
       "expectedVsCounted": {
         "title": "Expected vs. counted cash",
@@ -734,7 +753,6 @@
     },
     "kpis": {
       "closuresThisMonth": "Closures recorded",
-      "thisMonth": "This month",
       "accumulatedDifference": "Accumulated difference"
     },
     "table": {
@@ -775,6 +793,13 @@
       "forbiddenTitle": "No access",
       "forbidden": "Only the salon owner can view this section."
     },
+    "period": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3Months": "Last 3 months",
+      "custom": "Custom",
+      "apply": "Apply"
+    },
     "charts": {
       "monthlyTrend": {
         "title": "Income, expenses and payouts by month",
@@ -782,15 +807,14 @@
       },
       "expenseCategory": {
         "title": "Expenses by category",
-        "emptyTitle": "No expenses recorded this month"
+        "emptyTitle": "No expenses recorded in this period"
       }
     },
     "summary": {
       "income": "Income",
       "expenses": "Expenses",
       "payouts": "Payroll",
-      "balance": "Balance",
-      "thisMonth": "This month"
+      "balance": "Balance"
     },
     "tabs": {
       "expenses": "Expenses",

@@ -361,11 +361,17 @@
   },
   "clients": {
     "createButton": "Nouveau client",
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
+    },
     "kpis": {
       "total": "Total des clients",
       "active": "Actifs",
-      "newThisMonth": "Nouveaux ce mois-ci",
-      "thisMonth": "Ce mois-ci",
+      "newInPeriod": "Nouveaux sur la période",
       "withHistory": "Avec historique de visites",
       "sinceFirstVisit": "Depuis la première visite",
       "totalSpent": "Dépense totale cumulée",
@@ -653,6 +659,13 @@
   },
   "payments": {
     "createButton": "Nouveau paiement",
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
+    },
     "charts": {
       "incomeTrend": {
         "title": "Évolution des revenus",
@@ -661,12 +674,11 @@
       },
       "methodBreakdown": {
         "title": "Paiements par mode de règlement",
-        "emptyTitle": "Aucun paiement encaissé ce mois-ci"
+        "emptyTitle": "Aucun paiement encaissé sur cette période"
       }
     },
     "kpis": {
       "monthlyIncome": "Revenus",
-      "thisMonth": "Ce mois-ci",
       "pending": "Paiements en attente",
       "pendingCaption": "À encaisser",
       "average": "Paiement moyen",
@@ -724,6 +736,13 @@
   },
   "cashClosures": {
     "createButton": "Nouvelle clôture",
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
+    },
     "charts": {
       "expectedVsCounted": {
         "title": "Espèces attendues vs. comptées",
@@ -734,7 +753,6 @@
     },
     "kpis": {
       "closuresThisMonth": "Clôtures enregistrées",
-      "thisMonth": "Ce mois-ci",
       "accumulatedDifference": "Écart cumulé"
     },
     "table": {
@@ -775,6 +793,13 @@
       "forbiddenTitle": "Accès refusé",
       "forbidden": "Seule la propriétaire du salon peut voir cette section."
     },
+    "period": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last3Months": "3 derniers mois",
+      "custom": "Personnalisé",
+      "apply": "Appliquer"
+    },
     "charts": {
       "monthlyTrend": {
         "title": "Revenus, dépenses et salaires par mois",
@@ -782,15 +807,14 @@
       },
       "expenseCategory": {
         "title": "Dépenses par catégorie",
-        "emptyTitle": "Aucune dépense enregistrée ce mois-ci"
+        "emptyTitle": "Aucune dépense enregistrée sur cette période"
       }
     },
     "summary": {
       "income": "Revenus",
       "expenses": "Dépenses",
       "payouts": "Paie",
-      "balance": "Solde",
-      "thisMonth": "Ce mois-ci"
+      "balance": "Solde"
     },
     "tabs": {
       "expenses": "Dépenses",

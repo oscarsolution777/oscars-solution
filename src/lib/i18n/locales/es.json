@@ -361,11 +361,17 @@
   },
   "clients": {
     "createButton": "Nuevo cliente",
+    "period": {
+      "thisMonth": "Este mes",
+      "lastMonth": "Mes pasado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
+    },
     "kpis": {
       "total": "Total de clientes",
       "active": "Activos",
-      "newThisMonth": "Nuevos este mes",
-      "thisMonth": "Este mes",
+      "newInPeriod": "Nuevos en el periodo",
       "withHistory": "Con historial de visitas",
       "sinceFirstVisit": "Desde la primera visita",
       "totalSpent": "Gasto total acumulado",
@@ -653,6 +659,13 @@
   },
   "payments": {
     "createButton": "Nuevo cobro",
+    "period": {
+      "thisMonth": "Este mes",
+      "lastMonth": "Mes pasado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
+    },
     "charts": {
       "incomeTrend": {
         "title": "Tendencia de ingresos",
@@ -661,12 +674,11 @@
       },
       "methodBreakdown": {
         "title": "Cobros por método de pago",
-        "emptyTitle": "Sin cobros pagados este mes"
+        "emptyTitle": "Sin cobros pagados en este periodo"
       }
     },
     "kpis": {
       "monthlyIncome": "Ingresos",
-      "thisMonth": "Este mes",
       "pending": "Cobros pendientes",
       "pendingCaption": "Por cobrar",
       "average": "Cobro promedio",
@@ -724,6 +736,13 @@
   },
   "cashClosures": {
     "createButton": "Nuevo cuadre",
+    "period": {
+      "thisMonth": "Este mes",
+      "lastMonth": "Mes pasado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
+    },
     "charts": {
       "expectedVsCounted": {
         "title": "Efectivo esperado vs. contado",
@@ -734,7 +753,6 @@
     },
     "kpis": {
       "closuresThisMonth": "Cuadres registrados",
-      "thisMonth": "Este mes",
       "accumulatedDifference": "Diferencia acumulada"
     },
     "table": {
@@ -775,6 +793,13 @@
       "forbiddenTitle": "Sin acceso",
       "forbidden": "Solo la propietaria del salón puede ver esta sección."
     },
+    "period": {
+      "thisMonth": "Este mes",
+      "lastMonth": "Mes pasado",
+      "last3Months": "Últimos 3 meses",
+      "custom": "Personalizado",
+      "apply": "Aplicar"
+    },
     "charts": {
       "monthlyTrend": {
         "title": "Ingresos, gastos y nóminas por mes",
@@ -782,15 +807,14 @@
       },
       "expenseCategory": {
         "title": "Gastos por categoría",
-        "emptyTitle": "Sin gastos registrados este mes"
+        "emptyTitle": "Sin gastos registrados en este periodo"
       }
     },
     "summary": {
       "income": "Ingresos",
       "expenses": "Gastos",
       "payouts": "Nóminas",
-      "balance": "Balance",
-      "thisMonth": "Este mes"
+      "balance": "Balance"
     },
     "tabs": {
       "expenses": "Gastos",

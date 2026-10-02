@@ -5,7 +5,9 @@ import { Plus, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PeriodSelector } from "@/components/shared/period-selector";
 import type { Tables } from "@/types/database";
+import type { Period } from "@/lib/utils/period";
 import { KpiCards } from "./kpi-cards";
 import { ClientsTable } from "./clients-table";
 import { ClientDetailPanel } from "./client-detail-panel";
@@ -15,15 +17,19 @@ type ClientRow = Tables<"clients">;
 
 export function ClientsView({
   clients,
+  period,
+  periodLabel,
   kpis,
   currency,
   timezone,
   locale,
 }: {
   clients: ClientRow[];
+  period: Period;
+  periodLabel: string;
   kpis: {
     total: number;
-    newThisMonth: number;
+    newInPeriod: number;
     withHistory: number;
     totalSpentCents: number;
   };
@@ -60,11 +66,16 @@ export function ClientsView({
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <PeriodSelector period={period} namespace="clients.period" />
+      </div>
+
       <KpiCards
         total={kpis.total}
-        newThisMonth={kpis.newThisMonth}
+        newInPeriod={kpis.newInPeriod}
         withHistory={kpis.withHistory}
         totalSpentCents={kpis.totalSpentCents}
+        periodLabel={periodLabel}
         currency={currency}
         locale={locale}
       />

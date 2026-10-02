@@ -5,16 +5,18 @@ import { formatMoney } from "@/lib/utils/money";
 
 export function KpiCards({
   total,
-  newThisMonth,
+  newInPeriod,
   withHistory,
   totalSpentCents,
+  periodLabel,
   currency,
   locale,
 }: {
   total: number;
-  newThisMonth: number;
+  newInPeriod: number;
   withHistory: number;
   totalSpentCents: number;
+  periodLabel: string;
   currency: string;
   locale: string;
 }) {
@@ -31,9 +33,9 @@ export function KpiCards({
     {
       icon: UserPlus,
       iconClass: "bg-violet-100 text-violet-600",
-      label: t("newThisMonth"),
-      value: newThisMonth,
-      caption: t("thisMonth"),
+      label: t("newInPeriod"),
+      value: newInPeriod,
+      caption: periodLabel,
     },
     {
       icon: History,

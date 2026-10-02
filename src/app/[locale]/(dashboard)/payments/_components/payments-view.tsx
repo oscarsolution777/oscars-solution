@@ -4,7 +4,9 @@ import { useMemo, useState } from "react";
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { PeriodSelector } from "@/components/shared/period-selector";
 import type { Tables } from "@/types/database";
+import type { Period } from "@/lib/utils/period";
 import type { SalesBucket, PaymentMethodSlice } from "@/lib/reports/aggregations";
 import { KpiCards } from "./kpi-cards";
 import { IncomeTrendChart } from "./income-trend-chart";
@@ -20,6 +22,8 @@ export function PaymentsView({
   clients,
   incomeTrend,
   methodBreakdown,
+  period,
+  periodLabel,
   kpis,
   currency,
   timezone,
@@ -29,11 +33,13 @@ export function PaymentsView({
   clients: ClientRow[];
   incomeTrend: SalesBucket[];
   methodBreakdown: PaymentMethodSlice[];
+  period: Period;
+  periodLabel: string;
   kpis: {
-    monthlyIncomeCents: number;
+    incomeInPeriodCents: number;
     pendingCount: number;
     averagePaymentCents: number;
-    refundedThisMonthCents: number;
+    refundedInPeriodCents: number;
   };
   currency: string;
   timezone: string;
@@ -56,11 +62,16 @@ export function PaymentsView({
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <PeriodSelector period={period} namespace="payments.period" />
+      </div>
+
       <KpiCards
-        monthlyIncomeCents={kpis.monthlyIncomeCents}
+        incomeInPeriodCents={kpis.incomeInPeriodCents}
         pendingCount={kpis.pendingCount}
         averagePaymentCents={kpis.averagePaymentCents}
-        refundedThisMonthCents={kpis.refundedThisMonthCents}
+        refundedInPeriodCents={kpis.refundedInPeriodCents}
+        periodLabel={periodLabel}
         currency={currency}
         locale={locale}
       />

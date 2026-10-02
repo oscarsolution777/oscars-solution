@@ -8,6 +8,7 @@ export function SummaryCards({
   expensesCents,
   payoutsCents,
   balanceCents,
+  periodLabel,
   currency,
   locale,
 }: {
@@ -15,6 +16,7 @@ export function SummaryCards({
   expensesCents: number;
   payoutsCents: number;
   balanceCents: number;
+  periodLabel: string;
   currency: string;
   locale: string;
 }) {
@@ -26,21 +28,21 @@ export function SummaryCards({
       iconClass: "bg-emerald-100 text-emerald-600",
       label: t("income"),
       value: formatMoney(incomeCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
     {
       icon: TrendingDown,
       iconClass: "bg-rose-100 text-rose-600",
       label: t("expenses"),
       value: formatMoney(expensesCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
     {
       icon: Users,
       iconClass: "bg-violet-100 text-violet-600",
       label: t("payouts"),
       value: formatMoney(payoutsCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
     {
       icon: Scale,
@@ -48,7 +50,7 @@ export function SummaryCards({
         balanceCents >= 0 ? "bg-emerald-100 text-emerald-600" : "bg-rose-100 text-rose-600",
       label: t("balance"),
       value: formatMoney(balanceCents, currency, locale),
-      caption: t("thisMonth"),
+      caption: periodLabel,
     },
   ];
 
