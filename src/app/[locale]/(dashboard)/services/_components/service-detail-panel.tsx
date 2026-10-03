@@ -1,6 +1,6 @@
 "use client";
 
-import { Pencil, Tag, CircleDollarSign, Clock } from "lucide-react";
+import { Pencil, Tag, CircleDollarSign, Clock, AlertTriangle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
   Sheet,
@@ -31,6 +31,7 @@ export function ServiceDetailPanel({
   currency,
   locale,
   canWrite,
+  outOfStock,
   onEdit,
   onEditProducts,
 }: {
@@ -42,6 +43,7 @@ export function ServiceDetailPanel({
   currency: string;
   locale: string;
   canWrite: boolean;
+  outOfStock: boolean;
   onEdit: () => void;
   onEditProducts: () => void;
 }) {
@@ -81,6 +83,16 @@ export function ServiceDetailPanel({
 
           {service.description && (
             <p className="text-sm text-text-secondary">{service.description}</p>
+          )}
+
+          {outOfStock && (
+            <div
+              role="alert"
+              className="flex items-center gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-2.5 text-sm text-destructive"
+            >
+              <AlertTriangle size={16} className="shrink-0" />
+              {t("outOfStockAlert")}
+            </div>
           )}
 
           <dl className="space-y-3">
@@ -130,14 +142,26 @@ export function ServiceDetailPanel({
             </div>
             {assignedProducts.length > 0 ? (
               <ul className="space-y-1 text-sm text-text-secondary">
-                {assignedProducts.map(({ product, qty }) => (
-                  <li key={product.id} className="flex items-center justify-between">
-                    <span>{product.name}</span>
-                    <span className="font-medium text-text-primary">
-                      {t("productQty", { qty, unit: product.unit })}
-                    </span>
-                  </li>
-                ))}
+                {assignedProducts.map(({ product, qty }) => {
+                  const insufficient = product.stock_qty < qty;
+                  return (
+                    <li key={product.id} className="flex items-center justify-between">
+                      <span className={insufficient ? "text-destructive" : undefined}>
+                        {product.name}
+                        {insufficient && ` (${t("productOutOfStock")})`}
+                      </span>
+                      <span
+                        className={
+                          insufficient
+                            ? "font-medium text-destructive"
+                            : "font-medium text-text-primary"
+                        }
+                      >
+                        {t("productQty", { qty, unit: product.unit })}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             ) : (
               <p className="text-sm text-text-secondary">{t("noProductsAssigned")}</p>

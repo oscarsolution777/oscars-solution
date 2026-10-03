@@ -297,7 +297,8 @@
       "emptyDescription": "Crea tu primer servicio para que aparezca en el catálogo.",
       "createFirst": "Crear el primer servicio",
       "viewAction": "Ver detalle",
-      "editAction": "Editar"
+      "editAction": "Editar",
+      "outOfStockBadge": "Sin stock suficiente"
     },
     "detail": {
       "title": "Detalle del servicio",
@@ -311,7 +312,9 @@
       "productsUsed": "Productos que usa",
       "editProducts": "Editar productos",
       "productQty": "{qty} {unit}",
-      "noProductsAssigned": "Sin productos asignados todavía"
+      "noProductsAssigned": "Sin productos asignados todavía",
+      "outOfStockAlert": "No se puede realizar: falta stock de al menos uno de los productos que usa.",
+      "productOutOfStock": "sin stock suficiente"
     },
     "form": {
       "createTitle": "Nuevo servicio",
@@ -1004,7 +1007,8 @@
     "title": "IA - Asistente",
     "subtitle": "Análisis y recomendaciones basados en la actividad de los últimos 30 días.",
     "tabs": {
-      "business": "Negocio",
+      "business": "Negocios",
+      "questions": "Preguntas",
       "help": "Ayuda"
     },
     "regenerateButton": "Regenerar",
@@ -1053,7 +1057,7 @@
       "subtitle": "Preguntas sobre cómo funciona el sistema -- nunca usa datos reales de tu salón.",
       "placeholder": "Ej: ¿Cómo edito una cita que ya está programada?",
       "sending": "Pensando...",
-      "emptyState": "Pregunta cómo usar cualquier pantalla del sistema. Este asistente no ve tus datos reales -- para eso está el otro chat, arriba.",
+      "emptyState": "Pregunta cómo usar cualquier pantalla del sistema. Este asistente no ve tus datos reales -- para eso está el otro chat.",
       "errors": {
         "invalidInput": "Escribe una pregunta antes de enviar.",
         "generic": "No se pudo responder tu pregunta. Intenta de nuevo."

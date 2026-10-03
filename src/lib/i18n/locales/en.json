@@ -297,7 +297,8 @@
       "emptyDescription": "Create your first service so it shows up in the catalog.",
       "createFirst": "Create the first service",
       "viewAction": "View detail",
-      "editAction": "Edit"
+      "editAction": "Edit",
+      "outOfStockBadge": "Not enough stock"
     },
     "detail": {
       "title": "Service detail",
@@ -311,7 +312,9 @@
       "productsUsed": "Products used",
       "editProducts": "Edit products",
       "productQty": "{qty} {unit}",
-      "noProductsAssigned": "No products assigned yet"
+      "noProductsAssigned": "No products assigned yet",
+      "outOfStockAlert": "Can't be performed: at least one of the products it uses is out of stock.",
+      "productOutOfStock": "not enough stock"
     },
     "form": {
       "createTitle": "New service",
@@ -1005,6 +1008,7 @@
     "subtitle": "Analysis and recommendations based on the last 30 days of activity.",
     "tabs": {
       "business": "Business",
+      "questions": "Questions",
       "help": "Help"
     },
     "regenerateButton": "Regenerate",
@@ -1053,7 +1057,7 @@
       "subtitle": "Questions about how the system works -- never uses your salon's real data.",
       "placeholder": "E.g.: How do I edit an appointment that's already scheduled?",
       "sending": "Thinking...",
-      "emptyState": "Ask how to use any screen in the system. This assistant can't see your real data -- that's what the other chat above is for.",
+      "emptyState": "Ask how to use any screen in the system. This assistant can't see your real data -- that's what the other chat is for.",
       "errors": {
         "invalidInput": "Type a question before sending.",
         "generic": "Couldn't answer your question. Please try again."

@@ -103,6 +103,18 @@ export function ServicesView({
       .filter((entry): entry is { product: ProductRow; qty: number } => Boolean(entry.product));
   }, [serviceProducts, viewingService, productsById]);
 
+  // Punto 2 del bloque de ajustes posterior: un servicio queda bloqueado por
+  // inventario si alguno de sus productos consumidos (service_products) no
+  // tiene stock suficiente para hacerlo una vez más.
+  const outOfStockServiceIds = useMemo(() => {
+    const blocked = new Set<string>();
+    for (const row of serviceProducts) {
+      const product = productsById.get(row.product_id);
+      if (product && product.stock_qty < row.qty) blocked.add(row.service_id);
+    }
+    return blocked;
+  }, [serviceProducts, productsById]);
+
   return (
     <div className="space-y-6">
       <KpiCards
@@ -136,6 +148,7 @@ export function ServicesView({
             currency={currency}
             locale={locale}
             canWrite={canWrite}
+            outOfStockServiceIds={outOfStockServiceIds}
             onView={(service) => setViewingServiceId(service.id)}
             onEdit={(service) => setServiceFormState({ mode: "edit", serviceId: service.id })}
             onCreate={() => setServiceFormState({ mode: "create" })}
@@ -166,6 +179,7 @@ export function ServicesView({
         currency={currency}
         locale={locale}
         canWrite={canWrite}
+        outOfStock={viewingService ? outOfStockServiceIds.has(viewingService.id) : false}
         onEdit={() => {
           if (!viewingService) return;
           setServiceFormState({ mode: "edit", serviceId: viewingService.id });

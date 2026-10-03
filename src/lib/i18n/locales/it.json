@@ -297,7 +297,8 @@
       "emptyDescription": "Crea il tuo primo servizio per aggiungerlo al catalogo.",
       "createFirst": "Crea il primo servizio",
       "viewAction": "Vedi dettaglio",
-      "editAction": "Modifica"
+      "editAction": "Modifica",
+      "outOfStockBadge": "Scorta insufficiente"
     },
     "detail": {
       "title": "Dettaglio del servizio",
@@ -311,7 +312,9 @@
       "productsUsed": "Prodotti utilizzati",
       "editProducts": "Modifica prodotti",
       "productQty": "{qty} {unit}",
-      "noProductsAssigned": "Nessun prodotto assegnato ancora"
+      "noProductsAssigned": "Nessun prodotto assegnato ancora",
+      "outOfStockAlert": "Non può essere eseguito: manca scorta di almeno uno dei prodotti che utilizza.",
+      "productOutOfStock": "scorta insufficiente"
     },
     "form": {
       "createTitle": "Nuovo servizio",
@@ -1005,6 +1008,7 @@
     "subtitle": "Analisi e raccomandazioni basate sull'attività degli ultimi 30 giorni.",
     "tabs": {
       "business": "Business",
+      "questions": "Domande",
       "help": "Aiuto"
     },
     "regenerateButton": "Rigenera",
@@ -1053,7 +1057,7 @@
       "subtitle": "Domande su come funziona il sistema -- non usa mai i dati reali del tuo salone.",
       "placeholder": "Es: Come modifico un appuntamento già programmato?",
       "sending": "Sto pensando...",
-      "emptyState": "Chiedi come usare qualsiasi schermata del sistema. Questo assistente non vede i tuoi dati reali -- per quello c'è l'altra chat, sopra.",
+      "emptyState": "Chiedi come usare qualsiasi schermata del sistema. Questo assistente non vede i tuoi dati reali -- per quello c'è l'altra chat.",
       "errors": {
         "invalidInput": "Scrivi una domanda prima di inviare.",
         "generic": "Non è stato possibile rispondere alla tua domanda. Riprova."

@@ -297,7 +297,8 @@
       "emptyDescription": "Crie seu primeiro serviço para que apareça no catálogo.",
       "createFirst": "Criar o primeiro serviço",
       "viewAction": "Ver detalhes",
-      "editAction": "Editar"
+      "editAction": "Editar",
+      "outOfStockBadge": "Estoque insuficiente"
     },
     "detail": {
       "title": "Detalhe do serviço",
@@ -311,7 +312,9 @@
       "productsUsed": "Produtos usados",
       "editProducts": "Editar produtos",
       "productQty": "{qty} {unit}",
-      "noProductsAssigned": "Nenhum produto atribuído ainda"
+      "noProductsAssigned": "Nenhum produto atribuído ainda",
+      "outOfStockAlert": "Não pode ser realizado: falta estoque de pelo menos um dos produtos que usa.",
+      "productOutOfStock": "estoque insuficiente"
     },
     "form": {
       "createTitle": "Novo serviço",
@@ -1004,7 +1007,8 @@
     "title": "IA - Assistente",
     "subtitle": "Análise e recomendações com base na atividade dos últimos 30 dias.",
     "tabs": {
-      "business": "Negócio",
+      "business": "Negócios",
+      "questions": "Perguntas",
       "help": "Ajuda"
     },
     "regenerateButton": "Regenerar",
@@ -1053,7 +1057,7 @@
       "subtitle": "Perguntas sobre como o sistema funciona -- nunca usa os dados reais do seu salão.",
       "placeholder": "Ex: Como edito um atendimento que já está agendado?",
       "sending": "Pensando...",
-      "emptyState": "Pergunte como usar qualquer tela do sistema. Este assistente não vê seus dados reais -- para isso existe o outro chat, acima.",
+      "emptyState": "Pergunte como usar qualquer tela do sistema. Este assistente não vê seus dados reais -- para isso existe o outro chat.",
       "errors": {
         "invalidInput": "Escreva uma pergunta antes de enviar.",
         "generic": "Não foi possível responder sua pergunta. Tente novamente."

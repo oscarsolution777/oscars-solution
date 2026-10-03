@@ -138,10 +138,12 @@ export function RequestForm({
                     onValueChange={(value) =>
                       staffField.onChange(value === NO_STAFF ? "" : value)
                     }
+                    // items resuelve la etiqueta del valor actual aunque ya no esté
+                    // en staffOptions (filtrado) -- si no aparece ahí, Select muestra el id crudo.
                     items={{
                       [NO_STAFF]: t("staffUnassigned"),
                       ...Object.fromEntries(
-                        staffOptions.map((member) => [member.id, member.full_name])
+                        staff.map((member) => [member.id, member.full_name])
                       ),
                     }}
                   >

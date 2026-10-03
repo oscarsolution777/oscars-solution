@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Pencil } from "lucide-react";
+import { Eye, Pencil, AlertTriangle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
   Table,
@@ -28,6 +28,7 @@ export function ServicesTable({
   currency,
   locale,
   canWrite,
+  outOfStockServiceIds,
   onView,
   onEdit,
   onCreate,
@@ -37,6 +38,7 @@ export function ServicesTable({
   currency: string;
   locale: string;
   canWrite: boolean;
+  outOfStockServiceIds: Set<string>;
   onView: (service: ServiceRow) => void;
   onEdit: (service: ServiceRow) => void;
   onCreate: () => void;
@@ -74,6 +76,7 @@ export function ServicesTable({
         <TableBody>
           {services.map((service) => {
             const category = categoriesById.get(service.category_id);
+            const outOfStock = outOfStockServiceIds.has(service.id);
             return (
               <TableRow key={service.id}>
                 <TableCell>
@@ -84,13 +87,25 @@ export function ServicesTable({
                   >
                     <ServiceThumbnail imageUrl={service.image_url} name={service.name} />
                     <div className="min-w-0">
-                      <p className="truncate font-medium text-text-primary">
-                        {service.name}
-                      </p>
+                      <div className="flex items-center gap-1.5">
+                        <p className="truncate font-medium text-text-primary">
+                          {service.name}
+                        </p>
+                        {outOfStock && (
+                          <AlertTriangle
+                            size={14}
+                            className="shrink-0 text-destructive"
+                            aria-label={t("outOfStockBadge")}
+                          />
+                        )}
+                      </div>
                       {service.description && (
                         <p className="truncate text-xs text-text-secondary">
                           {service.description}
                         </p>
+                      )}
+                      {outOfStock && (
+                        <p className="text-xs text-destructive">{t("outOfStockBadge")}</p>
                       )}
                     </div>
                   </button>

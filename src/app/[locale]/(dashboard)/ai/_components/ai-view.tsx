@@ -35,7 +35,7 @@ export function AiView({
   const [failed, setFailed] = useState(generationFailed);
   const [limitError, setLimitError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const [tab, setTab] = useState<"business" | "help">("business");
+  const [tab, setTab] = useState<"business" | "questions" | "help">("business");
 
   if (notConfigured) {
     return (
@@ -66,12 +66,14 @@ export function AiView({
         <p className="text-sm text-text-secondary">{t("subtitle")}</p>
       </div>
 
-      {/* Puntos 3/5 del bloque de ajustes: el asistente de ayuda sobre el
-          funcionamiento del sistema vive como pestaña propia, separada del
-          análisis/recomendaciones/chat de datos reales ("Negocio"). */}
+      {/* Ajuste posterior al bloque de 22: "Negocio" se separó en dos
+          pestañas -- "Negocios" (análisis/recomendaciones) y "Preguntas"
+          (chat con datos reales) -- con "Ayuda" quedando como la tercera,
+          a pedido del usuario ("Negocios", "Preguntas", "Ayuda"). */}
       <Tabs value={tab} onValueChange={(value) => setTab(value as typeof tab)}>
         <TabsList>
           <TabsTrigger value="business">{t("tabs.business")}</TabsTrigger>
+          <TabsTrigger value="questions">{t("tabs.questions")}</TabsTrigger>
           <TabsTrigger value="help">{t("tabs.help")}</TabsTrigger>
         </TabsList>
 
@@ -118,7 +120,9 @@ export function AiView({
               <EmptyState title={t("emptyRecommendations")} />
             )}
           </div>
+        </TabsContent>
 
+        <TabsContent value="questions">
           <AiChat initialMessages={initialChatMessages} locale={locale} />
         </TabsContent>
 

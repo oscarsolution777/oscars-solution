@@ -297,7 +297,8 @@
       "emptyDescription": "Erstellen Sie Ihre erste Dienstleistung, damit sie im Katalog erscheint.",
       "createFirst": "Erste Dienstleistung erstellen",
       "viewAction": "Details ansehen",
-      "editAction": "Bearbeiten"
+      "editAction": "Bearbeiten",
+      "outOfStockBadge": "Nicht genug Lagerbestand"
     },
     "detail": {
       "title": "Details der Dienstleistung",
@@ -311,7 +312,9 @@
       "productsUsed": "Verwendete Produkte",
       "editProducts": "Produkte bearbeiten",
       "productQty": "{qty} {unit}",
-      "noProductsAssigned": "Noch keine Produkte zugewiesen"
+      "noProductsAssigned": "Noch keine Produkte zugewiesen",
+      "outOfStockAlert": "Kann nicht durchgeführt werden: mindestens eines der verwendeten Produkte hat nicht genug Lagerbestand.",
+      "productOutOfStock": "nicht genug Lagerbestand"
     },
     "form": {
       "createTitle": "Neue Dienstleistung",
@@ -1005,6 +1008,7 @@
     "subtitle": "Analyse und Empfehlungen basierend auf der Aktivität der letzten 30 Tage.",
     "tabs": {
       "business": "Geschäft",
+      "questions": "Fragen",
       "help": "Hilfe"
     },
     "regenerateButton": "Neu generieren",
@@ -1053,7 +1057,7 @@
       "subtitle": "Fragen zur Funktionsweise des Systems -- verwendet nie die echten Daten deines Salons.",
       "placeholder": "Z. B.: Wie bearbeite ich einen bereits geplanten Termin?",
       "sending": "Denkt nach...",
-      "emptyState": "Frag, wie du einen beliebigen Bildschirm des Systems benutzt. Dieser Assistent sieht deine echten Daten nicht -- dafür ist der andere Chat oben da.",
+      "emptyState": "Frag, wie du einen beliebigen Bildschirm des Systems benutzt. Dieser Assistent sieht deine echten Daten nicht -- dafür ist der andere Chat da.",
       "errors": {
         "invalidInput": "Schreib eine Frage, bevor du sendest.",
         "generic": "Deine Frage konnte nicht beantwortet werden. Bitte erneut versuchen."

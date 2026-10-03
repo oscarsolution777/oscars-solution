@@ -297,7 +297,8 @@
       "emptyDescription": "Créez votre premier service pour qu'il apparaisse dans le catalogue.",
       "createFirst": "Créer le premier service",
       "viewAction": "Voir le détail",
-      "editAction": "Modifier"
+      "editAction": "Modifier",
+      "outOfStockBadge": "Stock insuffisant"
     },
     "detail": {
       "title": "Détail du service",
@@ -311,7 +312,9 @@
       "productsUsed": "Produits utilisés",
       "editProducts": "Modifier les produits",
       "productQty": "{qty} {unit}",
-      "noProductsAssigned": "Aucun produit assigné pour l'instant"
+      "noProductsAssigned": "Aucun produit assigné pour l'instant",
+      "outOfStockAlert": "Impossible à réaliser : il manque du stock pour au moins un des produits utilisés.",
+      "productOutOfStock": "stock insuffisant"
     },
     "form": {
       "createTitle": "Nouveau service",
@@ -1005,6 +1008,7 @@
     "subtitle": "Analyse et recommandations basées sur l'activité des 30 derniers jours.",
     "tabs": {
       "business": "Activité",
+      "questions": "Questions",
       "help": "Aide"
     },
     "regenerateButton": "Régénérer",
@@ -1053,7 +1057,7 @@
       "subtitle": "Questions sur le fonctionnement du système -- n'utilise jamais les données réelles de ton salon.",
       "placeholder": "Ex : Comment je modifie un rendez-vous déjà programmé ?",
       "sending": "Réflexion...",
-      "emptyState": "Demande comment utiliser n'importe quel écran du système. Cet assistant ne voit pas tes données réelles -- c'est à ça que sert l'autre chat, au-dessus.",
+      "emptyState": "Demande comment utiliser n'importe quel écran du système. Cet assistant ne voit pas tes données réelles -- c'est à ça que sert l'autre chat.",
       "errors": {
         "invalidInput": "Écris une question avant d'envoyer.",
         "generic": "Impossible de répondre à ta question. Réessaie."

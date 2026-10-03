@@ -100,7 +100,9 @@ function AppointmentItemRow({
             <Select
               value={staffField.value}
               onValueChange={staffField.onChange}
-              items={Object.fromEntries(staffOptions.map((member) => [member.id, member.full_name]))}
+              // items resuelve la etiqueta del valor actual aunque ya no esté
+              // en staffOptions (filtrado) -- si no aparece ahí, Select muestra el id crudo.
+              items={Object.fromEntries(staff.map((member) => [member.id, member.full_name]))}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={t("staffPlaceholder")} />
